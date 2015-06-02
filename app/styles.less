@@ -21,6 +21,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-record:before {
+  content: "\e604";
+}
+.icon-pause:before {
+  content: "\e603";
+}
+.icon-play:before {
+  content: "\e602";
+}
+.icon-stop:before {
+  content: "\e605";
+}
 .icon-menu:before {
   content: "\e600";
 }
@@ -29,4 +41,29 @@ html, body {
   margin: 0;
   height: 100%;
   overflow: hidden;
+}
+
+#app {
+  height: 100%;
+  overflow: hidden;
+}
+
+#app > div {
+  height: 100%;
+}
+
+.Code {
+  display: inline-block;
+  height: ~"calc(100% - 86px)";
+  width: 50%;
+}
+
+iframe {
+  width: 50%;
+  display: inline-block;
+  vertical-align: top;
+  box-sizing: border-box;
+  border: 0;
+  border-left: 2px solid #EEE;
+  height: ~"calc(100% - 86px)";
 }

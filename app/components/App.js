@@ -1,6 +1,9 @@
 import React from 'react';
 import mixin from 'cerebral/mixin';
 import CodeToolbar from './CodeToolbar.js';
+import Sandbox from './Sandbox.js';
+import PlayButton from './PlayButton.js';
+import RecordButton from './RecordButton.js';
 import DurationSlider from './DurationSlider.js';
 import Code from './Code.js';
 import {
@@ -9,8 +12,14 @@ import {
 }
 from 'material-ui';
 
-var ThemeManager = new Styles.ThemeManager();
+let ThemeManager = new Styles.ThemeManager();
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
+
+let AppContainerStyle = {
+  position: 'relative',
+  height: '100%',
+  overflow: 'hidden'
+};
 
 let App = React.createClass({
   mixins: [mixin],
@@ -24,10 +33,13 @@ let App = React.createClass({
   },
   render() {
     return (
-      <div>
+      <div style={AppContainerStyle}>
         <CodeToolbar/>
         <DurationSlider/>
         <Code/>
+        <Sandbox/>
+        <RecordButton/>
+        <PlayButton/>
       </div>
     );
   }
