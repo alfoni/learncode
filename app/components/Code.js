@@ -22,9 +22,12 @@ let Code = React.createClass({
   },
   onEditorChange(instance, event) {
     if (!this.isMutatingCode) {
+
+      // fix line breaks
       if (event.text.length === 2) {
         event.text = ['\n'];
       }
+      
       this.signals.codeChanged(event, this.codemirror.getDoc().getValue());
     }
   },

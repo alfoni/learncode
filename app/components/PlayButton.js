@@ -16,9 +16,6 @@ let PlayButton = React.createClass({
   getCerebralState() {
     return ['recorder'];
   },
-  onButtonClick() {
-    this.signals.recorder.play();
-  },
   render() {
     PlayButtonStyle.right = this.state.recorder.isRecording ? '-50px' : '25px';
     return (
@@ -28,7 +25,7 @@ let PlayButton = React.createClass({
         mini={this.state.recorder.isPlaying || this.state.recorder.isRecording}
         disabled={!this.state.recorder.hasRecording}
         secondary={true} 
-        onClick={this.onButtonClick}/>
+        onClick={this.props.onClick}/>
     );
   }
 });

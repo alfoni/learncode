@@ -2,9 +2,8 @@ import React from 'react';
 import mixin from 'cerebral/mixin';
 import CodeToolbar from './CodeToolbar.js';
 import Sandbox from './Sandbox.js';
-import PlayButton from './PlayButton.js';
-import RecordButton from './RecordButton.js';
-import DurationSlider from './DurationSlider.js';
+import SceneControls from './SceneControls.js';
+import VideoScreen from './VideoScreen.js';
 import Code from './Code.js';
 import {
   Styles,
@@ -35,11 +34,9 @@ let App = React.createClass({
     return (
       <div style={AppContainerStyle}>
         <CodeToolbar/>
-        <DurationSlider/>
+        <SceneControls/>
         <Code/>
         <Sandbox/>
-        <RecordButton/>
-        <PlayButton/>
       </div>
     );
   }

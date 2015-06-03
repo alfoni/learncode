@@ -16,13 +16,6 @@ let RecordButton = React.createClass({
   getCerebralState() {
     return ['recorder'];
   },
-  onButtonClick() {
-    if (this.state.recorder.isRecording) {
-      this.signals.recorder.stop();
-    } else {
-      this.signals.recorder.record();
-    }
-  },
   render() {
     RecordButtonStyle.bottom = this.state.recorder.isPlaying ? '-60px' : '25px';
     RecordButtonStyle.right = this.state.recorder.isRecording ? '25px' : '100px';
@@ -33,7 +26,7 @@ let RecordButton = React.createClass({
         label={this.state.recorder.isRecording ? 'stop' : 'record'} 
         primary={true} 
         mini={this.state.recorder.isPlaying}
-        onClick={this.onButtonClick}/>
+        onClick={this.props.onClick}/>
     );
   }
 });
