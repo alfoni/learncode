@@ -1,45 +1,30 @@
-/*
- var session = {
-    audio: true,
-    video: true
-};
-
-var recordRTC;
-
-navigator.getUserMedia(session, function (mediaStream) {
-    recordRTC = RecordRTC(MediaStream);
-    recordRTC.startRecording();
-}, onError);
-
-btnStopRecording.onclick = function () {
-    recordRTC.stopRecording(function (audioVideoWebMURL) {
-        video.src = audioVideoWebMURL;
-
-        var recordedBlob = recordRTC.getBlob();
-        recordRTC.getDataURL(function(dataURL) { });
-    });
-};
-*/
 import React from 'react';
 import mixin from 'cerebral/mixin';
-import RecordButton from './RecordButton.js';
-import PlayButton from './PlayButton.js';
+import RecordButton from './SceneControls/RecordButton.js';
+import PlayButton from './SceneControls/PlayButton.js';
+import DurationSlider from './SceneControls/DurationSlider.js';
 import {
   Paper
 } from 'material-ui';
 
 let SceneControlsStyle = {
   height: '30px',
-  backgroundColor: '#EEE'
+  backgroundColor: '#EEE',
+  paddingRight: '300px'
 };
 
 let VideoScreenStyle = {
   position: 'absolute',
   right: '25px',
   top: '25px',
-  width: '150px',
-  height: '150px',
-  backgroundColor: '#000'
+  height: '200px',
+  backgroundColor: '#000',
+  overflow: 'hidden'
+};
+
+let VideoStyle = {
+  height: '200px',
+  width: '267px'
 };
 
 let RecordRTC = global.RecordRTC;
@@ -52,29 +37,45 @@ let SceneControls = React.createClass({
   getCerebralState() {
     return ['recorder'];
   },
+  componentDidMount() {
+    this.video = this.refs.video.getDOMNode();
+  },
   onPlayClick() {
-    let video = this.refs.video.getDOMNode();
-    video.addEventListener('loadeddata', function () {
-      video.play();
-      this.signals.recorder.play();
-    }.bind(this));    
-    video.src =  this.video;
+    if (this.state.recorder.isPlaying) {
+      this.video.pause();
+      this.signals.recorder.paused();
+    } else {
+      this.video.addEventListener('loadeddata', this.startPlayback); 
+      this.video.addEventListener('playing', this.seekPlayback);   
+      this.video.src = this.recording;
+      this.video.play();
+    }
 
+  },
+  startPlayback() {
+
+    this.signals.recorder.play();
+    this.video.removeEventListener('loadeddata', this.startPlayback);
+
+  },
+  seekPlayback() {
+    // TODO: Have to sync pause to full second, to make video work in sync
+    let seconds = this.state.recorder.currentDuration ? Math.round(this.state.recorder.currentDuration / 1000) : 0;
+    console.log('seconds', seconds);
+    this.video.currentTime = seconds;
+    this.video.removeEventListener('playing', this.seekPlayback);
   },
   onRecordClick() {
     if (this.state.recorder.isRecording) {
       this.stream.stop();
-      this.streamRecorder.stopRecording(function (video) {
-        this.video = video;
+      this.streamRecorder.stopRecording(function (recording) {
+        this.recording = recording;
       }.bind(this));
       this.signals.recorder.stop();
     } else {
     (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).call(navigator, {
       video: {
-        mandatory: {
-          //maxWidth: 150,
-          //maxHeight: 150
-        }
+        height: 200
       },
       audio: true
     }, this.streamRecording, function (err) {
@@ -85,19 +86,21 @@ let SceneControls = React.createClass({
   streamRecording(stream) {
     this.stream = stream;
     this.streamRecorder = RecordRTC(stream);
-    let video = this.refs.video.getDOMNode();
-    video.addEventListener('loadeddata', function () {
-        this.streamRecorder.startRecording();
-        this.signals.recorder.record();
-    }.bind(this));
-    video.src = window.URL.createObjectURL(stream);
-    video.play();
+    this.video.addEventListener('loadeddata', this.startRecording);
+    this.video.src = window.URL.createObjectURL(stream);
+    this.video.play();
+  },
+  startRecording() {
+    this.streamRecorder.startRecording();
+    this.signals.recorder.record();
+    this.video.removeEventListener('loadeddata', this.startRecording);
   },
   render() {
     return (
       <div style={SceneControlsStyle}>
-        <Paper zDepth={1} style={VideoScreenStyle}>
-          <video ref="video" width="150" height="150"/>
+        <DurationSlider/>
+        <Paper zDepth={3} style={VideoScreenStyle}>
+          <video ref="video" height="200" style={VideoStyle}/>
         </Paper>
         <RecordButton onClick={this.onRecordClick}/>
         <PlayButton onClick={this.onPlayClick}/>

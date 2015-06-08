@@ -28,7 +28,7 @@ let Code = React.createClass({
         event.text = ['\n'];
       }
       
-      this.signals.codeChanged(event, this.codemirror.getDoc().getValue());
+      this.signals.codeChanged(event);
     }
   },
   updateCode() {

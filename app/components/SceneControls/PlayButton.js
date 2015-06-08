@@ -21,7 +21,7 @@ let PlayButton = React.createClass({
     return (
       <FloatingActionButton 
         style={PlayButtonStyle}
-        iconClassName="icon-play"
+        iconClassName={this.state.recorder.isPlaying ? "icon-pause" : "icon-play"}
         mini={this.state.recorder.isPlaying || this.state.recorder.isRecording}
         disabled={!this.state.recorder.hasRecording}
         secondary={true} 

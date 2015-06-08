@@ -7,7 +7,7 @@ import React from 'react';
 import cerebral from './cerebral.js';
 import App from './components/App.js';
 
-cerebral.signal('codeChanged', function logEvents(cerebral, event, code) {
+cerebral.signal('codeChanged', function logEvents(cerebral, event) {
   cerebral.push('events', event);
 });
 
