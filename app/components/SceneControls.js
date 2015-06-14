@@ -39,44 +39,59 @@ let SceneControls = React.createClass({
   },
   componentDidMount() {
     this.video = this.refs.video.getDOMNode();
+    window.AudioContext = window.AudioContext || window.webkitAudioContext;
+    this.audioContext = new AudioContext();
   },
   onPlayClick() {
     if (this.state.recorder.isPlaying) {
       this.video.pause();
-      this.signals.recorder.paused();
+      this.audio.stop();
+      this.signals.pauseClicked();
     } else {
-      this.video.addEventListener('loadeddata', this.startPlayback); 
-      this.video.addEventListener('playing', this.seekPlayback);   
-      this.video.src = this.recording;
-      this.video.play();
+      
+      this.video.addEventListener('canplay', this.seekPlayback);
+      this.video.src = this.video.src;
+
     }
 
   },
-  startPlayback() {
+  seekPlayback(event, seek) {
 
-    this.signals.recorder.play();
-    this.video.removeEventListener('loadeddata', this.startPlayback);
+    seek = seek || (this.state.recorder.isAtEnd ? 0 : this.state.recorder.seek);
+    this.audioContext.decodeAudioData(this.buffer, function (buffer) {
+      this.audio = this.audioContext.createBufferSource(); // creates a sound source
+      this.audio.buffer = buffer;                    // tell the source which sound to play
+      this.audio.connect(this.audioContext.destination);  
+
+      var start = function () {
+        console.log('Starting');
+        this.startSomething(seek);   
+        this.video.removeEventListener('playing', start); 
+      }.bind(this);
+
+      this.video.addEventListener('playing', start);
+      this.video.currentTime = seek / 1000;
+      this.video.play();
+
+    }.bind(this));
+
+    this.video.removeEventListener('canplay', this.seekPlayback);
 
   },
-  seekPlayback() {
-    // TODO: Have to sync pause to full second, to make video work in sync
-    let seconds = this.state.recorder.currentDuration ? Math.round(this.state.recorder.currentDuration / 1000) : 0;
-    console.log('seconds', seconds);
-    this.video.currentTime = seconds;
-    this.video.removeEventListener('playing', this.seekPlayback);
+   startSomething(seek) {
+    this.audio.start(0, seek / 1000);
+    this.signals.playClicked(seek);
   },
   onRecordClick() {
     if (this.state.recorder.isRecording) {
+
+      this.multiStreamRecorder.stop();
       this.stream.stop();
-      this.streamRecorder.stopRecording(function (recording) {
-        this.recording = recording;
-      }.bind(this));
-      this.signals.recorder.stop();
+      this.signals.stopClicked();
+
     } else {
     (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia).call(navigator, {
-      video: {
-        height: 200
-      },
+      video: true,
       audio: true
     }, this.streamRecording, function (err) {
       console.log('Failed!', err);
@@ -84,21 +99,48 @@ let SceneControls = React.createClass({
     }
   },
   streamRecording(stream) {
-    this.stream = stream;
-    this.streamRecorder = RecordRTC(stream);
+
+    this.multiStreamRecorder = new MultiStreamRecorder(stream);
+    this.multiStreamRecorder.video = this.video; // to get maximum accuracy
+    this.multiStreamRecorder.audioChannels = 1;
+    this.multiStreamRecorder.ondataavailable = function (blobs) {
+
+      var self = this;
+      var fileReader = new FileReader();
+      fileReader.onload = function() {
+        
+        self.buffer = this.result;
+
+      };
+      fileReader.readAsArrayBuffer(blobs.audio);
+
+      this.video.src = window.URL.createObjectURL(blobs.video);
+
+      this.video.pause();
+
+    }.bind(this);
+
     this.video.addEventListener('loadeddata', this.startRecording);
     this.video.src = window.URL.createObjectURL(stream);
     this.video.play();
+    this.stream = stream;
+
   },
   startRecording() {
-    this.streamRecorder.startRecording();
-    this.signals.recorder.record();
+    // Five minutes
+    this.multiStreamRecorder.start(5 * 60 * 60 * 1000);
+    this.signals.recordClicked();
     this.video.removeEventListener('loadeddata', this.startRecording);
+  },
+  onSliderChange(event, value) {
+    var seek = this.state.recorder.duration * value;
+    this.audio.stop();
+    this.seekPlayback(null, seek);
   },
   render() {
     return (
       <div style={SceneControlsStyle}>
-        <DurationSlider/>
+        <DurationSlider onSliderChange={this.onSliderChange}/>
         <Paper zDepth={3} style={VideoScreenStyle}>
           <video ref="video" height="200" style={VideoStyle}/>
         </Paper>

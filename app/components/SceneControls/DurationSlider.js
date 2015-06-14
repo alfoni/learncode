@@ -34,6 +34,7 @@ let DurationSlider = React.createClass({
           name="duration" 
           min={0}
           max={1}
+          onChange={this.props.onSliderChange}
           value={value > 1 ? 1 : value}
           style={SliderStyle} 
           disabled={!this.state.recorder.hasRecording}/>
