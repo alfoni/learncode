@@ -55,8 +55,9 @@ let SceneControls = React.createClass({
     }
 
   },
-  seekPlayback(event, seek) {
+  seekPlayback(event, seek, startPlayback) {
 
+    startPlayback = typeof startPlayback === 'undefined' ? true : startPlayback;
     seek = seek || (this.state.recorder.isAtEnd ? 0 : this.state.recorder.seek);
     this.audioContext.decodeAudioData(this.buffer, function (buffer) {
       this.audio = this.audioContext.createBufferSource(); // creates a sound source
@@ -64,8 +65,7 @@ let SceneControls = React.createClass({
       this.audio.connect(this.audioContext.destination);  
 
       var start = function () {
-        console.log('Starting');
-        this.startSomething(seek);   
+        this.startSomething(seek, startPlayback);   
         this.video.removeEventListener('playing', start); 
       }.bind(this);
 
@@ -78,9 +78,13 @@ let SceneControls = React.createClass({
     this.video.removeEventListener('canplay', this.seekPlayback);
 
   },
-   startSomething(seek) {
-    this.audio.start(0, seek / 1000);
-    this.signals.playClicked(seek);
+   startSomething(seek, startPlayback) {
+    if (startPlayback) {
+      this.audio.start(0, seek / 1000);
+    } else {
+      this.video.pause();
+    }
+    this.signals.playClicked(seek, startPlayback);
   },
   onRecordClick() {
     if (this.state.recorder.isRecording) {
@@ -134,8 +138,10 @@ let SceneControls = React.createClass({
   },
   onSliderChange(event, value) {
     var seek = this.state.recorder.duration * value;
-    this.audio.stop();
-    this.seekPlayback(null, seek);
+    if (this.state.recorder.isPlaying) {
+      this.audio.stop();
+    }
+    this.seekPlayback(null, seek, this.state.recorder.isPlaying);
   },
   render() {
     return (

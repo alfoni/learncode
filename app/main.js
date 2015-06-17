@@ -6,25 +6,27 @@ injectTapEventPlugin();
 import React from 'react';
 import cerebral from './cerebral.js';
 import App from './components/App.js';
+import api from './utils/api.js';
 
-    // Add recorder signals
-  cerebral.signal('playClicked', function play (cerebral, seek) { 
-    cerebral.recorder.play(seek); 
-  });
-  cerebral.signal('stopClicked', function stop (cerebral) { cerebral.recorder.stop(); });
-  cerebral.signal('recordClicked', function record (cerebral) {cerebral.recorder.record(); });
-  cerebral.signal('pauseClicked', function pause (cerebral) { 
-    // 
-    cerebral.recorder.pause(); 
-  });
-  cerebral.signal('recorder.durationUpdated', function updateDuration (cerebral, currentDuration) { 
-    cerebral.set(['recorder', 'currentDuration'], currentDuration);
-  });
+import saveLatestSandbox from './actions/saveLatestSandbox.js';
+import saveSandbox from './actions/saveSandbox.js';
+import startRecorderPlayback from './actions/startRecorderPlayback.js';
+import stopRecorder from './actions/stopRecorder.js';
+import startRecording from './actions/startRecording.js';
+import pauseRecorder from './actions/pauseRecorder.js';
+import updateSeekPosition from './actions/updateSeekPosition';
+import updateCode from './actions/updateCode.js';
+import createSandbox from './actions/createSandbox.js';
 
-cerebral.signal('codeChanged', function logEvents(cerebral, event, code) {
-  cerebral.set('code', code);
-  cerebral.set('lastEvent', event);
-});
+  // Add recorder signals
+cerebral.signal('playClicked', saveLatestSandbox, startRecorderPlayback);
+cerebral.signal('stopClicked', stopRecorder);
+cerebral.signal('recordClicked', startRecording);
+cerebral.signal('pauseClicked', pauseRecorder);
+cerebral.signal('recorder.durationUpdated', updateSeekPosition);
+cerebral.signal('codeChanged', updateCode);
+cerebral.signal('saveClicked', saveSandbox);
+cerebral.signal('appMounted', createSandbox, saveSandbox)
 
 let Wrapper = cerebral.injectInto(App);
 

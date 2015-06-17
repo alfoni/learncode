@@ -1,5 +1,5 @@
 import React from 'react';
-import Cerebral from 'cerebral/decorator';
+import mixin from 'cerebral/mixin';
 import {
   Toolbar,
   ToolbarGroup,
@@ -13,9 +13,19 @@ import {
 from 'material-ui';
 
 let Sandbox = React.createClass({
+  mixins: [mixin],
+  componentWillMount() {
+    this.context.cerebral.on('sandbox:saved', this.onSandboxSaved);
+  },
+  componentWillUnmount() {
+    this.context.cerebral.off('sandbox:saved', this.onSandboxSaved);
+  },
+  onSandboxSaved() {
+    this.refs.sandbox.getDOMNode().src = "http://sandbox.learncode.com:3000";
+  },
   render() {
     return (
-      <iframe ref="sandbox"/>
+      <iframe src="about:blank" ref="sandbox"/>
     );
   }
 });

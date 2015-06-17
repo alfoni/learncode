@@ -29,6 +29,9 @@ let App = React.createClass({
       muiTheme: ThemeManager.getCurrentTheme()
     };
   },
+  componentDidMount() {
+    this.signals.appMounted();
+  },
   render() {
     return (
       <div style={AppContainerStyle}>

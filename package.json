@@ -24,10 +24,13 @@
   },
   "homepage": "https://github.com/christianalfoni/learncode",
   "dependencies": {
+    "body-parser": "^1.13.0",
     "css-loader": "^0.10.1",
     "express": "^4.12.3",
+    "express-subdomain": "^1.0.3",
     "recordrtc": "^5.1.0",
     "style-loader": "^0.10.2",
+    "superagent": "^1.2.0",
     "webpack": "^1.8.5"
   },
   "devDependencies": {

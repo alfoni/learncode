@@ -1,9 +1,9 @@
 import React from 'react';
-import Cerebral from 'cerebral/decorator';
+import mixin from 'cerebral/mixin';
 import {
   Toolbar,
   ToolbarGroup,
-  DropDownMenu,
+  RaisedButton,
   FontIcon,
   LeftNav,
   MenuItem,
@@ -12,30 +12,11 @@ import {
 }
 from 'material-ui';
 
-let filterOptions = [{
-  payload: '1',
-  text: 'index.html'
-}, {
-  payload: '2',
-  text: 'All Voice'
-}, {
-  payload: '3',
-  text: 'All Text'
-}, {
-  payload: '4',
-  text: 'Complete Voice'
-}, {
-  payload: '5',
-  text: 'Complete Text'
-}, {
-  payload: '6',
-  text: 'Active Voice'
-}, {
-  payload: '7',
-  text: 'Active Text'
-}, ];
-
 let CodeToolbar = React.createClass({
+  mixins: [mixin],
+  getCerebralState() {
+    return ['recorder'];
+  },
   render() {
     return (
       <Toolbar style={{padding: '0', zIndex: '99999'}}>
@@ -43,7 +24,7 @@ let CodeToolbar = React.createClass({
           <FontIcon className="icon-menu"/>
           <ToolbarSeparator/>
           <ToolbarTitle text="Promises (4:13)" style={{paddingLeft: '24px'}}/>
-          <DropDownMenu menuItems={filterOptions} style={{zIndex: '9999999'}}/>
+          <RaisedButton label="Save" primary={true} onClick={this.signals.saveClicked} disabled={this.state.recorder.isPlaying}/>
         </ToolbarGroup>
       </Toolbar>
     );

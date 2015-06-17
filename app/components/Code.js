@@ -8,30 +8,32 @@ import 'codemirror/mode/javascript/javascript';
 let Code = React.createClass({
   mixins: [mixin],
   codemirror: null,
-  canUpdate: true,
   getCerebralState() {
-    return ['code', 'lastEvent', 'recorder'];
+    return ['course', 'recorder'];
   },
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.recorder.isPlaying && this.state.lastEvent !== prevState.lastEvent) {
-      this.updateCode(this.state.lastEvent);
+    
+    if (this.state.recorder.started !== prevState.recorder.started || this.state.course.code !== prevState.course.code) {
+      this.updateAllCode();
     }
 
-    // Have to do this async as the updateCode is async
-    if (
-      (this.state.recorder.started !== prevState.recorder.started)) {
-      setTimeout(function () {
-        var code = this.state.code;
-        var doc = this.codemirror.getDoc();
-        this.isMutatingCode = true;
-        doc.setValue(code);
-        this.isMutatingCode = false;
-      }.bind(this), 0);
+    if (!this.triggeredBySignal && this.state.course.lastEvent && this.state.course.lastEvent !== prevState.course.lastEvent) {
+      this.updateCode(this.state.course.lastEvent);
+    } else if (this.triggeredBySignal) {
+      this.triggeredBySignal = false;
     }
+
+  },
+  updateAllCode() {
+    var code = this.state.course.code;
+    var doc = this.codemirror.getDoc();
+    this.isMutatingCode = true;
+    doc.setValue(code);
+    this.isMutatingCode = false;
   },
   componentDidMount() {
     this.codemirror = CodeMirror(this.refs.code.getDOMNode(), {
-      value: '',
+      value: this.state.course.code,
       mode: 'javascript',
       theme: 'learncode',
       lineNumbers: true,
@@ -46,7 +48,7 @@ let Code = React.createClass({
       if (event.text.length === 2) {
         event.text = ['\n'];
       }
-      
+      this.triggeredBySignal = true;
       this.signals.codeChanged(event, this.codemirror.getDoc().getValue());
     }
   },
