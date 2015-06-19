@@ -9,8 +9,7 @@ import {
 
 let SceneControlsStyle = {
   height: '30px',
-  backgroundColor: '#EEE',
-  paddingRight: '300px'
+  backgroundColor: '#EEE'
 };
 
 let VideoScreenStyle = {

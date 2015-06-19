@@ -12,6 +12,16 @@ import {
 }
 from 'material-ui';
 
+let SandboxStyle = {
+  width: '50%',
+  display: 'inline-block',
+  verticalAlign: 'top',
+  boxSizing: 'border-box',
+  border: 0,
+  borderLeft: '2px solid #EEE',
+  height: 'calc(100% - 86px)'
+};
+
 let Sandbox = React.createClass({
   mixins: [mixin],
   componentWillMount() {
@@ -25,7 +35,7 @@ let Sandbox = React.createClass({
   },
   render() {
     return (
-      <iframe src="about:blank" ref="sandbox"/>
+      <iframe style={SandboxStyle} src="about:blank" ref="sandbox"/>
     );
   }
 });

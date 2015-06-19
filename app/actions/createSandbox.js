@@ -6,9 +6,7 @@ let createSandbox = function (cerebral) {
     return file.toJS();
   });
 
-
   cerebral.set(['course', 'sandbox'], sandbox);
-  cerebral.set(['course', 'code'], cerebral.get('course', 'sandbox', currentFileIndex, 'code'));
 
 };
 
