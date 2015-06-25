@@ -6,6 +6,15 @@
     height: 100%;
 }
 
+.cm-s-learncode.CodeMirror .CodeMirror-lines {
+  padding-top: 0; 
+}
+
+.cm-s-learncode.CodeMirror pre {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 .cm-s-learncode div.CodeMirror-selected {
     background: #d6d5d4 !important;
 }
@@ -60,6 +69,11 @@
     color: #e91e63;
 }
 
+.cm-s-learncode span.cm-qualifier {
+    color: #e91e63;
+}
+
+
 .cm-s-learncode span.cm-string {
     color: #ff9800;
 }
@@ -81,16 +95,20 @@
 }
 
 .cm-s-learncode span.cm-tag {
-    color: #db2d20;
+    color: #e91e63;
 }
 
 .cm-s-learncode span.cm-link {
     color: #a16a94;
 }
 
+.cm-s-learncode span.cm-meta {
+    color: rgba(0,0,0,0.4);
+}
+
 .cm-s-learncode span.cm-error {
-    background: #db2d20;
-    color: #5c5855;
+    //background: rgba(0,0,0,0.1);
+    color: #F44336;
 }
 
 .cm-s-learncode .CodeMirror-activeline-background {

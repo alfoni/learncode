@@ -2,6 +2,9 @@ import React from 'react';
 import mixin from 'cerebral/mixin';
 import Folder from './CodeToolbar/Folder.js';
 import AddFile from './CodeToolbar/AddFile.js';
+import BrowserButton from './CodeToolbar/BrowserButton.js';
+import ConsoleButton from './CodeToolbar/ConsoleButton.js';
+import AssignmentToolbar from './CodeToolbar/AssignmentToolbar.js';
 import {
   Toolbar,
   ToolbarGroup,
@@ -23,12 +26,14 @@ let CodeToolbar = React.createClass({
     };
   },
   onFolderClick(event) {
-    event.stopPropagation();
-    this.signals.folderClicked();
+    setTimeout(() => {
+      this.signals.folderClicked();
+    }, 0);
   },
   onAddFileClick(event) {
-    event.stopPropagation();
-    this.signals.addFileClicked();
+    setTimeout(() => {
+      this.signals.addFileClicked();
+    }, 0);
   },
   render() {
     
@@ -39,10 +44,16 @@ let CodeToolbar = React.createClass({
           <ToolbarSeparator/>
           <ToolbarTitle text="Promises (4:13)" style={{paddingLeft: '24px'}}/>
           <FontIcon className="icon-save"  onClick={this.signals.saveClicked} disabled={this.state.recorder.isPlaying}/>
+          <ToolbarSeparator/>
           <FontIcon className="icon-folder" onClick={this.onFolderClick} disabled={this.state.recorder.isPlaying}/>
           <FontIcon className="icon-file-add" onClick={this.onAddFileClick} disabled={this.state.recorder.isPlaying}/>
           {this.state.showAddFileInput ? <AddFile/> : <span/>}
           <Folder/>
+          <ToolbarSeparator/>
+          <BrowserButton/>
+          <ConsoleButton/>
+          <ToolbarSeparator/>
+          <AssignmentToolbar/>
         </ToolbarGroup>
       </Toolbar>
     );

@@ -3,6 +3,10 @@ import mixin from 'cerebral/mixin';
 import CodeToolbar from './CodeToolbar.js';
 import Sandbox from './Sandbox.js';
 import SceneControls from './SceneControls.js';
+import Console from './Console.js';
+import AssignmentEditor from './AssignmentEditor.js';
+import ClickIndication from './ClickIndication.js';
+
 import Code from './Code.js';
 import {
   Styles,
@@ -41,7 +45,12 @@ let App = React.createClass({
     window.removeEventListener('keyup', this.onWindowKeyup);
   },
   getCerebralState() {
-    return ['isLoadingCourse', 'snackbar'];
+    return {
+      isLoadingCourse: ['isLoadingCourse'],
+      snackbar: ['snackbar'],
+      showBrowser: ['course', 'showBrowser'],
+      assignment: ['course', 'assignment']
+    };
   },
   onWindowKeydown(event) {
     if (event.keyCode === 91) {
@@ -65,14 +74,24 @@ let App = React.createClass({
       this.refs.snackbar.dismiss();
     }
   },
+  onAppClicked(event) {
+    this.signals.appClicked({
+      x: event.clientX,
+      y: event.clientY
+    });
+  },
   render() {
+    let width = this.state.assignment.showEditor ? '33.33333%' : '50%';
     return (
-      <div style={AppContainerStyle} onClick={this.signals.appClicked}>
-        <SceneControls/>
+      <div style={AppContainerStyle} onClick={this.onAppClicked}>
         <CodeToolbar/>
-        {this.state.isLoadingCourse ? null : <Code/>}
-        {this.state.isLoadingCourse ? null : <Sandbox/>}
+        <SceneControls/>
+        {this.state.isLoadingCourse || !this.state.assignment.showEditor ? null : <AssignmentEditor width={width}/>}
+        {this.state.isLoadingCourse ? null : <Code width={width}/>}
+        {this.state.isLoadingCourse ? null : <Sandbox width={width}/>}
+        {this.state.isLoadingCourse || this.state.showBrowser ? null : <Console width={width}/>}
         <Snackbar ref="snackbar" message={this.state.snackbar.message}/>
+        <ClickIndication/>
       </div>
     );
   }

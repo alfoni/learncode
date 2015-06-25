@@ -6,23 +6,29 @@ import CodeMirror from 'codemirror';
 import FileName from './Code/FileName.js';
 import DeleteFile from './Code/DeleteFile.js';
 import 'codemirror/mode/javascript/javascript';
+import 'codemirror/mode/css/css';
+import 'codemirror/mode/xml/xml';
+import path from 'path';
 
 let CodeWrapperStyle = {
   position: 'relative',
   display: 'inline-block',
-  height: 'calc(100% - 86px)',
-  width: '50%'
+  height: 'calc(100% - 86px)'
 };
 
 let CodeStyle = {
-  height: '100%'
+  height: 'calc(100% - 36px)'
 };
 
 let FileWrapperStyle = {
-  position: 'absolute',
-  top: '5px',
-  right: '5px',
-  zIndex: 5
+  position: 'relative',
+  backgroundColor: '#f7f7f7',
+  lineHeight: '26px',
+  fontFamily: 'Roboto',
+  color: 'rgba(0,0,0,0.4)',
+  padding: '5px 10px',
+  height: '36px',
+  boxSizing: 'border-box'
 };
 
 let Code = React.createClass({
@@ -50,6 +56,7 @@ let Code = React.createClass({
   updateAllCode() {
     var doc = this.codemirror.getDoc();
     var code = this.getCode();
+    this.codemirror.setOption('mode', this.getMode());
     this.isMutatingCode = true;
     doc.setValue(code);
     this.isMutatingCode = false;
@@ -59,10 +66,21 @@ let Code = React.createClass({
       this.codemirror.setCursor(this.codemirror.lineCount(), 0);
     }
   },
+  getMode() {
+    let extension = path.extname(this.state.course.currentFileName);
+    switch (extension) {
+      case '.html':
+        return 'xml';
+      case '.js':
+        return 'javascript';
+      case '.css':
+        return 'css';
+    }
+  },
   componentDidMount() {
     this.codemirror = CodeMirror(this.refs.code.getDOMNode(), {
       value: this.getCode(),
-      mode: 'javascript',
+      mode: this.getMode(),
       theme: 'learncode',
       lineNumbers: true,
       tabSize: 2
@@ -86,13 +104,15 @@ let Code = React.createClass({
     }
   },
   render() {
+    CodeWrapperStyle.width = this.props.width;
     return (
       <div style={CodeWrapperStyle}>
-        <div style={CodeStyle} ref="code"/>
         <div style={FileWrapperStyle}>
+          CODE EDITOR
           <DeleteFile/>
           <FileName/>
         </div>
+        <div style={CodeStyle} ref="code"/>
       </div>
     );
   }

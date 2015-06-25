@@ -15,8 +15,9 @@ let SceneControlsStyle = {
 let VideoScreenStyle = {
   position: 'absolute',
   right: '25px',
-  top: '25px',
+  bottom: '25px',
   height: '200px',
+  zIndex: 10,
   backgroundColor: '#000',
   overflow: 'hidden'
 };

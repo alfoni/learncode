@@ -4,7 +4,9 @@ let cerebral = Cerebral({
   user: {
     id: '123'
   },
-  course: {},
+  course: {
+    assignment: {}
+  },
   isLoadingCourse: true,
   snackbar: {
     show: false,

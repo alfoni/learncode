@@ -7,7 +7,7 @@ import {
 let RecordButtonStyle = {
   position: 'absolute',
   bottom: '25px',
-  right: '100px',
+  right: '390px',
   zIndex: '1'
 };
 
@@ -18,7 +18,7 @@ let RecordButton = React.createClass({
   },
   render() {
     RecordButtonStyle.bottom = this.state.recorder.isPlaying ? '-60px' : '25px';
-    RecordButtonStyle.right = this.state.recorder.isRecording ? '25px' : '100px';
+    RecordButtonStyle.right = this.state.recorder.isRecording ? '320px' : '390px';
     return (
       <FloatingActionButton 
         style={RecordButtonStyle}

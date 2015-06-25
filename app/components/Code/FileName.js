@@ -6,6 +6,7 @@ let FileNameStyle = {
   padding: '5px 10px',
   backgroundColor: 'rgb(255, 64, 129)', // rgb(226,226,226)
   borderRadius: '3px',
+  lineHeight: 'normal',
   color: '#FFF',
   fontFamily: 'Roboto',
   fontSize: '14px'

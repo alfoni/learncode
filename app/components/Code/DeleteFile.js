@@ -6,8 +6,6 @@ import {
 
 let DeleteFileStyle = {
   float: 'right',
-  backgroundColor: 'rgb(226,226,226)',
-  padding: '5px',
   borderRadius: '3px',
   marginLeft: '5px'
 };

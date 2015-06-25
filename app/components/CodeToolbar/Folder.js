@@ -9,7 +9,7 @@ let FolderStyle = {
   position: 'absolute',
   zIndex: 10,
   top: 45,
-  left: 300
+  left: 305
 };
 
 let Folder = React.createClass({
@@ -34,12 +34,15 @@ let Folder = React.createClass({
       <span onClick={stopPropagation}>
         {
           this.state.course.showFolder ? 
-          <Menu 
-            menuItems={this.createMenuItems()}
-            selectedIndex={this.state.course.currentFileIndex} 
-            autoWidth={false}
-            onItemTap={this.onItemSelected}
-            style={FolderStyle}/> :
+            <div className="arrow_box" style={FolderStyle}>
+              <Menu 
+                menuItems={this.createMenuItems()}
+                selectedIndex={this.state.course.currentFileIndex} 
+                autoWidth={true}
+
+                onItemTap={this.onItemSelected}/>
+            </div>
+            :
             null
         }
       </span>

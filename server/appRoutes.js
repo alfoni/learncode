@@ -11,6 +11,7 @@ module.exports = function (router) {
       res.send({
         id: '',
         authorId: '123',
+        logs: [],
         files: [{
           name: 'index.html',
           code: [
@@ -29,14 +30,23 @@ module.exports = function (router) {
         currentFileName: 'index.html',
         showFolder: false,
         showAddFileInput: false,
-        newFileName: ''
+        newFileName: '',
+        showBrowser: true,
+        lastClick: null,
+        assignment: {
+          showEditor: false,
+          showAssignment: false,
+          code: '',
+          description: '',
+          result: false
+        }
       });
     }, 1000);
 
   });
 
   router.post('/sandbox', function (req, res) {
-    updateSandbox(req.body.sandbox);
+    updateSandbox(req.body.sandbox, req.body.assignment);
     res.type('json');
     res.end();
   });
