@@ -1,0 +1,74 @@
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?103ejc');
+	src:url('fonts/icomoon.eot?103ejc#iefix') format('embedded-opentype'),
+		url('fonts/icomoon.ttf?103ejc') format('truetype'),
+		url('fonts/icomoon.woff?103ejc') format('woff'),
+		url('fonts/icomoon.svg?103ejc#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-mic:before {
+	content: "\e00f";
+}
+.icon-pause:before {
+	content: "\e018";
+}
+.icon-play_arrow:before {
+	content: "\e01b";
+}
+.icon-save:before {
+	content: "\e085";
+}
+.icon-border_color:before {
+	content: "\e0c5";
+}
+.icon-folder:before {
+	content: "\e101";
+}
+.icon-remove_red_eye:before {
+	content: "\e1a8";
+}
+.icon-menu:before {
+	content: "\e20e";
+}
+.icon-school:before {
+	content: "\e259";
+}
+.icon-check_box:before {
+	content: "\e25c";
+}
+.icon-assignment_late:before {
+	content: "\e274";
+}
+.icon-delete:before {
+	content: "\e287";
+}
+.icon-description:before {
+	content: "\e288";
+}
+.icon-note_add:before {
+	content: "\e2b0";
+}
+.icon-thumb_down:before {
+	content: "\e2ed";
+}
+.icon-thumb_up:before {
+	content: "\e2ee";
+}
+

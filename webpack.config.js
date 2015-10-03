@@ -28,9 +28,6 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify('development')
     })
   ],
-  postcss: [
-   require('autoprefixer')
-  ],
   resolve: {
     alias: {
       'common': path.join(__dirname, 'app/common')
@@ -47,6 +44,12 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
+    }, {
+      test: /\.woff$/,
+      loader: 'url?limit=100000'
     }]
-  }
+  },
+  postcss: [
+   require('autoprefixer')
+  ]
 };

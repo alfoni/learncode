@@ -50,6 +50,9 @@ module.exports = {
     }, {
       test: /\.css$/,
       loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
+    }, {
+      test: /\.woff$/,
+      loader: 'url?limit=100000'
     }]
   },
   postcss: [
