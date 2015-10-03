@@ -1,0 +1,15 @@
+.app {
+  background-color: green;
+  height: 50px;
+  border: 1px solid blue;
+}
+
+.app:hover {
+  background-color: blue;
+}
+
+@media (max-width: 600px) {
+  .app {
+    display: none;
+  }
+}
