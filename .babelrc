@@ -9,8 +9,7 @@
             "transform": "react-transform-hmr",
             "imports": ["react"],
             "locals": ["module"]
-          }],
-          "factoryMethods": ["React.createClass", "Component"]
+          }]
         }
       }
     }

@@ -1,10 +1,29 @@
 import React from 'react';
-import styles from './App.css';
+import {Decorator as Cerebral} from 'cerebral-react';
+import Recording from './course/components/Recording.js';
+import Home from './home/components/Home.js';
 
-function App() {
-  return (
-    <div>hepp</div>
-  );
+const pages = {
+  'home': Home,
+  'recording': Recording
+};
+
+@Cerebral({
+  page: ['currentPage']
+})
+class App extends React.Component {
+  renderPage() {
+    const Page = pages[this.props.page];
+
+    return <Page/>;
+  }
+  render() {
+    return (
+      <div>
+        {this.renderPage()}
+      </div>
+    );
+  }
 }
 
 export default App;

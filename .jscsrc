@@ -62,7 +62,7 @@
   "validateQuoteMarks": null,
   "validateIndentation": 2,
   "disallowMixedSpacesAndTabs": true,
-  "disallowTrailingWhitespace": true,
+  "disallowTrailingWhitespace": false,
   "disallowTrailingComma": true,
   "disallowKeywordsOnNewLine": ["else", "catch"],
   "requireLineFeedAtFileEnd": true,

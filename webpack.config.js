@@ -7,7 +7,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: 'eval-source-map',
   entry: [
-    'webpack-hot-middleware/client',
+    'webpack-hot-middleware/client?reload=true',
     path.join(__dirname, 'app/main.js')
   ],
   output: {
@@ -31,11 +31,16 @@ module.exports = {
   postcss: [
    require('autoprefixer')
   ],
+  resolve: {
+    alias: {
+      'common': path.join(__dirname, 'app/common')
+    }
+  },
   module: {
     loaders: [{
       test: /\.js?$/,
       exclude: /node_modules/,
-      loader: 'babel'
+      loader: 'babel?optional=es7.decorators'
     }, {
       test: /\.json?$/,
       loader: 'json'
