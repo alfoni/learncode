@@ -4,6 +4,7 @@ import Toolbar from './Toolbar';
 import ToolbarButton from './ToolbarButton';
 import ToolbarSeparator from './ToolbarSeparator';
 import ToolbarTitle from './ToolbarTitle';
+import ToolbarInput from './ToolbarInput';
 import icons from 'common/icons.css';
 
 @Cerebral()
@@ -19,6 +20,7 @@ class Recording extends React.Component {
           <ToolbarSeparator/>
           <ToolbarButton icon={icons.folder}/>
           <ToolbarButton icon={icons.addFile}/>
+          <ToolbarInput placeholder="Type filename..."/>
           <ToolbarSeparator/>
           <ToolbarButton icon={icons.showBrowser}/>
           <ToolbarButton icon={icons.assignment}/>

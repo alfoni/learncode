@@ -11,6 +11,7 @@
   font-size: 24px;
   line-height: 56px;
   color: rgba(0, 0, 0, 0.4);
+  cursor: pointer;
 }
 
 .icon:hover {
