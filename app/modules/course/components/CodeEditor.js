@@ -1,4 +1,4 @@
-import '!style!css!./../../../node_modules/codemirror/lib/codemirror.css';
+import '!style!css!./../../../../node_modules/codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/mode/css/css.js';
 import 'codemirror/mode/xml/xml.js';
