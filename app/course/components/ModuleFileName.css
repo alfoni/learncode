@@ -1,0 +1,10 @@
+.fileName {
+  float: right;
+  font-size: 14px;
+  border-radius: 3px;
+  padding: 5px 10px;
+  background-color: #ff4081;
+  color: #fff;
+  font-family: Roboto, sans-serif;
+  line-height: normal;
+}

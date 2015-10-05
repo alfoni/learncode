@@ -7,9 +7,15 @@ import ToolbarTitle from './ToolbarTitle';
 import ToolbarInput from './ToolbarInput';
 import ToolbarButtonPopover from './ToolbarButtonPopover';
 import DurationSlider from './DurationSlider';
+import Module from './Module';
+import ModuleToolbar from './ModuleToolbar';
+import ModuleFileName from './ModuleFileName';
+import ModuleAddressbar from './ModuleAddressbar';
 import icons from 'common/icons.css';
 
-@Cerebral()
+@Cerebral({
+  showAddFileInput: ['showAddFileInput']
+})
 class Recording extends React.Component {
   render() {
     return (
@@ -23,7 +29,13 @@ class Recording extends React.Component {
           <ToolbarButtonPopover icon={icons.folder}>
             <div style={{width: '100%', height: 40}}></div>
           </ToolbarButtonPopover>
-          <ToolbarInput icon={icons.addFile} placeholder="Type filename..."/>
+          <ToolbarButton/>
+          {
+            this.props.showAddFileInput ? 
+              <ToolbarInput icon={icons.addFile} placeholder="Type filename..."/>
+            :
+              null
+          }
           <ToolbarSeparator/>
           <ToolbarButton icon={icons.showBrowser}/>
           <ToolbarButton icon={icons.assignment}/>
@@ -33,6 +45,16 @@ class Recording extends React.Component {
           <ToolbarButton icon={icons.editAssignment}/>
         </Toolbar>
         <DurationSlider/>
+        <Module>
+          <ModuleToolbar title="CODE EDITOR">
+            <ModuleFileName fileName="index.html"/>
+          </ModuleToolbar>
+        </Module>
+        <Module>
+          <ModuleToolbar title="BROWSER">
+            <ModuleAddressbar url="http://sandbox.learncode.com:3000"/>
+          </ModuleToolbar>
+        </Module>
         <h1>Recording</h1>
       </div>
     );

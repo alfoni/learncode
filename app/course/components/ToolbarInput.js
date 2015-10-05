@@ -5,9 +5,6 @@ import ToolbarButton from './ToolbarButton';
 class ToolbarInput extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showInput: false
-    };
   }
   renderInput() {
     return (
@@ -31,7 +28,7 @@ class ToolbarInput extends React.Component {
       <div className={styles.wrapper}>
         <ToolbarButton icon={this.props.icon} onClick={() => this.toggleInput()}/>
         {
-          this.state.showInput ?
+          this.props.showInput ?
             this.renderInput()
           : null
         }
