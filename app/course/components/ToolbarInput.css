@@ -1,6 +1,11 @@
+.wrapper {
+  float: left;
+  height: 100%;
+}
+
 .inputWrapper {
   float: left;
-  padding: 10px 0 10px 12px;
+  padding: 10px 10px 10px 0;
   line-height: 36px;
 }
 
@@ -14,4 +19,8 @@
   height: 24px;
   font-size: 14px;
   color: rgba(0, 0, 0, 0.8);
+}
+
+.input:focus {
+  outline: 0;
 }

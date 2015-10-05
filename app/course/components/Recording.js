@@ -5,6 +5,8 @@ import ToolbarButton from './ToolbarButton';
 import ToolbarSeparator from './ToolbarSeparator';
 import ToolbarTitle from './ToolbarTitle';
 import ToolbarInput from './ToolbarInput';
+import ToolbarButtonPopover from './ToolbarButtonPopover';
+import DurationSlider from './DurationSlider';
 import icons from 'common/icons.css';
 
 @Cerebral()
@@ -18,9 +20,10 @@ class Recording extends React.Component {
           <ToolbarTitle title="Heisann!"/>
           <ToolbarButton icon={icons.save}/>
           <ToolbarSeparator/>
-          <ToolbarButton icon={icons.folder}/>
-          <ToolbarButton icon={icons.addFile}/>
-          <ToolbarInput placeholder="Type filename..."/>
+          <ToolbarButtonPopover icon={icons.folder}>
+            <div style={{width: '100%', height: 40}}></div>
+          </ToolbarButtonPopover>
+          <ToolbarInput icon={icons.addFile} placeholder="Type filename..."/>
           <ToolbarSeparator/>
           <ToolbarButton icon={icons.showBrowser}/>
           <ToolbarButton icon={icons.assignment}/>
@@ -29,6 +32,7 @@ class Recording extends React.Component {
           <ToolbarButton icon={icons.checkbox}/>
           <ToolbarButton icon={icons.editAssignment}/>
         </Toolbar>
+        <DurationSlider/>
         <h1>Recording</h1>
       </div>
     );
