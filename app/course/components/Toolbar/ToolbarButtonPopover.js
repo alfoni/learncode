@@ -11,6 +11,13 @@ class ToolbarButtonPopover extends React.Component {
     };
     this.onWindowClick = this.onWindowClick.bind(this);
   }
+  componentWillUpdate(nextProps) {
+    if (this.props.showFilesPopover && !nextProps.showFilesPopover) {
+      window.removeEventListener('click', this.onWindowClick);
+    } else if (!this.props.showFilesPopover && nextProps.showFilesPopover) {
+      setTimeout(() => window.addEventListener('click', this.onWindowClick), 0);
+    }
+  }
   onWindowClick(event) {
     if (!propagatedThrough(event, this.refs.popover)) {
       window.removeEventListener('click', this.onWindowClick);
@@ -18,15 +25,6 @@ class ToolbarButtonPopover extends React.Component {
         showPopover: false
       });
     }
-  }
-  togglePopover() {
-    if (this.state.showPopover) {
-      window.removeEventListener('click', this.onWindowClick);
-    } else {
-      setTimeout(() => window.addEventListener('click', this.onWindowClick), 0);
-    }
-
-    this.setState({showPopover: !this.state.showPopover});
   }
   renderPopover() {
     return (
@@ -40,9 +38,9 @@ class ToolbarButtonPopover extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        <ToolbarButton icon={this.props.icon} onClick={() => this.togglePopover()}/>
+        <ToolbarButton icon={this.props.icon} onClick={this.props.onClick}/>
         {
-          this.state.showPopover ?
+          this.props.show ?
             this.renderPopover()
           :
             null

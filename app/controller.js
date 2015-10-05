@@ -13,7 +13,8 @@ const model = Model({
     },
     sandboxFiles: [{
       code: 'foo'
-    }]
+    }],
+    showFilesPopover: false
   }
 });
 
