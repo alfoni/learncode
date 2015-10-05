@@ -12,6 +12,8 @@ import ModuleToolbar from './ModuleToolbar';
 import ModuleFileName from './ModuleFileName';
 import ModuleAddressbar from './ModuleAddressbar';
 import CodeEditor from './CodeEditor.js';
+import PlayButton from './PlayButton';
+import RecordButton from './RecordButton';
 import icons from 'common/icons.css';
 import styles from 'common/layout.css';
 
@@ -59,6 +61,9 @@ class Recording extends React.Component {
             <ModuleAddressbar url="http://sandbox.learncode.com:3000"/>
           </ModuleToolbar>
         </Module>
+        <PlayButton/>
+        <RecordButton/>
+        <h1>Recording</h1>
       </div>
     );
   }
