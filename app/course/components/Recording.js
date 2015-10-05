@@ -15,6 +15,7 @@ import CodeEditor from './CodeEditor.js';
 import PlayButton from './PlayButton';
 import RecordButton from './RecordButton';
 import icons from 'common/icons.css';
+import VideoFrame from './VideoFrame';
 import styles from 'common/layout.css';
 
 @Cerebral({
@@ -63,6 +64,7 @@ class Recording extends React.Component {
         </Module>
         <PlayButton/>
         <RecordButton/>
+        <VideoFrame/>
         <h1>Recording</h1>
       </div>
     );

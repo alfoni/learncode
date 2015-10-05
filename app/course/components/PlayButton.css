@@ -14,4 +14,9 @@
   font-size: 24px;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px;
   cursor: pointer;
+  z-index: 3;
+}
+
+.wrapper:hover {
+  opacity: 0.8;
 }
