@@ -11,7 +11,9 @@ import Module from './Module';
 import ModuleToolbar from './ModuleToolbar';
 import ModuleFileName from './ModuleFileName';
 import ModuleAddressbar from './ModuleAddressbar';
+import CodeEditor from './CodeEditor.js';
 import icons from 'common/icons.css';
+import styles from 'common/layout.css';
 
 @Cerebral({
   showAddFileInput: ['showAddFileInput']
@@ -19,7 +21,7 @@ import icons from 'common/icons.css';
 class Recording extends React.Component {
   render() {
     return (
-      <div>
+      <div className={styles.fullHeightContainer}>
         <Toolbar>
           <ToolbarButton icon={icons.menu}/>
           <ToolbarSeparator/>
@@ -31,7 +33,7 @@ class Recording extends React.Component {
           </ToolbarButtonPopover>
           <ToolbarButton/>
           {
-            this.props.showAddFileInput ? 
+            this.props.showAddFileInput ?
               <ToolbarInput icon={icons.addFile} placeholder="Type filename..."/>
             :
               null
@@ -49,13 +51,13 @@ class Recording extends React.Component {
           <ModuleToolbar title="CODE EDITOR">
             <ModuleFileName fileName="index.html"/>
           </ModuleToolbar>
+          <CodeEditor/>
         </Module>
         <Module>
           <ModuleToolbar title="BROWSER">
             <ModuleAddressbar url="http://sandbox.learncode.com:3000"/>
           </ModuleToolbar>
         </Module>
-        <h1>Recording</h1>
       </div>
     );
   }

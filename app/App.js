@@ -2,6 +2,7 @@ import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
 import Recording from './course/components/Recording.js';
 import Home from './home/components/Home.js';
+import styles from 'common/layout.css';
 
 const pages = {
   'home': Home,
@@ -9,7 +10,7 @@ const pages = {
 };
 
 @Cerebral({
-  page: ['course', 'currentPage']
+  page: ['currentPage']
 })
 class App extends React.Component {
   renderPage() {
@@ -19,7 +20,7 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className={styles.fullHeightContainer}>
         {this.renderPage()}
       </div>
     );
