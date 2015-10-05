@@ -28,10 +28,10 @@ class Toolbar extends React.Component {
         <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
           <div style={{width: '100%', height: 40}}></div>
         </ToolbarButtonPopover>
-        <ToolbarButton icon={icons.addFile} onClick={this.props.signals.addFileClicked}/>
+        <ToolbarButton icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
         {
           this.props.showAddFileInput ?
-            <ToolbarInput onBlur={this.props.signals.addFileInputBlurred} placeholder="Type filename..."/>
+            <ToolbarInput onBlur={() => this.props.signals.course.addFileInputBlurred()} placeholder="Type filename..."/>
           :
             null
         }
