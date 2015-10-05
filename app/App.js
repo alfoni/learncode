@@ -9,7 +9,7 @@ const pages = {
 };
 
 @Cerebral({
-  page: ['course', 'currentPage']
+  page: ['currentPage']
 })
 class App extends React.Component {
   renderPage() {

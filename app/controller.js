@@ -4,7 +4,8 @@ import Model from 'cerebral-baobab';
 const model = Model({
   currentPage: 'recording',
   course: {
-    showAddFileInput: false
+    showAddFileInput: false,
+    showFilesPopover: false
   }
 });
 

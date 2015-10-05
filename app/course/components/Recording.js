@@ -1,11 +1,11 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
 import Toolbar from './Toolbar';
-import ToolbarButton from './ToolbarButton';
-import ToolbarSeparator from './ToolbarSeparator';
-import ToolbarTitle from './ToolbarTitle';
-import ToolbarInput from './ToolbarInput';
-import ToolbarButtonPopover from './ToolbarButtonPopover';
+import ToolbarButton from './Toolbar/ToolbarButton';
+import ToolbarSeparator from './Toolbar/ToolbarSeparator';
+import ToolbarTitle from './Toolbar/ToolbarTitle';
+import ToolbarInput from './Toolbar/ToolbarInput';
+import ToolbarButtonPopover from './Toolbar/ToolbarButtonPopover';
 import DurationSlider from './DurationSlider';
 import Module from './Module';
 import ModuleToolbar from './ModuleToolbar';
@@ -14,7 +14,8 @@ import ModuleAddressbar from './ModuleAddressbar';
 import icons from 'common/icons.css';
 
 @Cerebral({
-  showAddFileInput: ['showAddFileInput']
+  showAddFileInput: ['course', 'showAddFileInput'],
+  showFilesPopover: ['course', 'showFilesPopover']
 })
 class Recording extends React.Component {
   render() {
@@ -26,13 +27,13 @@ class Recording extends React.Component {
           <ToolbarTitle title="Heisann!"/>
           <ToolbarButton icon={icons.save}/>
           <ToolbarSeparator/>
-          <ToolbarButtonPopover icon={icons.folder}>
+          <ToolbarButtonPopover onClick={this.props.signals.folderClicked} show={this.props.showFilesPopover} icon={icons.folder}>
             <div style={{width: '100%', height: 40}}></div>
           </ToolbarButtonPopover>
-          <ToolbarButton/>
+          <ToolbarButton icon={icons.addFile} onClick={this.props.signals.addFileClicked}/>
           {
-            this.props.showAddFileInput ? 
-              <ToolbarInput icon={icons.addFile} placeholder="Type filename..."/>
+            this.props.showAddFileInput ?
+              <ToolbarInput onBlur={this.props.signals.addFileInputBlurred} placeholder="Type filename..."/>
             :
               null
           }
