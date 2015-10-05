@@ -3,10 +3,14 @@ import Model from 'cerebral-baobab';
 
 const model = Model({
   currentPage: 'recording',
+  snackbar: {
+    show: true,
+    text: 'foobar'
+  },
   course: {
+    isLoading: false,
     showAddFileInput: false,
     currentFileIndex: 0,
-    currentFileName: 'index.html',
     recorder: {
       isPlaying: false,
       started: null

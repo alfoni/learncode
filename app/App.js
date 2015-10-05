@@ -2,7 +2,8 @@ import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
 import Recording from './course/components/Recording.js';
 import Home from './home/components/Home.js';
-import styles from 'common/layout.css';
+import layout from 'common/layout.css';
+import styles from './App.css';
 
 const pages = {
   'home': Home,
@@ -10,7 +11,8 @@ const pages = {
 };
 
 @Cerebral({
-  page: ['currentPage']
+  page: ['currentPage'],
+  snackbar: ['snackbar']
 })
 class App extends React.Component {
   renderPage() {
@@ -20,8 +22,11 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className={styles.fullHeightContainer}>
+      <div className={layout.fullHeightContainer}>
         {this.renderPage()}
+        <div className={this.props.snackbar.show ? styles.snackbarVisible : styles.snackbar}>
+          {this.props.snackbar.text}
+        </div>
       </div>
     );
   }

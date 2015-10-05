@@ -2,7 +2,7 @@ import '!style!css!./../../../node_modules/codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/mode/css/css.js';
 import 'codemirror/mode/xml/xml.js';
-import '!style!css!./CodeEditorStyle.css';
+import '!style!css!./CodeEditor/CodeEditorStyle.css';
 
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';

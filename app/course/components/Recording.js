@@ -9,9 +9,10 @@ import ToolbarButtonPopover from './Toolbar/ToolbarButtonPopover';
 import DurationSlider from './DurationSlider';
 import Module from './Module';
 import ModuleToolbar from './ModuleToolbar';
-import ModuleFileName from './ModuleFileName';
-import ModuleAddressbar from './ModuleAddressbar';
+import ModuleFileName from './CodeEditor/ModuleFileName';
+import ModuleAddressbar from './Preview/ModuleAddressbar';
 import CodeEditor from './CodeEditor.js';
+import Preview from './Preview.js';
 import PlayButton from './PlayButton';
 import RecordButton from './RecordButton';
 import icons from 'common/icons.css';
@@ -60,6 +61,7 @@ class Recording extends React.Component {
           <ModuleToolbar title="BROWSER">
             <ModuleAddressbar url="http://sandbox.learncode.com:3000"/>
           </ModuleToolbar>
+          <Preview/>
         </Module>
         <PlayButton/>
         <RecordButton/>
