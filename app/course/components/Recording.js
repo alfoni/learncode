@@ -16,6 +16,7 @@ import PlayButton from './PlayButton';
 import RecordButton from './RecordButton';
 import icons from 'common/icons.css';
 import VideoFrame from './VideoFrame';
+import Preview from './Preview';
 import styles from 'common/layout.css';
 
 @Cerebral({
@@ -61,6 +62,7 @@ class Recording extends React.Component {
           <ModuleToolbar title="BROWSER">
             <ModuleAddressbar url="http://sandbox.learncode.com:3000"/>
           </ModuleToolbar>
+          <Preview/>
         </Module>
         <PlayButton/>
         <RecordButton/>

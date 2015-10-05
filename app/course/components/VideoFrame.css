@@ -10,4 +10,5 @@
   bottom: 25px;
   right: 25px;
   border-radius: 2px;
+  z-index: 3;
 }
