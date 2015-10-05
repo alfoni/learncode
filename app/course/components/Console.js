@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './Console.css';
 
-function Console() {
+function Console(props) {
   return (
-    <div className={this.props.show ? styles.wrapper : styles.wrapperHidden}></div>
+    <div className={props.show ? styles.wrapper : styles.wrapperHidden}></div>
   );
 }
 

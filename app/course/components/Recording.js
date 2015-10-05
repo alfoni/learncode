@@ -17,7 +17,7 @@ import PlayButton from './PlayButton';
 import RecordButton from './RecordButton';
 import icons from 'common/icons.css';
 import VideoFrame from './VideoFrame';
-import Preview from './Preview';
+import Console from './Console.js';
 import styles from 'common/layout.css';
 
 @Cerebral({
