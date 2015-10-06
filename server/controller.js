@@ -29,7 +29,6 @@ export default function controller(app) {
         currentFileIndex: 0,
         showAddFileInput: false,
         showFolder: false,
-        currentFileName: '',
         files: [{
           name: 'index.html',
           code: [

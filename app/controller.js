@@ -20,6 +20,19 @@ const model = Model({
         return data.scenes[data.index];
       }
     }),
+    currentFile: Model.monkey({
+      cursors: {
+        index: ['course', 'currentScene', 'currentFileIndex'],
+        files: ['course', 'currentScene', 'sandboxFiles']
+      },
+      get(data) {
+        if (typeof data.index === 'number' && data.files.length) {
+          return data.files[data.index];
+        }
+
+        return {};
+      }
+    }),
     recorder: {
       isPlaying: false,
       started: null,
