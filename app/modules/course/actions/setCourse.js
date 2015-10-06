@@ -3,10 +3,13 @@ function setCourse(input, state, output) {
 
   state.set(['course', 'currentSceneIndex'], input.scene.index);
   state.set(['course', 'scenes', input.scene.index], input.scene);
+  state.set(['course', 'scenes', input.scene.index, 'sandboxFiles'], input.scene.files);
 
-  output.success({
-    courseSet: true
-  });
+  if (input.courseError || input.sceneError) {
+    output.error();
+  } else {
+    output.success();
+  }
 }
 
 export default setCourse;
