@@ -1,5 +1,7 @@
-export default function controller(app) {
-  app.get('/API/courses/:id', function getCourse(req, res) {
+import sandbox from './sandbox.js';
+
+export default function appController(router) {
+  router.get('/API/courses/:id', function getCourse(req, res) {
     setTimeout(function respond() {
       res.send({
         id: req.params.id,
@@ -20,7 +22,7 @@ export default function controller(app) {
     }, 50);
   });
 
-  app.get('/API/courses/:id/scenes/:index', function getCourse(req, res) {
+  router.get('/API/courses/:id/scenes/:index', function getCourse(req, res) {
     setTimeout(function respond() {
       res.send({
         index: req.params.index,
@@ -75,5 +77,11 @@ export default function controller(app) {
         ]
       });
     }, 50);
+  });
+
+  router.post('/API/sandbox', function updateSandbox(req, res) {
+    sandbox.update(req.body);
+    res.type('json');
+    res.send({});
   });
 }
