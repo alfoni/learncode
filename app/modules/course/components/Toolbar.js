@@ -6,16 +6,30 @@ import ToolbarSeparator from './Toolbar/ToolbarSeparator.js';
 import ToolbarTitle from './Toolbar/ToolbarTitle.js';
 import ToolbarInput from './Toolbar/ToolbarInput.js';
 import ToolbarButtonPopover from './Toolbar/ToolbarButtonPopover.js';
+import ToolbarFileListItem from './Toolbar/ToolbarFileListItem.js';
 import icons from 'common/icons.css';
 
 @Cerebral({
   showAddFileInput: ['course', 'currentScene', 'showAddFileInput'],
-  showFolder: ['course', 'currentScene', 'showFolder']
+  showFolder: ['course', 'currentScene', 'showFolder'],
+  files: ['course', 'currentScene', 'sandboxFiles']
 })
 class Toolbar extends React.Component {
   folderClick(e) {
     e.stopPropagation();
     this.props.signals.course.openFolderClicked();
+  }
+  renderFilesList() {
+    const files = this.props.files || [];
+    const filesList = [];
+
+    for (let x = 0; x < files.length; x++) {
+      filesList.push(
+        <ToolbarFileListItem key={x} name={files[x].name} icon={icons.description}/>
+      );
+    }
+
+    return filesList;
   }
   render() {
     return (
@@ -26,7 +40,7 @@ class Toolbar extends React.Component {
         <ToolbarButton icon={icons.save}/>
         <ToolbarSeparator/>
         <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
-          <div style={{width: '100%', height: 40}}></div>
+          {this.renderFilesList()}
         </ToolbarButtonPopover>
         <ToolbarButton icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
         {

@@ -1,0 +1,15 @@
+.wrapper {
+  padding: 0 24px;
+  color: #ff4081;
+  line-height: 48px;
+  font-size: 24px;
+}
+
+.wrapper:hover {
+  background-color: rgba(0, 0, 0, 0.032);
+}
+
+.fileName {
+  margin-left: 24px;
+  font-size: 16px;
+}

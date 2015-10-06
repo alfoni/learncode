@@ -20,10 +20,10 @@ const model = Model({
         return data.scenes[data.index];
       }
     }),
-    currentFile: Model.monkey({
+    selectedFile: Model.monkey({
       cursors: {
         index: ['course', 'currentScene', 'currentFileIndex'],
-        files: ['course', 'currentScene', 'sandboxFiles']
+        files: ['course', 'currentScene']
       },
       get(data) {
         if (typeof data.index === 'number' && data.files.length) {

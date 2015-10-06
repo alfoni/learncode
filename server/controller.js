@@ -57,6 +57,20 @@ export default function controller(app) {
               '  </body>',
               '</html>'
             ].join('\n')
+          },
+          {
+            name: 'test.html',
+            code: [
+              '<!DOCTYPE html>',
+              '<html>',
+              '  <head>',
+              '    <meta charset="UTF-8"/>',
+              '  </head>',
+              '  <body>',
+              '    This is another file!',
+              '  </body>',
+              '</html>'
+            ].join('\n')
           }
         ]
       });

@@ -16,7 +16,7 @@ import Console from './Console.js';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
-  currentFileName: ['course', 'currentFile', 'name']
+  currentFileName: ['course', 'selectedFile', 'name']
 })
 class Recording extends React.Component {
   render() {
