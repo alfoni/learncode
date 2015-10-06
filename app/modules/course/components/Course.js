@@ -16,7 +16,9 @@ import Console from './Console.js';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
-  currentFileName: ['course', 'selectedFile', 'name']
+  currentFileName: ['course', 'selectedFile', 'name'],
+  showPreview: ['course', 'showPreview'],
+  showConsole: ['course', 'showConsole']
 })
 class Recording extends React.Component {
   render() {
@@ -35,8 +37,8 @@ class Recording extends React.Component {
           <ModuleToolbar title="BROWSER">
             <ModuleAddressbar url="http://sandbox.learncode.com:3000"/>
           </ModuleToolbar>
-          <Preview/>
-          <Console show={false}/>
+          <Preview show={this.props.showPreview}/>
+          <Console show={this.props.showConsole}/>
         </Module>
         <PlayButton/>
         <RecordButton/>

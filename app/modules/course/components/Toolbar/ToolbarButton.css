@@ -19,6 +19,15 @@
   color: rgba(0, 0, 0, 0.87);
 }
 
+.activeIcon {
+  composes: icon;
+  color: #ff4081;
+}
+
+.activeIcon:hover, .button:focus .activeIcon {
+  color: #ff4081;
+}
+
 .button:focus{
   outline: 0;
 }

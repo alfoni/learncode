@@ -11,6 +11,8 @@ const model = Model({
     isLoading: false,
     authorId: null,
     currentSceneIndex: null,
+    showPreview: true,
+    showConsole: false,
     currentScene: Model.monkey({
       cursors: {
         index: ['course', 'currentSceneIndex'],

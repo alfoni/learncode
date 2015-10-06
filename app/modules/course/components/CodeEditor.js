@@ -76,7 +76,7 @@ class CodeEditor extends React.Component {
         event.text = ['\n'];
       }
 
-      this.props.signals.codeChanged({
+      this.props.signals.course.codeChanged({
         from: event.from,
         to: event.to,
         text: event.text

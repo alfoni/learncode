@@ -12,7 +12,9 @@ import icons from 'common/icons.css';
 @Cerebral({
   showAddFileInput: ['course', 'currentScene', 'showAddFileInput'],
   showFolder: ['course', 'currentScene', 'showFolder'],
-  files: ['course', 'currentScene', 'sandboxFiles']
+  files: ['course', 'currentScene', 'sandboxFiles'],
+  showPreview: ['course', 'showPreview'],
+  showConsole: ['course', 'showConsole']
 })
 class Toolbar extends React.Component {
   folderClick(e) {
@@ -43,15 +45,12 @@ class Toolbar extends React.Component {
           {this.renderFilesList()}
         </ToolbarButtonPopover>
         <ToolbarButton icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
-        {
-          this.props.showAddFileInput ?
-            <ToolbarInput onBlur={() => this.props.signals.course.addFileInputBlurred()} placeholder="Type filename..."/>
-          :
-            null
-        }
+        <ToolbarInput show={this.props.showAddFileInput}
+                      onBlur={() => this.props.signals.course.addFileInputBlurred()}
+                      placeholder="Type filename..."/>
         <ToolbarSeparator/>
-        <ToolbarButton icon={icons.showBrowser}/>
-        <ToolbarButton icon={icons.assignment}/>
+        <ToolbarButton active={this.props.showPreview} icon={icons.showBrowser} onClick={() => this.props.signals.course.showPreviewClicked()}/>
+        <ToolbarButton active={this.props.showConsole} icon={icons.assignment} onClick={() => this.props.signals.course.showConsoleClicked()}/>
         <ToolbarSeparator/>
         <ToolbarButton icon={icons.school}/>
         <ToolbarButton icon={icons.checkbox}/>

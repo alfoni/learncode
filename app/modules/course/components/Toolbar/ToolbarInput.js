@@ -7,16 +7,19 @@ class ToolbarInput extends React.Component {
   }
   render() {
     return (
-      <div className={styles.wrapper}>
-        <div className={styles.inputWrapper}>
-          <input
-          className={styles.input}
-          autoFocus
-          placeholder={this.props.placeholder}
-          onBlur={this.props.onBlur}>
-          </input>
+      this.props.show ?
+        <div className={styles.wrapper}>
+          <div className={styles.inputWrapper}>
+            <input
+            className={styles.input}
+            autoFocus
+            placeholder={this.props.placeholder}
+            onBlur={this.props.onBlur}>
+            </input>
+          </div>
         </div>
-      </div>
+      :
+        null
     );
   }
 }
