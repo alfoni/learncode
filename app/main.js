@@ -23,7 +23,7 @@ controller.signal('codeChanged', ...codeChanged);
 
 Router(controller, {
   '/': 'homeOpened',
-  '/course/:courseId/scenes/:sceneIndex': 'courseOpened'
+  '/courses/:courseId/scenes/:sceneIndex': 'courseOpened'
 }, {
   onlyHash: true
 }).trigger();
