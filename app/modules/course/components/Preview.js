@@ -6,7 +6,7 @@ import styles from './Preview.css';
 class Preview extends React.Component {
   render() {
     return (
-      <iframe ref="preview" className={styles.preview}/>
+      <iframe ref="preview" className={styles.preview} src="about:blank"/>
     );
   }
 }

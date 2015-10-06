@@ -4,7 +4,32 @@ export default function controller(app) {
       res.send({
         id: req.params.id,
         authorId: '123',
-        logs: [],
+        name: 'Whatever kurs',
+        scenes: [
+          {
+            name: 'Scene 1'
+          },
+          {
+            name: 'Scene 2'
+          },
+          {
+            name: 'Scene 3'
+          }
+        ]
+      });
+    }, 50);
+  });
+
+  app.get('/API/courses/:id/scenes/:index', function getCourse(req, res) {
+    setTimeout(function respond() {
+      res.send({
+        index: req.params.index,
+        authorId: '123',
+        name: 'Scene 1',
+        currentFileIndex: 0,
+        showAddFileInput: false,
+        showFolder: false,
+        currentFileName: '',
         files: [{
           name: 'index.html',
           code: [
@@ -17,10 +42,25 @@ export default function controller(app) {
             '    ',
             '  </body>',
             '</html>'
-          ].join('\n'),
-          currentFileIndex: 0
-        }]
+          ].join('\n')
+        }],
+        sandboxFiles: [
+          {
+            name: 'index.html',
+            code: [
+              '<!DOCTYPE html>',
+              '<html>',
+              '  <head>',
+              '    <meta charset="UTF-8"/>',
+              '  </head>',
+              '  <body>',
+              '    ',
+              '  </body>',
+              '</html>'
+            ].join('\n')
+          }
+        ]
       });
-    }, 2000);
+    }, 50);
   });
 }

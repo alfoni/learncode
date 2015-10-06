@@ -1,13 +1,13 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
-import Recording from './modules/course/components/Recording.js';
+import Course from './modules/course/components/Course.js';
 import Home from './modules/home/components/Home.js';
 import layout from 'common/layout.css';
 import styles from './App.css';
 
 const pages = {
   'home': Home,
-  'recording': Recording
+  'course': Course
 };
 
 @Cerebral({
