@@ -1,44 +1,55 @@
-var Webpack = require('webpack');
-var path = require('path');
-var appPath = path.resolve(__dirname, 'app');
-var nodeModulesPath = path.resolve(__dirname, 'node_modules');
-var materialUIPath = path.resolve(__dirname, 'node_modules', 'material-ui');
-var buildPath = path.resolve(__dirname, 'public', 'build');
+'use strict';
 
-var config = {
-  context: __dirname,
+var path = require('path');
+var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
   devtool: 'eval-source-map',
   entry: [
-    'webpack-dev-server/client?http://localhost:8080',
-    'webpack/hot/dev-server',
-    path.resolve(appPath, 'main.js')
+    'webpack-hot-middleware/client?reload=true',
+    path.join(__dirname, 'app/main.js')
   ],
   output: {
-    path: buildPath,
-    filename: 'bundle.js',
-    publicPath: '/build/'
+    path: path.join(__dirname, '/dist/'),
+    filename: '[name].js',
+    publicPath: '/'
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'app/index.tpl.html',
+      inject: 'body',
+      filename: 'index.html'
+    }),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('development')
+    })
+  ],
   resolve: {
-    // ...other resolve settings ...
     alias: {
-      "react": __dirname + '/node_modules/react',
-      "react/addons": __dirname + '/node_modules/react/addons',
+      'common': path.join(__dirname, 'app/common')
     }
   },
   module: {
     loaders: [{
-      test: /\.js$/,
-      loader: 'react-hot!babel?optional[]=es7.decorators,optional[]=es7.objectRestSpread,optional[]=es7.classProperties',
-      include: [materialUIPath, appPath]
+      test: /\.js?$/,
+      exclude: /node_modules/,
+      loader: 'babel?optional=es7.decorators'
     }, {
-      test: /\.(less|css)$/,
-      loader: 'style!css!less'
+      test: /\.json?$/,
+      loader: 'json'
+    }, {
+      test: /\.css$/,
+      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
     }, {
       test: /\.woff$/,
-      loader: 'url?limit=25000'
+      loader: 'url?limit=100000'
     }]
   },
-  plugins: [new Webpack.HotModuleReplacementPlugin()]
+  postcss: [
+   require('autoprefixer')
+  ]
 };
-
-module.exports = config;

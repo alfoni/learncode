@@ -1,0 +1,100 @@
+@font-face {
+	font-family: 'icomoon';
+	src: url('./icomoon.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.font {
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.mic {composes: font;}
+.mic:before {
+	content: "\e00f";
+}
+
+.pause {composes: font;}
+.pause:before {
+	content: "\e018";
+}
+
+.play {composes: font;}
+.play:before {
+	content: "\e01b";
+}
+
+.save {composes: font;}
+.save:before {
+	content: "\e085";
+}
+
+.editAssignment {composes: font;}
+.editAssignment:before {
+	content: "\e0c5";
+}
+
+.folder {composes: font;}
+.folder:before {
+	content: "\e101";
+}
+
+.showBrowser {composes: font;}
+.showBrowser:before {
+	content: "\e1a8";
+}
+
+.menu {composes: font;}
+.menu:before {
+	content: "\e20e";
+}
+
+.school {composes: font;}
+.school:before {
+	content: "\e259";
+}
+
+.checkbox {composes: font;}
+.checkbox:before {
+	content: "\e25c";
+}
+
+.assignment {composes: font;}
+.assignment:before {
+	content: "\e274";
+}
+
+.delete {composes: font;}
+.delete:before {
+	content: "\e287";
+}
+
+.description {composes: font;}
+.description:before {
+	content: "\e288";
+}
+
+.addFile {composes: font;}
+.addFile:before {
+	content: "\e2b0";
+}
+
+.thumbDown {composes: font;}
+.thumbDown:before {
+	content: "\e2ed";
+}
+
+.thumbUp {composes: font;}
+.thumbUp:before {
+	content: "\e2ee";
+}

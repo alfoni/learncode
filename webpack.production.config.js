@@ -1,33 +1,61 @@
-var Webpack = require('webpack');
+'use strict';
+
 var path = require('path');
-var nodeModulesPath = path.resolve(__dirname, 'node_modules');
-var buildPath = path.resolve(__dirname, 'dist');
-var mainPath = path.resolve(__dirname, 'app', 'main.js');
+var webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var StatsPlugin = require('stats-webpack-plugin');
 
-var config = {
-
-  // We change to normal source mapping, if you need them
-  devtool: 'source-map',
-  entry: mainPath,
+module.exports = {
+  entry: [
+    path.join(__dirname, 'app/main.js')
+  ],
   output: {
-    path: buildPath,
-    filename: 'bundle.js'
+    path: path.join(__dirname, '/dist/'),
+    filename: '[name]-[hash].min.js'
   },
+  plugins: [
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new HtmlWebpackPlugin({
+      template: 'app/index.tpl.html',
+      inject: 'body',
+      filename: 'index.html'
+    }),
+    new ExtractTextPlugin('[name]-[hash].min.css'),
+    new webpack.optimize.UglifyJsPlugin({
+      compressor: {
+        warnings: false,
+        screw_ie8: true
+      }
+    }),
+    new StatsPlugin('webpack.stats.json', {
+      source: false,
+      modules: false
+    }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    })
+  ],
+  postcss: [
+   require('autoprefixer')
+  ],
   module: {
     loaders: [{
-      test: /\.js$/,
-      loader: 'babel?optional=es7.decorators',
-      exclude: [nodeModulesPath]
+      test: /\.js?$/,
+      exclude: /node_modules/,
+      loader: 'babel'
+    }, {
+      test: /\.json?$/,
+      loader: 'json'
     }, {
       test: /\.css$/,
-      loader: 'style!css'
+      loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
+    }, {
+      test: /\.woff$/,
+      loader: 'url?limit=100000'
     }]
   },
-  plugins: [new Webpack.DefinePlugin({
-    "process.env": {
-      NODE_ENV: JSON.stringify("production")
-    }
-  })]
+  postcss: [
+    require('autoprefixer')
+  ]
 };
-
-module.exports = config;

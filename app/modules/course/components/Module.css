@@ -1,0 +1,8 @@
+.wrapper {
+  width: 50%;
+  height: calc(100% - 86px);
+  display: inline-block;
+  vertical-align: top;
+  border-left: 2px solid #eee;
+  box-sizing: border-box;
+}

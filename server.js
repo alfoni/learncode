@@ -1,53 +1,47 @@
-// CONFIG
-var path = require('path');
-var isProduction = process.env.NODE_ENV === 'production';
-var port = isProduction ? 8080 : 3000;
-var publicPath = path.resolve(__dirname, 'public');
-var buildPath = path.resolve(__dirname, 'dist');
+/* eslint no-console: 0 */
 
-// SERVER
-var express = require('express');
-var subdomain = require('express-subdomain');
-var bodyParser = require('body-parser');
-var httpProxy = require('http-proxy');
-var proxy = httpProxy.createProxyServer({
-  changeOrigin: true
-});
-var app = express();
+import path from 'path';
+import express from 'express';
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import config from './webpack.config.js';
+import controller from './server/controller.js';
 
-// ROUTES
-var appRoutes = require('./server/appRoutes.js');
-var sandboxRoutes = require('./server/sandboxRoutes.js');
-var sandboxRouter = express.Router();
+const isDeveloping = process.env.NODE_ENV !== 'production';
+const port = isDeveloping ? 3000 : process.env.PORT;
+const app = express();
 
-app.use(subdomain('sandbox', sandboxRouter));
-app.use(express.static(publicPath));
-app.use(bodyParser.json());
-sandboxRoutes(sandboxRouter);
-appRoutes(app);
+app.use(express.static(__dirname + '/dist'));
 
-// BUILD
-if (isProduction) {
+if (isDeveloping) {
+  const compiler = webpack(config);
 
-  app.use('/build', express.static(buildPath));
+  app.use(webpackMiddleware(compiler, {
+    publicPath: config.output.publicPath,
+    contentBase: 'src',
+    stats: {
+      colors: true,
+      hash: false,
+      timings: true,
+      chunks: false,
+      chunkModules: false,
+      modules: false
+    }
+  }));
 
-} else {
-
-  // Runs the build
-  var bundle = require('./server/bundle.js');
-  bundle();
-  app.all('/build/*', function(req, res) {
-    proxy.web(req, res, {
-      target: 'http://localhost:8080'
-    });
-  });
-
-  proxy.on('error', function(e) {
-    console.log('Could not connect to proxy, please try again...');
-  });
-
+  app.use(webpackHotMiddleware(compiler));
 }
 
-app.listen(port, function() {
-  console.log('Server running on port ' + port);
+controller(app);
+
+app.get('*', function response(req, res) {
+  res.sendFile(path.join(__dirname, 'dist/index.html'));
+});
+
+app.listen(port, 'localhost', function onStart(err) {
+  if (err) {
+    console.log(err);
+  }
+  console.info('==> 🌎 Listening on port %s. Open up http://localhost:%s/ in your browser.', port, port);
 });
