@@ -28,7 +28,7 @@
     "cerebral": "^0.19.4",
     "cerebral-baobab": "^0.2.5",
     "cerebral-react": "^0.2.0",
-    "cerebral-router": "^0.4.2",
+    "cerebral-router": "^0.5.1",
     "codemirror": "^5.7.0",
     "file-loader": "^0.8.4",
     "react": "0.14.0-rc1 ",

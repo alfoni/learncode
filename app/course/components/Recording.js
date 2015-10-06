@@ -21,8 +21,8 @@ import Console from './Console.js';
 import styles from 'common/layout.css';
 
 @Cerebral({
-  showAddFileInput: ['course', 'showAddFileInput'],
-  showFilesPopover: ['course', 'showFilesPopover']
+  showAddFileInput: ['course', 'currentScene', 'showAddFileInput'],
+  showFilesPopover: ['course', 'currentScene', 'showFilesPopover']
 })
 class Recording extends React.Component {
   render() {

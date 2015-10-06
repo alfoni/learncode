@@ -9,8 +9,8 @@ import ToolbarButtonPopover from './Toolbar/ToolbarButtonPopover.js';
 import icons from 'common/icons.css';
 
 @Cerebral({
-  showAddFileInput: ['course', 'showAddFileInput'],
-  showFolder: ['course', 'showFolder']
+  showAddFileInput: ['course', 'currentScene', 'showAddFileInput'],
+  showFolder: ['course', 'currentScene', 'showFolder']
 })
 class Toolbar extends React.Component {
   folderClick(e) {

@@ -12,11 +12,15 @@ import styles from './CodeEditor.css';
 
 @Cerebral({
   recorder: ['course', 'recorder'],
-  currentFileIndex: ['course', 'currentFileIndex'],
-  sandboxFiles: ['course', 'sandboxFiles'],
-  currentFileName: ['course', 'currentFileName']
+  currentFileIndex: ['course', 'currentScene', 'currentFileIndex'],
+  sandboxFiles: ['course', 'currentScene', 'sandboxFiles'],
+  currentFileName: ['course', 'currentScene', 'currentFileName']
 })
 class CodeEditor extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onEditorChange = this.onEditorChange.bind(this);
+  }
   componentDidMount() {
     this.codemirror = CodeMirror(this.refs.code, {
       value: this.getCode(),
@@ -25,6 +29,7 @@ class CodeEditor extends React.Component {
       lineNumbers: true,
       tabSize: 2
     });
+    this.codemirror.on('change', this.onEditorChange);
   }
   componentDidUpdate(prevProps) {
     if (
@@ -36,7 +41,11 @@ class CodeEditor extends React.Component {
     }
   }
   getCode() {
-    return this.props.sandboxFiles[this.props.currentFileIndex].code;
+    if (typeof this.props.currentFileIndex === 'number') {
+      return this.props.sandboxFiles[this.props.currentFileIndex].code;
+    }
+
+    return '';
   }
   updateAllCode() {
     const doc = this.codemirror.getDoc();

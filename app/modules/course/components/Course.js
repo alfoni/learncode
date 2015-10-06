@@ -11,19 +11,23 @@ import Preview from './Preview.js';
 import PlayButton from './PlayButton.js';
 import RecordButton from './RecordButton.js';
 import VideoFrame from './VideoFrame.js';
-import styles from 'common/layout.css';
+import styles from './Course.css';
 import Console from './Console.js';
 
-@Cerebral()
+@Cerebral({
+  isLoading: ['course', 'isLoading'],
+  currentFileName: ['course', 'currentScene', 'currentFileName']
+})
 class Recording extends React.Component {
   render() {
     return (
-      <div className={styles.fullHeightContainer} onClick={() => this.props.signals.course.appClicked()}>
+      <div className={styles.wrapper} onClick={() => this.props.signals.course.appClicked()}>
+        <div className={this.props.isLoading ? styles.overlayVisible : styles.overlay}></div>
         <Toolbar/>
         <DurationSlider/>
         <Module>
           <ModuleToolbar title="CODE EDITOR">
-            <ModuleFileName fileName="index.html"/>
+            <ModuleFileName fileName={this.props.currentFileName}/>
           </ModuleToolbar>
           <CodeEditor/>
         </Module>
@@ -37,7 +41,6 @@ class Recording extends React.Component {
         <PlayButton/>
         <RecordButton/>
         <VideoFrame/>
-        <h1>Recording</h1>
       </div>
     );
   }
