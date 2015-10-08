@@ -40,6 +40,15 @@ class Toolbar extends React.Component {
       );
     });
   }
+  addFileInputKeyDown(e) {
+    const keyCode = e.keyCode;
+
+    if (keyCode === 27) { // Escape
+      this.props.signals.course.addFileAborted();
+    } else if (keyCode === 13) { // Enter
+      this.props.signals.course.addFileSubmitted();
+    }
+  }
   render() {
     return (
       <div className={styles.background}>
@@ -53,6 +62,7 @@ class Toolbar extends React.Component {
         </ToolbarButtonPopover>
         <ToolbarButton icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
         <ToolbarInput show={this.props.showAddFileInput}
+                      onKeyDown={(e) => this.addFileInputKeyDown(e)}
                       onBlur={() => this.props.signals.course.addFileInputBlurred()}
                       placeholder="Type filename..."/>
         <ToolbarSeparator/>
