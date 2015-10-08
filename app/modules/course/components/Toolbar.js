@@ -22,8 +22,8 @@ class Toolbar extends React.Component {
     e.stopPropagation();
     this.props.signals.course.openFolderClicked();
   }
-  listFileClicked(index) { // TOOD: Refacotr to folderFileClicked
-    this.props.signals.course.listFileClicked({index: index});
+  folderFileClicked(index) { // TOOD: Refacotr to folderFileClicked
+    this.props.signals.course.folderFileClicked({index: index});
   }
   renderFilesList() {
     const files = this.props.files || [];
@@ -34,7 +34,7 @@ class Toolbar extends React.Component {
           icon={icons.description}
           key={index}
           name={file.name}
-          onClick={() => this.listFileClicked(index)}
+          onClick={() => this.folderFileClicked(index)}
           selectedFile={file === this.props.selectedFile}
         />
       );
