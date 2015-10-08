@@ -3,7 +3,7 @@ import styles from './ToolbarFileListItem.css';
 
 function ToolbarFileListItem(props) {
   return (
-    <div className={styles.wrapper}>
+    <div onClick={props.onClick} className={props.selectedFile ? styles.activeWrapper : styles.wrapper}>
       <span className={props.icon}></span>
       <span className={styles.fileName}>{props.name}</span>
     </div>

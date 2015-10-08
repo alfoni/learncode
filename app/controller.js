@@ -26,7 +26,7 @@ const model = Model({
     selectedFile: Model.monkey({
       cursors: {
         index: ['course', 'currentScene', 'currentFileIndex'],
-        files: ['course', 'currentScene']
+        files: ['course', 'currentScene', 'files']
       },
       get(data) {
         if (typeof data.index === 'number' && data.files.length) {
@@ -44,7 +44,6 @@ const model = Model({
     scenes: [{
       showAddFileInput: false,
       currentFileIndex: null,
-      currentFileName: '',
       files: [],
       sandboxFiles: [],
       showFolder: false

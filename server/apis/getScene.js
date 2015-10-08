@@ -21,23 +21,21 @@ export default function getScene(req, res) {
           '  </body>',
           '</html>'
         ].join('\n')
-      }],
-      sandboxFiles: [
-        {
-          name: 'index.html',
-          code: [
-            '<!DOCTYPE html>',
-            '<html>',
-            '  <head>',
-            '    <meta charset="UTF-8"/>',
-            '  </head>',
-            '  <body>',
-            '    ',
-            '  </body>',
-            '</html>'
-          ].join('\n')
-        }
-      ]
+      },
+      {
+        name: 'test.html',
+        code: [
+          '<!DOCTYPE html>',
+          '<html>',
+          '  <head>',
+          '    <meta charset="UTF-8"/>',
+          '  </head>',
+          '  <body>',
+          '    <h1>Test</h1>',
+          '  </body>',
+          '</html>'
+        ].join('\n')
+      }]
     });
   }, 50);
 }

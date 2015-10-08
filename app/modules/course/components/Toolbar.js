@@ -14,24 +14,31 @@ import icons from 'common/icons.css';
   showFolder: ['course', 'currentScene', 'showFolder'],
   files: ['course', 'currentScene', 'sandboxFiles'],
   showPreview: ['course', 'showPreview'],
-  showConsole: ['course', 'showConsole']
+  showConsole: ['course', 'showConsole'],
+  selectedFile: ['course', 'selectedFile']
 })
 class Toolbar extends React.Component {
   folderClick(e) {
     e.stopPropagation();
     this.props.signals.course.openFolderClicked();
   }
+  listFileClicked(index) { // TOOD: Refacotr to folderFileClicked
+    this.props.signals.course.listFileClicked({index: index});
+  }
   renderFilesList() {
     const files = this.props.files || [];
-    const filesList = [];
 
-    for (let x = 0; x < files.length; x++) {
-      filesList.push(
-        <ToolbarFileListItem key={x} name={files[x].name} icon={icons.description}/>
+    return files.map((file, index) => {
+      return (
+        <ToolbarFileListItem
+          icon={icons.description}
+          key={index}
+          name={file.name}
+          onClick={() => this.listFileClicked(index)}
+          selectedFile={file === this.props.selectedFile}
+        />
       );
-    }
-
-    return filesList;
+    });
   }
   render() {
     return (
