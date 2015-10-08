@@ -14,6 +14,7 @@ const model = Model({
     currentSceneIndex: null,
     showPreview: true,
     showConsole: false,
+    showEditAssignment: false,
     currentScene: Model.monkey({
       cursors: {
         index: ['course', 'currentSceneIndex'],

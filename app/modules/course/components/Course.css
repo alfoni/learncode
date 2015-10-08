@@ -21,3 +21,16 @@
   visibility: visible;
   opacity: 1;
 }
+
+.twoColumns,.threeColumns {
+  height: calc(100% - 86px);
+  width: 100%;
+}
+
+.twoColumns > div {
+  width: 50%;
+}
+
+.threeColumns > div {
+  width: 33.3333%;
+}

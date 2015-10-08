@@ -18,7 +18,8 @@ import Console from './Console.js';
   isLoading: ['course', 'isLoading'],
   currentFileName: ['course', 'selectedFile', 'name'],
   showPreview: ['course', 'showPreview'],
-  showConsole: ['course', 'showConsole']
+  showConsole: ['course', 'showConsole'],
+  showEditAssignment: ['course', 'showEditAssignment']
 })
 class Recording extends React.Component {
   render() {
@@ -27,19 +28,24 @@ class Recording extends React.Component {
         <div className={this.props.isLoading ? styles.overlayVisible : styles.overlay}></div>
         <Toolbar/>
         <DurationSlider/>
-        <Module>
-          <ModuleToolbar title="CODE EDITOR">
-            <ModuleFileName fileName={this.props.currentFileName}/>
-          </ModuleToolbar>
-          <CodeEditor/>
-        </Module>
-        <Module>
-          <ModuleToolbar title="BROWSER">
-            <ModuleAddressbar url="http://sandbox.learncode.com:3000"/>
-          </ModuleToolbar>
-          <Preview show={this.props.showPreview}/>
-          <Console show={this.props.showConsole}/>
-        </Module>
+        <div className={this.props.showEditAssignment ? styles.threeColumns : styles.twoColumns}>
+          <Module show={this.props.showEditAssignment}>
+            <ModuleToolbar title="ASSIGNMENT DESCRIPTION"/>
+          </Module>
+          <Module show={Boolean(true)}>
+            <ModuleToolbar title="CODE EDITOR">
+              <ModuleFileName fileName={this.props.currentFileName}/>
+            </ModuleToolbar>
+            <CodeEditor/>
+          </Module>
+          <Module show={Boolean(true)}>
+            <ModuleToolbar title="BROWSER">
+              <ModuleAddressbar url="http://sandbox.learncode.com:3000"/>
+            </ModuleToolbar>
+            <Preview show={this.props.showPreview}/>
+            <Console show={this.props.showConsole}/>
+          </Module>
+        </div>
         <PlayButton/>
         <RecordButton/>
         <VideoFrame/>

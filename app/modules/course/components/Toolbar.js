@@ -15,7 +15,8 @@ import icons from 'common/icons.css';
   files: ['course', 'currentScene', 'sandboxFiles'],
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
-  selectedFile: ['course', 'selectedFile']
+  selectedFile: ['course', 'selectedFile'],
+  showEditAssignment: ['course', 'showEditAssignment']
 })
 class Toolbar extends React.Component {
   folderClick(e) {
@@ -71,7 +72,9 @@ class Toolbar extends React.Component {
         <ToolbarSeparator/>
         <ToolbarButton icon={icons.school}/>
         <ToolbarButton icon={icons.checkbox}/>
-        <ToolbarButton icon={icons.editAssignment}/>
+        <ToolbarButton active={this.props.showEditAssignment}
+                       onClick={() => this.props.signals.course.editAssignmentClicked()}
+                       icon={icons.editAssignment}/>
       </div>
     );
   }
