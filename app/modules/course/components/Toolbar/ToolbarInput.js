@@ -11,6 +11,7 @@ class ToolbarInput extends React.Component {
         <div className={styles.wrapper}>
           <div className={styles.inputWrapper}>
             <input
+            onKeyDown={this.props.onKeyDown}
             className={styles.input}
             autoFocus
             placeholder={this.props.placeholder}
