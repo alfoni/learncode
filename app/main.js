@@ -12,6 +12,8 @@ import openFolderClicked from './modules/course/signals/openFolderClicked.js';
 import addFileClicked from './modules/course/signals/addFileClicked.js';
 import addFileInputBlurred from './modules/course/signals/addFileInputBlurred.js';
 import codeChanged from './modules/course/signals/codeChanged.js';
+import showPreviewClicked from './modules/course/signals/showPreviewClicked.js';
+import showConsoleClicked from './modules/course/signals/showConsoleClicked.js';
 
 controller.signal('homeOpened', ...homeOpened);
 controller.signal('courseOpened', ...courseOpened);
@@ -19,7 +21,9 @@ controller.signal('course.appClicked', ...courseAppClicked);
 controller.signal('course.openFolderClicked', ...openFolderClicked);
 controller.signal('course.addFileClicked', ...addFileClicked);
 controller.signal('course.addFileInputBlurred', ...addFileInputBlurred);
-controller.signal('codeChanged', ...codeChanged);
+controller.signal('course.codeChanged', ...codeChanged);
+controller.signal('course.showPreviewClicked', ...showPreviewClicked);
+controller.signal('course.showConsoleClicked', ...showConsoleClicked);
 
 Router(controller, {
   '/': 'homeOpened',

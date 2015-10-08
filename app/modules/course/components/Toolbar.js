@@ -6,16 +6,32 @@ import ToolbarSeparator from './Toolbar/ToolbarSeparator.js';
 import ToolbarTitle from './Toolbar/ToolbarTitle.js';
 import ToolbarInput from './Toolbar/ToolbarInput.js';
 import ToolbarButtonPopover from './Toolbar/ToolbarButtonPopover.js';
+import ToolbarFileListItem from './Toolbar/ToolbarFileListItem.js';
 import icons from 'common/icons.css';
 
 @Cerebral({
   showAddFileInput: ['course', 'currentScene', 'showAddFileInput'],
-  showFolder: ['course', 'currentScene', 'showFolder']
+  showFolder: ['course', 'currentScene', 'showFolder'],
+  files: ['course', 'currentScene', 'sandboxFiles'],
+  showPreview: ['course', 'showPreview'],
+  showConsole: ['course', 'showConsole']
 })
 class Toolbar extends React.Component {
   folderClick(e) {
     e.stopPropagation();
     this.props.signals.course.openFolderClicked();
+  }
+  renderFilesList() {
+    const files = this.props.files || [];
+    const filesList = [];
+
+    for (let x = 0; x < files.length; x++) {
+      filesList.push(
+        <ToolbarFileListItem key={x} name={files[x].name} icon={icons.description}/>
+      );
+    }
+
+    return filesList;
   }
   render() {
     return (
@@ -26,18 +42,15 @@ class Toolbar extends React.Component {
         <ToolbarButton icon={icons.save}/>
         <ToolbarSeparator/>
         <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
-          <div style={{width: '100%', height: 40}}></div>
+          {this.renderFilesList()}
         </ToolbarButtonPopover>
         <ToolbarButton icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
-        {
-          this.props.showAddFileInput ?
-            <ToolbarInput onBlur={() => this.props.signals.course.addFileInputBlurred()} placeholder="Type filename..."/>
-          :
-            null
-        }
+        <ToolbarInput show={this.props.showAddFileInput}
+                      onBlur={() => this.props.signals.course.addFileInputBlurred()}
+                      placeholder="Type filename..."/>
         <ToolbarSeparator/>
-        <ToolbarButton icon={icons.showBrowser}/>
-        <ToolbarButton icon={icons.assignment}/>
+        <ToolbarButton active={this.props.showPreview} icon={icons.showBrowser} onClick={() => this.props.signals.course.showPreviewClicked()}/>
+        <ToolbarButton active={this.props.showConsole} icon={icons.assignment} onClick={() => this.props.signals.course.showConsoleClicked()}/>
         <ToolbarSeparator/>
         <ToolbarButton icon={icons.school}/>
         <ToolbarButton icon={icons.checkbox}/>

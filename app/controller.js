@@ -12,6 +12,8 @@ const model = Model({
     isLoading: false,
     authorId: null,
     currentSceneIndex: null,
+    showPreview: true,
+    showConsole: false,
     currentScene: Model.monkey({
       cursors: {
         index: ['course', 'currentSceneIndex'],
@@ -19,6 +21,19 @@ const model = Model({
       },
       get(data) {
         return data.scenes[data.index];
+      }
+    }),
+    selectedFile: Model.monkey({
+      cursors: {
+        index: ['course', 'currentScene', 'currentFileIndex'],
+        files: ['course', 'currentScene']
+      },
+      get(data) {
+        if (typeof data.index === 'number' && data.files.length) {
+          return data.files[data.index];
+        }
+
+        return {};
       }
     }),
     recorder: {
