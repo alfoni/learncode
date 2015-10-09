@@ -7,6 +7,8 @@ import ToolbarTitle from './Toolbar/ToolbarTitle.js';
 import ToolbarInput from './Toolbar/ToolbarInput.js';
 import ToolbarButtonPopover from './Toolbar/ToolbarButtonPopover.js';
 import ToolbarFileListItem from './Toolbar/ToolbarFileListItem.js';
+import AssignmentDescription from './AssignmentDescription.js';
+import AssignmentResult from './AssignmentResult.js';
 import icons from 'common/icons.css';
 
 @Cerebral({
@@ -16,7 +18,9 @@ import icons from 'common/icons.css';
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
   selectedFile: ['course', 'selectedFile'],
-  showEditAssignment: ['course', 'showEditAssignment']
+  showEditAssignment: ['course', 'showEditAssignment'],
+  showAssignment: ['course', 'showAssignment'],
+  assignmentDescription: ['course', 'currentScene', 'assignment', 'description']
 })
 class Toolbar extends React.Component {
   folderClick(e) {
@@ -50,6 +54,10 @@ class Toolbar extends React.Component {
       this.props.signals.course.addFileSubmitted();
     }
   }
+  assignmentClicked(e) {
+    e.stopPropagation();
+    this.props.signals.course.openAssignmentClicked();
+  }
   render() {
     return (
       <div className={styles.background}>
@@ -70,7 +78,10 @@ class Toolbar extends React.Component {
         <ToolbarButton active={this.props.showPreview} icon={icons.showBrowser} onClick={() => this.props.signals.course.showPreviewClicked()}/>
         <ToolbarButton active={this.props.showConsole} icon={icons.assignment} onClick={() => this.props.signals.course.showConsoleClicked()}/>
         <ToolbarSeparator/>
-        <ToolbarButton icon={icons.school}/>
+        <ToolbarButtonPopover onClick={(e) => this.assignmentClicked(e)} show={this.props.showAssignment} icon={icons.school}>
+          <AssignmentDescription description={this.props.assignmentDescription}/>
+          <AssignmentResult/>
+        </ToolbarButtonPopover>
         <ToolbarButton icon={icons.checkbox}/>
         <ToolbarButton active={this.props.showEditAssignment}
                        onClick={() => this.props.signals.course.editAssignmentClicked()}

@@ -13,7 +13,7 @@ import RecordButton from './RecordButton.js';
 import VideoFrame from './VideoFrame.js';
 import styles from './Course.css';
 import Console from './Console.js';
-import AssignmentDescription from './AssignmentDescription.js';
+import EditAssignmentDescription from './EditAssignmentDescription.js';
 import AssignmentEditor from './AssignmentEditor.js';
 
 @Cerebral({
@@ -38,7 +38,7 @@ class Recording extends React.Component {
         <div className={this.props.showEditAssignment ? styles.threeColumns : styles.twoColumns}>
           <Module show={this.props.showEditAssignment}>
             <ModuleToolbar title="ASSIGNMENT DESCRIPTION"/>
-            <AssignmentDescription onChange={(e) => this.assignmentDescriptionChanged(e)}/>
+            <EditAssignmentDescription onChange={(e) => this.assignmentDescriptionChanged(e)}/>
             <ModuleToolbar title="ASSIGNMENT TEST"/>
             <AssignmentEditor/>
           </Module>

@@ -1,12 +1,5 @@
-.textArea {
-  font-family: monospace;
-  font-size: 14px;
-  border: 0;
-  outline: none;
-  resize: none;
-  height: 100px;
-  margin-left: 29px;
-  width: calc(100% - 29px);
-  padding: 8px 12px;
+.wrapper {
+  padding: 10px 20px;
+  width: 400px;
   box-sizing: border-box;
 }

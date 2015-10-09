@@ -1,9 +1,12 @@
 import React from 'react';
-import styles from './AssignmentDescription.css';
+import style from './AssignmentDescription.css';
 
 function AssignmentDescription(props) {
   return (
-    <textArea className={styles.textArea} onChange={props.onChange}></textArea>
+    <div className={style.wrapper}>
+      <h2>Assignment</h2>
+      {props.description}
+    </div>
   );
 }
 

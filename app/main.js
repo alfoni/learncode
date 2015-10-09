@@ -20,6 +20,7 @@ import editAssignmentClicked from './modules/course/signals/editAssignmentClicke
 import assignmentCodeChanged from './modules/course/signals/assignmentCodeChanged.js';
 import AssignmentDescriptionChanged from './modules/course/signals/AssignmentDescriptionChanged.js';
 import addFileSubmitted from './modules/course/signals/addFileSubmitted.js';
+import openAssignmentClicked from './modules/course/signals/openAssignmentClicked.js';
 
 controller.signal('homeOpened', ...homeOpened);
 controller.signal('courseOpened', ...courseOpened);
@@ -36,6 +37,7 @@ controller.signal('course.editAssignmentClicked', ...editAssignmentClicked);
 controller.signal('course.assignmentCodeChanged', ...assignmentCodeChanged);
 controller.signal('course.AssignmentDescriptionChanged', ...AssignmentDescriptionChanged);
 controller.signal('course.addFileSubmitted', ...addFileSubmitted);
+controller.signal('course.openAssignmentClicked', ...openAssignmentClicked);
 
 Router(controller, {
   '/': 'homeOpened',
