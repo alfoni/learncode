@@ -13,6 +13,8 @@ import RecordButton from './RecordButton.js';
 import VideoFrame from './VideoFrame.js';
 import styles from './Course.css';
 import Console from './Console.js';
+import AssignmentDescription from './AssignmentDescription.js';
+import AssignmentEditor from './AssignmentEditor.js';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
@@ -22,6 +24,11 @@ import Console from './Console.js';
   showEditAssignment: ['course', 'showEditAssignment']
 })
 class Recording extends React.Component {
+  assignmentDescriptionChanged(e) {
+    this.props.signals.course.AssignmentDescriptionChanged({
+      description: e.target.value
+    });
+  }
   render() {
     return (
       <div className={styles.wrapper} onClick={() => this.props.signals.course.appClicked()}>
@@ -31,6 +38,9 @@ class Recording extends React.Component {
         <div className={this.props.showEditAssignment ? styles.threeColumns : styles.twoColumns}>
           <Module show={this.props.showEditAssignment}>
             <ModuleToolbar title="ASSIGNMENT DESCRIPTION"/>
+            <AssignmentDescription onChange={(e) => this.assignmentDescriptionChanged(e)}/>
+            <ModuleToolbar title="ASSIGNMENT TEST"/>
+            <AssignmentEditor/>
           </Module>
           <Module show={Boolean(true)}>
             <ModuleToolbar title="CODE EDITOR">

@@ -14,7 +14,7 @@ const model = Model({
     currentSceneIndex: null,
     showPreview: true,
     showConsole: false,
-    showEditAssignment: false,
+    showEditAssignment: true,
     currentScene: Model.monkey({
       cursors: {
         index: ['course', 'currentSceneIndex'],
@@ -43,6 +43,10 @@ const model = Model({
       isRecording: false
     },
     scenes: [{
+      assignment: {
+        description: '',
+        code: ''
+      },
       showAddFileInput: false,
       currentFileIndex: null,
       files: [],
