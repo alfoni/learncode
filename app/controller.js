@@ -11,33 +11,12 @@ const model = Model({
   course: {
     isLoading: false,
     authorId: null,
-    currentSceneIndex: null,
     showPreview: true,
     showConsole: false,
     showEditAssignment: true,
     showAssignment: false,
-    currentScene: Model.monkey({
-      cursors: {
-        index: ['course', 'currentSceneIndex'],
-        scenes: ['course', 'scenes']
-      },
-      get(data) {
-        return data.scenes[data.index];
-      }
-    }),
-    selectedFile: Model.monkey({
-      cursors: {
-        index: ['course', 'currentScene', 'currentFileIndex'],
-        files: ['course', 'currentScene', 'files']
-      },
-      get(data) {
-        if (typeof data.index === 'number' && data.files.length) {
-          return data.files[data.index];
-        }
-
-        return {};
-      }
-    }),
+    currentScene: 0,
+    selectedFile: 0,
     recorder: {
       isPlaying: false,
       started: null,
@@ -49,7 +28,6 @@ const model = Model({
         code: ''
       },
       showAddFileInput: false,
-      currentFileIndex: null,
       files: [],
       sandboxFiles: [],
       showFolder: false
@@ -64,4 +42,18 @@ const services = {
   ajax: ajax
 };
 
-export default Controller(model, services);
+const controller = Controller(model, services);
+controller.compute({
+  course: {
+    currentScene(get, index) {
+      return get(['course', 'scenes', index]);
+    },
+    selectedFile(get, index) {
+      const currentScene = get(['course', 'currentScene']);
+
+      return get(['course', 'scenes', currentScene, 'files', index]);
+    }
+  }
+});
+
+export default controller;

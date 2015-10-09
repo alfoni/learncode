@@ -22,22 +22,22 @@ import AssignmentDescriptionChanged from './modules/course/signals/AssignmentDes
 import addFileSubmitted from './modules/course/signals/addFileSubmitted.js';
 import openAssignmentClicked from './modules/course/signals/openAssignmentClicked.js';
 
-controller.signal('homeOpened', ...homeOpened);
-controller.signal('courseOpened', ...courseOpened);
-controller.signal('course.appClicked', ...courseAppClicked);
-controller.signal('course.openFolderClicked', ...openFolderClicked);
-controller.signal('course.addFileClicked', ...addFileClicked);
-controller.signal('course.addFileInputBlurred', ...addFileInputBlurred);
-controller.signal('course.codeChanged', ...codeChanged);
-controller.signal('course.showPreviewClicked', ...showPreviewClicked);
-controller.signal('course.showConsoleClicked', ...showConsoleClicked);
-controller.signal('course.folderFileClicked', ...folderFileClicked);
-controller.signal('course.addFileAborted', ...addFileAborted);
-controller.signal('course.editAssignmentClicked', ...editAssignmentClicked);
-controller.signal('course.assignmentCodeChanged', ...assignmentCodeChanged);
-controller.signal('course.AssignmentDescriptionChanged', ...AssignmentDescriptionChanged);
-controller.signal('course.addFileSubmitted', ...addFileSubmitted);
-controller.signal('course.openAssignmentClicked', ...openAssignmentClicked);
+controller.signal('homeOpened', homeOpened);
+controller.signal('courseOpened', courseOpened);
+controller.signal('course.appClicked', courseAppClicked);
+controller.signal('course.openFolderClicked', openFolderClicked);
+controller.signal('course.addFileClicked', addFileClicked);
+controller.signal('course.addFileInputBlurred', addFileInputBlurred);
+controller.signal('course.codeChanged', codeChanged);
+controller.signal('course.showPreviewClicked', showPreviewClicked);
+controller.signal('course.showConsoleClicked', showConsoleClicked);
+controller.signal('course.folderFileClicked', folderFileClicked);
+controller.signal('course.addFileAborted', addFileAborted);
+controller.signal('course.editAssignmentClicked', editAssignmentClicked);
+controller.signal('course.assignmentCodeChanged', assignmentCodeChanged);
+controller.signal('course.AssignmentDescriptionChanged', AssignmentDescriptionChanged);
+controller.signal('course.addFileSubmitted', addFileSubmitted);
+controller.signal('course.openAssignmentClicked', openAssignmentClicked);
 
 Router(controller, {
   '/': 'homeOpened',

@@ -12,9 +12,8 @@ import styles from './CodeEditor.css';
 
 @Cerebral({
   recorder: ['course', 'recorder'],
-  currentFileIndex: ['course', 'currentScene', 'currentFileIndex'],
-  sandboxFiles: ['course', 'currentScene', 'sandboxFiles'],
-  currentFileName: ['course', 'currentScene', 'currentFileName']
+  currentScene: ['course', 'currentScene'],
+  selectedFile: ['course', 'selectedFile']
 })
 class CodeEditor extends React.Component {
   constructor(props) {
@@ -35,17 +34,13 @@ class CodeEditor extends React.Component {
     if (
       this.props.recorder.isPlaying ||
       this.props.recorder.started !== prevProps.recorder.started ||
-      this.props.currentFileIndex !== prevProps.currentFileIndex
+      this.props.selectedFile !== prevProps.selectedFile
     ) {
       this.updateAllCode();
     }
   }
   getCode() {
-    if (typeof this.props.currentFileIndex === 'number') {
-      return this.props.sandboxFiles[this.props.currentFileIndex].code;
-    }
-
-    return '';
+    return this.props.selectedFile.code || '';
   }
   updateAllCode() {
     const doc = this.codemirror.getDoc();
@@ -66,7 +61,7 @@ class CodeEditor extends React.Component {
       '.js': 'javascript',
       '.css': 'css'
     };
-    const extension = path.extname(this.props.currentFileName);
+    const extension = path.extname(this.props.currentScene.currentFileName);
 
     return modes[extension] || 'xml';
   }

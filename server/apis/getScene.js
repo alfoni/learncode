@@ -4,10 +4,15 @@ export default function getScene(req, res) {
       index: req.params.index,
       authorId: '123',
       name: 'Scene 1',
-      currentFileIndex: 0,
       showAddFileInput: false,
       showFolder: false,
       currentFileName: '',
+      assignment: {
+        description: 'Create a h1 element.',
+        code: [
+          'return document.getElementsByTagName(\'h1\').length() === 1;'
+        ].join('\n')
+      },
       files: [{
         name: 'index.html',
         code: [

@@ -4,7 +4,7 @@ function codeChanged(input, state) {
   const isOwner = state.get(['course', 'authorId']) === state.get(['user', 'id']);
   const isRecording = state.get(['recorder', 'isRecording']);
   const isPlaying = state.get(['recorder', 'isPlaying']);
-  const currentFileIndex = state.get(['course', 'currentScene', 'currentFileIndex']);
+  const currentFileIndex = state.get(['course', 'currentFile']);
 
   let code = state.get(['course', 'currentScene', 'sandboxFiles', currentFileIndex, 'code']);
   code = transformCode(code, input);

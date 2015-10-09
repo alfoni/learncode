@@ -3,7 +3,7 @@ function showAddFileInput(input, state) {
     [
       'course',
       'scenes',
-      state.get(['course', 'currentSceneIndex']),
+      state.get(['course', 'currentScene']),
       'showAddFileInput'
     ], true);
 }

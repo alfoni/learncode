@@ -13,15 +13,16 @@ import RecordButton from './RecordButton.js';
 import VideoFrame from './VideoFrame.js';
 import styles from './Course.css';
 import Console from './Console.js';
-import EditAssignmentDescription from './EditAssignmentDescription.js';
+import AssignmentDescriptionTextArea from './AssignmentDescriptionTextArea.js';
 import AssignmentEditor from './AssignmentEditor.js';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
-  currentFileName: ['course', 'selectedFile', 'name'],
+  selectedFile: ['course', 'selectedFile'],
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
-  showEditAssignment: ['course', 'showEditAssignment']
+  showEditAssignment: ['course', 'showEditAssignment'],
+  currentScene: ['course', 'currentScene']
 })
 class Recording extends React.Component {
   assignmentDescriptionChanged(e) {
@@ -38,13 +39,15 @@ class Recording extends React.Component {
         <div className={this.props.showEditAssignment ? styles.threeColumns : styles.twoColumns}>
           <Module show={this.props.showEditAssignment}>
             <ModuleToolbar title="ASSIGNMENT DESCRIPTION"/>
-            <EditAssignmentDescription onChange={(e) => this.assignmentDescriptionChanged(e)}/>
+            <AssignmentDescriptionTextArea
+              value={this.props.currentScene.assignment.description}
+              onChange={(e) => this.assignmentDescriptionChanged(e)}/>
             <ModuleToolbar title="ASSIGNMENT TEST"/>
             <AssignmentEditor/>
           </Module>
           <Module show={Boolean(true)}>
             <ModuleToolbar title="CODE EDITOR">
-              <ModuleFileName fileName={this.props.currentFileName}/>
+              <ModuleFileName fileName={this.props.selectedFile.name}/>
             </ModuleToolbar>
             <CodeEditor/>
           </Module>

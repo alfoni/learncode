@@ -12,15 +12,12 @@ import AssignmentResult from './AssignmentResult.js';
 import icons from 'common/icons.css';
 
 @Cerebral({
-  showAddFileInput: ['course', 'currentScene', 'showAddFileInput'],
-  showFolder: ['course', 'currentScene', 'showFolder'],
-  files: ['course', 'currentScene', 'sandboxFiles'],
+  currentScene: ['course', 'currentScene'],
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
   selectedFile: ['course', 'selectedFile'],
   showEditAssignment: ['course', 'showEditAssignment'],
   showAssignment: ['course', 'showAssignment'],
-  assignmentDescription: ['course', 'currentScene', 'assignment', 'description']
 })
 class Toolbar extends React.Component {
   folderClick(e) {
@@ -31,7 +28,7 @@ class Toolbar extends React.Component {
     this.props.signals.course.folderFileClicked({index: index});
   }
   renderFilesList() {
-    const files = this.props.files || [];
+    const files = this.props.currentScene.files || [];
 
     return files.map((file, index) => {
       return (
@@ -66,11 +63,11 @@ class Toolbar extends React.Component {
         <ToolbarTitle title="Heisann!"/>
         <ToolbarButton icon={icons.save}/>
         <ToolbarSeparator/>
-        <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
+        <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.currentScene.showFolder} icon={icons.folder}>
           {this.renderFilesList()}
         </ToolbarButtonPopover>
         <ToolbarButton icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
-        <ToolbarInput show={this.props.showAddFileInput}
+        <ToolbarInput show={this.props.currentScene.showAddFileInput}
                       onKeyDown={(e) => this.addFileInputKeyDown(e)}
                       onBlur={() => this.props.signals.course.addFileInputBlurred()}
                       placeholder="Type filename..."/>
@@ -79,7 +76,7 @@ class Toolbar extends React.Component {
         <ToolbarButton active={this.props.showConsole} icon={icons.assignment} onClick={() => this.props.signals.course.showConsoleClicked()}/>
         <ToolbarSeparator/>
         <ToolbarButtonPopover onClick={(e) => this.assignmentClicked(e)} show={this.props.showAssignment} icon={icons.school}>
-          <AssignmentDescription description={this.props.assignmentDescription}/>
+          <AssignmentDescription description={this.props.currentScene.assignment.description}/>
           <AssignmentResult/>
         </ToolbarButtonPopover>
         <ToolbarButton icon={icons.checkbox}/>
