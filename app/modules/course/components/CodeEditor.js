@@ -13,7 +13,7 @@ import styles from './CodeEditor.css';
 @Cerebral({
   recorder: ['course', 'recorder'],
   currentScene: ['course', 'currentScene'],
-  selectedFile: ['course', 'selectedFile']
+  currentFile: ['course', 'currentFile']
 })
 class CodeEditor extends React.Component {
   constructor(props) {
@@ -34,13 +34,13 @@ class CodeEditor extends React.Component {
     if (
       this.props.recorder.isPlaying ||
       this.props.recorder.started !== prevProps.recorder.started ||
-      this.props.selectedFile !== prevProps.selectedFile
+      this.props.currentFile !== prevProps.currentFile
     ) {
       this.updateAllCode();
     }
   }
   getCode() {
-    return this.props.selectedFile.code || '';
+    return this.props.currentFile.code || '';
   }
   updateAllCode() {
     const doc = this.codemirror.getDoc();

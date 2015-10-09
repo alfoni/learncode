@@ -18,7 +18,7 @@ import AssignmentEditor from './AssignmentEditor.js';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
-  selectedFile: ['course', 'selectedFile'],
+  currentFile: ['course', 'currentFile'],
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
   showEditAssignment: ['course', 'showEditAssignment'],
@@ -47,7 +47,7 @@ class Recording extends React.Component {
           </Module>
           <Module show={Boolean(true)}>
             <ModuleToolbar title="CODE EDITOR">
-              <ModuleFileName fileName={this.props.selectedFile.name}/>
+              <ModuleFileName fileName={this.props.currentFile.name}/>
             </ModuleToolbar>
             <CodeEditor/>
           </Module>

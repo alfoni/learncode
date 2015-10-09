@@ -2,7 +2,9 @@ function setActiveFile(input, state) {
   state.set(
     [
       'course',
-      'selectedFile'
+      'scenes',
+      state.get(['course', 'currentSceneIndex']),
+      'currentFileIndex'
     ], input.index
   );
 }

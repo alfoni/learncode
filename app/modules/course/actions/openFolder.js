@@ -3,7 +3,7 @@ function openFolder(input, state) {
     [
       'course',
       'scenes',
-      state.get(['course', 'currentScene']),
+      state.get(['course', 'currentSceneIndex']),
       'showFolder'
     ], true);
 }

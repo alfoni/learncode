@@ -1,5 +1,5 @@
 function updateAssignmentCode(input, state) {
-  const currentSceneIndex = state.get(['course', 'currentScene']);
+  const currentSceneIndex = state.get(['course', 'currentSceneIndex']);
   state.set([
     'course',
     'scenes',

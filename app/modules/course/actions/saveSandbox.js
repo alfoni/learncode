@@ -1,5 +1,5 @@
 function saveSandbox(input, state, output, services) {
-  const currentSceneIndex = state.get(['course', 'currentScene']);
+  const currentSceneIndex = state.get(['course', 'currentSceneIndex']);
   services.ajax.post('/API/sandbox?id=' + input.requestId, {
     files: state.get(['course', 'scenes', currentSceneIndex, 'sandboxFiles'])
   })

@@ -15,7 +15,7 @@ import icons from 'common/icons.css';
   currentScene: ['course', 'currentScene'],
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
-  selectedFile: ['course', 'selectedFile'],
+  currentFile: ['course', 'currentFile'],
   showEditAssignment: ['course', 'showEditAssignment'],
   showAssignment: ['course', 'showAssignment'],
 })
@@ -28,7 +28,7 @@ class Toolbar extends React.Component {
     this.props.signals.course.folderFileClicked({index: index});
   }
   renderFilesList() {
-    const files = this.props.currentScene.files || [];
+    const files = this.props.currentScene.sandboxFiles || [];
 
     return files.map((file, index) => {
       return (
@@ -37,7 +37,7 @@ class Toolbar extends React.Component {
           key={index}
           name={file.name}
           onClick={() => this.folderFileClicked(index)}
-          selectedFile={file === this.props.selectedFile}
+          currentFile={file === this.props.currentFile}
         />
       );
     });

@@ -6,7 +6,6 @@ export default function getScene(req, res) {
       name: 'Scene 1',
       showAddFileInput: false,
       showFolder: false,
-      currentFileName: '',
       assignment: {
         description: 'Create a h1 element.',
         code: [

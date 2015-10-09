@@ -3,7 +3,7 @@ function hideAddFileInput(input, state) {
     [
       'course',
       'scenes',
-      state.get(['course', 'currentScene']),
+      state.get(['course', 'currentSceneIndex']),
       'showAddFileInput'
     ], false);
 }
