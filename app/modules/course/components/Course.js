@@ -18,11 +18,11 @@ import AssignmentEditor from './AssignmentEditor.js';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
-  currentFile: ['course', 'currentFile'],
+  currentFile: 'currentFile',
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
   showEditAssignment: ['course', 'showEditAssignment'],
-  currentScene: ['course', 'currentScene']
+  currentScene: 'currentScene'
 })
 class Recording extends React.Component {
   assignmentDescriptionChanged(e) {

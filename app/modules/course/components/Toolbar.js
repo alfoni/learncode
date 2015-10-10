@@ -12,10 +12,10 @@ import AssignmentResult from './AssignmentResult.js';
 import icons from 'common/icons.css';
 
 @Cerebral({
-  currentScene: ['course', 'currentScene'],
+  currentScene: 'currentScene',
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
-  currentFile: ['course', 'currentFile'],
+  currentFile: 'currentFile',
   showEditAssignment: ['course', 'showEditAssignment'],
   showAssignment: ['course', 'showAssignment'],
 })

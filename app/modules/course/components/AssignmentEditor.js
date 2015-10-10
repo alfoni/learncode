@@ -11,7 +11,7 @@ import styles from './AssignmentEditor.css';
 
 @Cerebral({
   recorder: ['course', 'recorder'],
-  currentScene: ['course', 'currentScene']
+  currentScene: 'currentScene'
 })
 class AssignmentEditor extends React.Component {
   constructor(props) {

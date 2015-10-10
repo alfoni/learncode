@@ -16,28 +16,6 @@ const model = Model({
     showEditAssignment: true,
     showAssignment: false,
     currentSceneIndex: 0,
-    currentScene: Model.monkey({
-      cursors: {
-        index: ['course', 'currentSceneIndex'],
-        scenes: ['course', 'scenes']
-      },
-      get(data) {
-        return data.scenes[data.index];
-      }
-    }),
-    currentFile: Model.monkey({
-      cursors: {
-        index: ['course', 'currentScene', 'currentFileIndex'],
-        files: ['course', 'currentScene', 'files']
-      },
-      get(data) {
-        if (typeof data.index === 'number' && data.files.length) {
-          return data.files[data.index];
-        }
-
-        return '';
-      }
-    }),
     recorder: {
       isPlaying: false,
       started: null,
@@ -64,4 +42,26 @@ const services = {
   ajax: ajax
 };
 
-export default Controller(model, services);
+const controller = Controller(model, services);
+
+controller.compute({
+  currentScene(get) {
+    const sceneIndex = get(['course', 'currentSceneIndex']);
+    const scenes = get(['course', 'scenes']);
+
+    return scenes[sceneIndex] || 0;
+  },
+  currentFile(get) {
+    const currentSceneIndex = get(['course', 'currentSceneIndex']);
+    const currentFileIndex = get(['course', 'scenes', currentSceneIndex, 'currentFileIndex']);
+    const files = get(['course', 'scenes', currentSceneIndex, 'sandboxFiles']);
+
+    if (typeof currentFileIndex === 'number' && files.length) {
+      return files[currentFileIndex];
+    }
+
+    return '';
+  }
+});
+
+export default controller;
