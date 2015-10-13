@@ -42,5 +42,5 @@ export default function getScene(req, res) {
         ].join('\n')
       }]
     });
-  }, 50);
+  }, 500);
 }
