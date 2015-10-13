@@ -34,7 +34,7 @@ class CodeEditor extends React.Component {
     if (
       this.props.recorder.isPlaying ||
       this.props.recorder.started !== prevProps.recorder.started ||
-      this.props.currentFile !== prevProps.currentFile
+      this.props.currentScene.currentFileIndex !== prevProps.currentScene.currentFileIndex
     ) {
       this.updateAllCode();
     }

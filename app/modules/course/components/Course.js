@@ -26,11 +26,11 @@ import AssignmentEditor from './AssignmentEditor.js';
 })
 class Recording extends React.Component {
   assignmentDescriptionChanged(e) {
-    this.props.signals.course.AssignmentDescriptionChanged({
+    this.props.signals.course.assignmentDescriptionChanged.sync({
       description: e.target.value
     });
   }
-  render() {
+  renderScene() {
     return (
       <div className={styles.wrapper} onClick={() => this.props.signals.course.appClicked()}>
         <div className={this.props.isLoading ? styles.overlayVisible : styles.overlay}></div>
@@ -64,6 +64,9 @@ class Recording extends React.Component {
         <VideoFrame/>
       </div>
     );
+  }
+  render() {
+    return this.props.currentScene ? this.renderScene() : null;
   }
 }
 

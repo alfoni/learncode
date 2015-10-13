@@ -21,7 +21,7 @@ const model = Model({
       started: null,
       isRecording: false
     },
-    scenes: [{
+    scenes: [/* {
       assignment: {
         description: '',
         code: ''
@@ -31,7 +31,7 @@ const model = Model({
       files: [],
       sandboxFiles: [],
       showFolder: false
-    }]
+    } */]
   },
   user: {
     id: '123'

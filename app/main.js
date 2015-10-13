@@ -35,7 +35,7 @@ controller.signal('course.folderFileClicked', folderFileClicked);
 controller.signal('course.addFileAborted', addFileAborted);
 controller.signal('course.editAssignmentClicked', editAssignmentClicked);
 controller.signal('course.assignmentCodeChanged', assignmentCodeChanged);
-controller.signal('course.AssignmentDescriptionChanged', AssignmentDescriptionChanged);
+controller.signal('course.assignmentDescriptionChanged', AssignmentDescriptionChanged);
 controller.signal('course.addFileSubmitted', addFileSubmitted);
 controller.signal('course.openAssignmentClicked', openAssignmentClicked);
 
