@@ -11,49 +11,27 @@ const model = Model({
   course: {
     isLoading: false,
     authorId: null,
-    currentSceneIndex: null,
     showPreview: true,
     showConsole: false,
     showEditAssignment: true,
     showAssignment: false,
-    currentScene: Model.monkey({
-      cursors: {
-        index: ['course', 'currentSceneIndex'],
-        scenes: ['course', 'scenes']
-      },
-      get(data) {
-        return data.scenes[data.index];
-      }
-    }),
-    selectedFile: Model.monkey({
-      cursors: {
-        index: ['course', 'currentScene', 'currentFileIndex'],
-        files: ['course', 'currentScene', 'files']
-      },
-      get(data) {
-        if (typeof data.index === 'number' && data.files.length) {
-          return data.files[data.index];
-        }
-
-        return {};
-      }
-    }),
+    currentSceneIndex: 0,
     recorder: {
       isPlaying: false,
       started: null,
       isRecording: false
     },
-    scenes: [{
+    scenes: [/* {
       assignment: {
         description: '',
         code: ''
       },
+      currentFileIndex: 0,
       showAddFileInput: false,
-      currentFileIndex: null,
       files: [],
       sandboxFiles: [],
       showFolder: false
-    }]
+    } */]
   },
   user: {
     id: '123'
@@ -64,4 +42,26 @@ const services = {
   ajax: ajax
 };
 
-export default Controller(model, services);
+const controller = Controller(model, services);
+
+controller.compute({
+  currentScene(get) {
+    const sceneIndex = get(['course', 'currentSceneIndex']);
+    const scenes = get(['course', 'scenes']);
+
+    return scenes[sceneIndex] || 0;
+  },
+  currentFile(get) {
+    const currentSceneIndex = get(['course', 'currentSceneIndex']);
+    const currentFileIndex = get(['course', 'scenes', currentSceneIndex, 'currentFileIndex']);
+    const files = get(['course', 'scenes', currentSceneIndex, 'sandboxFiles']);
+
+    if (typeof currentFileIndex === 'number' && files.length) {
+      return files[currentFileIndex];
+    }
+
+    return '';
+  }
+});
+
+export default controller;

@@ -1,10 +1,9 @@
 function setActiveFile(input, state) {
-  const currentSceneIndex = state.get(['course', 'currentSceneIndex']);
   state.set(
     [
       'course',
       'scenes',
-      currentSceneIndex,
+      state.get(['course', 'currentSceneIndex']),
       'currentFileIndex'
     ], input.index
   );

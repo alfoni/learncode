@@ -10,7 +10,8 @@ import CodeMirror from 'codemirror';
 import styles from './AssignmentEditor.css';
 
 @Cerebral({
-  assignment: ['course', 'currentScene', 'assignment']
+  recorder: ['course', 'recorder'],
+  currentScene: 'currentScene'
 })
 class AssignmentEditor extends React.Component {
   constructor(props) {
@@ -27,11 +28,30 @@ class AssignmentEditor extends React.Component {
     });
     this.codemirror.on('change', this.onEditorChange);
   }
+  componentDidUpdate(prevProps) {
+    if (this.props.recorder.isPlaying ||
+    this.props.recorder.started !== prevProps.recorder.started ||
+    this.props.currentScene.assignment.code !== prevProps.currentScene.assignment.code) {
+      this.updateAllCode();
+    }
+  }
+  updateAllCode() {
+    const doc = this.codemirror.getDoc();
+    const code = this.getCode();
+    this.isMutatingCode = true;
+    doc.setValue(code);
+    this.isMutatingCode = false;
+
+    if (!this.props.recorder.isPlaying) {
+      this.codemirror.focus();
+      this.codemirror.setCursor(this.codemirror.lineCount(), 0);
+    }
+  }
   onEditorChange() {
     this.props.signals.course.assignmentCodeChanged({code: this.codemirror.getDoc().getValue()});
   }
   getCode() {
-    const assignment = this.props.assignment;
+    const assignment = this.props.currentScene.assignment;
 
     if (assignment && assignment.code) {
       return assignment.code;

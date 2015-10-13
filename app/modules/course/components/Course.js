@@ -13,23 +13,24 @@ import RecordButton from './RecordButton.js';
 import VideoFrame from './VideoFrame.js';
 import styles from './Course.css';
 import Console from './Console.js';
-import EditAssignmentDescription from './EditAssignmentDescription.js';
+import AssignmentDescriptionTextArea from './AssignmentDescriptionTextArea.js';
 import AssignmentEditor from './AssignmentEditor.js';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
-  currentFileName: ['course', 'selectedFile', 'name'],
+  currentFile: 'currentFile',
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
-  showEditAssignment: ['course', 'showEditAssignment']
+  showEditAssignment: ['course', 'showEditAssignment'],
+  currentScene: 'currentScene'
 })
 class Recording extends React.Component {
   assignmentDescriptionChanged(e) {
-    this.props.signals.course.AssignmentDescriptionChanged({
+    this.props.signals.course.assignmentDescriptionChanged.sync({
       description: e.target.value
     });
   }
-  render() {
+  renderScene() {
     return (
       <div className={styles.wrapper} onClick={() => this.props.signals.course.appClicked()}>
         <div className={this.props.isLoading ? styles.overlayVisible : styles.overlay}></div>
@@ -38,13 +39,15 @@ class Recording extends React.Component {
         <div className={this.props.showEditAssignment ? styles.threeColumns : styles.twoColumns}>
           <Module show={this.props.showEditAssignment}>
             <ModuleToolbar title="ASSIGNMENT DESCRIPTION"/>
-            <EditAssignmentDescription onChange={(e) => this.assignmentDescriptionChanged(e)}/>
+            <AssignmentDescriptionTextArea
+              value={this.props.currentScene.assignment.description}
+              onChange={(e) => this.assignmentDescriptionChanged(e)}/>
             <ModuleToolbar title="ASSIGNMENT TEST"/>
             <AssignmentEditor/>
           </Module>
           <Module show={Boolean(true)}>
             <ModuleToolbar title="CODE EDITOR">
-              <ModuleFileName fileName={this.props.currentFileName}/>
+              <ModuleFileName fileName={this.props.currentFile.name}/>
             </ModuleToolbar>
             <CodeEditor/>
           </Module>
@@ -61,6 +64,9 @@ class Recording extends React.Component {
         <VideoFrame/>
       </div>
     );
+  }
+  render() {
+    return this.props.currentScene ? this.renderScene() : null;
   }
 }
 
