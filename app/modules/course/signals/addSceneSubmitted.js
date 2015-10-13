@@ -1,6 +1,6 @@
 import saveNewScene from './../actions/saveNewScene.js';
 import addNewScene from './../actions/addNewScene.js';
-import setScene from './../actions/setScene.js';
+import setSceneIndex from './../actions/setSceneIndex.js';
 import showSavingScene from './../actions/showSavingScene.js';
 import timeout from 'common/actions/timeout.js';
 import closeConfigureScenes from './../actions/closeConfigureScenes.js';
@@ -14,7 +14,7 @@ export default [
     saveNewScene, {
       success: [
         addNewScene,
-        setScene,
+        setSceneIndex,
         showSceneLoaded
       ]
     }

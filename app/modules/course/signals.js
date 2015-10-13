@@ -18,6 +18,10 @@ import stopClicked from './signals/stopClicked.js';
 import playClicked from './signals/playClicked.js';
 import saveShortcutPressed from './signals/saveShortcutPressed.js';
 import saveCourseClicked from './signals/saveCourseClicked.js';
+import configureScenesClicked from './signals/configureScenesClicked.js';
+import addSceneSubmitted from './signals/addSceneSubmitted.js';
+import sceneNameClicked from './signals/sceneNameClicked.js';
+import listSceneNameClicked from './signals/listSceneNameClicked.js';
 
 export default function(controller) {
   controller.signal('course.courseOpened', courseOpened);
@@ -42,4 +46,8 @@ export default function(controller) {
   controller.signal('course.stopClicked', stopClicked);
   controller.signal('course.saveShortcutPressed', saveShortcutPressed);
   controller.signal('course.saveCourseClicked', saveCourseClicked);
+  controller.signal('course.configureScenesClicked', configureScenesClicked);
+  controller.signal('course.addSceneSubmitted', addSceneSubmitted);
+  controller.signal('course.sceneNameClicked', sceneNameClicked);
+  controller.signal('course.listSceneNameClicked', listSceneNameClicked);
 }

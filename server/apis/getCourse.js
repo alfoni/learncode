@@ -3,7 +3,7 @@ export default function getCourse(req, res) {
     res.send({
       id: req.params.id,
       authorId: '123',
-      name: 'Whatever kurs',
+      name: 'Course 1',
       scenes: [
         {
           name: 'Scene 1'

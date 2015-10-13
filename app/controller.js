@@ -9,6 +9,7 @@ const model = Model({
     text: ''
   },
   course: {
+    name: 'Course 1',
     isLoading: false,
     authorId: null,
     showPreview: true,
@@ -16,6 +17,7 @@ const model = Model({
     showEditAssignment: false,
     showAssignment: false,
     showConfigureScenes: false,
+    showScenesList: false,
     currentSceneIndex: 0,
     sandboxSnapshot: null,
     recorder: {
@@ -31,6 +33,7 @@ const model = Model({
       },
       currentFileIndex: 0,
       showAddFileInput: false,
+      showScenesList: false,
       files: [],
       sandboxFiles: [],
       showFolder: false

@@ -3,9 +3,10 @@ export default function getScene(req, res) {
     res.send({
       index: req.params.index,
       authorId: '123',
-      name: 'Scene 1',
+      name: 'Scene ' + (Number(req.params.index) + 1),
       showAddFileInput: false,
       showFolder: false,
+      showScenesList: false,
       assignment: {
         description: 'Create a h1 element.',
         code: [
@@ -41,5 +42,5 @@ export default function getScene(req, res) {
         ].join('\n')
       }]
     });
-  }, 50);
+  }, 500);
 }

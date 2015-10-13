@@ -6,6 +6,7 @@
   position: relative;
   cursor: pointer;
   width: 192px;
+  height: 25px;
 }
 
 .wrapper:hover {

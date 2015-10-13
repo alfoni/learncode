@@ -13,11 +13,13 @@ import ConfigureScenes from './Toolbar/ConfigureScenes.js';
 import icons from 'common/icons.css';
 
 @Cerebral({
+  scenes: ['course', 'scenes'],
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
   showConfigureScenes: ['course', 'showConfigureScenes'],
   showEditAssignment: ['course', 'showEditAssignment'],
-  showAssignment: ['course', 'showAssignment']
+  showAssignment: ['course', 'showAssignment'],
+  courseName: ['course', 'name']
 }, {
   currentFile: ['currentFile'],
   currentScene: ['currentScene']
@@ -40,8 +42,27 @@ class Toolbar extends React.Component {
           key={index}
           name={file.name}
           onClick={() => this.folderFileClicked(index)}
-          currentFile={file === this.props.currentFile}
+          active={file === this.props.currentFile}
         />
+      );
+    });
+  }
+  listSceneNameClicked(index) {
+    this.props.signals.course.listSceneNameClicked({
+      sceneIndex: index
+    });
+  }
+  renderScenesList() {
+    const scenes = this.props.scenes;
+
+    return scenes.map((scene, index) => {
+      return (
+        <ToolbarFileListItem
+          key={index}
+          onClick={() => this.listSceneNameClicked(index)}
+          name={scene.name}
+          active={scene === this.props.currentScene}
+          />
       );
     });
   }
@@ -65,12 +86,16 @@ class Toolbar extends React.Component {
     e.stopPropagation();
     this.props.signals.course.configureScenesClicked();
   }
+  sceneNameClicked(e) {
+    e.stopPropagation();
+    this.props.signals.course.sceneNameClicked();
+  }
   render() {
     return (
       <div className={styles.background}>
         <ToolbarButton icon={icons.menu}/>
         <ToolbarSeparator/>
-        <ToolbarTitle title="Heisann!"/>
+        <ToolbarTitle title={this.props.courseName}/>
         <ToolbarButton icon={icons.save} onClick={() => this.props.signals.course.saveCourseClicked()}/>
         <ToolbarSeparator/>
         <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.currentScene.showFolder} icon={icons.folder}>
@@ -94,6 +119,11 @@ class Toolbar extends React.Component {
                        onClick={() => this.props.signals.course.editAssignmentClicked()}
                        icon={icons.editAssignment}/>
         <ToolbarSeparator/>
+        <ToolbarButtonPopover onClick={(e) => this.sceneNameClicked(e)}
+                              title={this.props.currentScene.name}
+                              show={this.props.currentScene.showScenesList}>
+          {this.renderScenesList()}
+        </ToolbarButtonPopover>
         <ToolbarButtonPopover icon={icons.thumbUp}
                               onClick={(e) => this.configureScenesClicked(e)}
                               show={this.props.showConfigureScenes}>

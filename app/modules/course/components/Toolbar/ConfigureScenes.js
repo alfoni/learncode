@@ -21,6 +21,7 @@ class ConfigureScenes extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
+        <h4 className={styles.title}>Add scene</h4>
         <AddSceneInput show={Boolean(true)}
                       onKeyDown={(e) => this.addSceneInputKeyDown(e)}
                       placeHolder="Type scenename..."/>
