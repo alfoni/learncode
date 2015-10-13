@@ -3,7 +3,7 @@ import styles from './Module.css';
 
 function Module(props) {
   return (
-    <div className={styles.wrapper}>
+    <div className={props.show ? styles.wrapper : styles.hidden}>
       {props.children}
     </div>
   );

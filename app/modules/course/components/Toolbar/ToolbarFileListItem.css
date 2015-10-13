@@ -5,6 +5,7 @@
   vertical-align: top;
   position: relative;
   cursor: pointer;
+  width: 192px;
 }
 
 .wrapper:hover {

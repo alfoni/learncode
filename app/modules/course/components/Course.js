@@ -13,33 +13,49 @@ import RecordButton from './RecordButton.js';
 import VideoFrame from './VideoFrame.js';
 import styles from './Course.css';
 import Console from './Console.js';
+import EditAssignmentDescription from './EditAssignmentDescription.js';
+import AssignmentEditor from './AssignmentEditor.js';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
   currentFileName: ['course', 'selectedFile', 'name'],
   showPreview: ['course', 'showPreview'],
-  showConsole: ['course', 'showConsole']
+  showConsole: ['course', 'showConsole'],
+  showEditAssignment: ['course', 'showEditAssignment']
 })
 class Recording extends React.Component {
+  assignmentDescriptionChanged(e) {
+    this.props.signals.course.AssignmentDescriptionChanged({
+      description: e.target.value
+    });
+  }
   render() {
     return (
       <div className={styles.wrapper} onClick={() => this.props.signals.course.appClicked()}>
         <div className={this.props.isLoading ? styles.overlayVisible : styles.overlay}></div>
         <Toolbar/>
         <DurationSlider/>
-        <Module>
-          <ModuleToolbar title="CODE EDITOR">
-            <ModuleFileName fileName={this.props.currentFileName}/>
-          </ModuleToolbar>
-          <CodeEditor/>
-        </Module>
-        <Module>
-          <ModuleToolbar title="BROWSER">
-            <ModuleAddressbar url="http://sandbox.learncode.com:3000"/>
-          </ModuleToolbar>
-          <Preview show={this.props.showPreview}/>
-          <Console show={this.props.showConsole}/>
-        </Module>
+        <div className={this.props.showEditAssignment ? styles.threeColumns : styles.twoColumns}>
+          <Module show={this.props.showEditAssignment}>
+            <ModuleToolbar title="ASSIGNMENT DESCRIPTION"/>
+            <EditAssignmentDescription onChange={(e) => this.assignmentDescriptionChanged(e)}/>
+            <ModuleToolbar title="ASSIGNMENT TEST"/>
+            <AssignmentEditor/>
+          </Module>
+          <Module show={Boolean(true)}>
+            <ModuleToolbar title="CODE EDITOR">
+              <ModuleFileName fileName={this.props.currentFileName}/>
+            </ModuleToolbar>
+            <CodeEditor/>
+          </Module>
+          <Module show={Boolean(true)}>
+            <ModuleToolbar title="BROWSER">
+              <ModuleAddressbar url="http://sandbox.learncode.com:3000"/>
+            </ModuleToolbar>
+            <Preview show={this.props.showPreview}/>
+            <Console show={this.props.showConsole}/>
+          </Module>
+        </div>
         <PlayButton/>
         <RecordButton/>
         <VideoFrame/>
