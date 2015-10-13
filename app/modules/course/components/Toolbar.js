@@ -44,11 +44,14 @@ class Toolbar extends React.Component {
   }
   addFileInputKeyDown(e) {
     const keyCode = e.keyCode;
+    const fileName = e.target.value;
 
     if (keyCode === 27) { // Escape
       this.props.signals.course.addFileAborted();
     } else if (keyCode === 13) { // Enter
-      this.props.signals.course.addFileSubmitted();
+      this.props.signals.course.addFileSubmitted({
+        name: fileName
+      });
     }
   }
   assignmentClicked(e) {
