@@ -28,13 +28,6 @@ class AssignmentEditor extends React.Component {
     });
     this.codemirror.on('change', this.onEditorChange);
   }
-  componentDidUpdate(prevProps) {
-    if (this.props.recorder.isPlaying ||
-    this.props.recorder.started !== prevProps.recorder.started ||
-    this.props.currentScene.assignment.code !== prevProps.currentScene.assignment.code) {
-      this.updateAllCode();
-    }
-  }
   updateAllCode() {
     const doc = this.codemirror.getDoc();
     const code = this.getCode();
@@ -48,7 +41,7 @@ class AssignmentEditor extends React.Component {
     }
   }
   onEditorChange() {
-    this.props.signals.course.assignmentCodeChanged({code: this.codemirror.getDoc().getValue()});
+    this.props.signals.course.assignmentCodeChanged.sync({code: this.codemirror.getDoc().getValue()});
   }
   getCode() {
     const assignment = this.props.currentScene.assignment;
