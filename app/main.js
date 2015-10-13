@@ -21,6 +21,9 @@ import assignmentCodeChanged from './modules/course/signals/assignmentCodeChange
 import AssignmentDescriptionChanged from './modules/course/signals/AssignmentDescriptionChanged.js';
 import addFileSubmitted from './modules/course/signals/addFileSubmitted.js';
 import openAssignmentClicked from './modules/course/signals/openAssignmentClicked.js';
+import recordClicked from './modules/course/signals/recordClicked.js';
+import stopClicked from './modules/course/signals/stopClicked.js';
+import playClicked from './modules/course/signals/playClicked.js';
 
 controller.signal('homeOpened', homeOpened);
 controller.signal('courseOpened', courseOpened);
@@ -38,6 +41,11 @@ controller.signal('course.assignmentCodeChanged', assignmentCodeChanged);
 controller.signal('course.assignmentDescriptionChanged', AssignmentDescriptionChanged);
 controller.signal('course.addFileSubmitted', addFileSubmitted);
 controller.signal('course.openAssignmentClicked', openAssignmentClicked);
+controller.signal('course.addFileSubmitted', addFileSubmitted);
+controller.signal('course.openAssignmentClicked', openAssignmentClicked);
+controller.signal('course.recordClicked', recordClicked);
+controller.signal('course.playClicked', playClicked);
+controller.signal('course.stopClicked', stopClicked);
 
 Router(controller, {
   '/': 'homeOpened',

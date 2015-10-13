@@ -21,3 +21,12 @@
 .wrapper:hover {
   opacity: 0.6;
 }
+
+.recording {
+  composes: wrapper;
+  right: 320px;
+}
+
+.playing {
+  bottom: -75px;
+}

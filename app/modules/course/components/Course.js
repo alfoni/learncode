@@ -22,7 +22,8 @@ import AssignmentEditor from './AssignmentEditor.js';
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
   showEditAssignment: ['course', 'showEditAssignment'],
-  currentScene: 'currentScene'
+  currentScene: 'currentScene',
+  recorder: ['course', 'recorder']
 })
 class Recording extends React.Component {
   assignmentDescriptionChanged(e) {
@@ -59,8 +60,14 @@ class Recording extends React.Component {
             <Console show={this.props.showConsole}/>
           </Module>
         </div>
-        <PlayButton/>
-        <RecordButton/>
+        <PlayButton
+          recorder={this.props.recorder}
+          onPlayClick={this.props.signals.course.playClicked}
+          onStopClick={this.props.signals.course.stopClicked}/>
+        <RecordButton
+          recorder={this.props.recorder}
+          onRecordClick={this.props.signals.course.recordClicked}
+          onStopClick={this.props.signals.course.stopClicked}/>
         <VideoFrame/>
       </div>
     );
