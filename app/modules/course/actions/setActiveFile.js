@@ -1,5 +1,4 @@
 function setActiveFile(input, state) {
-  console.log(input.index);
   state.set(
     [
       'course',

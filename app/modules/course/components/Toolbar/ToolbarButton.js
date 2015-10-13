@@ -7,6 +7,7 @@ function ToolbarButton(props) {
       <div className={props.active ? style.activeIcon : style.icon}>
         <div className={props.icon}></div>
       </div>
+      {props.title}
     </button>
   );
 }
