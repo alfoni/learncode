@@ -29,6 +29,11 @@
 	content: "\e018";
 }
 
+.stop {composes: font}
+.stop:before {
+	content: "\e02a";
+}
+
 .play {composes: font;}
 .play:before {
 	content: "\e01b";

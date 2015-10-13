@@ -19,7 +19,8 @@ const model = Model({
     recorder: {
       isPlaying: false,
       started: null,
-      isRecording: false
+      isRecording: false,
+      hasRecorded: false
     },
     scenes: [/* {
       assignment: {
