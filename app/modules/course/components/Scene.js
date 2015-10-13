@@ -13,12 +13,13 @@ import styles from './Scene.css';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
-  currentFile: 'currentFile',
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
   showEditAssignment: ['course', 'showEditAssignment'],
-  currentScene: 'currentScene',
   recorder: ['course', 'recorder']
+}, {
+  currentFile: ['currentFile'],
+  currentScene: ['currentScene']
 })
 class Scene extends React.Component {
   assignmentDescriptionChanged(e) {

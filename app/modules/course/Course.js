@@ -10,10 +10,27 @@ import styles from './Course.css';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
-  currentScene: 'currentScene',
   recorder: ['course', 'recorder']
+}, {
+  currentScene: ['currentScene'],
 })
 class Course extends React.Component {
+  constructor() {
+    super();
+    this.onKeydown = this.onKeydown.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener('keydown', this.onKeydown);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onKeydown);
+  }
+  onKeydown(event) {
+    if (event.metaKey && event.keyCode === 83) {
+      event.preventDefault();
+      this.props.signals.course.saveShortcutPressed();
+    }
+  }
   assignmentDescriptionChanged(e) {
     this.props.signals.course.assignmentDescriptionChanged.sync({
       description: e.target.value
