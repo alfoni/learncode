@@ -10,8 +10,9 @@ import CodeMirror from 'codemirror';
 import styles from './AssignmentEditor.css';
 
 @Cerebral({
-  recorder: ['course', 'recorder'],
-  currentScene: 'currentScene'
+  recorder: ['course', 'recorder']
+}, {
+  currentScene: ['currentScene']
 })
 class AssignmentEditor extends React.Component {
   constructor(props) {

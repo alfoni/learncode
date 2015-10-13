@@ -11,9 +11,10 @@ import path from 'path';
 import styles from './CodeEditor.css';
 
 @Cerebral({
-  recorder: ['course', 'recorder'],
-  currentScene: 'currentScene',
-  currentFile: 'currentFile'
+  recorder: ['course', 'recorder']
+}, {
+  currentScene: ['currentScene'],
+  currentFile: ['currentFile']
 })
 class CodeEditor extends React.Component {
   constructor(props) {
