@@ -2,8 +2,8 @@ import {transformCode as transformCode} from 'common/utils.js';
 
 function codeChanged(input, state) {
   const isOwner = state.get(['course', 'authorId']) === state.get(['user', 'id']);
-  const isRecording = state.get(['recorder', 'isRecording']);
-  const isPlaying = state.get(['recorder', 'isPlaying']);
+  const isRecording = state.get(['course', 'recorder', 'isRecording']);
+  const isPlaying = state.get(['course', 'recorder', 'isPlaying']);
   const currentSceneIndex = state.get(['course', 'currentSceneIndex']);
   const currentFileIndex = state.get(['course', 'scenes', currentSceneIndex, 'currentFileIndex']);
 

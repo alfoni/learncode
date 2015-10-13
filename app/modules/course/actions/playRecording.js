@@ -1,6 +1,6 @@
 function playRecording(input, state, output, services) {
-  services.recorder.seek(0, true);
   state.set(['course', 'recorder', 'isPlaying'], true);
+  services.recorder.play();
 }
 
 export default playRecording;

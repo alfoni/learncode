@@ -19,6 +19,7 @@ const model = Model({
     showConfigureScenes: false,
     showScenesList: false,
     currentSceneIndex: 0,
+    sandboxSnapshot: null,
     recorder: {
       isPlaying: false,
       started: null,
@@ -47,26 +48,18 @@ const services = {
   ajax: ajax
 };
 
-const controller = Controller(model, services);
-
-controller.compute({
+const computed = {
   currentScene(get) {
     const sceneIndex = get(['course', 'currentSceneIndex']);
     const scenes = get(['course', 'scenes']);
 
-    return scenes[sceneIndex] || 0;
+    return scenes[sceneIndex];
   },
-  currentFile(get) {
-    const currentSceneIndex = get(['course', 'currentSceneIndex']);
-    const currentFileIndex = get(['course', 'scenes', currentSceneIndex, 'currentFileIndex']);
-    const files = get(['course', 'scenes', currentSceneIndex, 'sandboxFiles']);
+  currentFile(get, getComputed) {
+    const currentScene = getComputed(['currentScene']);
 
-    if (typeof currentFileIndex === 'number' && files.length) {
-      return files[currentFileIndex];
-    }
-
-    return '';
+    return currentScene.sandboxFiles[currentScene.currentFileIndex];
   }
-});
+};
 
-export default controller;
+export default Controller(model, services, computed);

@@ -13,15 +13,16 @@ import ConfigureScenes from './Toolbar/ConfigureScenes.js';
 import icons from 'common/icons.css';
 
 @Cerebral({
-  currentScene: 'currentScene',
   scenes: ['course', 'scenes'],
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
   showConfigureScenes: ['course', 'showConfigureScenes'],
-  currentFile: 'currentFile',
   showEditAssignment: ['course', 'showEditAssignment'],
   showAssignment: ['course', 'showAssignment'],
   courseName: ['course', 'name']
+}, {
+  currentFile: ['currentFile'],
+  currentScene: ['currentScene']
 })
 class Toolbar extends React.Component {
   folderClick(e) {
@@ -95,7 +96,7 @@ class Toolbar extends React.Component {
         <ToolbarButton icon={icons.menu}/>
         <ToolbarSeparator/>
         <ToolbarTitle title={this.props.courseName}/>
-        <ToolbarButton icon={icons.save}/>
+        <ToolbarButton icon={icons.save} onClick={() => this.props.signals.course.saveCourseClicked()}/>
         <ToolbarSeparator/>
         <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.currentScene.showFolder} icon={icons.folder}>
           {this.renderFilesList()}
