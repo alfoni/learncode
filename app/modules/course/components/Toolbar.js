@@ -7,8 +7,8 @@ import ToolbarTitle from './Toolbar/ToolbarTitle.js';
 import ToolbarInput from './Toolbar/ToolbarInput.js';
 import ToolbarButtonPopover from './Toolbar/ToolbarButtonPopover.js';
 import ToolbarFileListItem from './Toolbar/ToolbarFileListItem.js';
-import AssignmentDescription from './AssignmentDescription.js';
-import AssignmentResult from './AssignmentResult.js';
+import AssignmentDescription from './Toolbar/AssignmentDescription.js';
+import AssignmentResult from './Toolbar/AssignmentResult.js';
 import icons from 'common/icons.css';
 
 @Cerebral({

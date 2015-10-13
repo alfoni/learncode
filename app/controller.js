@@ -13,7 +13,7 @@ const model = Model({
     authorId: null,
     showPreview: true,
     showConsole: false,
-    showEditAssignment: true,
+    showEditAssignment: false,
     showAssignment: false,
     currentSceneIndex: 0,
     recorder: {
