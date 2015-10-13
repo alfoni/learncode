@@ -24,6 +24,8 @@ import openAssignmentClicked from './modules/course/signals/openAssignmentClicke
 import recordClicked from './modules/course/signals/recordClicked.js';
 import stopClicked from './modules/course/signals/stopClicked.js';
 import playClicked from './modules/course/signals/playClicked.js';
+import configureScenesClicked from './modules/course/signals/configureScenesClicked.js';
+import addSceneSubmitted from './modules/course/signals/addSceneSubmitted.js';
 
 controller.signal('homeOpened', homeOpened);
 controller.signal('courseOpened', courseOpened);
@@ -46,6 +48,8 @@ controller.signal('course.openAssignmentClicked', openAssignmentClicked);
 controller.signal('course.recordClicked', recordClicked);
 controller.signal('course.playClicked', playClicked);
 controller.signal('course.stopClicked', stopClicked);
+controller.signal('course.configureScenesClicked', configureScenesClicked);
+controller.signal('course.addSceneSubmitted', addSceneSubmitted);
 
 Router(controller, {
   '/': 'homeOpened',

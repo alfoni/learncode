@@ -15,6 +15,7 @@ const model = Model({
     showConsole: false,
     showEditAssignment: false,
     showAssignment: false,
+    showConfigureScenes: false,
     currentSceneIndex: 0,
     recorder: {
       isPlaying: false,

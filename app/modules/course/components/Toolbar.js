@@ -9,15 +9,17 @@ import ToolbarButtonPopover from './Toolbar/ToolbarButtonPopover.js';
 import ToolbarFileListItem from './Toolbar/ToolbarFileListItem.js';
 import AssignmentDescription from './Toolbar/AssignmentDescription.js';
 import AssignmentResult from './Toolbar/AssignmentResult.js';
+import ConfigureScenes from './Toolbar/ConfigureScenes.js';
 import icons from 'common/icons.css';
 
 @Cerebral({
   currentScene: 'currentScene',
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
+  showConfigureScenes: ['course', 'showConfigureScenes'],
   currentFile: 'currentFile',
   showEditAssignment: ['course', 'showEditAssignment'],
-  showAssignment: ['course', 'showAssignment'],
+  showAssignment: ['course', 'showAssignment']
 })
 class Toolbar extends React.Component {
   folderClick(e) {
@@ -58,12 +60,16 @@ class Toolbar extends React.Component {
     e.stopPropagation();
     this.props.signals.course.openAssignmentClicked();
   }
+  configureScenesClicked(e) {
+    e.stopPropagation();
+    this.props.signals.course.configureScenesClicked();
+  }
   render() {
     return (
       <div className={styles.background}>
         <ToolbarButton icon={icons.menu}/>
         <ToolbarSeparator/>
-        <ToolbarTitle title="Heisann!"/>
+        <ToolbarTitle title={this.props.currentScene.name}/>
         <ToolbarButton icon={icons.save}/>
         <ToolbarSeparator/>
         <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.currentScene.showFolder} icon={icons.folder}>
@@ -86,6 +92,12 @@ class Toolbar extends React.Component {
         <ToolbarButton active={this.props.showEditAssignment}
                        onClick={() => this.props.signals.course.editAssignmentClicked()}
                        icon={icons.editAssignment}/>
+        <ToolbarSeparator/>
+        <ToolbarButtonPopover icon={icons.thumbUp}
+                              onClick={(e) => this.configureScenesClicked(e)}
+                              show={this.props.showConfigureScenes}>
+          <ConfigureScenes/>
+        </ToolbarButtonPopover>
       </div>
     );
   }
