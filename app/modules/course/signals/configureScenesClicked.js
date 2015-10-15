@@ -1,5 +1,5 @@
-import openConfigureScenes from './../actions/openConfigureScenes.js';
+import set from 'common/factories/actions/set.js';
 
 export default [
-  openConfigureScenes
+  set(['course', 'showConfigureScenes'], true)
 ];

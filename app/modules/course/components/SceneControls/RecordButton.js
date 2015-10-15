@@ -13,6 +13,10 @@ function RecordButton(props) {
     className = styles.playing;
   }
 
+  if (props.recorder.isUploading) {
+    className = styles.uploading;
+  }
+
   return (
     <div className={className} onClick={() => props.recorder.isRecording ? props.onStopClick() : props.onRecordClick()}>
       <div className={props.recorder.isRecording ? icons.stop : icons.mic}></div>

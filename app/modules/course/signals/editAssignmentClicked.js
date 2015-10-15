@@ -1,5 +1,5 @@
-import toggleEditAssignment from './../actions/toggleEditAssignment.js';
+import toggle from 'common/factories/actions/toggle.js';
 
 export default [
-  toggleEditAssignment
+  toggle(['course', 'showEditAssignment'])
 ];

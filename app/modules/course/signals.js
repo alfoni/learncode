@@ -18,6 +18,9 @@ import stopClicked from './signals/stopClicked.js';
 import playClicked from './signals/playClicked.js';
 import saveShortcutPressed from './signals/saveShortcutPressed.js';
 import saveCourseClicked from './signals/saveCourseClicked.js';
+import uploadClicked from './signals/uploadClicked.js';
+import uploadFinished from './signals/uploadFinished.js';
+import uploadFailed from './signals/uploadFailed.js';
 
 export default function(controller) {
   controller.signal('course.courseOpened', courseOpened);
@@ -42,4 +45,7 @@ export default function(controller) {
   controller.signal('course.stopClicked', stopClicked);
   controller.signal('course.saveShortcutPressed', saveShortcutPressed);
   controller.signal('course.saveCourseClicked', saveCourseClicked);
+  controller.signal('course.uploadClicked', uploadClicked);
+  controller.signal('course.uploadFinished', uploadFinished);
+  controller.signal('course.uploadFailed', uploadFailed);
 }

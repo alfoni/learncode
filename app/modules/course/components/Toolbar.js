@@ -15,6 +15,8 @@ import icons from 'common/icons.css';
 @Cerebral({
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
+  showFolder: ['course', 'showFolder'],
+  showAddFileInput: ['course', 'showAddFileInput'],
   showConfigureScenes: ['course', 'showConfigureScenes'],
   showEditAssignment: ['course', 'showEditAssignment'],
   showAssignment: ['course', 'showAssignment']
@@ -73,11 +75,11 @@ class Toolbar extends React.Component {
         <ToolbarTitle title="Heisann!"/>
         <ToolbarButton icon={icons.save} onClick={() => this.props.signals.course.saveCourseClicked()}/>
         <ToolbarSeparator/>
-        <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.currentScene.showFolder} icon={icons.folder}>
+        <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
           {this.renderFilesList()}
         </ToolbarButtonPopover>
         <ToolbarButton icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
-        <ToolbarInput show={this.props.currentScene.showAddFileInput}
+        <ToolbarInput show={this.props.showAddFileInput}
                       onKeyDown={(e) => this.addFileInputKeyDown(e)}
                       onBlur={() => this.props.signals.course.addFileInputBlurred()}
                       placeholder="Type filename..."/>

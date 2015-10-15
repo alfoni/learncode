@@ -1,0 +1,20 @@
+.wrapper {
+  composes: button from './button.css';
+  right: 400px;
+  background-color: #E91E63;
+}
+
+.recording {
+  composes: wrapper;
+  right: 320px;
+}
+
+.playing {
+  composes: wrapper;
+  bottom: -75px;
+}
+
+.uploading {
+  composes: wrapper;
+  bottom: -75px;
+}

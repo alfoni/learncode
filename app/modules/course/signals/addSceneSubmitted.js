@@ -1,27 +1,24 @@
 import saveNewScene from './../actions/saveNewScene.js';
 import addNewScene from './../actions/addNewScene.js';
 import setScene from './../actions/setScene.js';
-import showSavingScene from './../actions/showSavingScene.js';
-import timeout from 'common/actions/timeout.js';
 import closeConfigureScenes from './../actions/closeConfigureScenes.js';
-import hideSnackbar from './../actions/hideSnackbar.js';
-import showSceneLoaded from './../actions/showSceneLoaded.js';
+import hideSnackbar from '.common/factories/chains/hideSnackbar.js';
+import showSnackbar from 'common/factories/actions/showSnackbar.js';
 
 export default [
   closeConfigureScenes,
-  showSavingScene,
+  showSnackbar('Saving scene...'),
   [
     saveNewScene, {
       success: [
         addNewScene,
         setScene,
-        showSceneLoaded
+        showSnackbar('Scene was saved and loaded')
+      ],
+      error: [
+        showSnackbar('Could not save new scene!')
       ]
     }
   ],
-  [
-    timeout, {
-      success: [hideSnackbar]
-    }
-  ]
+  ...hideSnackbar(2000)
 ];

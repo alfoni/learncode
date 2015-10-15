@@ -16,11 +16,13 @@ const model = Model({
     showEditAssignment: false,
     showAssignment: false,
     showConfigureScenes: false,
+    showFolder: false,
+    showAddFileInput: false,
     currentSceneIndex: 0,
     sandboxSnapshot: null,
     recorder: {
       isPlaying: false,
-      started: null,
+      isUploading: false,
       isRecording: false,
       hasRecorded: false
     },
