@@ -1,9 +1,13 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
 
+import icons from 'common/icons.css';
 import styles from './Home.css';
 
-@Cerebral()
+@Cerebral({
+  signupResponseMessage: ['home', 'signupResponseMessage'],
+  showSigningupLoader: ['home', 'showSigningupLoader']
+})
 class Home extends React.Component {
   formSubmitted(e) {
     e.preventDefault();
@@ -38,12 +42,23 @@ class Home extends React.Component {
           </div>
         </div>
         <div className={styles.lightBackground}>
-          <div className={styles.formWrapper}>
-            <input className={styles.input} placeholder="Din e-post"/>
-            <button className={styles.button}>Hold meg oppdatert</button>
-            <div className={styles.emailDesc}>
-              E-posten sendes ikke videre og vil kun bli sendt e-poster knyttet til denne tjenesten.
-            </div>
+          <div className={styles.container}>
+            <form onSubmit={(e) => this.formSubmitted(e)} className={styles.formWrapper}>
+              <div className={this.props.signupResponseMessage ? styles.responseMessageVisible : styles.responseMessage}>
+                {this.props.signupResponseMessage}
+              </div>
+              <input name="email" className={styles.input} placeholder="Din e-post"/>
+              <button className={this.props.showSigningupLoader ? styles.buttonDisabled : styles.button}>
+                { this.props.showSigningupLoader ?
+                    <span className={icons.thumbUp}></span>
+                  :
+                    'Hold meg oppdatert'
+                }
+              </button>
+              <div className={styles.emailDesc}>
+                E-posten sendes ikke videre og vil kun bli sendt e-poster knyttet til denne tjenesten.
+              </div>
+            </form>
           </div>
         </div>
       </div>

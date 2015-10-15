@@ -1,16 +1,13 @@
 function registerSignup(input, state, output, services) {
   services.ajax.post('/API/registerSignup', {
-    name: input.name,
-    email: input.email,
-    number: input.number,
-    location: input.location
+    email: input.email
   })
   .then(() => {
-    output.success({message: 'Thanks for registering! You will receive a confirmation e-mail shortly.'});
+    output({message: 'Thanks for registering! You will receive a confirmation e-mail shortly.'});
   })
   .catch(() => {
-    output.error({
-      message: 'Could not save sandbox files'
+    output({
+      message: 'Could not register'
     });
   });
 }

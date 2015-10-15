@@ -1,11 +1,9 @@
 import mandrill from 'mandrill-api/mandrill';
-import React from 'react';
 const mandrillClient = new mandrill.Mandrill('0HhFoz-B1KNKuCOI2V2mNA');
 
 export default function registerSignup(req, res) {
-  console.log(<confirmationEmail/>);
   console.log(req.body);
-  /*mandrillClient.messages.send({
+  /* mandrillClient.messages.send({
     message: {
       html:
         '<body style="background-color: #E2E2E2; font-family: Helvetica, sans-serif;">' +
@@ -65,6 +63,8 @@ export default function registerSignup(req, res) {
     res.send({
       error: e.name + ' - ' + e.message
     });
-  });*/
-  res.send([]);
+  }); */
+  setTimeout(() => {
+    res.send([]);
+  }, 2000);
 }
