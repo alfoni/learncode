@@ -1,5 +1,5 @@
-import openAssignment from './../actions/openAssignment.js';
+import set from 'common/factories/actions/set.js';
 
 export default [
-  openAssignment
+  set(['course', 'showAssignment'], true)
 ];

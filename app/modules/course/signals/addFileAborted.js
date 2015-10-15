@@ -1,5 +1,5 @@
-import hideAddFileInput from './../actions/hideAddFileInput.js';
+import set from 'common/factories/actions/set.js';
 
 export default [
-  hideAddFileInput
+  set(['course', 'showAddFileInput'], false)
 ];

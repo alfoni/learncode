@@ -1,18 +1,21 @@
 import saveSandbox from './../actions/saveSandbox';
-import setError from './../actions/setError.js';
 import setPreviewUrl from './../actions/setPreviewUrl';
-import setLoadingPreview from './../actions/setPreviewUrl';
-import unsetLoadingPreview from './../actions/setPreviewUrl';
+import set from 'common/factories/actions/set.js';
 import setSandboxSnapshot from './../actions/setSandboxSnapshot';
+import showSnackbar from 'common/factories/actions/showSnackbar.js';
 
 export default [
   setSandboxSnapshot,
   setPreviewUrl,
-  setLoadingPreview,
+  set(['course', 'isLoadingPreview'], true),
   [
     saveSandbox, {
-      success: [unsetLoadingPreview],
-      error: [setError]
+      success: [
+        set(['course', 'isLoadingPreview'], false)
+      ],
+      error: [
+        showSnackbar('An error occured, please try again...')
+      ]
     }
   ]
 ];

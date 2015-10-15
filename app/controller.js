@@ -18,11 +18,13 @@ const model = Model({
     showAssignment: false,
     showConfigureScenes: false,
     showScenesList: false,
+    showFolder: false,
+    showAddFileInput: false,
     currentSceneIndex: 0,
     sandboxSnapshot: null,
     recorder: {
       isPlaying: false,
-      started: null,
+      isUploading: false,
       isRecording: false,
       hasRecorded: false
     },
@@ -32,11 +34,8 @@ const model = Model({
         code: ''
       },
       currentFileIndex: 0,
-      showAddFileInput: false,
-      showScenesList: false,
       files: [],
       sandboxFiles: [],
-      showFolder: false
     } */]
   },
   user: {

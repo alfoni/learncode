@@ -1,26 +1,29 @@
-import setPage from 'common/factories/setPage.js';
-import showLoadingCourse from './../actions/showLoadingCourse.js';
+import setPage from 'common/factories/actions/setPage.js';
+import set from 'common/factories/actions/set.js';
 import loadCourse from './../actions/loadCourse.js';
 import loadScene from './../actions/loadScene.js';
 import setCourse from './../actions/setCourse.js';
-import hideLoadingCourse from './../actions/hideLoadingCourse.js';
-import setError from './../actions/setError.js';
+import showSnackbar from 'common/factories/actions/showSnackbar.js';
+import hideSnackbar from 'common/factories/chains/hideSnackbar.js';
 import saveSandboxChain from './../chains/saveSandbox.js';
 
 export default [
   setPage('course'),
-  showLoadingCourse,
+  set(['course', 'isLoading'], true),
+  showSnackbar('Loading course...'),
   [
     loadCourse,
     loadScene
   ],
   setCourse, {
     success: [
-      hideLoadingCourse,
-      ...saveSandboxChain
+      set(['course', 'isLoading'], false),
+      ...saveSandboxChain,
+      showSnackbar('Course loaded!'),
+      ...hideSnackbar(2000)
     ],
     error: [
-      setError
+      showSnackbar('Unable to open the course!')
     ]
   }
 ];

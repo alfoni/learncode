@@ -1,7 +1,7 @@
 import setActiveFile from './../actions/setActiveFile.js';
-import closeFolder from './../actions/closeFolder.js';
+import set from 'common/factories/actions/set.js';
 
 export default [
   setActiveFile,
-  closeFolder
+  set(['course', 'showFolder'], false)
 ];

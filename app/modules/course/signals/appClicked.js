@@ -1,11 +1,8 @@
-import closeFolder from './../actions/closeFolder.js';
-import closeAssignment from './../actions/closeAssignment.js';
-import closeConfigureScenes from './../actions/closeConfigureScenes.js';
-import closeScenesList from './../actions/closeScenesList.js';
+import set from 'common/factories/actions/set.js';
 
 export default [
-  closeFolder,
-  closeAssignment,
-  closeConfigureScenes,
-  closeScenesList
+  set(['course', 'showFolder'], false),
+  set(['course', 'showAssignment'], false),
+  set(['course', 'showConfigureScenes'], false),
+  set(['course', 'showScenesList'], false)
 ];
