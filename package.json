@@ -33,6 +33,7 @@
     "codemirror": "^5.7.0",
     "express-domain": "^1.0.5",
     "file-loader": "^0.8.4",
+    "mandrill-api": "^1.0.45",
     "react": "0.14.0",
     "react-dom": "0.14.0",
     "subdomain": "^1.2.0",
