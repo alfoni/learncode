@@ -22,6 +22,9 @@ import configureScenesClicked from './signals/configureScenesClicked.js';
 import addSceneSubmitted from './signals/addSceneSubmitted.js';
 import sceneNameClicked from './signals/sceneNameClicked.js';
 import listSceneNameClicked from './signals/listSceneNameClicked.js';
+import uploadClicked from './signals/uploadClicked.js';
+import uploadFinished from './signals/uploadFinished.js';
+import uploadFailed from './signals/uploadFailed.js';
 
 export default function(controller) {
   controller.signal('course.courseOpened', courseOpened);
@@ -50,4 +53,7 @@ export default function(controller) {
   controller.signal('course.addSceneSubmitted', addSceneSubmitted);
   controller.signal('course.sceneNameClicked', sceneNameClicked);
   controller.signal('course.listSceneNameClicked', listSceneNameClicked);
+  controller.signal('course.uploadClicked', uploadClicked);
+  controller.signal('course.uploadFinished', uploadFinished);
+  controller.signal('course.uploadFailed', uploadFailed);
 }

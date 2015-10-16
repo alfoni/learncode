@@ -25,3 +25,9 @@
   opacity: 1;
   transform: translate3d(0px, 0px, 0px);
 }
+
+@media screen and (max-device-width: 375px) {
+  .snackbar {
+    display: none;
+  }
+}

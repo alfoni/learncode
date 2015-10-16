@@ -1,11 +1,13 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
+import Video from './components/Video.js';
+import SuccessMessage from './components/SuccessMessage.js';
 
 import icons from 'common/icons.css';
 import styles from './Home.css';
 
 @Cerebral({
-  signupResponseMessage: ['home', 'signupResponseMessage'],
+  hasRegistered: ['home', 'hasRegistered'],
   showSigningupLoader: ['home', 'showSigningupLoader']
 })
 class Home extends React.Component {
@@ -29,36 +31,36 @@ class Home extends React.Component {
             </div>
           </div>
           <div className={styles.column2}>
-            <div className={styles.videoFrame}>
-              <iframe className={styles.iFrame}
-                      width="100%"
-                      height="100%"
-                      src="https://www.youtube.com/embed/mNFt2lhN5pM"
-                      frameBorder="0"
-                      allowFullScreen></iframe>
-            </div>
-            <div className={styles.videoFrameShadowLeft}></div>
-            <div className={styles.videoFrameShadowRight}></div>
+            <Video url="https://www.youtube.com/embed/mNFt2lhN5pM"/>
           </div>
         </div>
         <div className={styles.lightBackground}>
           <div className={styles.container}>
-            <form onSubmit={(e) => this.formSubmitted(e)} className={styles.formWrapper}>
-              <div className={this.props.signupResponseMessage ? styles.responseMessageVisible : styles.responseMessage}>
-                {this.props.signupResponseMessage}
-              </div>
-              <input name="email" className={styles.input} placeholder="Din e-post"/>
-              <button className={this.props.showSigningupLoader ? styles.buttonDisabled : styles.button}>
+            <SuccessMessage
+              show={this.props.hasRegistered}
+              icon={icons.thumbUp}
+              message={'Takk for din interesse!'}/>
+            <form onSubmit={(e) => this.formSubmitted(e)}
+                  className={this.props.hasRegistered ? styles.formWrapperHidden : styles.formWrapper}>
+              <input
+                type="email"
+                name="email"
+                disabled={this.props.showSigningupLoader}
+                className={this.props.showSigningupLoader ? styles.inputDisabled : styles.input}
+                placeholder="Din e-post"/>
+              <button
+                className={this.props.showSigningupLoader ? styles.buttonDisabled : styles.button}
+                disabled={this.props.showSigningupLoader}>
                 { this.props.showSigningupLoader ?
-                    <span className={icons.thumbUp}></span>
+                    <span className={icons.loading + ' ' + styles.loadingIcon}></span>
                   :
                     'Hold meg oppdatert'
                 }
               </button>
-              <div className={styles.emailDesc}>
-                E-posten sendes ikke videre og vil kun bli sendt e-poster knyttet til denne tjenesten.
-              </div>
             </form>
+            <div className={styles.emailDesc}>
+              Din e-post sendes ikke videre og vil kun motta e-poster knyttet til denne tjenesten.
+            </div>
           </div>
         </div>
       </div>

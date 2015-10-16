@@ -3,12 +3,10 @@ function registerSignup(input, state, output, services) {
     email: input.email
   })
   .then(() => {
-    output({message: 'Thanks for registering! You will receive a confirmation e-mail shortly.'});
+    output.success();
   })
   .catch(() => {
-    output({
-      message: 'Could not register'
-    });
+    output.error();
   });
 }
 

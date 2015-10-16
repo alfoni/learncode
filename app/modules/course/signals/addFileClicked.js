@@ -1,5 +1,5 @@
-import showAddFileInput from './../actions/showAddFileInput.js';
+import set from 'common/factories/actions/set.js';
 
 export default [
-  showAddFileInput
+  set(['course', 'showAddFileInput'], true)
 ];

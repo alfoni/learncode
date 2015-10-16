@@ -1,5 +1,5 @@
-import openScenesList from './../actions/openScenesList.js';
+import set from 'common/factories/actions/set.js';
 
 export default [
-  openScenesList
+  set(['course', 'showScenesList'], true)
 ];

@@ -1,5 +1,5 @@
-import openFolder from './../actions/openFolder.js';
+import set from 'common/factories/actions/set.js';
 
 export default [
-  openFolder
+  set(['course', 'showFolder'], true)
 ];

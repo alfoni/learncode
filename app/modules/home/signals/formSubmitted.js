@@ -1,13 +1,20 @@
-import showSigningupLoader from './../actions/showSigningupLoader.js';
+import set from 'common/factories/actions/set.js';
 import registerSignup from './../actions/registerSignup.js';
-import hideSigningupLoader from './../actions/hideSigningupLoader.js';
-import showSnackbarMessage from './../actions/showSnackbarMessage.js';
-import hideSnackbar from './../actions/hideSnackbar.js';
+import showSnackbar from 'common/factories/actions/showSnackbar.js';
+import hideSnackbar from 'common/factories/chains/hideSnackbar.js';
 
 export default [
-  showSigningupLoader,
-  showSnackbarMessage,
-  [registerSignup],
-  hideSnackbar,
-  hideSigningupLoader
+  set(['home', 'showSigningupLoader'], true),
+  [
+    registerSignup, {
+      success: [
+        set(['home', 'hasRegistered'], true)
+      ],
+      error: [
+        showSnackbar('Kunne ikke registrere din e-post'),
+        ...hideSnackbar(1000)
+      ]
+    }
+  ],
+  set(['home', 'showSigningupLoader'], false)
 ];
