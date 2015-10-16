@@ -2,55 +2,20 @@ import mandrill from 'mandrill-api/mandrill';
 const mandrillClient = new mandrill.Mandrill('0HhFoz-B1KNKuCOI2V2mNA');
 
 export default function registerSignup(req, res) {
-  console.log(req.body);
-  /* mandrillClient.messages.send({
+  mandrillClient.messages.send({
     message: {
       html:
-        '<body style="background-color: #E2E2E2; font-family: Helvetica, sans-serif;">' +
-          '<div style="width: 100%; background-color: #fff; padding: 20px;">' +
-            '<div style="font-size: 26px; color: rgba(0, 0, 0, 0.4);">' +
-              'Thank you for your registration!' +
-            '</div>' +
-            '<span style="color: #333; font-size: 16px; margin-top: 10px; display: inline-block;">' +
-              'Your registration is is confirmed' +
-            '</span>' +
-          '</div>' +
-          '<br/>' +
-          '<br/>' +
-          '<br/>' +
-          '<h4>Registration details</h4>' +
-          '<table>' +
-            '<tr>' +
-              '<td>Name</td>' +
-              '<td>:</td>' +
-              '<td>Tommy</td>' +
-            '</tr>' +
-            '<tr>' +
-              '<td>E-mail</td>' +
-              '<td>:</td>' +
-              '<td>tommy@tommyostgaard.com</td>' +
-            '</tr>' +
-            '<tr>' +
-              '<td>Number</td>' +
-              '<td>:</td>' +
-              '<td>41515350</td>' +
-            '</tr>' +
-            '<tr>' +
-              '<td>Location</td>' +
-              '<td>:</td>' +
-              '<td>Trondheim</td>' +
-            '</tr>' +
-          '</table>' +
-          'Best regards, <br/>' +
-          'Learncode' +
-        '</body>',
+        '<html> <head> <meta charset="utf-8"> <style> .wrapper { max-width: 600px; margin: 0 auto; } .grayBg a { color: rgba(0, 0, 0, 0.5); } a { color: #fff; } </style> </head> <body style="background-color: #F7F7F7; font-family: Helvetica, sans-serif; margin: 0; padding: 0; color: rgba(0, 0, 0, 0.8);"> <div class="wrapper" style="padding: 20px;"> <div style="font-size: 18px;"> <h1>Takk for din interesse!</h1> </div> </div> <div style="padding: 20px; background-color: #ECECEC; border-top: 1px solid #cacaca; border-bottom: 1px solid #cacaca;"> <div class="wrapper"> <div class="grayBg"> <p style="color: rgba(0, 0, 0, 0.5); line-height: 24px;"> Takk for din interesse i kodeboksen.no. Her bør det kanskje stå litt mer tekst. </p> </div> <br/> </div> </div> <div class="wrapper" style="padding: 20px; margin-top: 20px;"> This is a place to put some information about the course and where it is etc. </div> <div style="background-color: #ff4081; padding: 20px; color: #fff; font-size: 28px; margin-top: 20px; margin-bottom: 20px;"> <div class="wrapper"> <span style="font-size: 16px; color: rgba(255, 255, 255, 0.6)">Med vennlig hilsen,</span> <br/> Kodeboksen.no </div> </div> <div class="wrapper" style="font-size: 12px; color: rgba(0, 0, 0, 0.4); padding: 0 20px; margin-bottom: 20px; margin-bottom: 20px;"> Din e-post sendes ikke videre og vil kun motta e-poster knyttet til denne tjenesten. <br/> Dersom du ikke ønsker å motte flere e-poster fra oss, kontakt oss på <a style="color: rgba(0, 0, 0, 0.4);" href="mailto:test@test.com">test@test.com</a> </div> </body> </html>',
       subject: 'Registration confirmation',
-      from_email: 'noreply@learncode.com',
+      from_email: 'noreply@kodeboksen.no',
       from_name: 'Learncode',
       to: [{
         email: 'tommy.ostgaard@gmail.com',
         name: 'Tommy Østgaard'
-      }]
+      }/* , {
+        email: req.body.email,
+        name: req.body.email
+      }*/]
     },
     async: true
   }, (result) => {
@@ -63,8 +28,5 @@ export default function registerSignup(req, res) {
     res.send({
       error: e.name + ' - ' + e.message
     });
-  }); */
-  setTimeout(() => {
-    res.send([]);
-  }, 2000);
+  });
 }
