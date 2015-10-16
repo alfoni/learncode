@@ -4,13 +4,26 @@
   width: 100%;
   overflow: auto;
   font-family: Helvetica, sans-serif;
-  background-color: #E2E2E2;
-  padding-top: 10%;
+  background-color: #F7F7F7;
   box-sizing: border-box;
 }
 
 .container {
   width: 920px;
+}
+
+.topWrapper {
+  position: relative;
+  padding-top: 10%;
+}
+
+.darkBackground {
+  position: absolute;
+  left: 0;
+  top: -75px;
+  background-color: #E2E2E2;
+  width: 100%;
+  height: 100%;
 }
 
 h1 {
@@ -36,13 +49,12 @@ h1 {
   position: relative;
 }
 
-.lightBackground {
-  height: calc(100% - 580px);
+.bottomWrapper {
   padding-top: 210px;
   padding-bottom: 100px;
   width: 100%;
   margin-top: -80px;
-  background-color: #F7F7F7;
+  padding-bottom: 20px;
 }
 
 .column1, .column2 {
@@ -142,6 +154,7 @@ h1 {
   text-align: center;
   margin-top: 5px;
   font-size: 12px;
+  margin-bottom: 40px;
   color: rgba(0, 0, 0, 0.4);
 }
 
@@ -164,12 +177,15 @@ h1 {
     font-size: 44px;
   }
 
-  .lightBackground {
-      padding-bottom: 60px;
-  }
+}
+
+.information {
+  font-size: 1.2em;
+  line-height: 1.8em;
 }
 
 @media screen and (max-device-width: 760px) {
+
   h1 {
     font-size: 44px;
   }
@@ -198,10 +214,8 @@ h1 {
     height: 280px;
   }
 
-  .lightBackground {
-    padding-top: 130px;
-    height: calc(100% - 715px);
-    padding-bottom: 30px;
+  .bottomWrapper {
+    padding-top: 120px;
   }
 
 }
@@ -217,13 +231,6 @@ h1 {
   .subTitle {
     margin-top: -20px;
     font-size: 36px;
-  }
-
-  .lightBackground {
-    padding-top: 130px;
-    height: calc(100% - 615px);
-    min-height: 159px;
-    padding-bottom: 30px;
   }
 
   .button {

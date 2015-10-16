@@ -21,20 +21,24 @@ class Home extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        <div className={styles.container}>
-          <div className={styles.column1}>
-            <h1>Vil du lære å programmere</h1>
-            <h1 className={styles.subTitle}>på en ny måte?</h1>
-            <div className={styles.descText}>
-              <p>Er du lei av å se på en lærevideo og i etterkant måtte reprodusere koden som har blitt vist?</p>
-              <p><b>Snart kan du ta kontroll over koden læreren presenterer!</b></p>
+        <div className={styles.topWrapper}>
+          <div className={styles.darkBackground}></div>
+          <div className={styles.container}>
+            <div className={styles.column1}>
+              <h1>Med kode kan du skape</h1>
+              <h1 className={styles.subTitle}>utrolige ting!</h1>
+              <div className={styles.descText}>
+                <p>Vil du vil lage din egen hjemmeside? Et spill som kan spilles over hele verden? Eller
+                vil du lage en applikasjon som hjelper andre?</p>
+                <p><b>Med Kodeboksen lærer vi deg hvordan!</b></p>
+              </div>
+            </div>
+            <div className={styles.column2}>
+              <Video url="https://www.youtube.com/embed/mNFt2lhN5pM"/>
             </div>
           </div>
-          <div className={styles.column2}>
-            <Video url="https://www.youtube.com/embed/mNFt2lhN5pM"/>
-          </div>
         </div>
-        <div className={styles.lightBackground}>
+        <div className={styles.bottomWrapper}>
           <div className={styles.container}>
             <SuccessMessage
               show={this.props.hasRegistered}
@@ -59,8 +63,13 @@ class Home extends React.Component {
               </button>
             </form>
             <div className={styles.emailDesc}>
-              Din e-post sendes ikke videre og vil kun motta e-poster knyttet til denne tjenesten.
+              Din e-post sendes ikke videre og vil kun motta e-poster knyttet til lanseringen av Kodeboksen.
             </div>
+            <p className={styles.information}>
+              <strong>Kodeboksen</strong> er en tjeneste under utvikling. Ved å melde din interesse vil vi gi deg beskjed når kan logge inn og lære
+              kode på en helt ny og interaktiv måte. Du vil også få muligheten til å delta på Kodeboksen sine kurs i <strong>Trondheim</strong> og
+              <strong> Oslo</strong>.
+            </p>
           </div>
         </div>
       </div>
