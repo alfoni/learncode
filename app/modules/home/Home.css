@@ -222,6 +222,7 @@ h1 {
   .lightBackground {
     padding-top: 130px;
     height: calc(100% - 615px);
+    min-height: 159px;
     padding-bottom: 30px;
   }
 
