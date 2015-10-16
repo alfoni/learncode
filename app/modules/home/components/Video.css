@@ -11,13 +11,18 @@
   background-color: #fff;
   display: inline-block;
   position: relative;
-  overflow: hidden;
+}
+
+.iFrame {
+  position: relative;
+  border-radius: 5px 5px 0 0;
+  z-index: 2;
 }
 
 .videoFrameShadowLeft {
   position: absolute;
-  left: 54px;
-  top: 335px;
+  left: 30px;
+  bottom: -5px;
   height: 0px;
   width: 50px;
   background-color: rgba(0, 0, 0, 0.3);
@@ -28,6 +33,7 @@
 
 .videoFrameShadowRight {
   composes: videoFrameShadowLeft;
-  left: 383px;
+  right: 30px;
+  left: auto;
   transform: skew(-50deg, 0);
 }
