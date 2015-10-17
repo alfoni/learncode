@@ -29,9 +29,9 @@ class Home extends React.Component {
               <h1>Med kode kan du skape</h1>
               <h1 className={styles.subTitle}>utrolige ting!</h1>
               <div className={styles.descText}>
-                <p>Vil du vil lage din egen hjemmeside? Et spill som kan spilles over hele verden? Eller
-                vil du lage en applikasjon som hjelper andre?</p>
-                <p><b>Med Kodeboksen lærer vi deg hvordan!</b></p>
+                <p>Vil du lære hvordan du lager et spill som kan spilles over hele verden?
+                Eller hvordan lager applikasjoner som hjelper andre mennesker? Vil du lage din egen hjemmeside?</p>
+                <p><b>Med Kodeboksen viser vi deg hvordan!</b></p>
               </div>
             </div>
             <div className={styles.column2}>
