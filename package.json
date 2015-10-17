@@ -36,6 +36,7 @@
     "expose-loader": "^0.7.0",
     "express-domain": "^1.0.5",
     "file-loader": "^0.8.4",
+    "mandrill-api": "^1.0.45",
     "imports-loader": "^0.6.4",
     "multer": "^1.0.6",
     "react": "0.14.0",

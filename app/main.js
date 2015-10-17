@@ -7,9 +7,11 @@ import Router from 'cerebral-router';
 import App from './App.js';
 import homeOpened from './modules/home/signals/homeOpened.js';
 import courseSignals from './modules/course/signals.js';
+import homeSignals from './modules/home/signals.js';
 
 controller.signal('homeOpened', homeOpened);
 
+homeSignals(controller);
 courseSignals(controller);
 
 Router(controller, {
