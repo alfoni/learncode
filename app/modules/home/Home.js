@@ -24,6 +24,7 @@ class Home extends React.Component {
         <div className={styles.topWrapper}>
           <div className={styles.darkBackground}></div>
           <div className={styles.container}>
+            <div className={styles.logo}></div>
             <div className={styles.column1}>
               <h1>Med kode kan du skape</h1>
               <h1 className={styles.subTitle}>utrolige ting!</h1>
@@ -34,7 +35,7 @@ class Home extends React.Component {
               </div>
             </div>
             <div className={styles.column2}>
-              <Video url="https://www.youtube.com/embed/mNFt2lhN5pM"/>
+              <Video url="https://www.youtube.com/embed/Oeti69mgf2g"/>
             </div>
           </div>
         </div>
