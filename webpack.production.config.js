@@ -11,7 +11,7 @@ module.exports = {
     path.join(__dirname, 'app/main.js')
   ],
   output: {
-    path: path.join(__dirname, '/dist/'),
+    path: path.join(__dirname, '/public'),
     filename: '[name]-[hash].min.js'
   },
   plugins: [
@@ -36,26 +36,28 @@ module.exports = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     })
   ],
-  postcss: [
-   require('autoprefixer')
-  ],
+  resolve: {
+    alias: {
+      'common': path.join(__dirname, 'app/common')
+    }
+  },
   module: {
     loaders: [{
       test: /\.js?$/,
       exclude: /node_modules/,
-      loader: 'babel'
+      loader: 'babel?optional=es7.decorators'
     }, {
       test: /\.json?$/,
       loader: 'json'
     }, {
       test: /\.css$/,
-      loader: ExtractTextPlugin.extract('style', 'css?modules&localIdentName=[name]---[local]---[hash:base64:5]!postcss')
+      loader: 'style!css?modules&localIdentName=[name]---[local]---[hash:base64:5]'
     }, {
       test: /\.woff$/,
       loader: 'url?limit=100000'
     }]
   },
   postcss: [
-    require('autoprefixer')
-  ]
+   require('autoprefixer')
+ ]
 };
