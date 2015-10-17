@@ -10,7 +10,7 @@ import folderFileClicked from './signals/folderFileClicked.js';
 import addFileAborted from './signals/addFileAborted.js';
 import editAssignmentClicked from './signals/editAssignmentClicked.js';
 import assignmentCodeChanged from './signals/assignmentCodeChanged.js';
-import AssignmentDescriptionChanged from './signals/AssignmentDescriptionChanged.js';
+import assignmentDescriptionChanged from './signals/assignmentDescriptionChanged.js';
 import addFileSubmitted from './signals/addFileSubmitted.js';
 import openAssignmentClicked from './signals/openAssignmentClicked.js';
 import recordClicked from './signals/recordClicked.js';
@@ -39,7 +39,7 @@ export default function(controller) {
   controller.signal('course.addFileAborted', addFileAborted);
   controller.signal('course.editAssignmentClicked', editAssignmentClicked);
   controller.signal('course.assignmentCodeChanged', assignmentCodeChanged);
-  controller.signal('course.assignmentDescriptionChanged', AssignmentDescriptionChanged);
+  controller.signal('course.assignmentDescriptionChanged', assignmentDescriptionChanged);
   controller.signal('course.addFileSubmitted', addFileSubmitted);
   controller.signal('course.openAssignmentClicked', openAssignmentClicked);
   controller.signal('course.addFileSubmitted', addFileSubmitted);
