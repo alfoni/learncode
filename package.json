@@ -42,9 +42,7 @@
     "react": "0.14.0",
     "react-dom": "0.14.0",
     "subdomain": "^1.2.0",
-    "url-loader": "^0.5.6"
-  },
-  "devDependencies": {
+    "url-loader": "^0.5.6",
     "autoprefixer": "^6.0.3",
     "babel": "^5.8.23",
     "babel-eslint": "^4.1.3",
