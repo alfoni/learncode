@@ -7,12 +7,12 @@ import styles from './Toolbar.css';
 import icons from 'common/icons.css';
 
 @Cerebral({
-  showAddCourseOverview: ['coursesOverview', 'showAddCourseOverview']
+  showNewCourse: ['courses', 'showNewCourse']
 })
 class Toolbar extends React.Component {
-  addCourseOverviewClicked(e) {
+  newCourseClicked(e) {
     e.stopPropagation();
-    this.props.signals.coursesOverview.addCourseOverviewClicked();
+    this.props.signals.courses.newCourseClicked();
   }
   render() {
     return (
@@ -20,8 +20,8 @@ class Toolbar extends React.Component {
         <ToolbarTitle title="Kurs"/>
         <ToolbarButtonPopover
           icon={icons.addFile}
-          onClick={(e) => this.addCourseOverviewClicked(e)}
-          show={this.props.showAddCourseOverview}>
+          onClick={(e) => this.newCourseClicked(e)}
+          show={this.props.showNewCourse}>
           <AddNewCourse/>
         </ToolbarButtonPopover>
       </div>

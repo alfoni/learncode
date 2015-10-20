@@ -1,13 +1,19 @@
 function setScene(input, state) {
-  const currentFileIndex = state.get(['course', 'scenes', input.scene.index, 'currentFileIndex']);
+  const currentFileIndex = state.get(['course', 'scenes', input.sceneIndex, 'currentFileIndex']);
 
-  state.set(['course', 'scenes', input.scene.index], input.scene);
-  state.set(['course', 'scenes', input.scene.index, 'sandboxFiles'], input.scene.files);
+  const scene = Object.assign({
+    assignment: {
+      description: '',
+      code: ''
+    }
+  }, input.scene);
+  state.set(['course', 'scenes', input.sceneIndex], scene);
+  state.set(['course', 'scenes', input.sceneIndex, 'sandboxFiles'], scene.files);
 
   if (currentFileIndex) {
-    state.set(['course', 'scenes', input.scene.index, 'currentFileIndex'], currentFileIndex);
+    state.set(['course', 'scenes', input.sceneIndex, 'currentFileIndex'], currentFileIndex);
   } else {
-    state.set(['course', 'scenes', input.scene.index, 'currentFileIndex'], 0);
+    state.set(['course', 'scenes', input.sceneIndex, 'currentFileIndex'], 0);
   }
 }
 

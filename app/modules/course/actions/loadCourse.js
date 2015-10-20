@@ -1,21 +1,18 @@
 function loadCourse(input, state, output) {
-  fetch('/API/courses/123')
+  fetch(`/API/courses/${input.courseId}`)
     .then((response) => {
-      if (response.status !== 200) {
-        output({
-          courseError: response.toString()
-        });
+      if (response.status === 200) {
+        return response.json();
       }
-
-      return response.json();
+      throw new Error('Could not get course');
     }
   ).then((course) => {
     output({
       course: course
     });
-  }).catch((err) => {
+  }).catch(() => {
     output({
-      courseError: err.toString()
+      courseError: 'Kunne ikke hente kurs'
     });
   });
 }

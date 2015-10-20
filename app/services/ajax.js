@@ -1,7 +1,7 @@
 export default {
   get(url) {
     return fetch(url, {
-      method: 'get',
+      method: 'GET',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -11,7 +11,7 @@ export default {
   },
   post(url, data) {
     return fetch(url, {
-      method: 'post',
+      method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -22,7 +22,7 @@ export default {
   },
   patch(url, data) {
     return fetch(url, {
-      method: 'patch',
+      method: 'PATCH',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -33,7 +33,7 @@ export default {
   },
   put(url, data) {
     return fetch(url, {
-      method: 'put',
+      method: 'PUT',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

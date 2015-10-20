@@ -1,5 +1,5 @@
 function updateNewCourseName(input, state) {
-  state.set(['coursesOverview', 'newCourseName'], input.newCourseName);
+  state.set(['courses', 'newCourseName'], input.newCourseName);
 }
 
 export default updateNewCourseName;
