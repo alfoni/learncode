@@ -31,17 +31,24 @@ class SceneControls extends React.Component {
   }
   onUploadClick() {
     const blobs = this.recorder.getBlobs();
-    const data = new FormData();
+    const audioData = new FormData();
+    const videoData = new FormData();
 
-    data.append('audio', blobs.audio);
-    data.append('video', blobs.video);
+    audioData.append('audio', blobs.audio);
+    videoData.append('video', blobs.video);
 
     this.props.signals.course.uploadClicked();
-    fetch('/API/upload', {
-      method: 'post',
-      body: data
-    }).then((response) => {
-      if (response.status === 200) {
+    Promise.all([
+      fetch('/API/courses/123/scenes/0/audio', {
+        method: 'post',
+        body: audioData
+      }),
+      fetch('/API/courses/123/scenes/0/video', {
+        method: 'post',
+        body: videoData
+      })
+    ]).then((responses) => {
+      if (responses[0].status === 200 && responses[1].status === 200) {
         this.props.signals.course.uploadFinished();
       } else {
         throw new Error('Upload failed');

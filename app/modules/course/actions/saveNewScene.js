@@ -1,5 +1,5 @@
 function saveNewScene(input, state, output, services) {
-  services.ajax.post('/API/courses/123/createScene', {
+  services.ajax.post('/API/courses/123/scenes', {
     name: input.sceneName
   })
   .then((scene) => {
