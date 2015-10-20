@@ -9,6 +9,7 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from './webpack.config.js';
 import appController from './server/appController.js';
 import sandboxController from './server/sandboxController.js';
+import db from './server/database.js';
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
@@ -42,6 +43,8 @@ if (isDeveloping) {
 
   app.use(webpackHotMiddleware(compiler));
 }
+
+db.connect();
 
 app.listen(port, function onStart(err) {
   if (err) {

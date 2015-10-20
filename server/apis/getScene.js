@@ -1,46 +1,20 @@
+import db from './../database.js';
+
 export default function getScene(req, res) {
-  setTimeout(function respond() {
-    res.send({
-      index: req.params.index,
-      authorId: '123',
-      name: 'Scene ' + (Number(req.params.index) + 1),
-      showAddFileInput: false,
-      showFolder: false,
-      showScenesList: false,
-      assignment: {
-        description: 'Create a h1 element.',
-        code: [
-          'return document.getElementsByTagName(\'h1\').length() === 1;'
-        ].join('\n')
-      },
-      files: [{
-        name: 'index.html',
-        code: [
-          '<!DOCTYPE html>',
-          '<html>',
-          '  <head>',
-          '    <meta charset="UTF-8"/>',
-          '  </head>',
-          '  <body>',
-          '    ',
-          '  </body>',
-          '</html>'
-        ].join('\n')
-      },
-      {
-        name: 'test.html',
-        code: [
-          '<!DOCTYPE html>',
-          '<html>',
-          '  <head>',
-          '    <meta charset="UTF-8"/>',
-          '  </head>',
-          '  <body>',
-          '    <h1>Test</h1>',
-          '  </body>',
-          '</html>'
-        ].join('\n')
-      }]
-    });
-  }, 500);
+  db.findOne('courses', {
+    id: req.params.id
+  }, {
+    _id: 0,
+    [`scenes.${req.params.index}`]: 1,
+    'scenes.files': 1,
+    'scenes.currentFileIndex': 1,
+    'scenes.name': 1
+  })
+  .then((course) => {
+    res.type('json');
+    res.send(course.scenes[0]);
+  })
+  .catch(() => {
+    console.log('Could not get scene');
+  })
 }

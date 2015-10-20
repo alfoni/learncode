@@ -1,11 +1,11 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
 import styles from './Toolbar.css';
-import ToolbarButton from './Toolbar/ToolbarButton.js';
+import ToolbarButton from 'common/components/Toolbar/ToolbarButton.js';
 import ToolbarSeparator from './Toolbar/ToolbarSeparator.js';
-import ToolbarTitle from './Toolbar/ToolbarTitle.js';
+import ToolbarTitle from 'common/components/Toolbar/ToolbarTitle.js';
 import ToolbarInput from './Toolbar/ToolbarInput.js';
-import ToolbarButtonPopover from './Toolbar/ToolbarButtonPopover.js';
+import ToolbarButtonPopover from 'common/components/Toolbar/ToolbarButtonPopover.js';
 import ToolbarFileListItem from './Toolbar/ToolbarFileListItem.js';
 import AssignmentDescription from './Toolbar/AssignmentDescription.js';
 import AssignmentResult from './Toolbar/AssignmentResult.js';
@@ -99,7 +99,7 @@ class Toolbar extends React.Component {
         <ToolbarButton icon={icons.menu}/>
         <ToolbarSeparator/>
         <ToolbarTitle title={this.props.courseName}/>
-        <ToolbarButton icon={icons.save} onClick={() => this.props.signals.course.saveCourseClicked()}/>
+        <ToolbarButton icon={icons.save} onClick={() => this.props.signals.course.saveSceneClicked()}/>
         <ToolbarSeparator/>
         <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
           {this.renderFilesList()}

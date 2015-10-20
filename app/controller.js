@@ -1,6 +1,7 @@
 import Controller from 'cerebral';
 import Model from 'cerebral-baobab';
 import ajax from './services/ajax.js';
+import Router from 'cerebral-router';
 
 const model = Model({
   currentPage: 'course',
@@ -11,6 +12,11 @@ const model = Model({
   home: {
     showSigningupLoader: false,
     hasRegistered: false
+  },
+  coursesOverview: {
+    showNewCourse: false,
+    isSavingNewCourse: false,
+    newCourseName: ''
   },
   course: {
     name: 'Course 1',
@@ -48,7 +54,8 @@ const model = Model({
 });
 
 const services = {
-  ajax: ajax
+  ajax: ajax,
+  router: Router
 };
 
 const computed = {
