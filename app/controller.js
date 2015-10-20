@@ -13,10 +13,11 @@ const model = Model({
     showSigningupLoader: false,
     hasRegistered: false
   },
-  coursesOverview: {
+  courses: {
     showNewCourse: false,
     isSavingNewCourse: false,
-    newCourseName: ''
+    newCourseName: '',
+    courses: []
   },
   course: {
     name: 'Course 1',

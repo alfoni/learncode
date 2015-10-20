@@ -50,7 +50,6 @@ class Course extends React.Component {
   renderScene() {
     return (
       <div className={styles.wrapper} onClick={() => this.props.signals.course.appClicked()}>
-        <div className={this.props.isLoading ? styles.overlayVisible : styles.overlay}></div>
         <Toolbar/>
         <DurationSlider/>
         <Scene/>
@@ -59,7 +58,16 @@ class Course extends React.Component {
     );
   }
   render() {
-    return !this.state.canRender || this.props.isLoading ? null : this.renderScene();
+    if (this.state.canRender) {
+      return (
+        <div>
+          <div className={this.props.isLoading ? styles.overlayVisible : styles.overlay}></div>
+          {this.props.isLoading ? null : this.renderScene()}
+        </div>
+      );
+    }
+
+    return null;
   }
 }
 
