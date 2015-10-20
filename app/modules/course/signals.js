@@ -24,6 +24,7 @@ import listSceneNameClicked from './signals/listSceneNameClicked.js';
 import uploadClicked from './signals/uploadClicked.js';
 import uploadFinished from './signals/uploadFinished.js';
 import uploadFailed from './signals/uploadFailed.js';
+import removeFileClicked from './signals/removeFileClicked.js';
 
 export default function(controller) {
   controller.signal('course.courseOpened', courseOpened);
@@ -55,4 +56,5 @@ export default function(controller) {
   controller.signal('course.uploadClicked', uploadClicked);
   controller.signal('course.uploadFinished', uploadFinished);
   controller.signal('course.uploadFailed', uploadFailed);
+  controller.signal('course.removeFileClicked', removeFileClicked);
 }

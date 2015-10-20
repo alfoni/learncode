@@ -9,6 +9,7 @@ import Preview from './Scene/Preview.js';
 import Console from './Scene/Console.js';
 import AssignmentDescriptionTextArea from './Scene/AssignmentDescriptionTextArea.js';
 import AssignmentEditor from './Scene/AssignmentEditor.js';
+import icons from 'common/icons.css';
 import styles from './Scene.css';
 
 @Cerebral({
@@ -40,6 +41,10 @@ class Scene extends React.Component {
         </Module>
         <Module show={Boolean(true)}>
           <ModuleToolbar title="CODE EDITOR">
+            <span
+              className={styles.removeIcon + ' ' + icons.delete}
+              onClick={() => this.props.signals.course.removeFileClicked()}>
+            </span>
             <ModuleFileName fileName={this.props.currentFile.name}/>
           </ModuleToolbar>
           <CodeEditor/>
