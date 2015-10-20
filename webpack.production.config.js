@@ -30,7 +30,7 @@ module.exports = {
     }),
     new StatsPlugin('webpack.stats.json', {
       source: false,
-      modules: false
+      modules: true
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)

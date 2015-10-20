@@ -1,10 +1,11 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
-import Toolbar from './components/Toolbar.js';
-import DurationSlider from './components/DurationSlider.js';
-import SceneControls from './components/SceneControls.js';
-import Scene from './components/Scene.js';
-import styles from './Course.css';
+
+let Toolbar = null;
+let DurationSlider = null;
+let SceneControls = null;
+let Scene = null;
+let styles = null;
 
 @Cerebral({
   isLoading: ['course', 'isLoading']
@@ -15,9 +16,22 @@ class Course extends React.Component {
   constructor() {
     super();
     this.onKeydown = this.onKeydown.bind(this);
+    this.state = {
+      canRender: false
+    };
   }
   componentDidMount() {
     window.addEventListener('keydown', this.onKeydown);
+    require.ensure([], (require) => {
+      Toolbar = require('./components/Toolbar.js');
+      DurationSlider = require('./components/DurationSlider.js');
+      SceneControls = require('./components/SceneControls.js');
+      Scene = require('./components/Scene.js');
+      styles = require('./Course.css');
+      this.setState({
+        canRender: true
+      });
+    });
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.onKeydown);
@@ -45,7 +59,7 @@ class Course extends React.Component {
     );
   }
   render() {
-    return this.props.isLoading ? null : this.renderScene();
+    return !this.state.canRender || this.props.isLoading ? null : this.renderScene();
   }
 }
 
