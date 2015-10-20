@@ -13,11 +13,11 @@ export default {
       console.log('Database is connected');
     });
   },
-  findOne(collectionName, query) {
+  findOne(collectionName, query, projection = {}) {
     const collection = db.collection(collectionName);
 
     return new Promise((resolve, reject) => {
-      collection.findOne(query, (err, result) => {
+      collection.findOne(query, projection, (err, result) => {
         if (err) {
           reject(err);
         }

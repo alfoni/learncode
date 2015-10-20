@@ -99,7 +99,7 @@ class Toolbar extends React.Component {
         <ToolbarButton icon={icons.menu}/>
         <ToolbarSeparator/>
         <ToolbarTitle title={this.props.courseName}/>
-        <ToolbarButton icon={icons.save} onClick={() => this.props.signals.course.saveCourseClicked()}/>
+        <ToolbarButton icon={icons.save} onClick={() => this.props.signals.course.saveSceneClicked()}/>
         <ToolbarSeparator/>
         <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
           {this.renderFilesList()}

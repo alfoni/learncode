@@ -6,6 +6,9 @@ import styles from './Preview.css';
   url: ['course', 'previewUrl']
 })
 class Preview extends React.Component {
+  componentDidMount() {
+    this.refs.preview.src = this.props.url;
+  }
   componentDidUpdate(prevProps) {
     if (prevProps.url !== this.props.url) {
       this.refs.preview.src = this.props.url;

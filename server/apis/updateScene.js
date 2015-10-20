@@ -6,7 +6,7 @@ export default function updateCourse(req, res) {
   }, {
     $set: Object.keys(req.body).reduce((update, key) => {
       update[`scenes.${req.params.index}.${key}`] = req.body[key];
-      
+
       return update;
     }, {})
   })
