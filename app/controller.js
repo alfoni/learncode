@@ -12,6 +12,11 @@ const model = Model({
     showSigningupLoader: false,
     hasRegistered: false
   },
+  coursesOverview: {
+    showAddCourseOverview: false,
+    showSavingCourse: true,
+    newCourseName: ''
+  },
   course: {
     name: 'Course 1',
     isLoading: false,
