@@ -22,7 +22,7 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className={layout.fullHeightContainer}>
+      <div>
         {this.renderPage()}
         <div className={this.props.snackbar.show ? styles.snackbarVisible : styles.snackbar}>
           {this.props.snackbar.text}
