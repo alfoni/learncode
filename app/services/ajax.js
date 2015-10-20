@@ -19,5 +19,27 @@ export default {
       body: JSON.stringify(data)
     })
     .then((response) => response.json());
+  },
+  patch(url, data) {
+    return fetch(url, {
+      method: 'patch',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then((response) => response.json());
+  },
+  put(url, data) {
+    return fetch(url, {
+      method: 'put',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then((response) => response.json());
   }
 };
