@@ -6,6 +6,7 @@
   font-family: Helvetica, sans-serif;
   background-color: #F7F7F7;
   box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
 }
 
 .container {
@@ -79,14 +80,14 @@ h1 {
 }
 
 .column1 {
-  padding-right: 30px;
+  padding-right: 25px;
   padding-left: 0;
   text-align: center;
 }
 
 .column2 {
   padding-right: 0;
-  padding-left: 30px;
+  padding-left: 25px;
 }
 
 .formWrapper {

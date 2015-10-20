@@ -1,6 +1,6 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
-import AddSceneInput from './ConfigureScenes/AddSceneInput.js';
+import AddSceneInput from 'common/components/Input.js';
 
 import styles from './ConfigureScenes.css';
 
@@ -24,7 +24,7 @@ class ConfigureScenes extends React.Component {
         <h4 className={styles.title}>Add scene</h4>
         <AddSceneInput show={Boolean(true)}
                       onKeyDown={(e) => this.addSceneInputKeyDown(e)}
-                      placeHolder="Type scenename..."/>
+                      placeholder="Type scenename..."/>
       </div>
     );
   }

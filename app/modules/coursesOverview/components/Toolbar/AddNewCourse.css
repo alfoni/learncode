@@ -1,0 +1,39 @@
+.wrapper {
+  width: 250px;
+  padding: 20px;
+  position: relative;
+}
+
+.title {
+  margin-top: 0;
+}
+
+.button {
+  margin-top: 5px;
+  background-color: #ff4081;
+  width: 100%;
+  border: 0;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 3px;
+  cursor: pointer;
+  height: 41px;
+}
+
+.button:focus, .button:hover {
+  outline: 0;
+  background-color: #ff5091;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: default;
+  background-color: #ff4081;
+}
+
+.savingIcon {
+  font-size: 26px;
+  line-height: 18px;
+  vertical-align: top;
+}

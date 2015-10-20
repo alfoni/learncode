@@ -2,12 +2,14 @@ import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
 import Course from './modules/course/Course.js';
 import Home from './modules/home/Home.js';
+import coursesOverview from './modules/coursesOverview/coursesOverview.js';
 import layout from 'common/layout.css';
 import styles from './App.css';
 
 const pages = {
   'home': Home,
-  'course': Course
+  'course': Course,
+  'coursesOverview': coursesOverview
 };
 
 @Cerebral({
@@ -22,7 +24,7 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className={layout.fullHeightContainer}>
+      <div>
         {this.renderPage()}
         <div className={this.props.snackbar.show ? styles.snackbarVisible : styles.snackbar}>
           {this.props.snackbar.text}

@@ -6,9 +6,9 @@
   font-size: 14px;
   padding: 5px 10px;
   border-radius: 3px;
-  background-color: #eee;
   color: rgba(0, 0, 0, 0.4);
-  border: 0;
+  border: 1px solid #eee;
+  box-shadow:inset 1px 1px 2px 0 rgba(0,0,0,0.15);
 }
 
 .input:focus {
