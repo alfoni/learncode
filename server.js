@@ -20,7 +20,7 @@ app.use(subdomain({
   prefix: 'sandbox'
 }));
 app.use(bodyParser.json());
-// app.use(express.static(__dirname + '/dist'));
+app.use(express.static(__dirname + '/public'));
 
 sandboxController(app);
 appController(app);
@@ -46,7 +46,7 @@ if (isDeveloping) {
 
 db.connect();
 
-app.listen(port, 'localhost', function onStart(err) {
+app.listen(port, function onStart(err) {
   if (err) {
     console.log(err);
   }

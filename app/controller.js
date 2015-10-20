@@ -8,6 +8,10 @@ const model = Model({
     show: false,
     text: ''
   },
+  home: {
+    showSigningupLoader: false,
+    hasRegistered: false
+  },
   course: {
     name: 'Course 1',
     isLoading: false,

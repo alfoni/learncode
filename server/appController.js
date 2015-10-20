@@ -8,6 +8,7 @@ import createScene from './apis/createScene.js';
 import updateScene from './apis/updateScene.js';
 import saveAudio from './apis/saveAudio.js';
 import saveVideo from './apis/saveVideo.js';
+import registerSignup from './apis/registerSignup.js';
 
 export default function appController(router) {
   router.post('/API/courses', createCourse);
@@ -20,4 +21,5 @@ export default function appController(router) {
   router.patch('/API/courses/:id/scenes/:index', updateScene);
   router.post('/API/courses/:id/scenes/:index/audio', saveAudio);
   router.post('/API/courses/:id/scenes/:index/video', saveVideo);
+  router.post('/API/registerSignup', registerSignup);
 }
