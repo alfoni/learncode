@@ -110,9 +110,11 @@ class Toolbar extends React.Component {
                       onBlur={() => this.props.signals.course.addFileInputBlurred()}
                       placeholder="Type filename..."/>
         <ToolbarSeparator/>
-        <ToolbarButton active={this.props.showPreview} icon={icons.showBrowser} onClick={() => this.props.signals.course.showPreviewClicked()}/>
-        <ToolbarButton active={this.props.showConsole} icon={icons.assignment} onClick={() => this.props.signals.course.showConsoleClicked()}/>
-        <ToolbarSeparator/>
+        { /* <ToolbarButton active={this.props.showPreview} icon={icons.showBrowser}
+          onClick={() => this.props.signals.course.showPreviewClicked()}/> */ }
+        { /* }<ToolbarButton active={this.props.showConsole} icon={icons.assignment}
+          onClick={() => this.props.signals.course.showConsoleClicked()}/> */ }
+        { /* }<ToolbarSeparator/> */ }
         <ToolbarButtonPopover onClick={(e) => this.assignmentClicked(e)} show={this.props.showAssignment} icon={icons.school}>
           <AssignmentDescription description={this.props.currentScene.assignment.description}/>
           <AssignmentResult/>
