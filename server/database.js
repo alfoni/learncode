@@ -61,13 +61,47 @@ export default {
       });
     });
   },
-  stream(req, filename) {
+  writeFile(filename, req) {
     return new Promise((resolve, reject) => {
-      const pipe = req.pipe(gfs.createWriteStream({
+      gfs.exist({
         filename: filename
-      }));
-      pipe.on('error', reject);
-      pipe.on('finish', resolve);
+      }, (err, found) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(found);
+        }
+      });
+    })
+    .then((exists) => {
+      if (exists) {
+        return new Promise((resolve, reject) => {
+          gfs.remove({
+            filename: filename
+          }, (err) => {
+            if (err) {
+              reject(err);
+            } else {
+              resolve();
+            }
+          });
+        });
+      }
+    })
+    .then(() => {
+      return new Promise((resolve, reject) => {
+        const pipe = req.pipe(gfs.createWriteStream({
+          filename: filename
+        }));
+        pipe.on('error', reject);
+        pipe.on('close', resolve);
+      });
     });
+  },
+  readFile(filename, res) {
+    const readstream = gfs.createReadStream({
+      filename: filename
+    });
+    readstream.pipe(res);
   }
 };

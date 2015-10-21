@@ -8,7 +8,8 @@ export default function getScene(req, res) {
     [`scenes.${req.params.index}`]: 1,
     'scenes.files': 1,
     'scenes.currentFileIndex': 1,
-    'scenes.name': 1
+    'scenes.name': 1,
+    'scenes.recording': 1
   })
   .then((course) => {
     res.type('json');

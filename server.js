@@ -19,7 +19,7 @@ app.use(subdomain({
   base: 'learncode.com',
   prefix: 'sandbox'
 }));
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '10mb'}));
 app.use(express.static(__dirname + '/public'));
 
 sandboxController(app);

@@ -1,10 +1,21 @@
 import set from 'common/factories/actions/set.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/chains/hideSnackbar.js';
+import saveRecording from '../actions/saveRecording.js';
 
 export default [
-  set(['course', 'recording', 'isUploading'], false),
-  set(['course', 'recording', 'hasRecorded'], false),
-  showSnackbar('The upload was successfull!'),
+  showSnackbar('Lagrer opptak...'),
+  [
+    saveRecording, {
+      success: [
+        showSnackbar('Opptaket er nå lagret'),
+        set(['course', 'recorder', 'isUploading'], false),
+        set(['course', 'recorder', 'hasRecorded'], false)
+      ],
+      error: [
+        showSnackbar('Det oppstod et problem med å lagre opptaket!')
+      ]
+    }
+  ],
   ...hideSnackbar(2000)
 ];

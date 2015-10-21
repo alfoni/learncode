@@ -36,18 +36,11 @@ const model = Model({
     recorder: {
       isPlaying: false,
       isUploading: false,
+      hasUpload: false,
       isRecording: false,
       hasRecorded: false
     },
-    scenes: [/* {
-      assignment: {
-        description: '',
-        code: ''
-      },
-      currentFileIndex: 0,
-      files: [],
-      sandboxFiles: [],
-    } */]
+    scenes: []
   },
   user: {
     id: '123'

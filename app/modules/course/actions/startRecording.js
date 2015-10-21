@@ -1,5 +1,7 @@
 function startRecording(input, state, output, services) {
-  state.set(['course', 'recorder', 'isRecording'], true);
+  state.merge(['course', 'recorder'], {
+    isRecording: true
+  });
   services.recorder.record();
 }
 

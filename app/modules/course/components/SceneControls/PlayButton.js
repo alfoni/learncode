@@ -14,9 +14,12 @@ function PlayButton(props) {
   }
 
   return (
-    <div className={className} onClick={() => props.recorder.isPlaying ? props.onStopClick() : props.onPlayClick()}>
+    <button
+      className={className}
+      onClick={() => props.recorder.isPlaying ? props.onStopClick() : props.onPlayClick()}
+      disabled={props.isExecutingSignal}>
       <div className={props.recorder.isRecording || props.recorder.isPlaying ? icons.stop : icons.play}></div>
-    </div>
+    </button>
   );
 }
 
