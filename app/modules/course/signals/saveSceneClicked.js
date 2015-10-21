@@ -1,11 +1,11 @@
 import saveSandboxChain from '../chains/saveSandbox';
-import condition from 'common/factories/actions/condition.js';
+import isPlayingOrRecording from '../actions/isPlayingOrRecording.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/chains/hideSnackbar.js';
 import saveScene from '../actions/saveScene.js';
 
 export default [
-  condition(['course', 'recorder', 'hasRecorded']), {
+  isPlayingOrRecording, {
     true: [
       ...saveSandboxChain
     ],

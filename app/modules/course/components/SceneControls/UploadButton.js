@@ -5,7 +5,7 @@ import icons from 'common/icons.css';
 function UploadButton(props) {
   let className = styles.wrapper;
 
-  if (props.recorder.hasRecorded) {
+  if (props.isUploadReady && !props.recorder.isPlaying) {
     className = styles.upload;
   }
 
