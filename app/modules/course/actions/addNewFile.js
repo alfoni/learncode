@@ -2,7 +2,7 @@ function addNewFile(input, state, output) {
   const currentSceneIndex = state.get(['course', 'currentSceneIndex']);
 
   state.push(['course', 'scenes', currentSceneIndex, 'sandboxFiles'], {
-    name: input.name,
+    name: state.get(['course', 'newFileName']),
     code: ''
   });
 

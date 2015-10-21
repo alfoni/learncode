@@ -10,13 +10,16 @@ class ToolbarInput extends React.Component {
       this.props.show ?
         <div className={styles.wrapper}>
           <div className={styles.inputWrapper}>
-            <input
-            onKeyDown={this.props.onKeyDown}
-            className={styles.input}
-            autoFocus
-            placeholder={this.props.placeholder}
-            onBlur={this.props.onBlur}>
-            </input>
+            <form onSubmit={this.props.onSubmit}>
+              <input
+                onChange={this.props.onChange}
+                onKeyDown={this.props.onKeyDown}
+                className={styles.input}
+                autoFocus
+                placeholder={this.props.placeholder}
+                onBlur={this.props.onBlur}>
+              </input>
+            </form>
           </div>
         </div>
       :

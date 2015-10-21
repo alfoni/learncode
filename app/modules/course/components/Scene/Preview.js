@@ -8,11 +8,18 @@ import styles from './Preview.css';
 class Preview extends React.Component {
   componentDidMount() {
     this.refs.preview.src = this.props.url;
+    window.addEventListener('message', (e) => this.onSandboxMessage(e));
   }
   componentDidUpdate(prevProps) {
     if (prevProps.url !== this.props.url) {
       this.refs.preview.src = this.props.url;
     }
+  }
+  componentWillUnmount() {
+    window.removeEventListener('message', this.onSandboxMessage);
+  }
+  onSandboxMessage(event) {
+    this.props.signals.course[event.data.signal]({message: event.data.message});
   }
   render() {
     return (

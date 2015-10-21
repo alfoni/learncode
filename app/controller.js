@@ -37,6 +37,7 @@ const model = Model({
     currentSceneIndex: 0,
     sandboxSnapshot: null,
     newSceneName: '',
+    newFileName: '',
     recorder: {
       isPlaying: false,
       isUploading: false,
