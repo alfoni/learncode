@@ -23,6 +23,7 @@ export default [
       sceneDidLoad, {
         true: [
           setScene,
+          ...saveSandboxChain,
           showSnackbar('Scenen er lastet'),
           ...hideSnackbar(2000)
         ],
