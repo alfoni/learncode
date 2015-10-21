@@ -26,6 +26,8 @@ import uploadFinished from './signals/uploadFinished.js';
 import uploadFailed from './signals/uploadFailed.js';
 import removeFileClicked from './signals/removeFileClicked.js';
 import newSceneNameChanged from './signals/newSceneNameChanged.js';
+import sandboxTested from './signals/sandboxTested.js';
+import runAssignmentClicked from './signals/runAssignmentClicked.js';
 
 export default function(controller) {
   controller.signal('course.courseOpened', courseOpened);
@@ -59,4 +61,6 @@ export default function(controller) {
   controller.signal('course.uploadFailed', uploadFailed);
   controller.signal('course.removeFileClicked', removeFileClicked);
   controller.signal('course.newSceneNameChanged', newSceneNameChanged);
+  controller.signal('course.sandboxTested', sandboxTested);
+  controller.signal('course.runAssignmentClicked', runAssignmentClicked);
 }

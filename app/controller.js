@@ -46,7 +46,8 @@ const model = Model({
     scenes: [/* {
       assignment: {
         description: '',
-        code: ''
+        code: '',
+        result: false
       },
       currentFileIndex: 0,
       files: [],
