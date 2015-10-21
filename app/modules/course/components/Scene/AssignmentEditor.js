@@ -10,7 +10,8 @@ import CodeMirror from 'codemirror';
 import styles from './AssignmentEditor.css';
 
 @Cerebral({
-  recorder: ['course', 'recorder']
+  recorder: ['course', 'recorder'],
+  currentSceneIndex: ['course', 'currentSceneIndex']
 }, {
   currentScene: ['currentScene']
 })
@@ -32,7 +33,7 @@ class AssignmentEditor extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.recorder.isPlaying ||
     this.props.recorder.started !== prevProps.recorder.started ||
-    this.props.currentScene.assignment.code !== prevProps.currentScene.assignment.code) {
+    this.props.currentSceneIndex !== prevProps.currentSceneIndex) {
       this.updateAllCode();
     }
   }
