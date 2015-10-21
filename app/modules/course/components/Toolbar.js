@@ -69,17 +69,21 @@ class Toolbar extends React.Component {
       );
     });
   }
-  addFileInputKeyDown(e) {
-    const keyCode = e.keyCode;
+  onAddFileInputChange(e) {
+    console.log('hey');
     const fileName = e.target.value;
+    this.props.signals.course.addFileNameUpdated({fileName: fileName});
+  }
+  onAddFileInputKeyDown(e) {
+    const keyCode = e.keyCode;
 
     if (keyCode === 27) { // Escape
       this.props.signals.course.addFileAborted();
-    } else if (keyCode === 13) { // Enter
-      this.props.signals.course.addFileSubmitted({
-        name: fileName
-      });
     }
+  }
+  onAddFileSubmit(e) {
+    e.preventDefault();
+    this.props.signals.course.addFileSubmitted();
   }
   assignmentClicked(e) {
     e.stopPropagation();
@@ -106,7 +110,9 @@ class Toolbar extends React.Component {
         </ToolbarButtonPopover>
         <ToolbarButton icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
         <ToolbarInput show={this.props.showAddFileInput}
-                      onKeyDown={(e) => this.addFileInputKeyDown(e)}
+                      onChange={(e) => this.onAddFileInputChange(e)}
+                      onSubmit={(e) => this.onAddFileSubmit(e)}
+                      onKeyDown={(e) => this.onAddFileInputKeyDown(e)}
                       onBlur={() => this.props.signals.course.addFileInputBlurred()}
                       placeholder="Type filename..."/>
         <ToolbarSeparator/>
