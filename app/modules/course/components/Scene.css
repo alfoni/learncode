@@ -18,17 +18,3 @@
 .threeColumns > div:first-child, .threeColumns > div:nth-child(2) {
   border: 0; /* Should be no border between Assignment and code editor */
 }
-
-.removeIcon {
-  float: right;
-  margin-top: 2px;
-  font-size: 20px;
-  margin-left: 7px;
-  cursor: pointer;
-  color: rgba(0, 0, 0, 0.4);
-  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-}
-
-.removeIcon:hover {
-  color: rgba(0, 0, 0, 1);
-}
