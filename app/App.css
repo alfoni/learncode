@@ -1,5 +1,5 @@
 .snackbar {
-  position: absolute;
+  position: fixed;
   opacity: 0;
   margin-left: 24px;
   bottom: 24px;
