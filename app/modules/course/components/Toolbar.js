@@ -70,7 +70,6 @@ class Toolbar extends React.Component {
     });
   }
   onAddFileInputChange(e) {
-    console.log('hey');
     const fileName = e.target.value;
     this.props.signals.course.addFileNameUpdated({fileName: fileName});
   }

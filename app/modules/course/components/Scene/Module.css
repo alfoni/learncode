@@ -4,6 +4,7 @@
   vertical-align: top;
   border-left: 2px solid #eee;
   box-sizing: border-box;
+  position: relative;
 }
 
 .hidden {

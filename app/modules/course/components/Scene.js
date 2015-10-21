@@ -41,9 +41,9 @@ class Scene extends React.Component {
         </Module>
         <Module show={Boolean(true)}>
           <ModuleToolbar title="CODE EDITOR">
-            <RemoveFile show={this.props.currentScene.currentFileIndex !== 0} onClick={() => this.props.signals.course.removeFileClicked()}/>
             <ModuleFileName fileName={this.props.currentFile.name}/>
           </ModuleToolbar>
+          <RemoveFile show={this.props.currentScene.currentFileIndex !== 0} onClick={() => this.props.signals.course.removeFileClicked()}/>
           <CodeEditor/>
         </Module>
         <Module show={Boolean(true)}>
