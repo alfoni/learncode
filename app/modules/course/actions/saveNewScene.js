@@ -1,9 +1,11 @@
 function saveNewScene(input, state, output, services) {
-  services.ajax.post('/API/courses/123/scenes', {
-    name: input.sceneName
+  const courseId = state.get(['course', 'id']);
+
+  services.ajax.post(`/API/courses/${courseId}/scenes`, {
+    name: state.get(['course', 'newSceneName'])
   })
   .then((scene) => {
-    output.success({newScene: scene});
+    output.success({scene: scene});
   })
   .catch(() => {
     output.error({

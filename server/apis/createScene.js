@@ -1,7 +1,6 @@
 import db from './../database.js';
 
-const defaultIndex = `
-<!DOCTYPE html>
+const defaultIndex = `<!DOCTYPE html>
 <html>
   <meta charset="utf-8"/>
   <body>

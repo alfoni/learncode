@@ -2,7 +2,7 @@ function saveRecording(input, state, output, services) {
   const courseId = state.get(['course', 'id']);
   const sceneIndex = state.get(['course', 'currentSceneIndex']);
   const recording = services.recorder.getRecording();
-
+  console.log(recording);
   services.ajax.patch(`/API/courses/${courseId}/scenes/${sceneIndex}`, {
     recording: recording
   })

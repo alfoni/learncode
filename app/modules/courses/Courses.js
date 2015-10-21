@@ -3,7 +3,7 @@ import {Decorator as Cerebral} from 'cerebral-react';
 
 let Toolbar = null;
 let styles = null;
-let CoursesComp = null;
+let CoursesList = null;
 
 @Cerebral({
   isLoading: ['courses', 'isLoading']
@@ -18,7 +18,7 @@ class Courses extends React.Component {
   componentDidMount() {
     require.ensure([], (require) => {
       Toolbar = require('./components/Toolbar.js');
-      CoursesComp = require('./components/Courses.js');
+      CoursesList = require('./components/CoursesList.js');
       styles = require('./Courses.css');
       this.setState({
         canRender: true
@@ -29,7 +29,9 @@ class Courses extends React.Component {
     return (
       <div className={styles.wrapper} onClick={() => this.props.signals.courses.appClicked()}>
         <Toolbar/>
-        <CoursesComp/>
+        <div className={styles.contentWrapper}>
+          <CoursesList/>
+        </div>
       </div>
     );
   }

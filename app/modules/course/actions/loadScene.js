@@ -1,5 +1,7 @@
 function loadScene(input, state, output) {
-  fetch(`/API/courses/${input.courseId}/scenes/${input.sceneIndex || 0}`)
+  const courseId = state.get(['course', 'id']);
+  
+  fetch(`/API/courses/${input.courseId || courseId}/scenes/${input.sceneIndex || 0}`)
     .then((response) => {
       if (response.status !== 200) {
         output({

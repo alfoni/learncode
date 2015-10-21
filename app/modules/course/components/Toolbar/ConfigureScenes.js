@@ -16,7 +16,7 @@ class ConfigureScenes extends React.Component {
         <form onSubmit={(e) => this.onNewSceneSubmit(e)}>
           <input
             className={elements.input}
-            onChange={(e) => this.props.signals.course.sceneNameChanged({value: e.target.value})}
+            onChange={(e) => this.props.signals.course.newSceneNameChanged({value: e.target.value})}
             placeholder="Type scenename..."/>
         </form>
       </div>

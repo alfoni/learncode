@@ -1,6 +1,6 @@
 .button {
-  position: absolute;
   border: 0;
+  position: fixed;
   height: 24px;
   width: 24px;
   right: 320px;

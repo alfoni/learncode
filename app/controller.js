@@ -16,7 +16,10 @@ const model = Model({
   courses: {
     showNewCourse: false,
     isSavingNewCourse: false,
-    newCourseName: '',
+    newCourse: {
+      courseName: '',
+      sceneName: ''
+    },
     courses: []
   },
   course: {
@@ -33,6 +36,7 @@ const model = Model({
     showAddFileInput: false,
     currentSceneIndex: 0,
     sandboxSnapshot: null,
+    newSceneName: '',
     recorder: {
       isPlaying: false,
       isUploading: false,

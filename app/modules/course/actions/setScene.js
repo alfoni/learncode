@@ -1,4 +1,4 @@
-function setScene(input, state) {
+function setScene(input, state, output, services) {
   const currentFileIndex = state.get(['course', 'scenes', input.sceneIndex, 'currentFileIndex']);
 
   const scene = Object.assign({
@@ -15,6 +15,12 @@ function setScene(input, state) {
   } else {
     state.set(['course', 'scenes', input.sceneIndex, 'currentFileIndex'], 0);
   }
+
+  if (scene.recording) {
+    services.recorder.loadRecording(scene.recording);
+  }
+
+  state.set(['course', 'currentSceneIndex'], input.sceneIndex);
 }
 
 export default setScene;

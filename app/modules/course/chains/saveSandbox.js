@@ -1,7 +1,7 @@
-import saveSandbox from './../actions/saveSandbox';
-import setPreviewUrl from './../actions/setPreviewUrl';
+import saveSandbox from '../actions/saveSandbox';
+import setPreviewUrl from '../actions/setPreviewUrl';
 import set from 'common/factories/actions/set.js';
-import setSandboxSnapshot from './../actions/setSandboxSnapshot';
+import setSandboxSnapshot from '../actions/setSandboxSnapshot';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 
 export default [

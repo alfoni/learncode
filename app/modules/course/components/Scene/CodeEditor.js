@@ -11,7 +11,8 @@ import path from 'path';
 import styles from './CodeEditor.css';
 
 @Cerebral({
-  recorder: ['course', 'recorder']
+  recorder: ['course', 'recorder'],
+  currentSceneIndex: ['course', 'currentSceneIndex']
 }, {
   currentScene: ['currentScene'],
   currentFile: ['currentFile']
@@ -35,7 +36,8 @@ class CodeEditor extends React.Component {
     if (
       this.props.recorder.isPlaying ||
       this.props.recorder.started !== prevProps.recorder.started ||
-      this.props.currentScene.currentFileIndex !== prevProps.currentScene.currentFileIndex
+      this.props.currentScene.currentFileIndex !== prevProps.currentScene.currentFileIndex ||
+      this.props.currentSceneIndex !== prevProps.currentSceneIndex
     ) {
       this.updateAllCode();
     }

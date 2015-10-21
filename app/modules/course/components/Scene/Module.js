@@ -4,7 +4,12 @@ import styles from './Module.css';
 function Module(props) {
   return (
     <div className={props.show ? styles.wrapper : styles.hidden}>
-      {props.children}
+      {
+        props.show ?
+          props.children
+        :
+          null
+      }
     </div>
   );
 }
