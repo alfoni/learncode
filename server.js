@@ -35,7 +35,7 @@ if (isDeveloping) {
       colors: true,
       hash: false,
       timings: true,
-      chunks: false,
+      chunks: true,
       chunkModules: false,
       modules: false
     }
