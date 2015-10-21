@@ -1,6 +1,6 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
-import styles from './Courses.css';
+import styles from './CoursesList.css';
 
 @Cerebral({
   courses: ['courses', 'courses']

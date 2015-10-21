@@ -5,10 +5,9 @@ export default function getScene(req, res) {
     id: req.params.id
   }, {
     _id: 0,
-    [`scenes.${req.params.index}`]: 1,
-    'scenes.files': 1,
-    'scenes.currentFileIndex': 1,
-    'scenes.name': 1
+    scenes: {
+      $slice: [Number(req.params.index), 1]
+    }
   })
   .then((course) => {
     res.type('json');

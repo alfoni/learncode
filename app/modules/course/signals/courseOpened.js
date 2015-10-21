@@ -3,27 +3,54 @@ import set from 'common/factories/actions/set.js';
 import loadCourse from './../actions/loadCourse.js';
 import loadScene from './../actions/loadScene.js';
 import setCourse from './../actions/setCourse.js';
+import isSameCourse from './../actions/isSameCourse.js';
+import sceneDidLoad from './../actions/sceneDidLoad.js';
+import courseAndSceneDidLoad from './../actions/courseAndSceneDidLoad.js';
+import setScene from './../actions/setScene.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/chains/hideSnackbar.js';
 import saveSandboxChain from './../chains/saveSandbox.js';
 
 export default [
   setPage('course'),
-  set(['course', 'isLoading'], true),
-  showSnackbar('Loading course...'),
-  [
-    loadCourse,
-    loadScene
-  ],
-  setCourse, {
-    success: [
-      set(['course', 'isLoading'], false),
-      ...saveSandboxChain,
-      showSnackbar('Course loaded!'),
-      ...hideSnackbar(2000)
+  isSameCourse, {
+    true: [
+      showSnackbar('Laster scene...'),
+      set(['course', 'showScenesList'], false),
+      [
+        loadScene
+      ],
+      sceneDidLoad, {
+        true: [
+          setScene,
+          showSnackbar('Scenen er lastet'),
+          ...hideSnackbar(2000)
+        ],
+        false: [
+          showSnackbar('Innlasting av scenen feilet!')
+        ]
+      }
     ],
-    error: [
-      showSnackbar('Unable to open the course!')
+    false: [
+      showSnackbar('Laster kurs...'),
+      set(['course', 'isLoading'], true),
+      [
+        loadCourse,
+        loadScene
+      ],
+      courseAndSceneDidLoad, {
+        true: [
+          setCourse,
+          setScene,
+          set(['course', 'isLoading'], false),
+          ...saveSandboxChain,
+          showSnackbar('Kurset er lastet'),
+          ...hideSnackbar(2000)
+        ],
+        false: [
+          showSnackbar('Innlasting av kurset feilet!')
+        ]
+      }
     ]
   }
 ];

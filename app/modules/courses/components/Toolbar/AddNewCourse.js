@@ -18,10 +18,17 @@ class AddNewCourse extends React.Component {
         <form onSubmit={(e) => this.onNewCourseSubmit(e)}>
           <input
             className={elements.input}
-            onChange={(e) => this.props.signals.courses.newCourseNameUpdated.sync({newCourseName: e.target.value})}
+            onChange={(e) => this.props.signals.courses.newCourseUpdated.sync({field: 'courseName', value: e.target.value})}
             placeholder="Navn på kurs"
-            disabled={this.props.showSavingCourse}
-            autoFocus/>
+            disabled={this.props.isSavingNewCourse}
+            autoFocus
+            required/>
+          <input
+            className={`${elements.input} ${styles.sceneInput}`}
+            onChange={(e) => this.props.signals.courses.newCourseUpdated.sync({field: 'sceneName', value: e.target.value})}
+            placeholder="Navn på første scene"
+            disabled={this.props.isSavingNewCourse}
+            required/>
           <button
             type="submit"
             className={styles.button}

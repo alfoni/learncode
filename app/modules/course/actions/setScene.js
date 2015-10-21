@@ -15,6 +15,8 @@ function setScene(input, state) {
   } else {
     state.set(['course', 'scenes', input.sceneIndex, 'currentFileIndex'], 0);
   }
+
+  state.set(['course', 'currentSceneIndex'], input.sceneIndex);
 }
 
 export default setScene;
