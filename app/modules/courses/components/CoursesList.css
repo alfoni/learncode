@@ -1,9 +1,3 @@
-.wrapper {
-  padding: 20px;
-  height: calc(100% - 56px);
-  box-sizing: border-box;
-}
-
 .title {
   font-family: Roboto, sans-serif;
 }
