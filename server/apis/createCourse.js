@@ -3,12 +3,13 @@ import db from './../database.js';
 
 const defaultIndex = `<!DOCTYPE html>
 <html>
+  <head>
+  </head>
   <meta charset="utf-8"/>
   <body>
 
   </body>
-</html>
-`;
+</html>`;
 
 export default function createCourse(req, res) {
   const course = {

@@ -117,7 +117,7 @@ class Toolbar extends React.Component {
           <AssignmentDescription description={this.props.currentScene.assignment.description}/>
           <AssignmentResult/>
         </ToolbarButtonPopover>
-        <ToolbarButton icon={icons.checkbox}/>
+        <ToolbarButton icon={icons.checkbox} onClick={() => this.props.signals.course.runAssignmentClicked()}/>
         <ToolbarButton active={this.props.showEditAssignment}
                        onClick={() => this.props.signals.course.editAssignmentClicked()}
                        icon={icons.editAssignment}/>

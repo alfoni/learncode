@@ -4,9 +4,11 @@ function setScene(input, state) {
   const scene = Object.assign({
     assignment: {
       description: '',
-      code: ''
+      code: '',
+      result: false
     }
   }, input.scene);
+
   state.set(['course', 'scenes', input.sceneIndex], scene);
   state.set(['course', 'scenes', input.sceneIndex, 'sandboxFiles'], scene.files);
 
