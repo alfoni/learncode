@@ -47,6 +47,16 @@
   }
 }
 
+.addScene {composes: font;}
+.addScene:before {
+	content: "\e013";
+}
+
+.addCourse {composes: font;}
+.addCourse:before {
+	content: "\e06a";
+}
+
 .uploadFile {composes: font;}
 .uploadFile:before {
 	content: "\e100";
