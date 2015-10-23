@@ -4,8 +4,8 @@ import db from './../database.js';
 const defaultIndex = `<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8"/>
   </head>
-  <meta charset="utf-8"/>
   <body>
 
   </body>
@@ -14,6 +14,7 @@ const defaultIndex = `<!DOCTYPE html>
 export default function createCourse(req, res) {
   const course = {
     id: uuid.v4(),
+    created: Date.now(),
     name: req.body.course.courseName,
     authorId: '123',
     scenes: [{
