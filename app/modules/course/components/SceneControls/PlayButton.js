@@ -16,9 +16,9 @@ function PlayButton(props) {
   return (
     <button
       className={className}
-      onClick={() => props.recorder.isPlaying ? props.onStopClick() : props.onPlayClick()}
+      onClick={() => props.recorder.isPlaying ? props.onPauseClick() : props.onPlayClick()}
       disabled={props.isExecutingSignal}>
-      <div className={props.recorder.isRecording || props.recorder.isPlaying ? icons.stop : icons.play}></div>
+      <div className={props.recorder.isRecording || props.recorder.isPlaying ? icons.pause : icons.play}></div>
     </button>
   );
 }
