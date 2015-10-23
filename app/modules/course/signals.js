@@ -29,6 +29,7 @@ import newSceneNameChanged from './signals/newSceneNameChanged.js';
 import sandboxTested from './signals/sandboxTested.js';
 import runAssignmentClicked from './signals/runAssignmentClicked.js';
 import addFileNameUpdated from './signals/addFileNameUpdated.js';
+import pauseClicked from './signals/pauseClicked.js';
 
 export default function(controller) {
   controller.signal('course.courseOpened', courseOpened);
@@ -65,4 +66,5 @@ export default function(controller) {
   controller.signal('course.sandboxTested', sandboxTested);
   controller.signal('course.runAssignmentClicked', runAssignmentClicked);
   controller.signal('course.addFileNameUpdated', addFileNameUpdated);
+  controller.signal('course.pauseClicked', pauseClicked);
 }

@@ -89,7 +89,17 @@ const SceneControls = React.createClass({
     }, 250);
   },
   onPlayClick() {
-    this.recorder.play(() => this.signals.course.playClicked());
+    this.recorder.seek(
+      this.refs.video.currentTime * 1000 > 0 ? this.refs.video.currentTime * 1000 : 0,
+      true,
+      () => this.signals.course.playClicked({
+        seek: this.refs.video.currentTime * 1000
+      })
+    );
+  },
+  onPauseClick() {
+    this.recorder.pause();
+    this.signals.course.pauseClicked();
   },
   readFile(file) {
     return new Promise((resolve, reject) => {
@@ -176,7 +186,7 @@ const SceneControls = React.createClass({
           isExecutingSignal={this.isExecutingSignal}
           recorder={this.state.course.recorder}
           onPlayClick={() => this.onPlayClick()}
-          onStopClick={this.signals.course.stopClicked}/>
+          onPauseClick={() => this.onPauseClick()}/>
         <video ref="video" className={styles.frame}></video>
       </div>
     );
