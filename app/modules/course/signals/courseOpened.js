@@ -14,7 +14,6 @@ import saveSandboxChain from './../chains/saveSandbox.js';
 
 export default [
   setPage('course'),
-  setDefaultCourseState,
   isSameCourse, {
     true: [
       showSnackbar('Laster scene...'),
@@ -35,6 +34,7 @@ export default [
       }
     ],
     false: [
+      setDefaultCourseState,
       showSnackbar('Laster kurs...'),
       set(['course', 'isLoading'], true),
       [
