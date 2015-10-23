@@ -22,7 +22,6 @@ const SceneControls = React.createClass({
     if (this.state.currentScene.recording) {
       this.loadAudioAndVideo();
     }
-
     this.context.controller.on('change', this.updateIsExecutingSignal);
   },
   componentWillUnmount() {
