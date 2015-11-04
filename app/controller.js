@@ -49,6 +49,10 @@ const model = Model({
   },
   user: {
     id: '123'
+  },
+  log: {
+    isLoading: false,
+    users: []
   }
 });
 
