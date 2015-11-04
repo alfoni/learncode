@@ -12,6 +12,8 @@ import saveVideo from './apis/saveVideo.js';
 import registerSignup from './apis/registerSignup.js';
 import getAudio from './apis/getAudio.js';
 import getVideo from './apis/getVideo.js';
+import saveUserLog from './apis/saveUserLog.js';
+import getUsersLog from './apis/getUsersLog.js';
 
 export default function appController(router) {
   router.post('/API/courses', createCourse);
@@ -28,4 +30,6 @@ export default function appController(router) {
   router.get('/API/courses/:id/scenes/:index/audio', getAudio);
   router.get('/API/courses/:id/scenes/:index/video', getVideo);
   router.post('/API/registerSignup', registerSignup);
+  router.post('/API/users/:userId/log', saveUserLog);
+  router.get('/API/users/logs', getUsersLog);
 }

@@ -11,6 +11,7 @@ import setScene from './../actions/setScene.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/chains/hideSnackbar.js';
 import saveSandboxChain from './../chains/saveSandbox.js';
+import trackData from 'common/factories/chains/trackData.js';
 
 export default [
   setPage('course'),
@@ -34,6 +35,7 @@ export default [
       }
     ],
     false: [
+      ...trackData('User opened new course'),
       setDefaultCourseState,
       showSnackbar('Laster kurs...'),
       set(['course', 'isLoading'], true),

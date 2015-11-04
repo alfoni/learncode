@@ -12,12 +12,13 @@ class DurationSlider extends React.Component {
     super();
     this.state = {
       timer: 0,
-      interval: null
+      interval: null,
+      duration: 0
     };
   }
   componentWillMount() {
     const duration = this.props.currentScene.recording ? this.props.currentScene.recording.duration : 0;
-    this.setState({ // why?
+    this.setState({
       duration: duration
     });
   }
@@ -51,9 +52,9 @@ class DurationSlider extends React.Component {
     let handlerPosition = 0;
     const duration = (this.state.duration / 1000).toFixed() - 1;
     const timer = (this.state.timer / 1000).toFixed();
-    handlerPosition = timer / duration * 100 + '%';
+    handlerPosition = timer / duration * 100;
 
-    return handlerPosition;
+    return handlerPosition + '%';
   }
   render() {
     return (
