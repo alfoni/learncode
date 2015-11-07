@@ -1,6 +1,7 @@
 import path from 'path';
-import sandbox from './../sandbox.js';
+import sandbox from './../sandbox';
 import fs from 'fs';
+import responseSync from './../responseSync';
 
 const responseTypes = {
   '.html': 'html',
@@ -29,32 +30,45 @@ export default function getSandboxFile(req, res) {
   }
 */
 
-  const insertScript = ['<script>',
-  fs.readFileSync(path.resolve(__dirname, '../..', 'assignmentTestRunner.js'))
-    .toString()
-    .replace('%{CODE}%', assignment.code.replace(/\'/g, '\\\''))
-    .split('\n').join(''),
-  '</script>'].join('');
-  const headTagExists = code.indexOf('<head>') >= 0;
+  if (file.name === 'index.html') {
+    const insertScript = ['<script>',
+    fs.readFileSync(path.resolve(__dirname, '../..', 'assignmentTestRunner.js'))
+      .toString()
+      .replace('%{CODE}%', assignment.code.replace(/\'/g, '\\\''))
+      .split('\n').join(''),
+    '</script>'].join('');
+    const headTagExists = code.indexOf('<head>') >= 0;
 
-  if (file.name === 'index.html' && assignment && assignment.code) {
-    if (headTagExists) {
-      code = code.replace('</head>', [
-        insertScript,
-        '\n</head>'
-      ].join(''));
+    if (assignment && assignment.code) {
+      if (headTagExists) {
+        code = code.replace('</head>', [
+          insertScript,
+          '\n</head>'
+        ].join(''));
+      } else {
+        code = code.replace('<html>', [
+          '<html>',
+          '\n<head>',
+          insertScript,
+          '\n</head>'
+        ].join(''));
+      }
+    }
+
+    const id = req.query.id;
+
+    if (!responseSync[id]) {
+      responseSync[id] = function response() {
+        res.type(type);
+        res.send(code);
+      };
+
+      return;
     } else {
-      code = code.replace('<html>', [
-        '<html>',
-        '\n<head>',
-        insertScript,
-        '\n</head>'
-      ].join(''));
+      delete responseSync[id];
     }
   }
 
   res.type(type);
-  setTimeout(() => {
-    res.send(code);
-  }, 200);
+  res.send(code);
 }
