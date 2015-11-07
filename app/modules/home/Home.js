@@ -18,7 +18,12 @@ class Home extends React.Component {
     };
   }
   componentDidMount() {
-    require.ensure([], (require) => {
+    require.ensure([
+      './components/Video.js',
+      './components/SuccessMessage.js',
+      'common/icons.css',
+      './Home.css'
+    ], (require) => {
       Video = require('./components/Video.js');
       SuccessMessage = require('./components/SuccessMessage.js');
       icons = require('common/icons.css');
