@@ -48,7 +48,8 @@ const model = Model({
     scenes: []
   },
   user: {
-    id: '123'
+    isLoggedIn: false,
+    isLoading: false
   },
   log: {
     isLoading: false,

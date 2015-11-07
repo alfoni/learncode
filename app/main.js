@@ -12,12 +12,14 @@ import coursesSignals from './modules/courses/signals.js';
 import logSignals from './modules/log/signals.js';
 
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
-import hideSnackbar from 'common/factories/chains/hideSnackbar.js';
+import hideSnackbar from 'common/factories/actions/hideSnackbar.js';
 
 controller.signal('homeOpened', homeOpened);
+controller.signal('snackbarTimedOut', [
+  hideSnackbar
+]);
 controller.signal('missingRouteRouted', [
-  showSnackbar('Denne url-en finnes ikke'),
-  ...hideSnackbar(2000)
+  showSnackbar('Denne url-en finnes ikke')
 ]);
 
 homeSignals(controller);

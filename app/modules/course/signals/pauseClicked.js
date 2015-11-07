@@ -1,7 +1,9 @@
 import pausePlaying from '../actions/pausePlaying.js';
-import trackData from 'common/factories/chains/trackData.js';
+import trackData from 'common/factories/actions/trackData.js';
 
 export default [
-  ...trackData('Pause clicked'),
-  pausePlaying
+  pausePlaying,
+  [
+    trackData('Pause clicked')
+  ]
 ];

@@ -1,3 +1,11 @@
+const verifyStatus = (response) => {
+  if (response.status >= 200 && response.status < 300) {
+    return response;
+  }
+
+  throw new Error('Error response on request');
+};
+
 export default {
   get(url) {
     return fetch(url, {
@@ -7,6 +15,7 @@ export default {
         'Content-Type': 'application/json'
       }
     })
+    .then(verifyStatus)
     .then((response) => response.json());
   },
   post(url, data) {
@@ -18,6 +27,7 @@ export default {
       },
       body: JSON.stringify(data)
     })
+    .then(verifyStatus)
     .then((response) => response.json());
   },
   patch(url, data) {
@@ -29,6 +39,7 @@ export default {
       },
       body: JSON.stringify(data)
     })
+    .then(verifyStatus)
     .then((response) => response.json());
   },
   put(url, data) {
@@ -40,6 +51,7 @@ export default {
       },
       body: JSON.stringify(data)
     })
+    .then(verifyStatus)
     .then((response) => response.json());
   }
 };

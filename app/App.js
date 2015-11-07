@@ -15,17 +15,39 @@ const pages = {
 
 @Cerebral({
   page: ['currentPage'],
-  snackbar: ['snackbar']
+  snackbar: ['snackbar'],
+  user: ['user']
 })
 class App extends React.Component {
+  constructor() {
+    super();
+    this.snackbarTimeout = null;
+  }
+  componentDidUpdate(prevProps) {
+    if (!prevProps.snackbar.show && this.props.snackbar.show) {
+      this.setSnackbarTimeout();
+    }
+
+    if (this.props.snackbar.show && prevProps.snackbar.text !== this.props.snackbar.text) {
+      clearTimeout(this.snackbarTimeout);
+      this.setSnackbarTimeout();
+    }
+  }
+  setSnackbarTimeout() {
+    this.snackbarTimeout = setTimeout(() => this.props.signals.snackbarTimedOut(), 2000);
+  }
   renderPage() {
     const Page = pages[this.props.page];
+
+    if (this.props.user.isLoading) {
+      return <div className={styles.label}/>;
+    }
 
     return <Page/>;
   }
   render() {
     return (
-      <div>
+      <div className={styles.wrapper}>
         {this.renderPage()}
         <div className={this.props.snackbar.show ? styles.snackbarVisible : styles.snackbar}>
           {this.props.snackbar.text}

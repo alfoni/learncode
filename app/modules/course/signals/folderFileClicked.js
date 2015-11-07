@@ -1,9 +1,11 @@
-import trackData from 'common/factories/chains/trackData.js';
+import trackData from 'common/factories/actions/trackData.js';
 import setActiveFile from './../actions/setActiveFile.js';
 import set from 'common/factories/actions/set.js';
 
 export default [
-  ...trackData('Changed file'),
   setActiveFile,
-  set(['course', 'showFolder'], false)
+  set(['course', 'showFolder'], false),
+  [
+    trackData('Changed file')
+  ]
 ];

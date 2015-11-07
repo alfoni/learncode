@@ -14,8 +14,10 @@ import getAudio from './apis/getAudio.js';
 import getVideo from './apis/getVideo.js';
 import saveUserLog from './apis/saveUserLog.js';
 import getUsersLog from './apis/getUsersLog.js';
+import getUser from './apis/getUser.js';
 
 export default function appController(router) {
+  router.get('/API/user', getUser);
   router.post('/API/courses', createCourse);
   router.patch('/API/courses/:id', updateCourse);
   router.get('/API/courses/:id', getCourse);

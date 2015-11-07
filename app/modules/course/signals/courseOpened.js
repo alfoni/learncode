@@ -9,9 +9,8 @@ import sceneDidLoad from './../actions/sceneDidLoad.js';
 import courseAndSceneDidLoad from './../actions/courseAndSceneDidLoad.js';
 import setScene from './../actions/setScene.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
-import hideSnackbar from 'common/factories/chains/hideSnackbar.js';
 import saveSandboxChain from './../chains/saveSandbox.js';
-import trackData from 'common/factories/chains/trackData.js';
+import trackData from 'common/factories/actions/trackData.js';
 
 export default [
   setPage('course'),
@@ -26,8 +25,7 @@ export default [
         true: [
           setScene,
           ...saveSandboxChain,
-          showSnackbar('Scenen er lastet'),
-          ...hideSnackbar(2000)
+          showSnackbar('Scenen er lastet')
         ],
         false: [
           showSnackbar('Innlasting av scenen feilet!')
@@ -35,7 +33,6 @@ export default [
       }
     ],
     false: [
-      ...trackData('User opened new course'),
       setDefaultCourseState,
       showSnackbar('Laster kurs...'),
       set(['course', 'isLoading'], true),
@@ -49,8 +46,10 @@ export default [
           setScene,
           set(['course', 'isLoading'], false),
           ...saveSandboxChain,
-          showSnackbar('Kurset er lastet'),
-          ...hideSnackbar(2000)
+          showSnackbar('Kurset er lastet')
+          [
+            trackData('User opened new course')
+          ]
         ],
         false: [
           showSnackbar('Innlasting av kurset feilet!')
