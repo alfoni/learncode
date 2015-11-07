@@ -32,22 +32,22 @@ class Scene extends React.Component {
     return (
       <div className={this.props.showEditAssignment ? styles.threeColumns : styles.twoColumns}>
         <Module show={this.props.showEditAssignment}>
-          <ModuleToolbar title="ASSIGNMENT DESCRIPTION"/>
+          <ModuleToolbar title="OPPGAVE BESKRIVELSE"/>
           <AssignmentDescriptionTextArea
             value={this.props.currentScene.assignment.description}
             onChange={(e) => this.assignmentDescriptionChanged(e)}/>
-          <ModuleToolbar title="ASSIGNMENT TEST"/>
+          <ModuleToolbar title="OPPGAVE TEST"/>
           <AssignmentEditor/>
         </Module>
         <Module show={Boolean(true)}>
-          <ModuleToolbar title="CODE EDITOR">
+          <ModuleToolbar title="KODE EDITOR">
             <ModuleFileName fileName={this.props.currentFile.name}/>
           </ModuleToolbar>
           <RemoveFile show={this.props.currentScene.currentFileIndex !== 0} onClick={() => this.props.signals.course.removeFileClicked()}/>
           <CodeEditor/>
         </Module>
         <Module show={Boolean(true)}>
-          <ModuleToolbar title="BROWSER">
+          <ModuleToolbar title="NETTLESER">
             <ModuleAddressbar url={process.env.NODE_ENV === 'production' ? 'http://sandbox.kodeboksen.no' : 'http://sandbox.learncode.com:3000'}/>
           </ModuleToolbar>
           <Preview show={this.props.showPreview}/>
