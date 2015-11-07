@@ -60,13 +60,13 @@ export default function getSandboxFile(req, res) {
     if (!responseSync[id]) {
       responseSync[id] = function response() {
         res.type(type);
-        res.send(code);
+        res.send(sandbox.getFile(req.path.replace('/subdomain/sandbox', '')).code);
+        delete responseSync[id];
       };
 
       return;
-    } else {
-      delete responseSync[id];
     }
+    delete responseSync[id];
   }
 
   res.type(type);
