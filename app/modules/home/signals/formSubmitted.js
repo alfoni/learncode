@@ -10,7 +10,12 @@ export default [
     registerSignup, {
       success: [
         setUser,
-        redirect('/courses/51549181-0839-437e-9813-4f1dc4c3b354/scenes/0')
+        redirect(
+          process.env.NODE_ENV === 'production' ?
+            'courses/ca434112-1be6-4db4-90b7-1b8c9db134c7/scenes/0'
+          :
+            '/courses/51549181-0839-437e-9813-4f1dc4c3b354/scenes/0'
+          )
       ],
       error: [
         showSnackbar('Kunne ikke registrere din e-post')
