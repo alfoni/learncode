@@ -8,6 +8,6 @@ export default [
   ...saveSandbox,
   playRecording,
   [
-    trackData('Play clicked')
+    trackData('PLAY_CLICKED')
   ]
 ];

@@ -6,6 +6,6 @@ export default [
   setActiveFile,
   set(['course', 'showFolder'], false),
   [
-    trackData('Changed file')
+    trackData('FILE_CHANGE')
   ]
 ];

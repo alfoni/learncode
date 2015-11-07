@@ -12,26 +12,44 @@ import saveVideo from './apis/saveVideo.js';
 import registerSignup from './apis/registerSignup.js';
 import getAudio from './apis/getAudio.js';
 import getVideo from './apis/getVideo.js';
-import saveUserLog from './apis/saveUserLog.js';
-import getUsersLog from './apis/getUsersLog.js';
+import saveLog from './apis/saveLog.js';
+import getLogs from './apis/getLogs.js';
 import getUser from './apis/getUser.js';
 
+const verifyUser = (req, res, next) => {
+  if (req.cookies.kodeboksen) {
+    next();
+  } else {
+    res.status(401);
+    res.send({});
+  }
+};
+
+const isAdmin = (req, res, next) => {
+  if (req.cookies.kodeboksen === 'christianalfoni@gmail.com') {
+    next();
+  } else {
+    res.status(401);
+    res.send({});
+  }
+};
+
 export default function appController(router) {
-  router.get('/API/user', getUser);
-  router.post('/API/courses', createCourse);
-  router.patch('/API/courses/:id', updateCourse);
-  router.get('/API/courses/:id', getCourse);
-  router.get('/API/courses', getCourses);
-  router.get('/API/courses/:id/scenes/:index', getScene);
-  router.put('/API/courses/:id/scenes/:index/recording', addRecording);
-  router.post('/API/sandbox', updateSandbox);
-  router.post('/API/courses/:id/scenes', createScene);
-  router.patch('/API/courses/:id/scenes/:index', updateScene);
-  router.post('/API/courses/:id/scenes/:index/audio', saveAudio);
-  router.post('/API/courses/:id/scenes/:index/video', saveVideo);
-  router.get('/API/courses/:id/scenes/:index/audio', getAudio);
-  router.get('/API/courses/:id/scenes/:index/video', getVideo);
+  router.get('/API/user', verifyUser, getUser);
+  router.post('/API/courses', isAdmin, createCourse);
+  router.patch('/API/courses/:id', isAdmin, updateCourse);
+  router.get('/API/courses/:id', verifyUser, getCourse);
+  router.get('/API/courses', isAdmin, getCourses);
+  router.get('/API/courses/:id/scenes/:index', verifyUser, getScene);
+  router.put('/API/courses/:id/scenes/:index/recording', isAdmin, addRecording);
+  router.post('/API/sandbox', verifyUser, updateSandbox);
+  router.post('/API/courses/:id/scenes', isAdmin, createScene);
+  router.patch('/API/courses/:id/scenes/:index', isAdmin, updateScene);
+  router.post('/API/courses/:id/scenes/:index/audio', isAdmin, saveAudio);
+  router.post('/API/courses/:id/scenes/:index/video', isAdmin, saveVideo);
+  router.get('/API/courses/:id/scenes/:index/audio', verifyUser, getAudio);
+  router.get('/API/courses/:id/scenes/:index/video', verifyUser, getVideo);
   router.post('/API/registerSignup', registerSignup);
-  router.post('/API/users/:userId/log', saveUserLog);
-  router.get('/API/users/logs', getUsersLog);
+  router.post('/API/logs', verifyUser, saveLog);
+  router.get('/API/logs', getLogs);
 }

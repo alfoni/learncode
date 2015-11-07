@@ -3,7 +3,7 @@ import redirectToScene from '../actions/redirectToScene.js';
 
 export default [
   [
-    trackData('Changed scene')
+    trackData('SCENE_CHANGE')
   ],
   redirectToScene
 ];

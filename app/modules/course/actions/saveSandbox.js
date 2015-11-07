@@ -10,7 +10,8 @@ function saveSandbox(input, state, output, services) {
   .then(() => {
     output.success();
   })
-  .catch(() => {
+  .catch((err) => {
+    console.log(err);
     output.error({
       message: 'Could not save sandbox files'
     });

@@ -4,6 +4,6 @@ import trackData from 'common/factories/actions/trackData.js';
 export default [
   pausePlaying,
   [
-    trackData('Pause clicked')
+    trackData('PAUSE_CLICKED')
   ]
 ];

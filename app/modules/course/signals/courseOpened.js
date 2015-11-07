@@ -46,9 +46,9 @@ export default [
           setScene,
           set(['course', 'isLoading'], false),
           ...saveSandboxChain,
-          showSnackbar('Kurset er lastet')
+          showSnackbar('Kurset er lastet'),
           [
-            trackData('User opened new course')
+            trackData('OPEN_COURSE')
           ]
         ],
         false: [

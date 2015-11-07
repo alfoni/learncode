@@ -1,6 +1,6 @@
-const verifyStatus = (response) => {
+const verifyStatusAndParse = (response) => {
   if (response.status >= 200 && response.status < 300) {
-    return response;
+    return response.json();
   }
 
   throw new Error('Error response on request');
@@ -13,10 +13,10 @@ export default {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
-      }
+      },
+      credentials: 'same-origin'
     })
-    .then(verifyStatus)
-    .then((response) => response.json());
+    .then(verifyStatusAndParse);
   },
   post(url, data) {
     return fetch(url, {
@@ -25,10 +25,10 @@ export default {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
+      credentials: 'same-origin',
       body: JSON.stringify(data)
     })
-    .then(verifyStatus)
-    .then((response) => response.json());
+    .then(verifyStatusAndParse);
   },
   patch(url, data) {
     return fetch(url, {
@@ -37,10 +37,10 @@ export default {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
+      credentials: 'same-origin',
       body: JSON.stringify(data)
     })
-    .then(verifyStatus)
-    .then((response) => response.json());
+    .then(verifyStatusAndParse);
   },
   put(url, data) {
     return fetch(url, {
@@ -49,9 +49,9 @@ export default {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
+      credentials: 'same-origin',
       body: JSON.stringify(data)
     })
-    .then(verifyStatus)
-    .then((response) => response.json());
+    .then(verifyStatusAndParse);
   }
 };

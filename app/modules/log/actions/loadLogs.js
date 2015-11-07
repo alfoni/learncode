@@ -1,5 +1,5 @@
-function loadLogs(input, state, output) {
-  fetch(`/API/users/logs`)
+function loadLogs(input, state, output, services) {
+  services.ajax.get(`/API/users/logs`)
     .then((response) => {
       if (response.status === 200) {
         return response.json();

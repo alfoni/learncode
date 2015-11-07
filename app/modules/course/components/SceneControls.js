@@ -137,6 +137,7 @@ const SceneControls = React.createClass({
             'Content-Type': audio.type,
             'Content-Length': audio.size
           },
+          credentials: 'same-origin',
           body: audio.file
         }),
         fetch(`/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/video`, {
@@ -145,6 +146,7 @@ const SceneControls = React.createClass({
             'Content-Type': video.type,
             'Content-Length': video.size
           },
+          credentials: 'same-origin',
           body: video.file
         })
       ])

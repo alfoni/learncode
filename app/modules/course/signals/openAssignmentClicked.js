@@ -6,6 +6,6 @@ export default [
   closeAllPopovers,
   set(['course', 'showAssignment'], true),
   [
-    trackData('Opened assignments')
+    trackData('ASSIGNMENT_OPENED')
   ]
 ];

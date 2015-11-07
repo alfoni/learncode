@@ -1,9 +1,8 @@
 export default function getUser(req, res) {
-  setTimeout(() => {
-    res.type('json');
-    res.status(500);
-    res.send({});
-    
-    return;
-  }, 1000);
+  const id = req.cookies.kodeboksen;
+
+  res.send({
+    id: id,
+    isAdmin: id === 'christianalfoni@gmail.com'
+  });
 }

@@ -49,6 +49,18 @@ export default {
       });
     });
   },
+  upsert(collectionName, data) {
+    const collection = db.collection(collectionName);
+
+    return new Promise((resolve, reject) => {
+      collection.upsert(data, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
+    });
+  },
   update(collectionName, query, data) {
     const collection = db.collection(collectionName);
 
