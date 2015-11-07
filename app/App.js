@@ -16,8 +16,7 @@ const pages = {
 @Cerebral({
   page: ['currentPage'],
   snackbar: ['snackbar'],
-  user: ['user'],
-  course: ['course']
+  user: ['user']
 })
 class App extends React.Component {
   constructor() {
@@ -40,7 +39,7 @@ class App extends React.Component {
   renderPage() {
     const Page = pages[this.props.page];
 
-    if (this.props.user.isLoading || this.props.course.isLoading) {
+    if (this.props.user.isLoading) {
       return <div className={styles.label}/>;
     }
 

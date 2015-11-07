@@ -20,7 +20,7 @@ const app = express();
 app.use(cookieParser('some secret'));
 app.use(compression());
 app.use(subdomain({
-  base: 'learncode.com',
+  base: isDeveloping ? 'learncode.com' : 'kodeboksen.no',
   prefix: 'sandbox'
 }));
 app.use(bodyParser.json({limit: '10mb'}));
