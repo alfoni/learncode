@@ -48,7 +48,7 @@ class Scene extends React.Component {
         </Module>
         <Module show={Boolean(true)}>
           <ModuleToolbar title="BROWSER">
-            <ModuleAddressbar url="http://sandbox.learncode.com:3000"/>
+            <ModuleAddressbar url={process.env.NODE_ENV === 'production' ? 'http://sandbox.kodeboksen.no' : 'http://sandbox.learncode.com:3000'}/>
           </ModuleToolbar>
           <Preview show={this.props.showPreview}/>
           <Console show={this.props.showConsole}/>
