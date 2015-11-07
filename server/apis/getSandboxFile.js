@@ -11,7 +11,7 @@ const responseTypes = {
 
 export default function getSandboxFile(req, res) {
   const assignment = sandbox.getAssignment();
-  const file = sandbox.getFile(req.path.replace('/sandbox/sandbox', ''));
+  const file = sandbox.getFile(req.path.replace('/subdomain/sandbox', ''));
 
   if (!file) {
     return res.sendStatus(404);
