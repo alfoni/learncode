@@ -48,8 +48,5 @@ module.exports = {
       test: /\.woff$/,
       loader: 'url?limit=100000'
     }]
-  },
-  postcss: [
-   require('autoprefixer')
- ]
+  }
 };
