@@ -3,11 +3,16 @@ import Grid from 'gridfs-stream';
 
 let gfs = null;
 let db = null;
-const url = 'mongodb://localhost:27017/learncode';
+const url = process.env.NODE_ENV === 'production' ? process.env.MONGOHQ_URL : 'mongodb://localhost:27017/learncode';
 
 export default {
   connect() {
     Mongo.MongoClient.connect(url, (err, connectedDb) => {
+      if (err) {
+        console.log('Could not connect to db', err);
+        return;
+      }
+      
       db = connectedDb;
       gfs = Grid(db, Mongo);
       console.log('Database is connected');
