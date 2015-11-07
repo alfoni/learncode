@@ -57,6 +57,7 @@
     "mandrill-api": "^1.0.45",
     "mongodb": "^2.0.46",
     "node-uuid": "^1.4.3",
+    "path-to-regexp": "^1.2.1",
     "postcss-loader": "^0.6.0",
     "react": "0.14.0",
     "react-addons-test-utils": "0.14.0-rc1",
