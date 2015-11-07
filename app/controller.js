@@ -49,7 +49,8 @@ const model = Model({
   },
   user: {
     isLoggedIn: false,
-    isLoading: false
+    isLoading: false,
+    isAdmin: false
   },
   log: {
     isLoading: false,

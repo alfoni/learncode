@@ -77,17 +77,17 @@ class Home extends React.Component {
                   { this.props.showSigningupLoader ?
                       <span className={icons.loading + ' ' + styles.loadingIcon}></span>
                     :
-                      'Hold meg oppdatert'
+                      'Vis meg tjenesten'
                   }
                 </button>
               </form>
               <div className={styles.emailDesc}>
-                Din e-post sendes ikke videre og vil kun motta e-poster knyttet til lanseringen av Kodeboksen.
+                Vi vil benytte din e-post til å sende deg oppdateringer om tjenesten og invitasjoner til våre live kurs.
               </div>
               <p className={styles.information}>
-                <strong>Kodeboksen</strong> er en tjeneste under utvikling. Ved å melde din interesse vil vi gi deg beskjed når kan logge inn og lære
-                kode på en helt ny og interaktiv måte. Du vil også få muligheten til å delta på Kodeboksen sine kurs i <strong>Trondheim</strong> og
-                <strong> Oslo</strong>.
+                <strong>Kodeboksen</strong> er en tjeneste under utvikling.
+                Ved å melde din interesse vil vi gi deg beskjed når nye kurs blir lagt til, samt muligheten til å bli med på våre live kurs.
+                Kodeboksen er en helt ny måte å lære kode på.
               </p>
             </div>
           </div>

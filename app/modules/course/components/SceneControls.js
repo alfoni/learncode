@@ -33,7 +33,8 @@ const SceneControls = React.createClass({
   isExecutingSignal: false,
   getStatePaths() {
     return {
-      course: ['course']
+      course: ['course'],
+      isAdmin: ['user', 'isAdmin']
     };
   },
   getComputedPaths() {
@@ -178,11 +179,16 @@ const SceneControls = React.createClass({
           recorder={this.state.course.recorder}
           onClick={() => this.onUploadClick()}
         />
-        <RecordButton
-          isExecutingSignal={this.isExecutingSignal}
-          recorder={this.state.course.recorder}
-          onRecordClick={() => this.onRecordClick()}
-          onStopClick={() => this.onStopClick()}/>
+        {
+          this.state.isAdmin ?
+            <RecordButton
+              isExecutingSignal={this.isExecutingSignal}
+              recorder={this.state.course.recorder}
+              onRecordClick={() => this.onRecordClick()}
+              onStopClick={() => this.onStopClick()}/>
+          :
+            null
+        }
         <PlayButton
           isExecutingSignal={this.isExecutingSignal}
           recorder={this.state.course.recorder}

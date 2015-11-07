@@ -7,7 +7,15 @@ function ToolbarButton(props) {
       <div className={props.active ? style.activeIcon : style.icon}>
         <div className={props.icon}></div>
       </div>
-      {props.title}
+      {
+        props.title ?
+          <span>
+            {props.title}
+            <span className={style.caret}>&#9660;</span>
+          </span>
+        :
+          null
+      }
     </button>
   );
 }

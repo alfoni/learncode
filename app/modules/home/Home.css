@@ -201,6 +201,7 @@ h1 {
 .information {
   font-size: 1.2em;
   line-height: 1.8em;
+  text-align: center;
 }
 
 @media screen and (max-device-width: 760px) {

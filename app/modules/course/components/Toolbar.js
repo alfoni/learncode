@@ -22,7 +22,8 @@ import icons from 'common/icons.css';
   showConfigureScenes: ['course', 'showConfigureScenes'],
   showEditAssignment: ['course', 'showEditAssignment'],
   showAssignment: ['course', 'showAssignment'],
-  courseName: ['course', 'name']
+  courseName: ['course', 'name'],
+  isAdmin: ['user', 'isAdmin']
 }, {
   currentFile: ['currentFile'],
   currentScene: ['currentScene']
@@ -125,20 +126,32 @@ class Toolbar extends React.Component {
           <AssignmentResult/>
         </ToolbarButtonPopover>
         <ToolbarButton icon={icons.checkbox} onClick={() => this.props.signals.course.runAssignmentClicked()}/>
-        <ToolbarButton active={this.props.showEditAssignment}
-                       onClick={() => this.props.signals.course.editAssignmentClicked()}
-                       icon={icons.editAssignment}/>
+        {
+          this.props.isAdmin ?
+            <ToolbarButton
+              active={this.props.showEditAssignment}
+              onClick={() => this.props.signals.course.editAssignmentClicked()}
+              icon={icons.editAssignment}/>
+          :
+            null
+        }
         <ToolbarSeparator/>
         <ToolbarButtonPopover onClick={(e) => this.sceneNameClicked(e)}
                               title={this.props.currentScene.name}
                               show={this.props.showScenesList}>
           {this.renderScenesList()}
         </ToolbarButtonPopover>
-        <ToolbarButtonPopover icon={icons.thumbUp}
-                              onClick={(e) => this.configureScenesClicked(e)}
-                              show={this.props.showConfigureScenes}>
-          <ConfigureScenes/>
-        </ToolbarButtonPopover>
+        {
+          this.props.isAdmin ?
+            <ToolbarButtonPopover icon={icons.thumbUp}
+                                  onClick={(e) => this.configureScenesClicked(e)}
+                                  show={this.props.showConfigureScenes}>
+              <ConfigureScenes/>
+            </ToolbarButtonPopover>
+          :
+            null
+        }
+
       </div>
     );
   }
