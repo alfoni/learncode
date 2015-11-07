@@ -5,6 +5,7 @@ import webpack from 'webpack';
 import subdomain from 'subdomain';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import compression from 'compression';
 import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import config from './webpack.config.js';
@@ -17,6 +18,7 @@ const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
 
 app.use(cookieParser('some secret'));
+app.use(compression());
 app.use(subdomain({
   base: 'learncode.com',
   prefix: 'sandbox'
