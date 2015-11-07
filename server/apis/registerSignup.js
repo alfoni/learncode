@@ -49,7 +49,11 @@ export default function registerSignup(req, res) {
       })
     ))
     .then(() => {
-      res.cookie('kodeboksen', req.body.email, {maxAge: 86400 * 1000, domain: '.learncode.com', httpOnly: true});
+      res.cookie('kodeboksen', req.body.email, {
+        maxAge: 86400 * 1000,
+        domain: process.env.NODE_ENV === 'production' ? '.kodeboksen.no' : '.learncode.com', 
+        httpOnly: true
+      });
       res.send({
         id: req.body.email,
         isAdmin: req.body.email === 'christianalfoni@gmail.com'
