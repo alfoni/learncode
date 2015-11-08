@@ -41,6 +41,12 @@ class CodeEditor extends React.Component {
     ) {
       this.updateAllCode();
     }
+
+    if (this.props.recorder.isPlaying && !prevProps.recorder.isPlaying) {
+      this.codemirror.setOption('readOnly', 'nocursor');
+    } else if (!this.props.recorder.isPlaying && prevProps.recorder.isPlaying) {
+      this.codemirror.setOption('readOnly', false);
+    }
   }
   getCode() {
     return this.props.currentFile.code || '';
