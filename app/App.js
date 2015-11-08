@@ -28,6 +28,12 @@ class App extends React.Component {
       this.setSnackbarTimeout();
     }
 
+    if (this.props.snackbar.persist && !prevProps.snackbar.persist) {
+      clearTimeout(this.snackbarTimeout);
+    } else if (!this.props.snackbar.persist && prevProps.snackbar.persist) {
+      this.setSnackbarTimeout();
+    }
+
     if (this.props.snackbar.show && prevProps.snackbar.text !== this.props.snackbar.text) {
       clearTimeout(this.snackbarTimeout);
       this.setSnackbarTimeout();

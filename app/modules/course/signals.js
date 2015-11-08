@@ -32,6 +32,7 @@ import sandboxTested from './signals/sandboxTested';
 import runAssignmentClicked from './signals/runAssignmentClicked';
 import addFileNameUpdated from './signals/addFileNameUpdated';
 import pauseClicked from './signals/pauseClicked';
+import mediaLoaded from './signals/mediaLoaded';
 
 export default function(controller) {
   controller.signal('course.courseOpened', authenticate(courseOpened));
@@ -69,4 +70,5 @@ export default function(controller) {
   controller.signal('course.runAssignmentClicked', runAssignmentClicked);
   controller.signal('course.addFileNameUpdated', addFileNameUpdated);
   controller.signal('course.pauseClicked', pauseClicked);
+  controller.signal('course.mediaLoaded', mediaLoaded);
 }

@@ -17,7 +17,7 @@ function PlayButton(props) {
     <button
       className={className}
       onClick={() => props.recorder.isPlaying ? props.onPauseClick() : props.onPlayClick()}
-      disabled={props.isExecutingSignal}>
+      disabled={props.disabled}>
       <div className={props.recorder.isRecording || props.recorder.isPlaying ? icons.pause : icons.play}></div>
     </button>
   );

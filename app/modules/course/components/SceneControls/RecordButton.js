@@ -21,7 +21,7 @@ function RecordButton(props) {
     <button
       className={className}
       onClick={() => props.recorder.isRecording ? props.onStopClick() : props.onRecordClick()}
-      disabled={props.isExecutingSignal}>
+      disabled={props.disabled}>
       <div className={props.recorder.isRecording ? icons.stop : icons.mic}></div>
     </button>
   );

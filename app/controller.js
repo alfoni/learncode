@@ -7,7 +7,8 @@ const model = Model({
   currentPage: 'course',
   snackbar: {
     show: false,
-    text: ''
+    text: '',
+    persist: false
   },
   home: {
     showSigningupLoader: false,
@@ -25,6 +26,7 @@ const model = Model({
   course: {
     name: 'Course 1',
     isLoading: false,
+    isLoadingMedia: false,
     authorId: null,
     showPreview: true,
     showConsole: false,

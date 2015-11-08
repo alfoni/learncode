@@ -11,6 +11,8 @@ import setScene from './../actions/setScene.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import saveSandboxChain from './../chains/saveSandbox.js';
 import trackData from 'common/factories/actions/trackData.js';
+import setLoadingCourse from './../actions/setLoadingCourse';
+import setLoadedCourse from './../actions/setLoadedCourse';
 
 export default [
   setPage('course'),
@@ -34,7 +36,7 @@ export default [
     ],
     false: [
       setDefaultCourseState,
-      showSnackbar('Laster kurs...'),
+      setLoadingCourse,
       set(['course', 'isLoading'], true),
       [
         loadCourse,
@@ -44,9 +46,8 @@ export default [
         true: [
           setCourse,
           setScene,
-          set(['course', 'isLoading'], false),
           ...saveSandboxChain,
-          showSnackbar('Kurset er lastet'),
+          setLoadedCourse,
           [
             trackData('OPEN_COURSE')
           ]

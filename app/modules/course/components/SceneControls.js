@@ -78,6 +78,7 @@ const SceneControls = React.createClass({
         video: media[1]
       };
       this.recorder.setBlobs(blobs);
+      this.signals.course.mediaLoaded();
     });
   },
   onRecordClick() {
@@ -188,7 +189,7 @@ const SceneControls = React.createClass({
         {
           this.state.isAdmin ?
             <RecordButton
-              isExecutingSignal={this.isExecutingSignal}
+              disabled={this.isExecutingSignal || this.state.course.isLoadingMedia}
               recorder={this.state.course.recorder}
               onRecordClick={() => this.onRecordClick()}
               onStopClick={() => this.onStopClick()}/>
@@ -196,7 +197,7 @@ const SceneControls = React.createClass({
             null
         }
         <PlayButton
-          isExecutingSignal={this.isExecutingSignal}
+          disabled={this.isExecutingSignal || this.state.course.isLoadingMedia}
           recorder={this.state.course.recorder}
           onPlayClick={() => this.onPlayClick()}
           onPauseClick={() => this.onPauseClick()}/>
