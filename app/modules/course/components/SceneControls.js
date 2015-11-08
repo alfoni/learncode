@@ -99,7 +99,9 @@ const SceneControls = React.createClass({
   },
   onPauseClick() {
     this.recorder.pause();
-    this.signals.course.pauseClicked();
+    this.signals.course.pauseClicked({}, {
+      isRecorded: true
+    });
   },
   readFile(file) {
     return new Promise((resolve, reject) => {
