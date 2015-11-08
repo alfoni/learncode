@@ -24,7 +24,7 @@ class AssignmentResult extends React.Component {
 
     if (result === false || result === undefined) {
       return (
-        <div>Assignment has not been run yet</div>
+        <div>Oppgaven har ikke blitt kjørt</div>
       );
     }
 
@@ -40,7 +40,7 @@ class AssignmentResult extends React.Component {
   render() {
     return (
       <div className={style.wrapper}>
-        <h3>Result</h3>
+        <h3>Resultat</h3>
         {this.renderResult()}
       </div>
     );

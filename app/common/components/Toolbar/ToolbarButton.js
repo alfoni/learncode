@@ -1,22 +1,55 @@
 import React from 'react';
-import styles from './ToolbarButton.css';
+import {Decorator as Cerebral} from 'cerebral-react';
+import style from './ToolbarButton.css';
+import Tooltip from 'common/components/Toolbar/Tooltip.js';
 
-function ToolbarButton(props) {
-  return (
-    <button className={styles.button}>
-      {
-        props.title ?
-          <span className={styles.title} onClick={props.onClick}>
-            {props.title}
-            <span className={styles.caret}>&#9660;</span>
-          </span>
-        :
-          <div className={props.active ? styles.activeIcon : styles.icon}>
-            <div className={props.icon} onClick={props.onClick}></div>
+@Cerebral()
+class ToolbarButton extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      showTooltip: false,
+      timeout: null
+    };
+  }
+  showTooltip() {
+    const self = this;
+    this.setState({
+      timeout: setTimeout(() => {
+        self.setState({
+          showTooltip: true
+        });
+      }, 1000)
+    });
+  }
+  hideTooltip() {
+    clearTimeout(this.state.timeout);
+    this.setState({
+      timeout: null,
+      showTooltip: false
+    });
+  }
+  render() {
+    return (
+      <button className={style.button} onClick={this.props.onClick}>
+        <Tooltip show={this.state.showTooltip && this.props.tooltip} text={this.props.tooltip}/>
+        {
+          this.props.title ?
+            <span>
+              {this.props.title}
+              <span className={style.caret}>&#9660;</span>
+            </span>
+          :
+          <div
+            className={this.props.active ? style.activeIcon : style.icon}
+            onMouseOver={() => this.showTooltip()}
+            onMouseOut={() => this.hideTooltip()}>
+            <div className={this.props.icon}></div>
           </div>
-      }
-    </button>
-  );
+        }
+      </button>
+    );
+  }
 }
 
 export default ToolbarButton;

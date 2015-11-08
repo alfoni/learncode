@@ -16,7 +16,7 @@ function ToolbarButtonPopover(props) {
 
   return (
     <div className={styles.wrapper}>
-      <ToolbarButton icon={props.icon} title={props.title} onClick={props.onClick}/>
+      <ToolbarButton icon={props.icon} title={props.title} onClick={props.onClick} tooltip={props.tooltip}/>
       {props.show ? renderBox() : null}
     </div>
   );

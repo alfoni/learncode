@@ -103,12 +103,12 @@ class Toolbar extends React.Component {
         <ToolbarButton icon={icons.menu}/>
         <ToolbarSeparator/>
         <ToolbarTitle title={this.props.courseName}/>
-        <ToolbarButton icon={icons.save} onClick={() => this.props.signals.course.saveSceneClicked()}/>
+        <ToolbarButton tooltip="Lagre" icon={icons.save} onClick={() => this.props.signals.course.saveSceneClicked()}/>
         <ToolbarSeparator/>
-        <ToolbarButtonPopover onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
+        <ToolbarButtonPopover tooltip="Vis filer" onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
           {this.renderFilesList()}
         </ToolbarButtonPopover>
-        <ToolbarButton icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
+        <ToolbarButton tooltip="Legg til fil" icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
         <ToolbarInput show={this.props.showAddFileInput}
                       onChange={(e) => this.onAddFileInputChange(e)}
                       onSubmit={(e) => this.onAddFileSubmit(e)}
@@ -121,11 +121,11 @@ class Toolbar extends React.Component {
         { /* }<ToolbarButton active={this.props.showConsole} icon={icons.assignment}
           onClick={() => this.props.signals.course.showConsoleClicked()}/> */ }
         { /* }<ToolbarSeparator/> */ }
-        <ToolbarButtonPopover onClick={(e) => this.assignmentClicked(e)} show={this.props.showAssignment} icon={icons.school}>
+        <ToolbarButtonPopover tooltip="Vis oppgave" onClick={(e) => this.assignmentClicked(e)} show={this.props.showAssignment} icon={icons.school}>
           <AssignmentDescription description={this.props.currentScene.assignment.description}/>
           <AssignmentResult/>
         </ToolbarButtonPopover>
-        <ToolbarButton icon={icons.checkbox} onClick={() => this.props.signals.course.runAssignmentClicked()}/>
+        <ToolbarButton tooltip="Kjør oppgave" icon={icons.checkbox} onClick={() => this.props.signals.course.runAssignmentClicked()}/>
         {
           this.props.isAdmin ?
             <ToolbarButton
