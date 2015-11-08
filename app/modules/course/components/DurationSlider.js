@@ -35,6 +35,7 @@ class DurationSlider extends React.Component {
   }
   startInterval() {
     this.setState({
+      timer: this.props.currentScene.recording.currentTime,
       interval: setInterval(() => {
         if (this.props.recorder.isPlaying) {
           this.setState({timer: this.state.timer + 1000});
