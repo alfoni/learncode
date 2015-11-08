@@ -20,7 +20,7 @@ const app = express();
 app.use(cookieParser('some secret'));
 app.use(compression());
 app.use(subdomain({
-  base: isDeveloping ? 'learncode.com' : 'kodeboksen.no',
+  base: isDeveloping ? 'kodeboksen.dev' : 'kodeboksen.no',
   ignoreWWW: true
 }));
 

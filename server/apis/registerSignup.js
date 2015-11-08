@@ -51,7 +51,7 @@ export default function registerSignup(req, res) {
     .then(() => {
       res.cookie('kodeboksen', req.body.email, {
         maxAge: 86400 * 1000,
-        domain: process.env.NODE_ENV === 'production' ? '.kodeboksen.no' : '.learncode.com', 
+        domain: process.env.NODE_ENV === 'production' ? '.kodeboksen.no' : '.kodeboksen.dev', 
         httpOnly: true
       });
       res.send({
