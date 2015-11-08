@@ -8,6 +8,6 @@
     window.parent.postMessage({
       signal: 'sandboxTested',
       message: result
-    }, location.origin);
+    }, location.origin.replace('sandbox', 'www'));
   });
 }(window));
