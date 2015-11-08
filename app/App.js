@@ -36,7 +36,10 @@ class App extends React.Component {
 
     if (this.props.snackbar.show && prevProps.snackbar.text !== this.props.snackbar.text) {
       clearTimeout(this.snackbarTimeout);
-      this.setSnackbarTimeout();
+      
+      if (!this.props.snackbar.persist) {
+        this.setSnackbarTimeout();
+      }
     }
   }
   setSnackbarTimeout() {
