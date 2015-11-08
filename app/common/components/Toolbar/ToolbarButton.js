@@ -29,36 +29,10 @@ class ToolbarButton extends React.Component {
       showTooltip: false
     });
   }
-  renderWithTooltip() {
-    return (
-      <div>
-        <Tooltip show={this.state.showTooltip} text={this.props.tooltip}/>
-        <div
-          className={this.props.active ? style.activeIcon : style.icon}
-          onMouseOver={() => this.showTooltip()}
-          onMouseOut={() => this.hideTooltip()}>
-          <div className={this.props.icon}></div>
-        </div>
-      </div>
-    );
-  }
-  renderwithoutTooltip() {
-    return (
-      <div className={this.props.active ? style.activeIcon : style.icon}>
-        <div className={this.props.icon}></div>
-      </div>
-    );
-  }
   render() {
     return (
       <button className={style.button} onClick={this.props.onClick}>
-        {
-          this.props.tooltip ?
-            this.renderWithTooltip()
-          :
-            this.renderwithoutTooltip()
-        }
-
+        <Tooltip show={this.state.showTooltip && this.props.tooltip} text={this.props.tooltip}/>
         {
           this.props.title ?
             <span>
@@ -66,7 +40,12 @@ class ToolbarButton extends React.Component {
               <span className={style.caret}>&#9660;</span>
             </span>
           :
-            null
+          <div
+            className={this.props.active ? style.activeIcon : style.icon}
+            onMouseOver={() => this.showTooltip()}
+            onMouseOut={() => this.hideTooltip()}>
+            <div className={this.props.icon}></div>
+          </div>
         }
       </button>
     );

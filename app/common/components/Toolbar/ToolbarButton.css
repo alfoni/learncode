@@ -36,3 +36,8 @@
   font-size: 8px;
   margin-left: 5px;
 }
+
+.title {
+  cursor: pointer;
+  font-size: 14px;
+}
