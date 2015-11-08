@@ -17,7 +17,11 @@ const SceneControls = React.createClass({
     this.isExecutingSignal = this.context.controller.store.isExecutingAsync();
   },
   componentDidMount() {
-    this.recorder = new Recorder(this.refs.video);
+    this.recorder = new Recorder(this.refs.video, {
+      audio: {
+        sampleRate: 44000
+      }
+    });
 
     if (this.state.currentScene.recording) {
       this.loadAudioAndVideo();
