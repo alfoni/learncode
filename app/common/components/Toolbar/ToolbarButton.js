@@ -1,20 +1,19 @@
 import React from 'react';
-import style from './ToolbarButton.css';
+import styles from './ToolbarButton.css';
 
 function ToolbarButton(props) {
   return (
-    <button className={style.button} onClick={props.onClick}>
-      <div className={props.active ? style.activeIcon : style.icon}>
-        <div className={props.icon}></div>
-      </div>
+    <button className={styles.button}>
       {
         props.title ?
-          <span>
+          <span className={styles.title} onClick={props.onClick}>
             {props.title}
-            <span className={style.caret}>&#9660;</span>
+            <span className={styles.caret}>&#9660;</span>
           </span>
         :
-          null
+          <div className={props.active ? styles.activeIcon : styles.icon}>
+            <div className={props.icon} onClick={props.onClick}></div>
+          </div>
       }
     </button>
   );
