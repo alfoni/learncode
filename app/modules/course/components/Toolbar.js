@@ -16,6 +16,7 @@ import icons from 'common/icons.css';
   scenes: ['course', 'scenes'],
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
+  newFileName: ['course', 'newFileName'],
   showScenesList: ['course', 'showScenesList'],
   showFolder: ['course', 'showFolder'],
   showAddFileInput: ['course', 'showAddFileInput'],
@@ -110,6 +111,7 @@ class Toolbar extends React.Component {
         </ToolbarButtonPopover>
         <ToolbarButton tooltip="Legg til fil" icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
         <ToolbarInput show={this.props.showAddFileInput}
+                      value={this.props.newFileName}
                       onChange={(e) => this.onAddFileInputChange(e)}
                       onSubmit={(e) => this.onAddFileSubmit(e)}
                       onKeyDown={(e) => this.onAddFileInputKeyDown(e)}

@@ -12,6 +12,7 @@ class ToolbarInput extends React.Component {
           <div className={styles.inputWrapper}>
             <form onSubmit={this.props.onSubmit}>
               <input
+                value={this.props.value}
                 onChange={this.props.onChange}
                 onKeyDown={this.props.onKeyDown}
                 className={styles.input}
