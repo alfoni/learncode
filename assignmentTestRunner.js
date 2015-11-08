@@ -8,6 +8,6 @@
     window.parent.postMessage({
       signal: 'sandboxTested',
       message: result
-    }, 'http://learncode.com:3000');
+    }, process.env.NODE_ENV === 'production' ? 'http://www.kodeboksen.no' : 'http://learncode.com:3000');
   });
 }(window));

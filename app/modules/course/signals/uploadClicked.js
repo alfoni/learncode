@@ -3,5 +3,5 @@ import showSnackbar from 'common/factories/actions/showSnackbar.js';
 
 export default [
   set(['course', 'recording', 'isUploading'], true),
-  showSnackbar('Lagrer video og lyd...')
+  showSnackbar('Lagrer video og lyd...', true)
 ];
