@@ -1,6 +1,6 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
-import style from './ToolbarButton.css';
+import styles from './ToolbarButton.css';
 import Tooltip from 'common/components/Toolbar/Tooltip.js';
 
 @Cerebral()
@@ -31,17 +31,17 @@ class ToolbarButton extends React.Component {
   }
   render() {
     return (
-      <button className={style.button} onClick={this.props.onClick}>
+      <button className={styles.button} onClick={this.props.onClick}>
         <Tooltip show={this.state.showTooltip && this.props.tooltip} text={this.props.tooltip}/>
         {
           this.props.title ?
-            <span>
+            <span className={styles.title}>
               {this.props.title}
-              <span className={style.caret}>&#9660;</span>
+              <span className={styles.caret}>&#9660;</span>
             </span>
           :
           <div
-            className={this.props.active ? style.activeIcon : style.icon}
+            className={this.props.active ? styles.activeIcon : styles.icon}
             onMouseOver={() => this.showTooltip()}
             onMouseOut={() => this.hideTooltip()}>
             <div className={this.props.icon}></div>
