@@ -27,6 +27,7 @@ const model = Model({
     name: 'Course 1',
     isLoading: false,
     isLoadingMedia: false,
+    isBuffering: false,
     authorId: null,
     showPreview: true,
     showConsole: false,

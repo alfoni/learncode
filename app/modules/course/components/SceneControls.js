@@ -68,7 +68,13 @@ const SceneControls = React.createClass({
     });
   },
   loadAudioAndVideo() {
-    Promise.all([
+    this.refs.video.addEventListener('canplaythrough', this.onCanPlayThrough);
+    this.refs.video.addEventListener('waiting', this.onWaiting);
+    this.refs.video.addEventListener('error', this.onError);
+    this.refs.video.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/video`;
+    this.refs.audio.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/audio`;
+
+    /*Promise.all([
       this.createMediaRequest(`/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/audio`),
       this.createMediaRequest(`/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/video`)
     ])
@@ -79,6 +85,27 @@ const SceneControls = React.createClass({
       };
       this.recorder.setBlobs(blobs);
       this.signals.course.mediaLoaded();
+    });*/
+  },
+  onCanPlayThrough() {
+    if (this.state.course.isBuffering) {
+      this.onPlayClick();
+    } else {
+      this.signals.course.mediaLoaded();
+    }
+  },
+  onWaiting() {
+    this.refs.video.pause();
+    this.refs.audio.pause();
+    this.signals.course.videoStartedBuffering({}, {
+      isRecorded: true
+    });
+  },
+  onError() {
+    this.refs.video.pause();
+    this.refs.audio.pause();
+    this.signals.course.videoFailed({}, {
+      isRecorded: true
     });
   },
   onRecordClick() {
@@ -94,16 +121,22 @@ const SceneControls = React.createClass({
     }, 250);
   },
   onPlayClick() {
-    this.recorder.seek(
+    this.refs.video.play();
+    this.refs.audio.play();
+    this.signals.course.playClicked({
+      seek: this.refs.video.currentTime * 1000
+    });
+    /* this.recorder.seek(
       this.refs.video.currentTime * 1000 > 0 ? this.refs.video.currentTime * 1000 : 0,
       true,
       () => this.signals.course.playClicked({
         seek: this.refs.video.currentTime * 1000
       })
-    );
+    ); */
   },
   onPauseClick() {
-    this.recorder.pause();
+    this.refs.video.pause();
+    this.refs.audio.pause();
     this.signals.course.pauseClicked({}, {
       isRecorded: true
     });
@@ -202,6 +235,7 @@ const SceneControls = React.createClass({
           onPlayClick={() => this.onPlayClick()}
           onPauseClick={() => this.onPauseClick()}/>
         <video ref="video" className={styles.frame}></video>
+        <audio ref="audio"></audio>
       </div>
     );
   }

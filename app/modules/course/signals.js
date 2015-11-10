@@ -33,6 +33,8 @@ import runAssignmentClicked from './signals/runAssignmentClicked';
 import addFileNameUpdated from './signals/addFileNameUpdated';
 import pauseClicked from './signals/pauseClicked';
 import mediaLoaded from './signals/mediaLoaded';
+import videoStartedBuffering from './signals/videoStartedBuffering';
+import videoFailed from './signals/videoFailed';
 
 export default function(controller) {
   controller.signal('course.courseOpened', authenticate(courseOpened));
@@ -71,4 +73,6 @@ export default function(controller) {
   controller.signal('course.addFileNameUpdated', addFileNameUpdated);
   controller.signal('course.pauseClicked', pauseClicked);
   controller.signal('course.mediaLoaded', mediaLoaded);
+  controller.signal('course.videoStartedBuffering', videoStartedBuffering);
+  controller.signal('course.videoFailed', videoFailed);
 }
