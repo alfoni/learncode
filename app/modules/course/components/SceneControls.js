@@ -109,6 +109,8 @@ const SceneControls = React.createClass({
     });
   },
   onRecordClick() {
+    this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
+    this.refs.video.removeEventListener('waiting', this.onWaiting);
     this.isRecording = true;
     this.recorder.record(() => this.signals.course.recordClicked());
   },

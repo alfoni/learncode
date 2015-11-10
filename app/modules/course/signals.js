@@ -35,6 +35,7 @@ import pauseClicked from './signals/pauseClicked';
 import mediaLoaded from './signals/mediaLoaded';
 import videoStartedBuffering from './signals/videoStartedBuffering';
 import videoFailed from './signals/videoFailed';
+import codeCursorChanged from './signals/codeCursorChanged';
 
 export default function(controller) {
   controller.signal('course.courseOpened', authenticate(courseOpened));
@@ -75,4 +76,5 @@ export default function(controller) {
   controller.signal('course.mediaLoaded', mediaLoaded);
   controller.signal('course.videoStartedBuffering', videoStartedBuffering);
   controller.signal('course.videoFailed', videoFailed);
+  controller.signal('course.codeCursorChanged', codeCursorChanged);
 }

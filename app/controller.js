@@ -41,6 +41,10 @@ const model = Model({
     sandboxSnapshot: null,
     newSceneName: '',
     newFileName: '',
+    codeSelection: {
+      anchor: {ch: 0, line: 0},
+      head: {ch: 0, line: 0}
+    },
     recorder: {
       isPlaying: false,
       isUploading: false,

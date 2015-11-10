@@ -12,7 +12,8 @@ import styles from './CodeEditor.css';
 
 @Cerebral({
   recorder: ['course', 'recorder'],
-  currentSceneIndex: ['course', 'currentSceneIndex']
+  currentSceneIndex: ['course', 'currentSceneIndex'],
+  codeSelection: ['course', 'codeSelection']
 }, {
   currentScene: ['currentScene'],
   currentFile: ['currentFile']
@@ -21,6 +22,7 @@ class CodeEditor extends React.Component {
   constructor(props) {
     super(props);
     this.onEditorChange = this.onEditorChange.bind(this);
+    this.onCursorActivity = this.onCursorActivity.bind(this);
   }
   componentDidMount() {
     this.codemirror = CodeMirror(this.refs.code, {
@@ -31,6 +33,7 @@ class CodeEditor extends React.Component {
       tabSize: 2
     });
     this.codemirror.on('change', this.onEditorChange);
+    this.codemirror.on('cursorActivity', this.onCursorActivity);
   }
   componentDidUpdate(prevProps) {
     if (
@@ -47,6 +50,18 @@ class CodeEditor extends React.Component {
     } else if (!this.props.recorder.isPlaying && prevProps.recorder.isPlaying) {
       this.codemirror.setOption('readOnly', false);
     }
+
+    if (this.props.recorder.isPlaying) {
+      this.codemirror.getDoc().setSelection(this.props.codeSelection.anchor, this.props.codeSelection.head);
+    }
+  }
+  onCursorActivity() {
+    const range = this.codemirror.getDoc().listSelections()[0];
+
+    this.props.signals.course.codeCursorChanged({
+      anchor: range.anchor,
+      head: range.head
+    });
   }
   getCode() {
     return this.props.currentFile.code || '';
@@ -70,8 +85,9 @@ class CodeEditor extends React.Component {
       '.js': 'javascript',
       '.css': 'css'
     };
-    const extension = path.extname(this.props.currentScene.currentFileName);
 
+    const extension = path.extname(this.props.currentScene.sandboxFiles[this.props.currentScene.currentFileIndex].name);
+    
     return modes[extension] || 'xml';
   }
   onEditorChange(instance, event) {
