@@ -1,5 +1,7 @@
-import closeAllPopovers from '../actions/closeAllPopovers.js';
+import closeAllPopovers from '../actions/closeAllPopovers';
+import setMousePosition from '../actions/setMousePosition';
 
 export default [
-  closeAllPopovers
+  closeAllPopovers,
+  setMousePosition
 ];

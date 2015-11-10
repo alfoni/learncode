@@ -25,6 +25,10 @@ const model = Model({
   },
   course: {
     name: 'Course 1',
+    mousePosition: {
+      x: 0,
+      y: 0
+    },
     isLoading: false,
     isLoadingMedia: false,
     isBuffering: false,
