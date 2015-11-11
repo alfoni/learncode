@@ -19,11 +19,11 @@ class Preview extends React.Component {
     window.removeEventListener('message', this.onSandboxMessage);
   }
   onSandboxMessage(event) {
-    this.props.signals.course[event.data.signal]({message: event.data.message});
+    this.props.signals.course[event.data.signal](event.data.payload);
   }
   render() {
     return (
-      <iframe ref="preview" className={this.props.show ? styles.preview : styles.hidden} src="about:blank"/>
+      <iframe id="previewIframe" ref="preview" className={this.props.show ? styles.preview : styles.hidden} src="about:blank"/>
     );
   }
 }

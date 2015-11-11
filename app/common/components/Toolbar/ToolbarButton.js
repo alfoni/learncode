@@ -29,9 +29,17 @@ class ToolbarButton extends React.Component {
       showTooltip: false
     });
   }
+  onClick(e) {
+    e.stopPropagation();
+    this.props.signals.course.buttonPopoverClicked({
+      mousePositionX: e.clientX,
+      mousePositionY: e.clientY
+    });
+    this.props.onClick();
+  }
   render() {
     return (
-      <button className={styles.button} onClick={this.props.onClick}>
+      <button className={styles.button} onClick={(e) => this.onClick(e)}>
         <Tooltip show={this.state.showTooltip && this.props.tooltip} text={this.props.tooltip}/>
         {
           this.props.title ?

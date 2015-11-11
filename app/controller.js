@@ -71,7 +71,15 @@ const model = Model({
 
 const services = {
   ajax: ajax,
-  router: Router
+  router: Router,
+  getIframePosition() {
+    const previewIframe = document.getElementById('previewIframe');
+
+    return {
+      offsetLeft: previewIframe.offsetParent.offsetLeft + previewIframe.offsetLeft,
+      offsetTop: previewIframe.offsetParent.offsetTop + previewIframe.offsetTop
+    };
+  }
 };
 
 const computed = {

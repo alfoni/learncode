@@ -1,25 +1,34 @@
 import React from 'react';
+import {Decorator as Cerebral} from 'cerebral-react';
 import ToolbarButton from './ToolbarButton.js';
 import styles from './ToolbarButtonPopover.css';
 
-/* Accepts two arguments: title OR icon */
-function ToolbarButtonPopover(props) {
-  const renderBox = () => {
+@Cerebral()
+class ToolbarButtonPopover extends React.Component {
+  onArrowBoxClick(e) {
+    e.stopPropagation();
+    this.props.signals.course.buttonPopoverClicked({
+      mousePositionX: e.clientX,
+      mousePositionY: e.clientY
+    });
+  }
+  renderBox() {
     return (
-      <div className={styles.arrowBox} onClick={(e) => e.stopPropagation()}>
+      <div className={styles.arrowBox} onClick={(e) => this.onArrowBoxClick(e)}>
         <div className={styles.contentBox}>
-          {props.children}
+          {this.props.children}
         </div>
       </div>
     );
-  };
-
-  return (
-    <div className={styles.wrapper}>
-      <ToolbarButton icon={props.icon} title={props.title} onClick={props.onClick} tooltip={props.tooltip}/>
-      {props.show ? renderBox() : null}
-    </div>
-  );
+  }
+  render() {
+    return (
+      <div className={styles.wrapper}>
+        <ToolbarButton icon={this.props.icon} title={this.props.title} onClick={this.props.onClick} tooltip={this.props.tooltip}/>
+        {this.props.show ? this.renderBox() : null}
+      </div>
+    );
+  }
 }
 
 export default ToolbarButtonPopover;

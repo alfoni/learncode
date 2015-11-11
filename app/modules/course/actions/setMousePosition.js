@@ -1,7 +1,16 @@
-function setMousePosition(input, state) {
+function setMousePosition(input, state, output, services) {
+  let mousePositionX = input.mousePositionX;
+  let mousePositionY = input.mousePositionY;
+
+  if (input.sandbox) { // Click happened in sandbox/preview window
+    const iFramePosition = services.getIframePosition();
+    mousePositionX += iFramePosition.offsetLeft;
+    mousePositionY += iFramePosition.offsetTop;
+  }
+
   state.set(['course', 'mousePosition'], {
-    x: input.mousePositionX,
-    y: input.mousePositionY
+    x: mousePositionX,
+    y: mousePositionY
   });
 }
 

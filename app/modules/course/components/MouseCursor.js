@@ -16,7 +16,8 @@ class MouseCursor extends React.Component {
   }
   render() {
     return (
-        this.props.isPlaying && !this.hasSwitched ?
+      // this.props.isPlaying && 
+        !this.hasSwitched ?
           <div
             key={this.props.mousePosition.x + '_' + this.props.mousePosition.y}
             className={styles.wrapper}
