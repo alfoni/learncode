@@ -81,7 +81,8 @@ class Toolbar extends React.Component {
       this.props.signals.course.addFileAborted();
     }
   }
-  onAddFileSubmit() {
+  onAddFileSubmit(e) {
+    e.preventDefault();
     this.props.signals.course.addFileSubmitted();
   }
   assignmentClicked() {
