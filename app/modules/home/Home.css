@@ -169,6 +169,56 @@ h1 {
   color: rgba(0, 0, 0, 0.4);
 }
 
+.formDisabled {
+  composes: formWrapper;
+  opacity: 0.2;
+}
+
+.formDisabled button {
+  cursor: default;
+}
+
+.formDisabled button:hover {
+  background-color: #e91e63;
+}
+
+.chromeInformationWrapper {
+  position: relative;
+  margin-top: -80px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.chromeLogo {
+  background-image: url('/images/chrome_logo.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+}
+
+.chromeText {
+  color: rgba(0, 0, 0, 0.6);
+  line-height: 18px;
+  display: inline-block;
+  font-size: 13px;
+  margin-left: 20px;
+  margin-top: 2px;
+  vertical-align: top;
+  font-weight: bold;
+}
+
+.chromeDownloadLink {
+  color: rgba(0, 0, 0, 1);
+}
+
+.caret {
+  margin-top: 10px;
+  display: inline-block;
+}
+
 @media screen and (max-device-width: 920px) {
 
   .topWrapper {
@@ -246,7 +296,6 @@ h1 {
   }
 
 }
-
 
 @media screen and (max-device-width: 654px) {
   h1 {
