@@ -1,5 +1,8 @@
 function playRecording(input, state, output, services) {
-  state.set(['recorder', 'isPlaying'], true);
+  state.merge(['recorder'], {
+    isPlaying: true,
+    isEnded: false
+  });
   services.recorder.play();
 }
 

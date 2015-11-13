@@ -4,7 +4,7 @@ import set from 'common/factories/actions/set';
 
 export default [
   pausePlaying,
-  set(['course', 'isBuffering'], true),
+  set(['recorder', 'isBuffering'], true),
   [
     trackData('VIDEO_STARTED_BUFFERING')
   ]

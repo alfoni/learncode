@@ -10,8 +10,7 @@ import icons from 'common/icons.css';
   showNewCourse: ['courses', 'showNewCourse']
 })
 class Toolbar extends React.Component {
-  newCourseClicked(e) {
-    e.stopPropagation();
+  newCourseClicked() {
     this.props.signals.courses.newCourseClicked();
   }
   render() {
@@ -20,7 +19,7 @@ class Toolbar extends React.Component {
         <ToolbarTitle title="Kurs"/>
         <ToolbarButtonPopover
           icon={icons.addFile}
-          onClick={(e) => this.newCourseClicked(e)}
+          onClick={() => this.newCourseClicked()}
           show={this.props.showNewCourse}>
           <AddNewCourse/>
         </ToolbarButtonPopover>

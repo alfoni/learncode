@@ -36,14 +36,14 @@ class App extends React.Component {
 
     if (this.props.snackbar.show && prevProps.snackbar.text !== this.props.snackbar.text) {
       clearTimeout(this.snackbarTimeout);
-      
+
       if (!this.props.snackbar.persist) {
         this.setSnackbarTimeout();
       }
     }
   }
   setSnackbarTimeout() {
-    this.snackbarTimeout = setTimeout(() => this.props.signals.snackbarTimedOut(), 2000);
+    this.snackbarTimeout = setTimeout(() => this.props.signals.snackbarTimedOut({}, {isRecorded: true}), 2000);
   }
   renderPage() {
     const Page = pages[this.props.page];

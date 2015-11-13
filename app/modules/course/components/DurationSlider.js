@@ -17,7 +17,8 @@ class DurationSlider extends React.Component {
     };
   }
   componentWillMount() {
-    const duration = this.props.currentScene.recording ? this.props.currentScene.recording.duration : 0;
+    const duration = this.props.currentScene.duration || 0;
+
     this.setState({
       duration: duration
     });
@@ -54,12 +55,13 @@ class DurationSlider extends React.Component {
     const duration = (this.state.duration / 1000).toFixed() - 1;
     const timer = (this.state.timer / 1000).toFixed();
     handlerPosition = timer / duration * 100;
+    handlerPosition = handlerPosition > 100 ? 100 : handlerPosition;
 
     return handlerPosition + '%';
   }
   seek(event) {
     if (this.props.currentScene.recording) {
-      const seek = this.props.currentScene.recording.duration / window.innerWidth * event.clientX;
+      const seek = this.props.currentScene.duration / window.innerWidth * event.clientX;
       this.props.signals.course.seeked({
         seek: seek
       }, {

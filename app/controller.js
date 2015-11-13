@@ -27,7 +27,8 @@ const model = Model({
     isUploading: false,
     hasUpload: false,
     isRecording: false,
-    hasRecorded: false
+    hasRecorded: false,
+    isBuffering: false
   },
   course: {
     name: 'Course 1',
@@ -37,7 +38,6 @@ const model = Model({
     },
     isLoading: false,
     isLoadingMedia: false,
-    isBuffering: false,
     authorId: null,
     currentSeek: [0, Date.now()],
     showPreview: true,

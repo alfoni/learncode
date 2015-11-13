@@ -29,13 +29,8 @@ const SceneControls = React.createClass({
     this.context.controller.on('change', this.updateIsExecutingSignal);
   },
   componentDidUpdate(prevProps, prevState) {
-    if (
-      !prevState.recorder.isRecording &&
-      prevState.recorder.isPlaying === this.state.recorder.isPlaying &&
-      prevState.currentSeek !== this.state.course.currentSeek
-    ) {
-      // this.refs.video.currenTime = this.state.course.currentSeek[0];
-      // this.refs.audio.currenTime = this.state.course.currentSeek[0];
+    if (!prevState.recorder.isEnded && this.state.recorder.isEnded) {
+      this.refs.video.removeEventListener('waiting', this.onWaiting);
     }
   },
   componentWillUnmount() {
@@ -80,23 +75,34 @@ const SceneControls = React.createClass({
   },
   loadAudioAndVideo() {
     this.refs.video.addEventListener('canplaythrough', this.onCanPlayThrough);
-    this.refs.video.addEventListener('waiting', this.onWaiting);
     this.refs.video.addEventListener('error', this.onError);
     this.refs.video.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/video`;
     this.refs.audio.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/audio`;
   },
   onCanPlayThrough() {
-    if (this.state.course.isBuffering) {
+    if (this.state.recorder.isBuffering) {
       this.onPlayClick();
     } else {
+      this.refs.video.addEventListener('waiting', this.onWaiting);
       this.signals.course.mediaLoaded();
     }
   },
   onWaiting() {
-    this.refs.video.pause();
     this.refs.audio.pause();
+
+    this.refs.video.addEventListener('playing', function onPlaying() {
+      this.onPlaying();
+      this.refs.video.removeEventListener('playing', onPlaying);
+    }.bind(this));
+
     this.signals.course.videoStartedBuffering({}, {
       isRecorded: true
+    });
+  },
+  onPlaying() {
+    this.refs.audio.play();
+    this.signals.course.playClicked({
+      seek: this.refs.video.currentTime * 1000
     });
   },
   onError() {

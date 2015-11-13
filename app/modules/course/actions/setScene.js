@@ -11,6 +11,10 @@ function setScene(input, state, output, services) {
 
   // We do not need to put the recording in the state tree
   const recording = scene.recording;
+
+  if (scene.recording) {
+    scene.duration = scene.recording.duration;
+  }
   scene.recording = Boolean(scene.recording);
 
   state.set(['course', 'scenes', input.sceneIndex], scene);
