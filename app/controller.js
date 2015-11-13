@@ -31,6 +31,10 @@ const model = Model({
   },
   course: {
     name: 'Course 1',
+    mousePosition: {
+      x: 0,
+      y: 0
+    },
     isLoading: false,
     isLoadingMedia: false,
     isBuffering: false,
@@ -66,7 +70,15 @@ const model = Model({
 });
 
 const services = {
-  ajax: ajax
+  ajax: ajax,
+  getIframePosition() {
+    const previewIframe = document.getElementById('previewIframe');
+
+    return {
+      offsetLeft: previewIframe.offsetParent.offsetLeft + previewIframe.offsetLeft,
+      offsetTop: previewIframe.offsetParent.offsetTop + previewIframe.offsetTop
+    };
+  }
 };
 
 const computed = {

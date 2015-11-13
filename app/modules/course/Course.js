@@ -6,6 +6,7 @@ let DurationSlider = null;
 let SceneControls = null;
 let Scene = null;
 let styles = null;
+let MouseCursor = null;
 
 @Cerebral({
   isLoading: ['course', 'isLoading']
@@ -27,6 +28,7 @@ class Course extends React.Component {
       DurationSlider = require('./components/DurationSlider.js');
       SceneControls = require('./components/SceneControls.js');
       Scene = require('./components/Scene.js');
+      MouseCursor = require('./components/MouseCursor.js');
       styles = require('./Course.css');
       this.setState({
         canRender: true
@@ -47,13 +49,20 @@ class Course extends React.Component {
       description: e.target.value
     });
   }
+  onAppClicked(e) {
+    this.props.signals.course.appClicked({
+      mousePositionX: e.clientX,
+      mousePositionY: e.clientY
+    });
+  }
   renderScene() {
     return (
-      <div className={styles.wrapper} onClick={() => this.props.signals.course.appClicked()}>
+      <div className={styles.wrapper} onClick={(e) => this.onAppClicked(e)}>
         <Toolbar/>
         <DurationSlider/>
         <Scene/>
         <SceneControls/>
+        <MouseCursor/>
       </div>
     );
   }

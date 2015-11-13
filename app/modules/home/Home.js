@@ -4,7 +4,9 @@ import {Decorator as Cerebral} from 'cerebral-react';
 let Video = null;
 let SuccessMessage = null;
 let icons = null;
-let styles = null;
+// let styles = null;
+import styles from './Home.css'; // TODO: Remove this;
+const isChrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 @Cerebral({
   hasRegistered: ['home', 'hasRegistered'],
@@ -22,7 +24,7 @@ class Home extends React.Component {
       Video = require('./components/Video.js');
       SuccessMessage = require('./components/SuccessMessage.js');
       icons = require('common/icons.css');
-      styles = require('./Home.css');
+      // styles = require('./Home.css');
       this.setState({
         canRender: true
       });
@@ -34,6 +36,29 @@ class Home extends React.Component {
     this.props.signals.home.formSubmitted({
       email: e.target.email.value
     });
+  }
+  renderChromeInformation() {
+    return (
+      <div className={styles.chromeInformationWrapper}>
+        <div className={styles.chromeLogo}></div>
+        <div className={styles.chromeText}>
+          Du bruker ikke Google Chrome, som kreves for å kunne bruke Kodeboksen.
+          <br/>
+          Flere nettlesere vil være støttet i den endelige utgaven av tjenesten.
+          <br/>
+          <a className={styles.chromeDownloadLink} href="http://www.google.com/chrome" target="_blank">Trykk her</a> for å laste ned Google Chrome.
+          <br/>
+          <div className={styles.caret}>&#9660;</div>
+        </div>
+      </div>
+    );
+  }
+  getFormClassname() {
+    if (!isChrome) {
+      return styles.formDisabled;
+    }
+
+    return this.props.hasRegistered ? styles.formWrapperHidden : styles.formWrapper;
   }
   render() {
     if (this.state.canRender) {
@@ -59,21 +84,23 @@ class Home extends React.Component {
           </div>
           <div className={styles.bottomWrapper}>
             <div className={styles.container}>
+              {!isChrome ? this.renderChromeInformation() : null}
               <SuccessMessage
                 show={this.props.hasRegistered}
                 icon={icons.thumbUp}
                 message={'Takk for din interesse!'}/>
-              <form onSubmit={(e) => this.formSubmitted(e)}
-                    className={this.props.hasRegistered ? styles.formWrapperHidden : styles.formWrapper}>
+              <form
+                onSubmit={(e) => this.formSubmitted(e)}
+                className={this.getFormClassname()}>
                 <input
                   type="email"
                   name="email"
-                  disabled={this.props.showSigningupLoader}
+                  disabled={this.props.showSigningupLoader || !isChrome}
                   className={this.props.showSigningupLoader ? styles.inputDisabled : styles.input}
                   placeholder="Din e-post"/>
                 <button
                   className={this.props.showSigningupLoader ? styles.buttonDisabled : styles.button}
-                  disabled={this.props.showSigningupLoader}>
+                  disabled={this.props.showSigningupLoader || !isChrome}>
                   { this.props.showSigningupLoader ?
                       <span className={icons.loading + ' ' + styles.loadingIcon}></span>
                     :

@@ -30,8 +30,7 @@ import icons from 'common/icons.css';
   currentScene: ['currentScene']
 })
 class Toolbar extends React.Component {
-  folderClick(e) {
-    e.stopPropagation();
+  folderClick() {
     this.props.signals.course.openFolderClicked();
   }
   folderFileClicked(index) { // TOOD: Refacotr to folderFileClicked
@@ -86,16 +85,13 @@ class Toolbar extends React.Component {
     e.preventDefault();
     this.props.signals.course.addFileSubmitted();
   }
-  assignmentClicked(e) {
-    e.stopPropagation();
+  assignmentClicked() {
     this.props.signals.course.openAssignmentClicked();
   }
-  configureScenesClicked(e) {
-    e.stopPropagation();
+  configureScenesClicked() {
     this.props.signals.course.configureScenesClicked();
   }
-  sceneNameClicked(e) {
-    e.stopPropagation();
+  sceneNameClicked() {
     this.props.signals.course.sceneNameClicked();
   }
   render() {

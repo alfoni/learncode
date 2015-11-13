@@ -31,25 +31,44 @@ export default function getSandboxFile(req, res) {
 */
 
   if (file.name === 'index.html') {
-    const insertScript = ['<script>',
+    const insertAssignmentScript = ['<script>',
     fs.readFileSync(path.resolve(__dirname, '../..', 'assignmentTestRunner.js'))
       .toString()
       .replace('%{CODE}%', assignment.code.replace(/\'/g, '\\\''))
       .split('\n').join(''),
     '</script>'].join('');
+    const insertMouseClickScript = ['<script>',
+      fs.readFileSync(path.resolve(__dirname, '../..', 'mouseClickScript.js'))
+        .toString()
+        .split('\n').join(''),
+      '</script>'].join('');
     const headTagExists = code.indexOf('<head>') >= 0;
+
+    if (headTagExists) {
+      code = code.replace('</head>', [
+        insertMouseClickScript,
+        '\n</head>'
+      ].join(''));
+    } else {
+      code = code.replace('<html>', [
+        '<html>',
+        '\n<head>',
+        insertMouseClickScript,
+        '\n</head>'
+      ].join(''));
+    }
 
     if (assignment && assignment.code) {
       if (headTagExists) {
         code = code.replace('</head>', [
-          insertScript,
+          insertAssignmentScript,
           '\n</head>'
         ].join(''));
       } else {
         code = code.replace('<html>', [
           '<html>',
           '\n<head>',
-          insertScript,
+          insertAssignmentScript,
           '\n</head>'
         ].join(''));
       }
