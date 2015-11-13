@@ -3,7 +3,7 @@ import {Decorator as Cerebral} from 'cerebral-react';
 import styles from './DurationSlider.css';
 
 @Cerebral({
-  recorder: ['course', 'recorder']
+  recorder: ['recorder']
 }, {
   currentScene: ['currentScene']
 })
@@ -28,14 +28,14 @@ class DurationSlider extends React.Component {
     }
 
     if (this.props.recorder.isPlaying) {
-      this.startInterval();
+      this.startInterval(this.props.currentScene.recording.currentTime);
     } else {
       this.stopInterval();
     }
   }
-  startInterval() {
+  startInterval(time) {
     this.setState({
-      timer: this.props.currentScene.recording.currentTime,
+      timer: time,
       interval: setInterval(() => {
         if (this.props.recorder.isPlaying) {
           this.setState({timer: this.state.timer + 1000});
@@ -57,9 +57,21 @@ class DurationSlider extends React.Component {
 
     return handlerPosition + '%';
   }
+  seek(event) {
+    if (this.props.currentScene.recording) {
+      const seek = this.props.currentScene.recording.duration / window.innerWidth * event.clientX;
+      this.props.signals.course.seeked({
+        seek: seek
+      }, {
+        isRecorded: true
+      });
+      clearInterval(this.state.interval);
+      this.startInterval(seek - 1000);
+    }
+  }
   render() {
     return (
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} onClick={(event) => this.seek(event)}>
         <div className={styles.line}>
           <div className={styles.dot} style={{left: this.handlerPosition()}}></div>
         </div>

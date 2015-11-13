@@ -1,5 +1,5 @@
 function pausePlaying(input, state, output, services) {
-  state.merge(['course', 'recorder'], {
+  state.merge(['recorder'], {
     isRecording: false,
     isPlaying: false,
     hasRecorded: false

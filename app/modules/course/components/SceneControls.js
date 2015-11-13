@@ -28,6 +28,16 @@ const SceneControls = React.createClass({
     }
     this.context.controller.on('change', this.updateIsExecutingSignal);
   },
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      !prevState.recorder.isRecording &&
+      prevState.recorder.isPlaying === this.state.recorder.isPlaying &&
+      prevState.currentSeek !== this.state.course.currentSeek
+    ) {
+      // this.refs.video.currenTime = this.state.course.currentSeek[0];
+      // this.refs.audio.currenTime = this.state.course.currentSeek[0];
+    }
+  },
   componentWillUnmount() {
     this.context.controller.removeListener('change', this.updateIsExecutingSignal);
   },
@@ -37,6 +47,7 @@ const SceneControls = React.createClass({
   isExecutingSignal: false,
   getStatePaths() {
     return {
+      recorder: ['recorder'],
       course: ['course'],
       isAdmin: ['user', 'isAdmin']
     };
@@ -73,19 +84,6 @@ const SceneControls = React.createClass({
     this.refs.video.addEventListener('error', this.onError);
     this.refs.video.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/video`;
     this.refs.audio.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/audio`;
-
-    /*Promise.all([
-      this.createMediaRequest(`/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/audio`),
-      this.createMediaRequest(`/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/video`)
-    ])
-    .then((media) => {
-      const blobs = {
-        audio: media[0],
-        video: media[1]
-      };
-      this.recorder.setBlobs(blobs);
-      this.signals.course.mediaLoaded();
-    });*/
   },
   onCanPlayThrough() {
     if (this.state.course.isBuffering) {
@@ -120,6 +118,9 @@ const SceneControls = React.createClass({
     this.signals.course.stopClicked();
     setTimeout(() => {
       this.recorder.stop();
+      const blobs = this.recorder.getBlobs();
+      this.refs.video.src = window.URL.createObjectURL(blobs.video);
+      this.refs.audio.src = window.URL.createObjectURL(blobs.audio);
     }, 250);
   },
   onPlayClick() {
@@ -128,13 +129,6 @@ const SceneControls = React.createClass({
     this.signals.course.playClicked({
       seek: this.refs.video.currentTime * 1000
     });
-    /* this.recorder.seek(
-      this.refs.video.currentTime * 1000 > 0 ? this.refs.video.currentTime * 1000 : 0,
-      true,
-      () => this.signals.course.playClicked({
-        seek: this.refs.video.currentTime * 1000
-      })
-    ); */
   },
   onPauseClick() {
     this.refs.video.pause();
@@ -218,14 +212,14 @@ const SceneControls = React.createClass({
       <div className={styles.wrapper}>
         <UploadButton
           isUploadReady={this.isUploadReady}
-          recorder={this.state.course.recorder}
+          recorder={this.state.recorder}
           onClick={() => this.onUploadClick()}
         />
         {
           this.state.isAdmin ?
             <RecordButton
               disabled={this.isExecutingSignal || this.state.course.isLoadingMedia}
-              recorder={this.state.course.recorder}
+              recorder={this.state.recorder}
               onRecordClick={() => this.onRecordClick()}
               onStopClick={() => this.onStopClick()}/>
           :
@@ -233,7 +227,7 @@ const SceneControls = React.createClass({
         }
         <PlayButton
           disabled={this.isExecutingSignal || this.state.course.isLoadingMedia}
-          recorder={this.state.course.recorder}
+          recorder={this.state.recorder}
           onPlayClick={() => this.onPlayClick()}
           onPauseClick={() => this.onPauseClick()}/>
         <video ref="video" className={styles.frame}></video>

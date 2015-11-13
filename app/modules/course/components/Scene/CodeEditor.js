@@ -11,7 +11,7 @@ import path from 'path';
 import styles from './CodeEditor.css';
 
 @Cerebral({
-  recorder: ['course', 'recorder'],
+  recorder: ['recorder'],
   currentSceneIndex: ['course', 'currentSceneIndex'],
   codeSelection: ['course', 'codeSelection']
 }, {

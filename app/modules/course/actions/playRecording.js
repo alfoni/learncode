@@ -1,5 +1,5 @@
 function playRecording(input, state, output, services) {
-  state.set(['course', 'recorder', 'isPlaying'], true);
+  state.set(['recorder', 'isPlaying'], true);
   services.recorder.play();
 }
 

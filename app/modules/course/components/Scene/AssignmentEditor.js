@@ -10,7 +10,7 @@ import CodeMirror from 'codemirror';
 import styles from './AssignmentEditor.css';
 
 @Cerebral({
-  recorder: ['course', 'recorder'],
+  recorder: ['recorder'],
   currentSceneIndex: ['course', 'currentSceneIndex']
 }, {
   currentScene: ['currentScene']

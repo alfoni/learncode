@@ -17,7 +17,7 @@ import styles from './Scene.css';
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
   showEditAssignment: ['course', 'showEditAssignment'],
-  recorder: ['course', 'recorder']
+  recorder: ['recorder']
 }, {
   currentFile: ['currentFile'],
   currentScene: ['currentScene']

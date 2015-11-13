@@ -1,7 +1,6 @@
 import Controller from 'cerebral';
 import Model from 'cerebral-baobab';
 import ajax from './services/ajax.js';
-import Router from 'cerebral-router';
 
 const model = Model({
   currentPage: 'course',
@@ -23,12 +22,20 @@ const model = Model({
     },
     courses: []
   },
+  recorder: {
+    isPlaying: false,
+    isUploading: false,
+    hasUpload: false,
+    isRecording: false,
+    hasRecorded: false
+  },
   course: {
     name: 'Course 1',
     isLoading: false,
     isLoadingMedia: false,
     isBuffering: false,
     authorId: null,
+    currentSeek: [0, Date.now()],
     showPreview: true,
     showConsole: false,
     showEditAssignment: false,
@@ -45,13 +52,6 @@ const model = Model({
       anchor: {ch: 0, line: 0},
       head: {ch: 0, line: 0}
     },
-    recorder: {
-      isPlaying: false,
-      isUploading: false,
-      hasUpload: false,
-      isRecording: false,
-      hasRecorded: false
-    },
     scenes: []
   },
   user: {
@@ -66,8 +66,7 @@ const model = Model({
 });
 
 const services = {
-  ajax: ajax,
-  router: Router
+  ajax: ajax
 };
 
 const computed = {

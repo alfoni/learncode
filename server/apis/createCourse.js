@@ -16,7 +16,7 @@ export default function createCourse(req, res) {
     id: uuid.v4(),
     created: Date.now(),
     name: req.body.course.courseName,
-    authorId: '123',
+    authorId: req.cookies.kodeboksen,
     scenes: [{
       name: req.body.course.sceneName,
       currentFileIndex: 0,

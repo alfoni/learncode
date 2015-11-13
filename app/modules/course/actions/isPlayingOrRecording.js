@@ -1,7 +1,7 @@
 function isPlayingOrRecording(input, state, output) {
   if (
-    state.get(['course', 'recorder', 'isPlaying']) ||
-    state.get(['course', 'recorder', 'isRecording'])
+    state.get(['recorder', 'isPlaying']) ||
+    state.get(['recorder', 'isRecording'])
   ) {
     output.true();
   } else {

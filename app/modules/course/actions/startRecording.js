@@ -1,8 +1,10 @@
 function startRecording(input, state, output, services) {
-  state.merge(['course', 'recorder'], {
+  state.merge(['recorder'], {
     isRecording: true
   });
-  services.recorder.record();
+  services.recorder.record({
+    path: ['course']
+  });
 }
 
 export default startRecording;

@@ -8,8 +8,8 @@ export default [
     saveRecording, {
       success: [
         showSnackbar('Opptaket er nå lagret'),
-        set(['course', 'recorder', 'isUploading'], false),
-        set(['course', 'recorder', 'hasRecorded'], false)
+        set(['recorder', 'isUploading'], false),
+        set(['recorder', 'hasRecorded'], false)
       ],
       error: [
         showSnackbar('Det oppstod et problem med å lagre opptaket!')
