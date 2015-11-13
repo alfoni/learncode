@@ -10,7 +10,6 @@ import courseAndSceneDidLoad from './../actions/courseAndSceneDidLoad.js';
 import setScene from './../actions/setScene.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import saveSandboxChain from './../chains/saveSandbox.js';
-import trackData from 'common/factories/actions/trackData.js';
 import setLoadingCourse from './../actions/setLoadingCourse';
 import setLoadedCourse from './../actions/setLoadedCourse';
 
@@ -47,10 +46,7 @@ export default [
           setCourse,
           setScene,
           ...saveSandboxChain,
-          setLoadedCourse,
-          [
-            trackData('OPEN_COURSE')
-          ]
+          setLoadedCourse
         ],
         false: [
           showSnackbar('Innlasting av kurset feilet!')

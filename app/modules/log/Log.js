@@ -3,7 +3,8 @@ import {Decorator as Cerebral} from 'cerebral-react';
 import styles from './Log.css';
 
 @Cerebral({
-  users: ['log', 'users']
+  users: ['log', 'users'],
+  user: ['user']
 })
 class Log extends React.Component {
   constructor() {
@@ -24,17 +25,20 @@ class Log extends React.Component {
       return (
         <div key={index}>
           <div className={styles.username}>{user.id}</div>
-          {this.renderUserLogs(user.log)}
+          {/* this.renderUserLogs(user.log) */}
         </div>
       );
     });
   }
   render() {
     return (
-      <div className={styles.wrapper}>
-        <h1>Brukerlogger</h1>
-        {this.renderUsers()}
-      </div>
+      this.props.user.isAdmin ?
+        <div className={styles.wrapper}>
+          <h1>Brukerlogger</h1>
+          {this.renderUsers()}
+        </div>
+      :
+        null
     );
   }
 }

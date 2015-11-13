@@ -2,9 +2,10 @@ import db from './../database.js';
 
 export default function saveUserLog(req, res) {
   db.insert('logs', {
-    id: req.cookies.kodeboksen,
+    userId: req.cookies.kodeboksen,
     date: Date.now(),
-    type: req.body.type
+    name: req.body.name,
+    input: req.body.input
   })
   .then(() => {
     res.type('json');

@@ -9,7 +9,10 @@ export default [
   set(['log', 'isLoading'], true),
   [
     loadLogs, {
-      success: [setLogs],
+      success: [
+        setLogs,
+        showSnackbar('Logger er lastet')
+      ],
       error: [
         showSnackbar('Kunne ikke hente brukerlogger!')
       ]

@@ -17,11 +17,13 @@ class Course extends React.Component {
   constructor() {
     super();
     this.onKeydown = this.onKeydown.bind(this);
+    this.hasMounted = false;
     this.state = {
       canRender: false
     };
   }
   componentDidMount() {
+    this.hasMounted = true;
     window.addEventListener('keydown', this.onKeydown);
     require.ensure([], (require) => {
       Toolbar = require('./components/Toolbar.js');
@@ -30,13 +32,17 @@ class Course extends React.Component {
       Scene = require('./components/Scene.js');
       MouseCursor = require('./components/MouseCursor.js');
       styles = require('./Course.css');
-      this.setState({
-        canRender: true
-      });
+
+      if (this.hasMounted) {
+        this.setState({
+          canRender: true
+        });
+      }
     });
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.onKeydown);
+    this.hasMounted = false;
   }
   onKeydown(event) {
     if (event.metaKey && event.keyCode === 83) {

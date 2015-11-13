@@ -63,9 +63,9 @@ const model = Model({
     isLoading: false,
     isAdmin: false
   },
-  log: {
-    isLoading: false,
-    users: []
+  session: {
+    sessionid: null,
+    isLoading: false
   }
 });
 

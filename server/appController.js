@@ -15,6 +15,8 @@ import getVideo from './apis/getVideo.js';
 import saveLog from './apis/saveLog.js';
 import getLogs from './apis/getLogs.js';
 import getUser from './apis/getUser.js';
+import createSession from './apis/createSession.js';
+import trackSession from './apis/trackSession.js';
 
 const verifyUser = (req, res, next) => {
   if (req.cookies.kodeboksen) {
@@ -52,4 +54,6 @@ export default function appController(router) {
   router.post('/API/registerSignup', registerSignup);
   router.post('/API/logs', verifyUser, saveLog);
   router.get('/API/logs', getLogs);
+  router.post('/API/sessions', createSession);
+  router.post('/API/sessions/:id', trackSession);
 }
