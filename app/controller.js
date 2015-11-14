@@ -28,7 +28,8 @@ const model = Model({
     hasUpload: false,
     isRecording: false,
     hasRecorded: false,
-    isBuffering: false
+    isBuffering: false,
+    currentSeek: [0, Date.now()]
   },
   course: {
     name: 'Course 1',

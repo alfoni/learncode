@@ -19,7 +19,7 @@ const SceneControls = React.createClass({
   componentDidMount() {
     this.recorder = new Recorder(this.refs.video, {
       audio: {
-        sampleRate: 44000
+        sampleRate: 43800
       }
     });
 
@@ -31,6 +31,10 @@ const SceneControls = React.createClass({
   componentDidUpdate(prevProps, prevState) {
     if (!prevState.recorder.isEnded && this.state.recorder.isEnded) {
       this.refs.video.removeEventListener('waiting', this.onWaiting);
+    }
+
+    if (prevState.recorder.currentSeek !== this.state.recorder.currentSeek) {
+      this.seek();
     }
   },
   componentWillUnmount() {
@@ -59,6 +63,13 @@ const SceneControls = React.createClass({
     if (forceUpdate) {
       this.forceUpdate();
     }
+  },
+  seek() {
+    this.refs.video.removeEventListener('waiting', this.onWaiting);
+    const seek = this.state.recorder.currentSeek[0];
+
+    this.refs.video.currentTime = seek / 1000;
+    this.refs.audio.currentTime = seek / 1000;
   },
   createMediaRequest(url) {
     return new Promise((resolve) => {

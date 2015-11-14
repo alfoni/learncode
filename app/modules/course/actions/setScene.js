@@ -15,6 +15,7 @@ function setScene(input, state, output, services) {
   if (scene.recording) {
     scene.duration = scene.recording.duration;
   }
+
   scene.recording = Boolean(scene.recording);
 
   state.set(['course', 'scenes', input.sceneIndex], scene);

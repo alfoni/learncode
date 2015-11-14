@@ -12,7 +12,7 @@ export default {
         console.log('Could not connect to db', err);
         return;
       }
-      
+
       db = connectedDb;
       gfs = Grid(db, Mongo);
       console.log('Database is connected');
@@ -115,10 +115,29 @@ export default {
       });
     });
   },
-  readFile(filename, res) {
-    const readstream = gfs.createReadStream({
+  readFile(filename, req, res) {
+    gfs.files.find({
       filename: filename
+    }).toArray((err, files) => {
+      const parts = req.headers.range.replace(/bytes=/, '').split('-');
+      const partialstart = parts[0];
+      const partialend = parts[1];
+      const start = parseInt(partialstart, 10);
+      const end = partialend ? parseInt(partialend, 10) : files[0].length - 1;
+      const chunksize = (end - start) + 1;
+
+      res.writeHead(206, {
+        'Content-disposition': 'filename=xyz',
+        'Accept-Ranges': 'bytes',
+        'Content-Type': files[0].contentType,
+        'Content-Range': 'bytes ' + start + '-' + end + '/' + files[0].length,
+        'Content-Length': chunksize
+      });
+
+      const readstream = gfs.createReadStream({
+        filename: filename
+      });
+      readstream.pipe(res);
     });
-    readstream.pipe(res);
   }
 };
