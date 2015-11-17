@@ -3,7 +3,7 @@ function setAssignmentResult(input, state) {
   const currentResult = state.get(['course', 'scenes', currentSceneIndex, 'assignment', 'result']);
   state.set(['course', 'scenes', currentSceneIndex, 'assignment', 'result'], input.result);
 
-  if (currentResult !== input.result && !state.get(['recorder', 'isRecording'])) {
+  if (currentResult !== input.result && !state.get(['recorder', 'isRecording']) && !state.get(['recorder', 'isPlaying'])) {
     state.set(['course', 'showAssignment'], true);
   }
 }
