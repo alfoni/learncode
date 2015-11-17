@@ -32,6 +32,11 @@ import icons from 'common/icons.css';
   currentScene: ['currentScene']
 })
 class Toolbar extends React.Component {
+  componentDidUpdate(prevprops) {
+    if (this.props.currentScene.assignment.result !== prevprops.currentScene.assignment.result) {
+      this.props.signals.course.openAssignmentClicked();
+    }
+  }
   folderClick() {
     this.props.signals.course.openFolderClicked();
   }

@@ -3,10 +3,8 @@ import responseSync from './../responseSync';
 
 export default function updateSandbox(req, res) {
   sandbox.update(req.body);
-  setTimeout(() => {
-    res.type('json');
-    res.send({});
-  }, 1500);
+  res.type('json');
+  res.send({});
 
   const id = req.query.id;
 
