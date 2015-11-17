@@ -83,14 +83,17 @@ const SceneControls = React.createClass({
       audio: false
     };
 
+    this.refs.video.removeEventListener('waiting', this.onWaiting);
+    this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
+
     this.signals.course.videoStartedBuffering({}, {
       isRecorded: true
     });
 
-    this.refs.video.removeEventListener('waiting', this.onWaiting);
-    this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
     this.refs.video.addEventListener('canplaythrough', function startPlaying() {
       bufferState.video = true;
+      self.refs.video.removeEventListener('canplaythrough', startPlaying);
+      self.refs.video.addEventListener('canplaythrough', self.onCanPlayThrough);
 
       if (bufferState.audio) {
         if (continuePlaying) {
@@ -104,12 +107,11 @@ const SceneControls = React.createClass({
       } else {
         self.refs.video.pause();
       }
-      self.refs.video.removeEventListener('canplaythrough', startPlaying);
-      self.refs.video.addEventListener('canplaythrough', self.onCanPlayThrough);
     });
 
     this.refs.audio.addEventListener('canplaythrough', function startPlaying() {
       bufferState.audio = true;
+      self.refs.audio.removeEventListener('canplaythrough', startPlaying);
 
       if (bufferState.video) {
         if (continuePlaying) {
