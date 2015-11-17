@@ -47,13 +47,12 @@ class DurationSlider extends React.Component {
     const timer = (this.state.timer / 1000).toFixed();
     handlerPosition = timer / duration * 100;
     handlerPosition = handlerPosition > 100 ? 100 : handlerPosition;
-    
+
     return handlerPosition + '%';
   }
   seek(event) {
     if (this.props.currentScene.recording && !this.context.controller.store.isExecutingAsync()) {
       const seek = this.props.currentScene.duration / window.innerWidth * event.clientX;
-
       this.props.signals.course.seekChanged({
         seek: seek
       }, {

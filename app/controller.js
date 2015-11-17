@@ -24,6 +24,7 @@ const model = Model({
   },
   recorder: {
     isPlaying: false,
+    isEnded: false,
     isUploading: false,
     hasUpload: false,
     isRecording: false,

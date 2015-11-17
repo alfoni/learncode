@@ -19,7 +19,7 @@ const SceneControls = React.createClass({
   componentDidMount() {
     this.recorder = new Recorder(this.refs.video, {
       audio: {
-        sampleRate: 44000
+        sampleRate: 44100
       }
     });
 
@@ -75,8 +75,28 @@ const SceneControls = React.createClass({
     }
   },
   seek() {
-    this.refs.video.removeEventListener('waiting', this.onWaiting);
     const seek = this.state.recorder.currentSeek[0];
+    const continuePlaying = this.state.recorder.isPlaying;
+    const self = this;
+
+    this.signals.course.videoStartedBuffering({}, {
+      isRecorded: true
+    });
+    this.refs.audio.pause();
+    this.refs.video.removeEventListener('waiting', this.onWaiting);
+    this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
+    this.refs.video.addEventListener('canplaythrough', function startPlaying() {
+      if (continuePlaying) {
+        self.refs.audio.play();
+      }
+      self.signals.course.videoBuffered({
+        continuePlaying: continuePlaying
+      }, {
+        isRecorded: true
+      });
+      self.refs.video.removeEventListener('canplaythrough', startPlaying);
+      self.refs.video.addEventListener('canplaythrough', self.onCanPlayThrough);
+    });
 
     this.refs.video.currentTime = seek / 1000;
     this.refs.audio.currentTime = seek / 1000;
@@ -101,12 +121,8 @@ const SceneControls = React.createClass({
     this.refs.audio.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/audio`;
   },
   onCanPlayThrough() {
-    if (this.state.recorder.isBuffering) {
-      this.onPlayClick();
-    } else {
-      this.refs.video.addEventListener('waiting', this.onWaiting);
-      this.signals.course.mediaLoaded();
-    }
+    this.signals.course.mediaLoaded();
+    this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
   },
   onWaiting() {
     this.refs.audio.pause();
@@ -257,7 +273,7 @@ const SceneControls = React.createClass({
           recorder={this.state.recorder}
           onPlayClick={() => this.onPlayClick()}
           onPauseClick={() => this.onPauseClick()}/>
-        <video ref="video" className={styles.frame}></video>
+        <video ref="video" className={this.state.recorder.isBuffering ? styles.loadingFrame : styles.frame}></video>
         <audio ref="audio"></audio>
       </div>
     );

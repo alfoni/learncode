@@ -18,3 +18,8 @@
   border-radius: 2px;
   z-index: 3;
 }
+
+.loadingFrame {
+  composes: frame;
+  opacity: 0.6; 
+}

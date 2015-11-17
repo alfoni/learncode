@@ -40,6 +40,7 @@ import codeCursorChanged from './signals/codeCursorChanged';
 import seekChanged from './signals/seekChanged';
 import buttonPopoverClicked from './signals/buttonPopoverClicked';
 import sandboxClicked from './signals/sandboxClicked';
+import videoBuffered from './signals/videoBuffered';
 
 export default function(controller) {
   controller.signal('course.courseOpened', createSession('course.courseOpened', authenticate(courseOpened)));
@@ -81,4 +82,5 @@ export default function(controller) {
   controller.signal('course.seekChanged', track('course.seeked', seekChanged));
   controller.signal('course.buttonPopoverClicked', buttonPopoverClicked);
   controller.signal('course.sandboxClicked', track('course.sandboxClicked', sandboxClicked));
+  controller.signal('course.videoBuffered', track('course.videoBuffered', videoBuffered));
 }
