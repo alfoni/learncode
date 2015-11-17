@@ -19,7 +19,7 @@ const SceneControls = React.createClass({
   componentDidMount() {
     this.recorder = new Recorder(this.refs.video, {
       audio: {
-        sampleRate: 43800
+        sampleRate: 43990
       }
     });
 
