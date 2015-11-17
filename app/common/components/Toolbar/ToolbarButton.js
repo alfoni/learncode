@@ -37,24 +37,42 @@ class ToolbarButton extends React.Component {
     });
     this.props.onClick();
   }
+  renderTextButton() {
+    return (
+      <span className={styles.title}>
+        {this.props.title}
+        <span className={styles.caret}>&#9660;</span>
+      </span>
+    );
+  }
+  renderIconTextButton() {
+    return (
+      <div
+        className={this.props.active ? styles.activeTextIcon : styles.textIcon}
+        onMouseOver={() => this.showTooltip()}
+        onMouseOut={() => this.hideTooltip()}>
+        <div className={this.props.icon}></div>
+        <div className={styles.iconTitle}>{this.props.title}</div>
+      </div>
+    );
+  }
+  renderIconButton() {
+    return (
+      <div
+        className={this.props.active ? styles.activeIcon : styles.icon}
+        onMouseOver={() => this.showTooltip()}
+        onMouseOut={() => this.hideTooltip()}>
+        <div className={this.props.icon}></div>
+      </div>
+    );
+  }
   render() {
     return (
       <button className={styles.button} onClick={(e) => this.onClick(e)}>
         <Tooltip show={this.state.showTooltip && this.props.tooltip} text={this.props.tooltip}/>
-        {
-          this.props.title ?
-            <span className={styles.title}>
-              {this.props.title}
-              <span className={styles.caret}>&#9660;</span>
-            </span>
-          :
-          <div
-            className={this.props.active ? styles.activeIcon : styles.icon}
-            onMouseOver={() => this.showTooltip()}
-            onMouseOut={() => this.hideTooltip()}>
-            <div className={this.props.icon}></div>
-          </div>
-        }
+        { this.props.title && !this.props.icon ? this.renderTextButton() : null }
+        { this.props.title && this.props.icon ? this.renderIconTextButton() : null }
+        { !this.props.title && this.props.icon ? this.renderIconButton() : null }
       </button>
     );
   }

@@ -10,6 +10,7 @@ import ToolbarFileListItem from './Toolbar/ToolbarFileListItem.js';
 import AssignmentDescription from './Toolbar/AssignmentDescription.js';
 import AssignmentResult from './Toolbar/AssignmentResult.js';
 import ConfigureScenes from './Toolbar/ConfigureScenes.js';
+import AssignmentIndication from './Toolbar/AssignmentIndication.js';
 import icons from 'common/icons.css';
 
 @Cerebral({
@@ -24,7 +25,8 @@ import icons from 'common/icons.css';
   showEditAssignment: ['course', 'showEditAssignment'],
   showAssignment: ['course', 'showAssignment'],
   courseName: ['course', 'name'],
-  isAdmin: ['user', 'isAdmin']
+  isAdmin: ['user', 'isAdmin'],
+  isLoadingPreview: ['course', 'isLoadingPreview']
 }, {
   currentFile: ['currentFile'],
   currentScene: ['currentScene']
@@ -33,7 +35,7 @@ class Toolbar extends React.Component {
   folderClick() {
     this.props.signals.course.openFolderClicked();
   }
-  folderFileClicked(index) { // TOOD: Refacotr to folderFileClicked
+  folderFileClicked(index) {
     this.props.signals.course.folderFileClicked({index: index});
   }
   renderFilesList() {
@@ -100,30 +102,32 @@ class Toolbar extends React.Component {
         <ToolbarButton icon={icons.menu}/>
         <ToolbarSeparator/>
         <ToolbarTitle title={this.props.courseName}/>
-        <ToolbarButton tooltip="Lagre" icon={icons.save} onClick={() => this.props.signals.course.saveSceneClicked()}/>
+        <ToolbarButton title="Lagre" icon={icons.save} onClick={() => this.props.signals.course.saveSceneClicked()}/>
         <ToolbarSeparator/>
-        <ToolbarButtonPopover tooltip="Vis filer" onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
+        <ToolbarButtonPopover title="Filer" onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
           {this.renderFilesList()}
         </ToolbarButtonPopover>
-        <ToolbarButton tooltip="Legg til fil" icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
+        <ToolbarButton title="Ny fil" icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
         <ToolbarInput show={this.props.showAddFileInput}
                       value={this.props.newFileName}
                       onChange={(e) => this.onAddFileInputChange(e)}
                       onSubmit={(e) => this.onAddFileSubmit(e)}
                       onKeyDown={(e) => this.onAddFileInputKeyDown(e)}
                       onBlur={() => this.props.signals.course.addFileInputBlurred()}
-                      placeholder="Type filename..."/>
+                      placeholder="Navn på ny fil..."/>
         <ToolbarSeparator/>
         { /* <ToolbarButton active={this.props.showPreview} icon={icons.showBrowser}
           onClick={() => this.props.signals.course.showPreviewClicked()}/> */ }
         { /* }<ToolbarButton active={this.props.showConsole} icon={icons.assignment}
           onClick={() => this.props.signals.course.showConsoleClicked()}/> */ }
         { /* }<ToolbarSeparator/> */ }
-        <ToolbarButtonPopover tooltip="Vis oppgave" onClick={(e) => this.assignmentClicked(e)} show={this.props.showAssignment} icon={icons.school}>
+        <ToolbarButtonPopover title="Oppgave" onClick={(e) => this.assignmentClicked(e)} show={this.props.showAssignment} icon={icons.school}>
           <AssignmentDescription description={this.props.currentScene.assignment.description}/>
           <AssignmentResult/>
         </ToolbarButtonPopover>
-        <ToolbarButton tooltip="Kjør oppgave" icon={icons.checkbox} onClick={() => this.props.signals.course.runAssignmentClicked()}/>
+        <ToolbarSeparator/>
+        <AssignmentIndication assignmentResult={this.props.currentScene.assignment.result} isRunningAssignment={this.props.isLoadingPreview}/>
+        <ToolbarSeparator/>
         {
           this.props.isAdmin ?
             <ToolbarButton
