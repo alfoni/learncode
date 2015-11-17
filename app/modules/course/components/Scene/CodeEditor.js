@@ -40,7 +40,8 @@ class CodeEditor extends React.Component {
       this.props.recorder.isPlaying ||
       this.props.recorder.started !== prevProps.recorder.started ||
       this.props.currentScene.currentFileIndex !== prevProps.currentScene.currentFileIndex ||
-      this.props.currentSceneIndex !== prevProps.currentSceneIndex
+      this.props.currentSceneIndex !== prevProps.currentSceneIndex ||
+      this.props.recorder.currentSeek !== prevProps.recorder.currentSeek
     ) {
       this.updateAllCode();
     }
@@ -87,7 +88,7 @@ class CodeEditor extends React.Component {
     };
 
     const extension = path.extname(this.props.currentScene.sandboxFiles[this.props.currentScene.currentFileIndex].name);
-    
+
     return modes[extension] || 'xml';
   }
   onEditorChange(instance, event) {

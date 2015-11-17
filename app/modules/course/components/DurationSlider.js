@@ -8,29 +8,20 @@ import styles from './DurationSlider.css';
   currentScene: ['currentScene']
 })
 class DurationSlider extends React.Component {
+  static contextTypes = {
+    controller: React.PropTypes.object
+  }
   constructor() {
     super();
     this.state = {
       timer: 0,
-      interval: null,
-      duration: 0
+      interval: null
     };
   }
-  componentWillMount() {
-    const duration = this.props.currentScene.duration || 0;
-
-    this.setState({
-      duration: duration
-    });
-  }
   componentDidUpdate(prevProps) {
-    if (this.props.recorder === prevProps.recorder) {
-      return;
-    }
-
-    if (this.props.recorder.isPlaying) {
-      this.startInterval(this.props.currentScene.recording.currentTime);
-    } else {
+    if (!prevProps.recorder.isPlaying && this.props.recorder.isPlaying) {
+      this.startInterval(this.props.recorder.currentSeek[0]);
+    } else if (prevProps.recorder.isPlaying && !this.props.recorder.isPlaying) {
       this.stopInterval();
     }
   }
@@ -52,23 +43,31 @@ class DurationSlider extends React.Component {
   }
   handlerPosition() {
     let handlerPosition = 0;
-    const duration = (this.state.duration / 1000).toFixed() - 1;
+    const duration = ((this.props.currentScene.duration || 0) / 1000).toFixed() - 1;
     const timer = (this.state.timer / 1000).toFixed();
     handlerPosition = timer / duration * 100;
     handlerPosition = handlerPosition > 100 ? 100 : handlerPosition;
-
     return handlerPosition + '%';
   }
   seek(event) {
-    if (this.props.currentScene.recording) {
+    if (this.props.currentScene.recording && !this.context.controller.store.isExecutingAsync()) {
       const seek = this.props.currentScene.duration / window.innerWidth * event.clientX;
-      this.props.signals.course.seeked({
+
+      console.log(this.props.currentScene.duration, seek);
+      this.props.signals.course.seekChanged({
         seek: seek
       }, {
         isRecorded: true
       });
       clearInterval(this.state.interval);
-      this.startInterval(seek - 1000);
+      
+      if (this.props.recorder.isPlaying) {
+        this.startInterval(seek);
+      } else {
+        this.setState({
+          timer: seek
+        });
+      }
     }
   }
   render() {

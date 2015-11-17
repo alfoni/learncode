@@ -38,7 +38,7 @@ import mediaLoaded from './signals/mediaLoaded';
 import videoStartedBuffering from './signals/videoStartedBuffering';
 import videoFailed from './signals/videoFailed';
 import codeCursorChanged from './signals/codeCursorChanged';
-import seeked from './signals/seeked';
+import seekChanged from './signals/seekChanged';
 import buttonPopoverClicked from './signals/buttonPopoverClicked';
 import sandboxClicked from './signals/sandboxClicked';
 
@@ -81,7 +81,7 @@ export default function(controller) {
   controller.signal('course.videoStartedBuffering', track('course.videoStartedBuffering', videoStartedBuffering));
   controller.signal('course.videoFailed', track('course.videoFailed', videoFailed));
   controller.signal('course.codeCursorChanged', track('course.codeCursorChanged', codeCursorChanged));
-  controller.signal('course.seeked', track('course.seeked', seeked));
+  controller.signal('course.seekChanged', track('course.seeked', seekChanged));
   controller.signal('course.buttonPopoverClicked', track('course.buttonPopoverClicked', buttonPopoverClicked));
   controller.signal('course.sandboxClicked', track('course.sandboxClicked', sandboxClicked));
 }
