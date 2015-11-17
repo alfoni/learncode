@@ -41,7 +41,6 @@ class Log extends React.Component {
   }
   renderSignals() {
     let marginTop = 0;
-    let firstTimestamp = 0;
     let previousTimestamp = 0;
 
     return this.props.selectedSession.signals.map((signal, index) => {
@@ -49,12 +48,7 @@ class Log extends React.Component {
       previousTimestamp = signal.timestamp;
 
       if (index === 0) {
-        firstTimestamp = signal.timestamp;
         timeSinceLastSignal = 0;
-      }
-
-      if (index === this.props.selectedSession.signals.length - 1) {
-        this.totalSessionTime = (signal.timestamp - firstTimestamp) / 1000;
       }
 
       marginTop = timeSinceLastSignal * 10;
@@ -86,6 +80,12 @@ class Log extends React.Component {
       );
     });
   }
+  getTotalSessionTime(signals) {
+    const firstTimestamp = signals[0].timestamp;
+    const lastTimestamp = signals[signals.length - 1].timestamp;
+
+    return (lastTimestamp - firstTimestamp) / 1000;
+  }
   toggleSignalInputs(e) {
     this.props.signals.sessions.sessionSignalClicked({
       index: this.props.openedSignal === e.currentTarget.id ? null : e.currentTarget.id
@@ -96,7 +96,7 @@ class Log extends React.Component {
       <div>
         <div className={styles.user}>
           <div><b>{this.props.selectedSession.userId}</b></div>
-          Total sessiontime: <b>{this.totalSessionTime} sec</b>
+          Total sessiontime: <b>{this.getTotalSessionTime(this.props.selectedSession.signals)} sec</b>
         </div>
         {this.renderSignals()}
       </div>
@@ -120,9 +120,7 @@ class Log extends React.Component {
             </select>
           </div>
           <div className={styles.timelineWrapper}>
-            {this.props.selectedSession ? this.renderSelectedSession() : this.props.signals.sessions.sessionSelected({
-              session: this.props.sessions[102]
-            })}
+            {this.props.selectedSession ? this.renderSelectedSession() : null}
           </div>
 
         </div>
