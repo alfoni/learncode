@@ -135,7 +135,11 @@ export default {
       });
 
       const readstream = gfs.createReadStream({
-        filename: filename
+        filename: filename,
+        range: {
+          startPos: start,
+          endPos: end
+        }
       });
       readstream.pipe(res);
     });

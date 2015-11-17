@@ -53,6 +53,8 @@ class DurationSlider extends React.Component {
   seek(event) {
     if (this.props.currentScene.recording && !this.context.controller.store.isExecutingAsync()) {
       const seek = this.props.currentScene.duration / window.innerWidth * event.clientX;
+
+      console.log('seek', seek / 1000);
       this.props.signals.course.seekChanged({
         seek: seek
       }, {

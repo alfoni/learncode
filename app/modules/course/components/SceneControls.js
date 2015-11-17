@@ -30,7 +30,7 @@ const SceneControls = React.createClass({
   },
   componentDidUpdate(prevProps, prevState) {
     if (!prevState.recorder.isEnded && this.state.recorder.isEnded) {
-      this.refs.video.removeEventListener('waiting', this.onWaiting);
+      // this.refs.video.removeEventListener('waiting', this.onWaiting);
     }
 
     if (!this.state.recorder.isRecording && !this.state.recorder.isEnded && prevState.recorder.currentSeek !== this.state.recorder.currentSeek) {
@@ -83,14 +83,15 @@ const SceneControls = React.createClass({
       audio: false
     };
 
-    this.refs.video.removeEventListener('waiting', this.onWaiting);
-    this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
+    // this.refs.video.removeEventListener('waiting', this.onWaiting);
+    // this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
 
     this.signals.course.videoStartedBuffering({}, {
       isRecorded: true
     });
 
     this.refs.video.addEventListener('canplaythrough', function startPlaying() {
+      console.log('Video ready!', self.refs.video.currentTime, self.refs.video.duration);
       bufferState.video = true;
       self.refs.video.removeEventListener('canplaythrough', startPlaying);
       self.refs.video.addEventListener('canplaythrough', self.onCanPlayThrough);
@@ -99,17 +100,20 @@ const SceneControls = React.createClass({
         if (continuePlaying) {
           self.refs.audio.play();
         }
+        console.log('video fires buffered');
         self.signals.course.videoBuffered({
           continuePlaying: continuePlaying
         }, {
           isRecorded: true
         });
       } else {
-        self.refs.video.pause();
+        console.log('pausing video');
+        // self.refs.video.pause();
       }
     });
 
     this.refs.audio.addEventListener('canplaythrough', function startPlaying() {
+      console.log('Audio ready!', self.refs.audio.currentTime, self.refs.audio.duration);
       bufferState.audio = true;
       self.refs.audio.removeEventListener('canplaythrough', startPlaying);
 
@@ -117,13 +121,15 @@ const SceneControls = React.createClass({
         if (continuePlaying) {
           self.refs.video.play();
         }
+        console.log('audio fires buffered');
         self.signals.course.videoBuffered({
           continuePlaying: continuePlaying
         }, {
           isRecorded: true
         });
       } else {
-        self.refs.audio.pause();
+        console.log('pausing audio');
+        // self.refs.audio.pause();
       }
     });
 
@@ -145,7 +151,7 @@ const SceneControls = React.createClass({
   },
   loadAudioAndVideo() {
     this.refs.video.addEventListener('canplaythrough', this.onCanPlayThrough);
-    this.refs.video.addEventListener('error', this.onError);
+    // this.refs.video.addEventListener('error', this.onError);
     this.refs.video.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/video`;
     this.refs.audio.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/audio`;
   },
@@ -179,8 +185,8 @@ const SceneControls = React.createClass({
     });
   },
   onRecordClick() {
-    this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
-    this.refs.video.removeEventListener('waiting', this.onWaiting);
+    // this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
+    // this.refs.video.removeEventListener('waiting', this.onWaiting);
     this.isRecording = true;
     this.recorder.record(() => this.signals.course.recordClicked());
   },
