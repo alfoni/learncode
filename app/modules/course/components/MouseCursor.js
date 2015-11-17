@@ -3,7 +3,7 @@ import {Decorator as Cerebral} from 'cerebral-react';
 import styles from './MouseCursor.css';
 
 @Cerebral({
-  isPlaying: ['course', 'recorder', 'isPlaying'],
+  isPlaying: ['recorder', 'isPlaying'],
   mousePosition: ['course', 'mousePosition']
 })
 class MouseCursor extends React.Component {

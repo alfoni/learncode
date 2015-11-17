@@ -78,24 +78,51 @@ const SceneControls = React.createClass({
     const seek = this.state.recorder.currentSeek[0];
     const continuePlaying = this.state.recorder.isPlaying;
     const self = this;
+    const bufferState = {
+      video: false,
+      audio: false
+    };
 
     this.signals.course.videoStartedBuffering({}, {
       isRecorded: true
     });
-    this.refs.audio.pause();
+
     this.refs.video.removeEventListener('waiting', this.onWaiting);
     this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
     this.refs.video.addEventListener('canplaythrough', function startPlaying() {
-      if (continuePlaying) {
-        self.refs.audio.play();
+      bufferState.video = true;
+
+      if (bufferState.audio) {
+        if (continuePlaying) {
+          self.refs.audio.play();
+        }
+        self.signals.course.videoBuffered({
+          continuePlaying: continuePlaying
+        }, {
+          isRecorded: true
+        });
+      } else {
+        self.refs.video.pause();
       }
-      self.signals.course.videoBuffered({
-        continuePlaying: continuePlaying
-      }, {
-        isRecorded: true
-      });
       self.refs.video.removeEventListener('canplaythrough', startPlaying);
       self.refs.video.addEventListener('canplaythrough', self.onCanPlayThrough);
+    });
+
+    this.refs.audio.addEventListener('canplaythrough', function startPlaying() {
+      bufferState.audio = true;
+
+      if (bufferState.video) {
+        if (continuePlaying) {
+          self.refs.video.play();
+        }
+        self.signals.course.videoBuffered({
+          continuePlaying: continuePlaying
+        }, {
+          isRecorded: true
+        });
+      } else {
+        self.refs.audio.pause();
+      }
     });
 
     this.refs.video.currentTime = seek / 1000;
@@ -269,7 +296,7 @@ const SceneControls = React.createClass({
             null
         }
         <PlayButton
-          disabled={this.isExecutingSignal || this.state.course.isLoadingMedia}
+          disabled={this.state.recorder.isBuffering || this.isExecutingSignal || this.state.course.isLoadingMedia}
           recorder={this.state.recorder}
           onPlayClick={() => this.onPlayClick()}
           onPauseClick={() => this.onPauseClick()}/>
