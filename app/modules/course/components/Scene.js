@@ -3,7 +3,6 @@ import {Decorator as Cerebral} from 'cerebral-react';
 import Module from './Scene/Module.js';
 import ModuleToolbar from './Scene/ModuleToolbar.js';
 import ModuleFileName from './Scene/ModuleFileName.js';
-import ModuleAddressbar from './Scene/ModuleAddressbar.js';
 import CodeEditor from './Scene/CodeEditor.js';
 import Preview from './Scene/Preview.js';
 import Console from './Scene/Console.js';
@@ -47,9 +46,7 @@ class Scene extends React.Component {
           <CodeEditor/>
         </Module>
         <Module show={Boolean(true)}>
-          <ModuleToolbar title="NETTLESER">
-            <ModuleAddressbar url={process.env.NODE_ENV === 'production' ? 'http://sandbox.kodeboksen.no' : 'http://sandbox.kodeboksen.dev:3000'}/>
-          </ModuleToolbar>
+          <ModuleToolbar title="NETTLESER"/>
           <Preview show={this.props.showPreview}/>
           <Console show={this.props.showConsole}/>
         </Module>

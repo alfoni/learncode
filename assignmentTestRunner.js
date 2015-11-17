@@ -7,7 +7,9 @@
 
     window.parent.postMessage({
       signal: 'sandboxTested',
-      payload: result
+      payload: {
+        result: result
+      }
     }, location.origin.replace('sandbox', 'www'));
   });
 }(window));

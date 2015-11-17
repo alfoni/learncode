@@ -32,11 +32,6 @@ import icons from 'common/icons.css';
   currentScene: ['currentScene']
 })
 class Toolbar extends React.Component {
-  componentDidUpdate(prevprops) {
-    if (this.props.currentScene.assignment.result !== prevprops.currentScene.assignment.result) {
-      this.props.signals.course.openAssignmentClicked();
-    }
-  }
   folderClick() {
     this.props.signals.course.openFolderClicked();
   }
@@ -126,7 +121,10 @@ class Toolbar extends React.Component {
         { /* }<ToolbarButton active={this.props.showConsole} icon={icons.assignment}
           onClick={() => this.props.signals.course.showConsoleClicked()}/> */ }
         { /* }<ToolbarSeparator/> */ }
-        <ToolbarButtonPopover title="Oppgave" onClick={(e) => this.assignmentClicked(e)} show={this.props.showAssignment} icon={icons.school}>
+        <ToolbarButtonPopover
+          title="Oppgave"
+          onClick={(e) => this.assignmentClicked(e)}
+          show={!this.props.isLoadingPreview && this.props.showAssignment} icon={icons.school}>
           <AssignmentDescription description={this.props.currentScene.assignment.description}/>
           <AssignmentResult/>
         </ToolbarButtonPopover>

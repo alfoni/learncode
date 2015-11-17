@@ -33,8 +33,18 @@ const SceneControls = React.createClass({
       this.refs.video.removeEventListener('waiting', this.onWaiting);
     }
 
-    if (prevState.recorder.currentSeek !== this.state.recorder.currentSeek) {
+    if (!this.state.recorder.isRecording && !this.state.recorder.isEnded && prevState.recorder.currentSeek !== this.state.recorder.currentSeek) {
       this.seek();
+    }
+
+    if (!this.state.recorder.isRecording && prevState.recorder.isPlaying && !this.state.recorder.isPlaying) {
+      this.refs.video.pause();
+      this.refs.audio.pause();
+    }
+
+    if (!this.state.recorder.isRecording && !prevState.recorder.isPlaying && this.state.recorder.isPlaying) {
+      this.refs.video.play();
+      this.refs.audio.play();
     }
   },
   componentWillUnmount() {
@@ -113,7 +123,7 @@ const SceneControls = React.createClass({
   onPlaying() {
     this.refs.audio.play();
     this.signals.course.playClicked({
-      seek: this.refs.video.currentTime * 1000
+      seek: this.state.recorder.currentSeek[0]
     });
   },
   onError() {
@@ -132,7 +142,9 @@ const SceneControls = React.createClass({
   onStopClick() {
     this.isUploadReady = this.isRecording;
     this.isRecording = false;
-    this.signals.course.stopClicked();
+    this.signals.course.stopClicked({
+      seek: this.refs.video.currentTime * 1000
+    });
     setTimeout(() => {
       this.recorder.stop();
       const blobs = this.recorder.getBlobs();
@@ -141,16 +153,14 @@ const SceneControls = React.createClass({
     }, 250);
   },
   onPlayClick() {
-    this.refs.video.play();
-    this.refs.audio.play();
     this.signals.course.playClicked({
-      seek: this.refs.video.currentTime * 1000
+      seek: this.state.recorder.isEnded ? 0 : this.refs.video.currentTime * 1000
     });
   },
   onPauseClick() {
-    this.refs.video.pause();
-    this.refs.audio.pause();
-    this.signals.course.pauseClicked({}, {
+    this.signals.course.pauseClicked({
+      seek: this.refs.video.currentTime * 1000
+    }, {
       isRecorded: true
     });
   },

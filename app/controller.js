@@ -29,7 +29,8 @@ const model = Model({
     isRecording: false,
     hasRecorded: false,
     isBuffering: false,
-    currentSeek: [0, Date.now()]
+    currentSeek: [0, Date.now()],
+    lastPaused: Date.now()
   },
   course: {
     name: 'Course 1',

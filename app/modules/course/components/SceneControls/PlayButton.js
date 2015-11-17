@@ -13,12 +13,14 @@ function PlayButton(props) {
     className = styles.playing;
   }
 
+  const isRecordingOrPlaying = props.recorder.isRecording || props.recorder.isPlaying;
+
   return (
     <button
       className={className}
-      onClick={() => props.recorder.isPlaying ? props.onPauseClick() : props.onPlayClick()}
+      onClick={() => isRecordingOrPlaying ? props.onPauseClick() : props.onPlayClick()}
       disabled={props.disabled}>
-      <div className={props.recorder.isRecording || props.recorder.isPlaying ? icons.pause : icons.play}></div>
+      <div className={isRecordingOrPlaying ? icons.pause : icons.play}></div>
     </button>
   );
 }
