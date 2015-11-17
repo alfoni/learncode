@@ -31,7 +31,6 @@ import uploadFailed from './signals/uploadFailed';
 import removeFileClicked from './signals/removeFileClicked';
 import newSceneNameChanged from './signals/newSceneNameChanged';
 import sandboxTested from './signals/sandboxTested';
-import runAssignmentClicked from './signals/runAssignmentClicked';
 import addFileNameUpdated from './signals/addFileNameUpdated';
 import pauseClicked from './signals/pauseClicked';
 import mediaLoaded from './signals/mediaLoaded';
@@ -74,7 +73,6 @@ export default function(controller) {
   controller.signal('course.removeFileClicked', track('course.removeFileClicked', removeFileClicked));
   controller.signal('course.newSceneNameChanged', track('course.newSceneNameChanged', newSceneNameChanged));
   controller.signal('course.sandboxTested', track('course.sandboxTested', sandboxTested));
-  controller.signal('course.runAssignmentClicked', track('course.runAssignmentClicked', runAssignmentClicked));
   controller.signal('course.addFileNameUpdated', track('course.addFileNameUpdated', addFileNameUpdated));
   controller.signal('course.pauseClicked', track('course.pauseClicked', pauseClicked));
   controller.signal('course.mediaLoaded', track('course.mediaLoaded', mediaLoaded));

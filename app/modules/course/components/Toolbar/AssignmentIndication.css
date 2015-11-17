@@ -1,0 +1,37 @@
+.wrapper {
+  float: left;
+  font-family: Roboto, sans-serif;
+  font-size: 12px;
+  line-height: 54px;
+  width: 150px;
+  color: rgba(0, 0, 0, 0.4);
+  padding-left: 10px;
+}
+
+.icon {
+  font-size: 20px;
+  display: inline-block;
+  margin-top: 15px;
+  vertical-align: top;
+}
+
+.text {
+  display: inline-block;
+  margin-left: 10px;
+  vertical-align: top;
+}
+
+.success {
+  composes: icon;
+  color: #4CAF50;
+}
+
+.failure {
+  composes: icon;
+  color: #f44336;
+}
+
+.runningAssignment {
+  composes: icon;
+  color: rgba(0, 0, 0, 0.2);
+}
