@@ -45,7 +45,7 @@ class Course extends React.Component {
     this.hasMounted = false;
   }
   onKeydown(event) {
-    if (event.metaKey && event.keyCode === 83) {
+    if ((event.metaKey || event.ctrlKey) && event.keyCode === 83) {
       event.preventDefault();
       this.props.signals.course.saveShortcutPressed();
     }
