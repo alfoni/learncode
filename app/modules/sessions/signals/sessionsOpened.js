@@ -1,20 +1,20 @@
 import setPage from 'common/factories/actions/setPage.js';
 import set from 'common/factories/actions/set.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
-import loadLogs from '../actions/loadLogs.js';
-import setLogs from '../actions/setLogs.js';
+import loadSessions from '../actions/loadSessions.js';
+import setSessions from '../actions/setSessions.js';
 
 export default [
-  setPage('log'),
-  set(['log', 'isLoading'], true),
+  setPage('sessions'),
+  set(['sessions', 'isLoading'], true),
   [
-    loadLogs, {
+    loadSessions, {
       success: [
-        setLogs,
+        setSessions,
         showSnackbar('Logger er lastet')
       ],
       error: [
-        showSnackbar('Kunne ikke hente brukerlogger!')
+        showSnackbar('Kunne ikke hente sesjoner!')
       ]
     }
   ]

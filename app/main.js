@@ -9,7 +9,7 @@ import homeOpened from './modules/home/signals/homeOpened.js';
 import courseSignals from './modules/course/signals.js';
 import homeSignals from './modules/home/signals.js';
 import coursesSignals from './modules/courses/signals.js';
-import logSignals from './modules/log/signals.js';
+import sessionsSignals from './modules/sessions/signals.js';
 
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/actions/hideSnackbar.js';
@@ -25,13 +25,13 @@ controller.signal('missingRouteRouted', [
 homeSignals(controller);
 courseSignals(controller);
 coursesSignals(controller);
-logSignals(controller);
+sessionsSignals(controller);
 
 Router(controller, {
   '/': 'homeOpened',
   '/courses': 'courses.coursesOpened',
   '/courses/:courseId/scenes/:sceneIndex': 'course.courseOpened',
-  '/log': 'log.logOpened',
+  '/sessions': 'sessions.sessionsOpened',
   '*': 'missingRouteRouted'
 }, {
   onlyHash: true

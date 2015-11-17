@@ -63,9 +63,13 @@ const model = Model({
     isLoading: false,
     isAdmin: false
   },
+  sessions: {
+    selectedSession: null,
+    sessionsList: [],
+    openedSignal: null
+  },
   session: {
-    sessionid: null,
-    isLoading: false
+    sessionId: null
   }
 });
 
