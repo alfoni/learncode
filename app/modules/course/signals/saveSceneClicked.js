@@ -2,7 +2,6 @@ import saveSandboxChain from '../chains/saveSandbox';
 import isPlayingOrRecording from '../actions/isPlayingOrRecording.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import saveScene from '../actions/saveScene.js';
-import trackData from 'common/factories/actions/trackData.js';
 
 export default [
   isPlayingOrRecording, {
@@ -14,10 +13,7 @@ export default [
       [
         saveScene, {
           success: [
-            showSnackbar('Scenen er lagret'),
-            [
-              trackData('SCENE_SAVED')
-            ]
+            showSnackbar('Scenen er lagret')
           ],
           error: [
             showSnackbar('Det skjedde en feil med lagring av scenen!')

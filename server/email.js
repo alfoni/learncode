@@ -7,6 +7,7 @@ export default function(message) {
       message: message,
       async: true
     }, (result) => {
+      console.log(result);
       resolve(result);
     }, (e) => {
       console.log('Mandrill error: ' + e.name + ' ' + e.message);
