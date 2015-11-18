@@ -33,8 +33,18 @@ const SceneControls = React.createClass({
       // this.refs.video.removeEventListener('waiting', this.onWaiting);
     }
 
-    if (!this.state.recorder.isRecording && !this.state.recorder.isEnded && prevState.recorder.currentSeek !== this.state.recorder.currentSeek) {
-      this.seek();
+    const hasChangedPlayMode = prevState.recorder.isPlaying !== this.state.recorder.isPlaying;
+    
+    if (
+      !this.state.recorder.isRecording &&
+      !this.state.recorder.isEnded &&
+      !hasChangedPlayMode &&
+      prevState.recorder.currentSeek !== this.state.recorder.currentSeek) {
+      console.log(prevState.recorder.currentSeek[0], this.state.recorder.currentSeek[0]);
+        this.seek(
+          parseInt(prevState.recorder.currentSeek[0], 10) ===
+          parseInt(this.state.recorder.currentSeek[0], 10)
+        );
     }
 
     if (!this.state.recorder.isRecording && prevState.recorder.isPlaying && !this.state.recorder.isPlaying) {
@@ -74,7 +84,8 @@ const SceneControls = React.createClass({
       this.forceUpdate();
     }
   },
-  seek() {
+  seek(isSame) {
+    console.log('isSame', isSame, this.state.recorder.currentSeek);
     const seek = this.state.recorder.currentSeek[0];
     const continuePlaying = this.state.recorder.isPlaying;
     const self = this;
@@ -82,6 +93,13 @@ const SceneControls = React.createClass({
       video: false,
       audio: false
     };
+
+    if (isSame && continuePlaying) {
+      this.refs.video.play();
+      this.refs.audio.play();
+
+      return;
+    }
 
     // this.refs.video.removeEventListener('waiting', this.onWaiting);
     // this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);

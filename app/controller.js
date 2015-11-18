@@ -42,7 +42,6 @@ const model = Model({
     isLoading: false,
     isLoadingMedia: false,
     authorId: null,
-    currentSeek: [0, Date.now()],
     showPreview: true,
     showConsole: false,
     showEditAssignment: false,

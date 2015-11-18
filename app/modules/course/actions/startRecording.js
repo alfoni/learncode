@@ -5,6 +5,7 @@ function startRecording(input, state, output, services) {
   });
   const currentSceneIndex = state.get(['course', 'currentSceneIndex']);
   state.unset(['course', 'scenes', currentSceneIndex, 'duration']);
+  state.set(['course', 'scenes', currentSceneIndex, 'recording'], true);
   services.recorder.record({
     path: ['course']
   });

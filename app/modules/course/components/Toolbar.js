@@ -131,6 +131,12 @@ class Toolbar extends React.Component {
         <ToolbarSeparator/>
         <AssignmentIndication assignmentResult={this.props.currentScene.assignment.result} isRunningAssignment={this.props.isLoadingPreview}/>
         <ToolbarSeparator/>
+        <ToolbarButtonPopover onClick={(e) => this.sceneNameClicked(e)}
+                              title={this.props.currentScene.name}
+                              show={this.props.showScenesList}>
+          {this.renderScenesList()}
+        </ToolbarButtonPopover>
+        <ToolbarSeparator/>
         {
           this.props.isAdmin ?
             <ToolbarButton
@@ -140,12 +146,7 @@ class Toolbar extends React.Component {
           :
             null
         }
-        <ToolbarSeparator/>
-        <ToolbarButtonPopover onClick={(e) => this.sceneNameClicked(e)}
-                              title={this.props.currentScene.name}
-                              show={this.props.showScenesList}>
-          {this.renderScenesList()}
-        </ToolbarButtonPopover>
+        { this.props.isAdmin ?  <ToolbarSeparator/> : null}
         {
           this.props.isAdmin ?
             <ToolbarButtonPopover icon={icons.thumbUp}

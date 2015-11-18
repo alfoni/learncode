@@ -45,9 +45,9 @@ export default function getSandboxFile(req, res) {
     const headTagExists = code.indexOf('<head>') >= 0;
 
     if (headTagExists) {
-      code = code.replace('</head>', [
-        insertMouseClickScript,
-        '\n</head>'
+      code = code.replace('<head>', [
+        '<head>\n',
+        insertMouseClickScript
       ].join(''));
     } else {
       code = code.replace('<html>', [
@@ -60,14 +60,14 @@ export default function getSandboxFile(req, res) {
 
     if (assignment && assignment.code) {
       if (headTagExists) {
-        code = code.replace('</head>', [
-          insertAssignmentScript,
-          '\n</head>'
+        code = code.replace('<head>', [
+          '<head>\n',
+          insertAssignmentScript
         ].join(''));
       } else {
         code = code.replace('<html>', [
           '<html>',
-          '\n<head>',
+          '\n<head>\n',
           insertAssignmentScript,
           '\n</head>'
         ].join(''));

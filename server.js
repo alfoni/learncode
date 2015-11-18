@@ -12,6 +12,8 @@ import config from './webpack.config.js';
 import appController from './server/appController.js';
 import sandboxController from './server/sandboxController.js';
 import db from './server/database.js';
+import email from './server/email.js';
+import introductionPhase2 from './server/emailTemplates/introductionPhase2.js';
 
 const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
@@ -23,6 +25,17 @@ app.use(subdomain({
   base: isDeveloping ? 'kodeboksen.dev' : 'kodeboksen.no',
   ignoreWWW: true
 }));
+
+/*email({
+  html: introductionPhase2(),
+  subject: 'Introduksjon av Kodeboksen',
+  from_email: 'post@kodeboksen.no',
+  from_name: 'Kodeboksen',
+  to: [{
+    email: 'tommy.ostgaard@gmail.com',
+    name: 'tommy.ostgaard@gmail.com'
+  }]
+});*/
 
 app.use(bodyParser.json({limit: '10mb'}));
 app.use(express.static(__dirname + '/public'));
