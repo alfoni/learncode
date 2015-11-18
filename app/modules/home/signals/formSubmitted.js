@@ -12,7 +12,7 @@ export default [
         setUser,
         redirect(
           process.env.NODE_ENV === 'production' ?
-            '/courses/ca434112-1be6-4db4-90b7-1b8c9db134c7/scenes/0'
+            '/courses/0a4bc01e-956d-49ee-b1ec-53fd29c849cd/scenes/0'
           :
             '/courses/51549181-0839-437e-9813-4f1dc4c3b354/scenes/0'
           )
