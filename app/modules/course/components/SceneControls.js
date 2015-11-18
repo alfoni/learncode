@@ -91,7 +91,6 @@ const SceneControls = React.createClass({
     });
 
     this.refs.video.addEventListener('canplaythrough', function startPlaying() {
-      console.log('Video ready!', self.refs.video.currentTime, self.refs.video.duration);
       bufferState.video = true;
       self.refs.video.removeEventListener('canplaythrough', startPlaying);
       self.refs.video.addEventListener('canplaythrough', self.onCanPlayThrough);
@@ -100,20 +99,18 @@ const SceneControls = React.createClass({
         if (continuePlaying) {
           self.refs.audio.play();
         }
-        console.log('video fires buffered');
+
         self.signals.course.videoBuffered({
           continuePlaying: continuePlaying
         }, {
           isRecorded: true
         });
       } else {
-        console.log('pausing video');
-        // self.refs.video.pause();
+        self.refs.video.pause();
       }
     });
 
     this.refs.audio.addEventListener('canplaythrough', function startPlaying() {
-      console.log('Audio ready!', self.refs.audio.currentTime, self.refs.audio.duration);
       bufferState.audio = true;
       self.refs.audio.removeEventListener('canplaythrough', startPlaying);
 
@@ -121,20 +118,18 @@ const SceneControls = React.createClass({
         if (continuePlaying) {
           self.refs.video.play();
         }
-        console.log('audio fires buffered');
         self.signals.course.videoBuffered({
           continuePlaying: continuePlaying
         }, {
           isRecorded: true
         });
       } else {
-        console.log('pausing audio');
-        // self.refs.audio.pause();
+        self.refs.audio.pause();
       }
     });
 
     this.refs.video.currentTime = seek / 1000;
-    this.refs.audio.currentTime = seek / 1000;
+    this.refs.audio.currentTime = (seek / 1000) - (seek / 1000 / 2);
   },
   createMediaRequest(url) {
     return new Promise((resolve) => {

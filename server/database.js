@@ -108,7 +108,8 @@ export default {
     .then(() => {
       return new Promise((resolve, reject) => {
         const pipe = req.pipe(gfs.createWriteStream({
-          filename: filename
+          filename: filename,
+          content_type: req.headers['content-type']
         }));
         pipe.on('error', reject);
         pipe.on('close', resolve);
