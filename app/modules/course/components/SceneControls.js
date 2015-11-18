@@ -34,13 +34,12 @@ const SceneControls = React.createClass({
     }
 
     const hasChangedPlayMode = prevState.recorder.isPlaying !== this.state.recorder.isPlaying;
-    
+
     if (
       !this.state.recorder.isRecording &&
       !this.state.recorder.isEnded &&
       !hasChangedPlayMode &&
       prevState.recorder.currentSeek !== this.state.recorder.currentSeek) {
-      console.log(prevState.recorder.currentSeek[0], this.state.recorder.currentSeek[0]);
         this.seek(
           parseInt(prevState.recorder.currentSeek[0], 10) ===
           parseInt(this.state.recorder.currentSeek[0], 10)
@@ -85,7 +84,6 @@ const SceneControls = React.createClass({
     }
   },
   seek(isSame) {
-    console.log('isSame', isSame, this.state.recorder.currentSeek);
     const seek = this.state.recorder.currentSeek[0];
     const continuePlaying = this.state.recorder.isPlaying;
     const self = this;
@@ -301,11 +299,11 @@ const SceneControls = React.createClass({
   render() {
     return (
       <div className={styles.wrapper}>
-        <UploadButton
-          isUploadReady={this.isUploadReady}
-          recorder={this.state.recorder}
-          onClick={() => this.onUploadClick()}
-        />
+      <UploadButton
+        isUploadReady={this.isUploadReady}
+        recorder={this.state.recorder}
+        onClick={() => this.onUploadClick()}
+      />
         {
           this.state.isAdmin ?
             <RecordButton

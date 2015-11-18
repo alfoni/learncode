@@ -26,7 +26,8 @@ import icons from 'common/icons.css';
   showAssignment: ['course', 'showAssignment'],
   courseName: ['course', 'name'],
   isAdmin: ['user', 'isAdmin'],
-  isLoadingPreview: ['course', 'isLoadingPreview']
+  isLoadingPreview: ['course', 'isLoadingPreview'],
+  recorder: ['recorder']
 }, {
   currentFile: ['currentFile'],
   currentScene: ['currentScene']
@@ -99,6 +100,7 @@ class Toolbar extends React.Component {
   render() {
     return (
       <div className={styles.background}>
+        { this.props.recorder.isPlaying ? <div className={styles.toolbarOverlay}></div> : null }
         <ToolbarButton icon={icons.menu}/>
         <ToolbarSeparator/>
         <ToolbarTitle title={this.props.courseName}/>
