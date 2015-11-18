@@ -136,7 +136,7 @@ h1 {
 
 .loadingIcon {
   font-size: 38px;
-  line-height: 22px;
+  line-height: 22px !important;
 }
 
 .input {

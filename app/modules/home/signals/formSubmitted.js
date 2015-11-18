@@ -21,6 +21,5 @@ export default [
         showSnackbar('Kunne ikke registrere din e-post')
       ]
     }
-  ],
-  set(['home', 'showSigningupLoader'], false)
+  ]
 ];
