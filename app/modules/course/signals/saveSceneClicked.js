@@ -1,10 +1,10 @@
 import saveSandboxChain from '../chains/saveSandbox';
-import isPlayingOrRecording from '../actions/isPlayingOrRecording.js';
+import isPlayingRecordingOrNotAuthor from '../actions/isPlayingRecordingOrNotAuthor.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import saveScene from '../actions/saveScene.js';
 
 export default [
-  isPlayingOrRecording, {
+  isPlayingRecordingOrNotAuthor, {
     true: [
       ...saveSandboxChain
     ],
