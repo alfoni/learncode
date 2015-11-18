@@ -9,85 +9,60 @@ const responseTypes = {
   '.css': 'text/css'
 };
 
+const assignmentTestRunner = fs.readFileSync(path.resolve(__dirname, '../..', 'assignmentTestRunner.js'));
+const mouseClickScript = fs.readFileSync(path.resolve(__dirname, '../..', 'mouseClickScript.js'));
+
 export default function getSandboxFile(req, res) {
-  const assignment = sandbox.getAssignment();
+  const id = req.query.id;
   const file = sandbox.getFile(req.path.replace('/subdomain/sandbox', ''));
-
-  if (!file) {
-    return res.sendStatus(404);
-  }
-
-  let code = file.code;
   const type = responseTypes[path.extname(file.name)];
 
-  /* Console and Assignment input
-  if (file.name === 'index.html') {
-    code = file.code.replace('</head>', [
-      '<script>',
-      fs.readFileSync(path.resolve(__dirname, '..', 'console.js')).toString(),
-      '</script>\n</head>'
-    ].join(''));
-  }
-*/
+  const createIndexResponse = (code) => {
+    const assignment = sandbox.getAssignment();
 
-  if (file.name === 'index.html') {
     const insertAssignmentScript = ['<script>',
-    fs.readFileSync(path.resolve(__dirname, '../..', 'assignmentTestRunner.js'))
+    assignmentTestRunner
       .toString()
       .replace('%{CODE}%', assignment.code.replace(/\'/g, '\\\''))
       .split('\n').join(''),
     '</script>'].join('');
+
     const insertMouseClickScript = ['<script>',
-      fs.readFileSync(path.resolve(__dirname, '../..', 'mouseClickScript.js'))
+      mouseClickScript
         .toString()
         .split('\n').join(''),
       '</script>'].join('');
-    const headTagExists = code.indexOf('<head>') >= 0;
 
-    if (headTagExists) {
-      code = code.replace('<head>', [
-        '<head>\n',
-        insertMouseClickScript
-      ].join(''));
-    } else {
-      code = code.replace('<html>', [
-        '<html>',
-        '\n<head>',
-        insertMouseClickScript,
-        '\n</head>'
-      ].join(''));
-    }
+    code = code.replace('</body>', [
+      insertMouseClickScript,
+      '\n</body>'
+    ].join(''));
 
-    if (assignment && assignment.code) {
-      if (headTagExists) {
-        code = code.replace('<head>', [
-          '<head>\n',
-          insertAssignmentScript
-        ].join(''));
-      } else {
-        code = code.replace('<html>', [
-          '<html>',
-          '\n<head>\n',
-          insertAssignmentScript,
-          '\n</head>'
-        ].join(''));
-      }
-    }
+    code = code.replace('</body>', [
+      insertAssignmentScript,
+      '\n</body>'
+    ].join(''));
 
-    const id = req.query.id;
+    return code;
+  };
 
-    if (!responseSync[id]) {
-      responseSync[id] = function response() {
-        res.type(type);
-        res.send(sandbox.getFile(req.path.replace('/subdomain/sandbox', '')).code);
-        delete responseSync[id];
-      };
-
-      return;
-    }
+  if (file.name === 'index.html' && !responseSync[id]) {
+    responseSync[id] = function response() {
+      const index = createIndexResponse(sandbox.getFile(req.path.replace('/subdomain/sandbox', '')).code);
+      res.type(type);
+      res.send(index);
+      delete responseSync[id];
+    };
+  } else if (file.name === 'index.html') {
+    const index = createIndexResponse(sandbox.getFile(req.path.replace('/subdomain/sandbox', '')).code);
+    res.type(type);
+    res.send(index);
     delete responseSync[id];
+  } else {
+    if (!file) {
+      return res.sendStatus(404);
+    }
+    res.type(type);
+    res.send(file.code);
   }
-
-  res.type(type);
-  res.send(code);
 }
