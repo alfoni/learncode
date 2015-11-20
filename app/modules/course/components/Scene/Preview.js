@@ -3,6 +3,7 @@ import {Decorator as Cerebral} from 'cerebral-react';
 import styles from './Preview.css';
 
 @Cerebral({
+  isRecording: ['recorder', 'isRecording'],
   url: ['course', 'previewUrl']
 })
 class Preview extends React.Component {
@@ -19,6 +20,9 @@ class Preview extends React.Component {
     window.removeEventListener('message', this.onSandboxMessage);
   }
   onSandboxMessage(event) {
+    if (event.data.signal === 'sandboxTested' && this.props.isRecording) {
+      return;
+    }
     this.props.signals.course[event.data.signal](event.data.payload);
   }
   render() {

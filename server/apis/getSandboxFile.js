@@ -34,11 +34,13 @@ export default function getSandboxFile(req, res) {
       '</script>'].join('');
 
     code = code.replace('</body>', [
+      '<span></span>',
       insertMouseClickScript,
       '\n</body>'
     ].join(''));
 
     code = code.replace('</body>', [
+      '<span></span>',
       insertAssignmentScript,
       '\n</body>'
     ].join(''));

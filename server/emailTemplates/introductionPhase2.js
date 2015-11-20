@@ -21,7 +21,7 @@ export default function() {
   <body style="background-color: #F7F7F7; font-family: Helvetica, sans-serif; margin: 0; padding: 0; color: rgba(0, 0, 0, 0.8);">
     <div class="wrapper" style="padding: 20px;">
       <div style="font-size: 18px;">
-        <h1>Pre-introduksjon av Kodeboksen</h1>
+        <h1>Testing av Kodeboksen</h1>
       </div>
       </div>
       <div style="padding: 20px; background-color: #ECECEC; border-top: 1px solid #cacaca; border-bottom: 1px solid #cacaca;">
@@ -31,7 +31,12 @@ export default function() {
               Hei!
               <br/>
               <br/>
-
+              Tusen takk til dere som har vært med oss så langt og velkommen til de som er nye!
+              <br/>
+              <br/>
+              Dette er altså runde 2 med testing. Vi har tatt tilbakemeldingene fra runde 1 i betraktning, implementert ny funksjonalitet og rettet opp en del bugs
+              Dette blir samme prosedyre som sist. Logg inn på www.kodeboksen.no med epostadressen din og spill av kurset. Vi forteller litt om endringene
+              som er gjort først, deretter lærer vi litt HTML og avslutter med en oppgave.
               <br/><br/>
               Dersom du har noen spørsmål eller ønsker å sende oss tilbakemeldinger,
               kontakt oss gjerne på <a style="color: rgba(0, 0, 0, 0.4);" href="mailto:post@kodeboksen.no">post@kodeboksen.no</a>.

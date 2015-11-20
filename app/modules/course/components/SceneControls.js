@@ -5,6 +5,7 @@ import UploadButton from './SceneControls/UploadButton.js';
 import styles from './SceneControls.css';
 import {Mixin} from 'cerebral-react';
 import Recorder from 'chrome-recorder';
+import debounce from 'debounce';
 
 // Need access to Cerebral controller, so using normal
 // constructor
@@ -36,14 +37,14 @@ const SceneControls = React.createClass({
     const hasChangedPlayMode = prevState.recorder.isPlaying !== this.state.recorder.isPlaying;
 
     if (
-      !this.state.recorder.isRecording &&
-      !this.state.recorder.isEnded &&
-      !hasChangedPlayMode &&
-      prevState.recorder.currentSeek !== this.state.recorder.currentSeek) {
-        this.seek(
-          parseInt(prevState.recorder.currentSeek[0], 10) ===
-          parseInt(this.state.recorder.currentSeek[0], 10)
-        );
+    !this.state.recorder.isRecording &&
+    !this.state.recorder.isEnded &&
+    !hasChangedPlayMode &&
+    prevState.recorder.currentSeek !== this.state.recorder.currentSeek) {
+      this.seek(
+        parseInt(prevState.recorder.currentSeek[0], 10) ===
+        parseInt(this.state.recorder.currentSeek[0], 10)
+      );
     }
 
     if (!this.state.recorder.isRecording && prevState.recorder.isPlaying && !this.state.recorder.isPlaying) {
@@ -83,7 +84,7 @@ const SceneControls = React.createClass({
       this.forceUpdate();
     }
   },
-  seek(isSame) {
+  seek: debounce(function (isSame) {
     const seek = this.state.recorder.currentSeek[0];
     const continuePlaying = this.state.recorder.isPlaying;
     const self = this;
@@ -109,7 +110,6 @@ const SceneControls = React.createClass({
     this.refs.video.addEventListener('canplaythrough', function startPlaying() {
       bufferState.video = true;
       self.refs.video.removeEventListener('canplaythrough', startPlaying);
-      self.refs.video.addEventListener('canplaythrough', self.onCanPlayThrough);
 
       if (bufferState.audio) {
         if (continuePlaying) {
@@ -146,7 +146,7 @@ const SceneControls = React.createClass({
 
     this.refs.video.currentTime = seek / 1000;
     this.refs.audio.currentTime = (seek / 1000) - (seek / 1000 / 2);
-  },
+  }, 500),
   createMediaRequest(url) {
     return new Promise((resolve) => {
       const req = new XMLHttpRequest();
@@ -161,7 +161,27 @@ const SceneControls = React.createClass({
     });
   },
   loadAudioAndVideo() {
-    this.refs.video.addEventListener('canplaythrough', this.onCanPlayThrough);
+    const self = this;
+    const bufferState = {
+      video: false,
+      audio: false
+    };
+    this.refs.video.addEventListener('canplaythrough', function canStartPlaying() {
+      bufferState.video = true;
+      self.refs.video.removeEventListener('canplaythrough', canStartPlaying);
+
+      if (bufferState.audio) {
+        self.onCanPlayThrough();
+      }
+    });
+    this.refs.audio.addEventListener('canplaythrough', function canStartPlaying() {
+      bufferState.audio = true;
+      self.refs.audio.removeEventListener('canplaythrough', canStartPlaying);
+
+      if (bufferState.video) {
+        self.onCanPlayThrough();
+      }
+    });
     // this.refs.video.addEventListener('error', this.onError);
     this.refs.video.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/video`;
     this.refs.audio.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/audio`;
@@ -169,6 +189,7 @@ const SceneControls = React.createClass({
   onCanPlayThrough() {
     this.signals.course.mediaLoaded();
     this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
+    this.refs.audio.removeEventListener('canplaythrough', this.onCanPlayThrough);
   },
   onWaiting() {
     this.refs.audio.pause();

@@ -1,3 +1,5 @@
+import seekRecording from '../actions/seekRecording';
+
 function mediaLoaded(input, state) {
   state.merge(['snackbar'], {
     text: 'Video og lyd lastet!',
@@ -7,4 +9,7 @@ function mediaLoaded(input, state) {
   state.set(['course', 'isLoadingMedia'], false);
 }
 
-export default mediaLoaded;
+export default [
+  mediaLoaded,
+  seekRecording
+];

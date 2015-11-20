@@ -107,8 +107,9 @@
 }
 
 .cm-s-learncode span.cm-error {
-    //background: rgba(0,0,0,0.1);
-    color: #F44336;
+    /* background: rgba(0,0,0,0.1); */
+    background-color: #F44336;
+    color: #fff;
 }
 
 .cm-s-learncode .CodeMirror-activeline-background {

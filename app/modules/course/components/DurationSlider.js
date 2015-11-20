@@ -48,11 +48,11 @@ class DurationSlider extends React.Component {
     handlerPosition = timer / duration * 100;
     handlerPosition = handlerPosition > 100 ? 100 : handlerPosition;
 
-    return handlerPosition + '%';
+    return handlerPosition;
   }
   seek(event) {
     if (this.props.currentScene.recording && !this.context.controller.store.isExecutingAsync()) {
-      const seek = this.props.currentScene.duration / window.innerWidth * event.clientX;
+      const seek = this.props.currentScene.duration / event.currentTarget.offsetWidth * (event.clientX - event.currentTarget.offsetLeft);
 
       this.props.signals.course.seekChanged({
         seek: seek
@@ -70,12 +70,26 @@ class DurationSlider extends React.Component {
       }
     }
   }
+  renderTime(time) {
+    const min = Math.floor(time / 60000);
+    let sec = ((time % 60000) / 1000).toFixed(0);
+    sec = sec < 10 ? '0' + sec : sec;
+
+    return min + ':' + sec;
+  }
   render() {
+    const lineWidth = (100 - this.handlerPosition()); // Reversing percent
+
     return (
-      <div className={styles.wrapper} onClick={(event) => this.seek(event)}>
-        <div className={styles.line}>
-          <div className={styles.dot} style={{left: this.handlerPosition()}}></div>
+      <div className={styles.wrapper}>
+        <div className={styles.currentDuration}>{this.renderTime(this.state.timer)}</div>
+        <div className={styles.lineWrapper} onClick={(event) => this.seek(event)}>
+          <div className={styles.line}>
+            <div className={styles.progressedLine} style={{right: lineWidth + '%'}}></div>
+            <div className={styles.dot} style={{left: this.handlerPosition() + '%'}}></div>
+          </div>
         </div>
+        <div className={styles.durationEnd}>{this.renderTime(this.props.currentScene.duration)}</div>
       </div>
     );
   }
