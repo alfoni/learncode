@@ -1,11 +1,13 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
 import styles from './DurationSlider.css';
+import currentScene from '../computed/currentScene';
 
 @Cerebral({
-  recorder: ['recorder']
+  recorder: ['recorder'],
+  currentScene: currentScene
 }, {
-  currentScene: ['currentScene']
+
 })
 class DurationSlider extends React.Component {
   static contextTypes = {

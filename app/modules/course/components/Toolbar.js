@@ -12,6 +12,8 @@ import AssignmentResult from './Toolbar/AssignmentResult.js';
 import ConfigureScenes from './Toolbar/ConfigureScenes.js';
 import AssignmentIndication from './Toolbar/AssignmentIndication.js';
 import icons from 'common/icons.css';
+import currentScene from '../computed/currentScene';
+import currentFile from '../computed/currentFile';
 
 @Cerebral({
   scenes: ['course', 'scenes'],
@@ -27,10 +29,9 @@ import icons from 'common/icons.css';
   courseName: ['course', 'name'],
   isAdmin: ['user', 'isAdmin'],
   isLoadingPreview: ['course', 'isLoadingPreview'],
-  recorder: ['recorder']
-}, {
-  currentFile: ['currentFile'],
-  currentScene: ['currentScene']
+  recorder: ['recorder'],
+  currentFile: currentFile,
+  currentScene: currentScene
 })
 class Toolbar extends React.Component {
   folderClick() {

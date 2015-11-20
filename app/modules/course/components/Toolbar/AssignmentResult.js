@@ -2,10 +2,10 @@ import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
 import style from './AssignmentResult.css';
 import icons from 'common/icons.css';
+import currentScene from '../../computed/currentScene';
 
 @Cerebral({
-}, {
-  currentScene: ['currentScene']
+  currentScene: currentScene
 })
 class AssignmentResult extends React.Component {
   renderResult() {

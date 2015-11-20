@@ -10,16 +10,17 @@ import AssignmentDescriptionTextArea from './Scene/AssignmentDescriptionTextArea
 import AssignmentEditor from './Scene/AssignmentEditor.js';
 import RemoveFile from './Scene/RemoveFile.js';
 import styles from './Scene.css';
+import currentFile from '../computed/currentFile';
+import currentScene from '../computed/currentScene';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
   showEditAssignment: ['course', 'showEditAssignment'],
-  recorder: ['recorder']
-}, {
-  currentFile: ['currentFile'],
-  currentScene: ['currentScene']
+  recorder: ['recorder'],
+  currentFile: currentFile,
+  currentScene: currentScene
 })
 class Scene extends React.Component {
   assignmentDescriptionChanged(e) {

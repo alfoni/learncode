@@ -6,6 +6,7 @@ import styles from './SceneControls.css';
 import {Mixin} from 'cerebral-react';
 import Recorder from 'chrome-recorder';
 import debounce from 'debounce';
+import currentScene from '../computed/currentScene';
 
 // Need access to Cerebral controller, so using normal
 // constructor
@@ -68,12 +69,8 @@ const SceneControls = React.createClass({
     return {
       recorder: ['recorder'],
       course: ['course'],
-      isAdmin: ['user', 'isAdmin']
-    };
-  },
-  getComputedPaths() {
-    return {
-      currentScene: ['currentScene']
+      isAdmin: ['user', 'isAdmin'],
+      currentScene: currentScene
     };
   },
   updateIsExecutingSignal() {

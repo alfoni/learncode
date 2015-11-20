@@ -5,7 +5,7 @@ import {Container} from 'cerebral-react';
 import Router from 'cerebral-router';
 
 import App from './App.js';
-import homeOpened from './modules/home/signals/homeOpened.js';
+
 import courseSignals from './modules/course/signals.js';
 import homeSignals from './modules/home/signals.js';
 import coursesSignals from './modules/courses/signals.js';
@@ -14,7 +14,6 @@ import sessionsSignals from './modules/sessions/signals.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/actions/hideSnackbar.js';
 
-controller.signal('homeOpened', homeOpened);
 controller.signal('snackbarTimedOut', [
   hideSnackbar
 ]);

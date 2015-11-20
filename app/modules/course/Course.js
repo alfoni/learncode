@@ -1,5 +1,6 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
+import currentScene from './computed/currentScene';
 
 let Toolbar = null;
 let DurationSlider = null;
@@ -9,9 +10,8 @@ let styles = null;
 let MouseCursor = null;
 
 @Cerebral({
-  isLoading: ['course', 'isLoading']
-}, {
-  currentScene: ['currentScene'],
+  isLoading: ['course', 'isLoading'],
+  currentScene: currentScene
 })
 class Course extends React.Component {
   constructor() {
