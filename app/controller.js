@@ -87,18 +87,4 @@ const services = {
   }
 };
 
-const computed = {
-  currentScene(get) {
-    const sceneIndex = get(['course', 'currentSceneIndex']);
-    const scenes = get(['course', 'scenes']);
-
-    return scenes[sceneIndex];
-  },
-  currentFile(get, getComputed) {
-    const currentScene = getComputed(['currentScene']);
-
-    return currentScene.sandboxFiles[currentScene.currentFileIndex];
-  }
-};
-
-export default Controller(model, services, computed);
+export default Controller(model, services);

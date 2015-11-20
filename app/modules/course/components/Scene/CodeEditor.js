@@ -9,14 +9,15 @@ import {Decorator as Cerebral} from 'cerebral-react';
 import CodeMirror from 'codemirror';
 import path from 'path';
 import styles from './CodeEditor.css';
+import currentScene from '../../computed/currentScene';
+import currentFile from '../../computed/currentFile';
 
 @Cerebral({
   recorder: ['recorder'],
   currentSceneIndex: ['course', 'currentSceneIndex'],
-  codeSelection: ['course', 'codeSelection']
-}, {
-  currentScene: ['currentScene'],
-  currentFile: ['currentFile']
+  codeSelection: ['course', 'codeSelection'],
+  currentScene: currentScene,
+  currentFile: currentFile
 })
 class CodeEditor extends React.Component {
   constructor(props) {

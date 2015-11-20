@@ -8,12 +8,12 @@ import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
 import CodeMirror from 'codemirror';
 import styles from './AssignmentEditor.css';
+import currentScene from '../../computed/currentScene';
 
 @Cerebral({
   recorder: ['recorder'],
-  currentSceneIndex: ['course', 'currentSceneIndex']
-}, {
-  currentScene: ['currentScene']
+  currentSceneIndex: ['course', 'currentSceneIndex'],
+  currentScene: currentScene
 })
 class AssignmentEditor extends React.Component {
   constructor(props) {
