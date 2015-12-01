@@ -16,7 +16,7 @@ import currentScene from '../computed/currentScene';
 import currentFile from '../computed/currentFile';
 
 @Cerebral({
-  scenes: ['course', 'scenes'],
+  scenes: ['course', 'scenesList'],
   showPreview: ['course', 'showPreview'],
   showConsole: ['course', 'showConsole'],
   newFileName: ['course', 'newFileName'],
@@ -68,8 +68,8 @@ class Toolbar extends React.Component {
         <ToolbarFileListItem
           key={index}
           onClick={() => this.listSceneNameClicked(index)}
-          name={scene.name}
-          active={scene === this.props.currentScene}
+          name={scene}
+          active={scene === this.props.currentScene.name}
           />
       );
     });
