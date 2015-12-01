@@ -120,6 +120,10 @@ export default {
     gfs.files.find({
       filename: filename
     }).toArray((err, files) => {
+      if (err || !files.length) {
+        return res.send(404);
+      }
+
       const parts = req.headers.range.replace(/bytes=/, '').split('-');
       const partialstart = parts[0];
       const partialend = parts[1];

@@ -31,8 +31,10 @@ const SceneControls = React.createClass({
     this.context.controller.on('change', this.updateIsExecutingSignal);
   },
   componentDidUpdate(prevProps, prevState) {
-    if (!prevState.recorder.isEnded && this.state.recorder.isEnded) {
-      // this.refs.video.removeEventListener('waiting', this.onWaiting);
+    if (prevState.currentScene.name !== this.state.currentScene.name) {
+      this.loadAudioAndVideo();
+
+      return;
     }
 
     const hasChangedPlayMode = prevState.recorder.isPlaying !== this.state.recorder.isPlaying;
