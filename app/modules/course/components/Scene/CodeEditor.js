@@ -1,7 +1,7 @@
 import '!style!css!./../../../../../node_modules/codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/mode/css/css.js';
-import 'codemirror/mode/xml/xml.js';
+import 'codemirror/mode/htmlmixed/htmlmixed.js';
 import '!style!css!./CodeEditorStyle.css';
 
 import React from 'react';
@@ -83,7 +83,7 @@ class CodeEditor extends React.Component {
   }
   getMode() {
     const modes = {
-      '.html': 'xml',
+      '.html': 'htmlmixed',
       '.js': 'javascript',
       '.css': 'css'
     };

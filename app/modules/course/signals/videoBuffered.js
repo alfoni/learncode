@@ -1,6 +1,7 @@
 import playRecording from '../actions/playRecording';
 import showSnackbar from 'common/factories/actions/showSnackbar';
 import shouldContinuePlaying from '../actions/shouldContinuePlaying';
+import seekRecording from '../actions/seekRecording';
 import set from 'common/factories/actions/set';
 
 export default [
@@ -8,6 +9,7 @@ export default [
   set(['recorder', 'isBuffering'], false),
   shouldContinuePlaying, {
     true: [
+      seekRecording,
       playRecording
     ],
     false: []
