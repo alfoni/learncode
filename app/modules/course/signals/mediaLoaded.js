@@ -1,4 +1,4 @@
-import setCurrentSeek from '../actions/setSeek';
+import setCurrentSeek from '../actions/setCurrentSeek';
 
 function mediaLoaded(input, state) {
   state.merge(['snackbar'], {

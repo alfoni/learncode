@@ -20,6 +20,13 @@ class DurationSlider extends React.Component {
       interval: null
     };
   }
+  componentWillUpdate(nextProps) {
+    if (nextProps.recorder.currentSeek !== this.props.recorder.currentSeek) {
+      this.setState({
+        timer: nextProps.recorder.currentSeek[0]
+      });
+    }
+  }
   componentDidUpdate(prevProps) {
     if (!prevProps.recorder.isPlaying && this.props.recorder.isPlaying) {
       this.startInterval(this.props.recorder.currentSeek[0]);
