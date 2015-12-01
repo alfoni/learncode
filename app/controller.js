@@ -58,7 +58,8 @@ const model = Model({
       anchor: {ch: 0, line: 0},
       head: {ch: 0, line: 0}
     },
-    scenes: []
+    scenes: [],
+    scenesList: []
   },
   user: {
     isLoggedIn: false,

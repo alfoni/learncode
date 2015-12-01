@@ -192,7 +192,9 @@ const SceneControls = React.createClass({
     this.refs.audio.src = `/API/courses/${this.state.course.id}/scenes/${this.state.course.currentSceneIndex}/audio`;
   },
   onCanPlayThrough() {
-    this.signals.course.mediaLoaded();
+    this.signals.course.mediaLoaded({
+      seek: 0
+    });
     this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
     this.refs.audio.removeEventListener('canplaythrough', this.onCanPlayThrough);
   },

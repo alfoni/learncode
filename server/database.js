@@ -121,7 +121,7 @@ export default {
       filename: filename
     }).toArray((err, files) => {
       if (err || !files.length) {
-        return res.send(404);
+        return res.sendStatus(404);
       }
 
       const parts = req.headers.range.replace(/bytes=/, '').split('-');
