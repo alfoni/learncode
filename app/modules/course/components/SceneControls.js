@@ -97,6 +97,9 @@ const SceneControls = React.createClass({
       this.refs.audio.play();
 
       return;
+    } else {
+      this.refs.video.pause();
+      this.refs.audio.pause();
     }
 
     // this.refs.video.removeEventListener('waiting', this.onWaiting);
@@ -111,20 +114,20 @@ const SceneControls = React.createClass({
       self.refs.video.removeEventListener('canplaythrough', startPlaying);
 
       if (bufferState.audio) {
-        self.signals.course.videoBuffered({
-          continuePlaying: continuePlaying
-        }, {
-          isRecorded: true
-        });
-
         self.refs.video.currentTime = seek / 1000;
         self.refs.audio.currentTime = (seek / 1000) - (seek / 1000 / 2);
+        setTimeout(() => {
+          self.signals.course.videoBuffered({
+            continuePlaying: continuePlaying
+          }, {
+            isRecorded: true
+          });
 
-        if (continuePlaying) {
-          self.refs.audio.play();
-        }
-      } else {
-        self.refs.video.pause();
+          if (continuePlaying) {
+            self.refs.audio.play();
+            self.refs.video.play();
+          }
+        }, 500);
       }
     });
 
@@ -133,19 +136,20 @@ const SceneControls = React.createClass({
       self.refs.audio.removeEventListener('canplaythrough', startPlaying);
 
       if (bufferState.video) {
-        self.signals.course.videoBuffered({
-          continuePlaying: continuePlaying
-        }, {
-          isRecorded: true
-        });
         self.refs.video.currentTime = seek / 1000;
         self.refs.audio.currentTime = (seek / 1000) - (seek / 1000 / 2);
+        setTimeout(() => {
+          self.signals.course.videoBuffered({
+            continuePlaying: continuePlaying
+          }, {
+            isRecorded: true
+          });
 
-        if (continuePlaying) {
-          self.refs.video.play();
-        }
-      } else {
-        self.refs.audio.pause();
+          if (continuePlaying) {
+            self.refs.audio.play();
+            self.refs.video.play();
+          }
+        }, 500);
       }
     });
 
