@@ -1,6 +1,6 @@
 import db from './../database.js';
 
-export default function updateCourse(req, res) {
+export default function updateScene(req, res) {
   db.update('courses', {
     id: req.params.id
   }, {
