@@ -9,14 +9,6 @@ function RecordButton(props) {
     className = styles.recording;
   }
 
-  if (props.recorder.isPlaying) {
-    className = styles.playing;
-  }
-
-  if (props.recorder.isUploading) {
-    className = styles.uploading;
-  }
-
   return (
     <button
       className={className}

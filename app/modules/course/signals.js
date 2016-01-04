@@ -4,19 +4,16 @@ import createSession from 'common/factories/chains/createSession';
 
 import courseOpened from './signals/courseOpened';
 import courseAppClicked from './signals/appClicked';
-import openFolderClicked from './signals/openFolderClicked';
 import addFileClicked from './signals/addFileClicked';
-import addFileInputBlurred from './signals/addFileInputBlurred';
 import codeChanged from './signals/codeChanged';
 import showPreviewClicked from './signals/showPreviewClicked';
 import showConsoleClicked from './signals/showConsoleClicked';
-import folderFileClicked from './signals/folderFileClicked';
+import fileClicked from './signals/fileClicked';
 import addFileAborted from './signals/addFileAborted';
 import editAssignmentClicked from './signals/editAssignmentClicked';
 import assignmentCodeChanged from './signals/assignmentCodeChanged';
 import assignmentDescriptionChanged from './signals/assignmentDescriptionChanged';
 import addFileSubmitted from './signals/addFileSubmitted';
-import openAssignmentClicked from './signals/openAssignmentClicked';
 import recordClicked from './signals/recordClicked';
 import stopClicked from './signals/stopClicked';
 import playClicked from './signals/playClicked';
@@ -41,23 +38,24 @@ import seekChanged from './signals/seekChanged';
 import buttonPopoverClicked from './signals/buttonPopoverClicked';
 import sandboxClicked from './signals/sandboxClicked';
 import videoBuffered from './signals/videoBuffered';
+import toggleForceUserClicked from './signals/toggleForceUserClicked';
+import newAssignmentClicked from './signals/newAssignmentClicked';
+import assignmentClicked from './signals/assignmentClicked';
+import runAssignmentClicked from './signals/runAssignmentClicked';
 
 export default function(controller) {
   controller.signal('course.courseOpened', createSession('course.courseOpened', authenticate(courseOpened)));
   controller.signal('course.appClicked', courseAppClicked);
-  controller.signal('course.openFolderClicked', track('course.openFolderClicked', openFolderClicked));
   controller.signal('course.addFileClicked', track('course.addFileClicked', addFileClicked));
-  controller.signal('course.addFileInputBlurred', track('course.addFileInputBlurred', addFileInputBlurred));
   controller.signal('course.codeChanged', codeChanged);
   controller.signal('course.showPreviewClicked', track('course.showPreviewClicked', showPreviewClicked));
   controller.signal('course.showConsoleClicked', track('course.showConsoleClicked', showConsoleClicked));
-  controller.signal('course.folderFileClicked', track('course.folderFileClicked', folderFileClicked));
+  controller.signal('course.fileClicked', track('course.fileClicked', fileClicked));
   controller.signal('course.addFileAborted', track('course.addFileAborted', addFileAborted));
   controller.signal('course.editAssignmentClicked', editAssignmentClicked);
   controller.signal('course.assignmentCodeChanged', assignmentCodeChanged);
   controller.signal('course.assignmentDescriptionChanged', assignmentDescriptionChanged);
   controller.signal('course.addFileSubmitted', track('course.addFileSubmitted', addFileSubmitted));
-  controller.signal('course.openAssignmentClicked', track('course.openAssignmentClicked', openAssignmentClicked));
   controller.signal('course.recordClicked', recordClicked);
   controller.signal('course.playClicked', track('course.playClicked', playClicked));
   controller.signal('course.stopClicked', stopClicked);
@@ -83,4 +81,8 @@ export default function(controller) {
   controller.signal('course.buttonPopoverClicked', buttonPopoverClicked);
   controller.signal('course.sandboxClicked', track('course.sandboxClicked', sandboxClicked));
   controller.signal('course.videoBuffered', track('course.videoBuffered', videoBuffered));
+  controller.signal('course.toggleForceUserClicked', toggleForceUserClicked);
+  controller.signal('course.newAssignmentClicked', newAssignmentClicked);
+  controller.signal('course.assignmentClicked', track('course.assignmentClicked', assignmentClicked));
+  controller.signal('course.runAssignmentClicked', track('course.runAssignmentClicked', runAssignmentClicked));
 }

@@ -40,6 +40,10 @@ const model = Model({
       y: 0
     },
     isLoading: false,
+    currentAssignmentStatus: {
+      isLoading: false,
+      result: null
+    },
     isLoadingMedia: false,
     authorId: null,
     showPreview: true,
@@ -51,6 +55,7 @@ const model = Model({
     showFolder: false,
     showAddFileInput: false,
     currentSceneIndex: 0,
+    currentAssignmentIndex: 0,
     sandboxSnapshot: null,
     newSceneName: '',
     newFileName: '',
@@ -64,7 +69,9 @@ const model = Model({
   user: {
     isLoggedIn: false,
     isLoading: false,
-    isAdmin: false
+    isAdmin: false,
+    forceUser: false,
+    completedAssignments: {}
   },
   sessions: {
     selectedSession: null,

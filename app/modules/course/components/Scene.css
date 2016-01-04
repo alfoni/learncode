@@ -1,20 +1,11 @@
-.twoColumns,.threeColumns {
+.modules {
   height: calc(100% - 86px);
-  width: 100%;
 }
 
-.twoColumns > div {
-  width: 50%;
+.controlsAndAssignments {
+  width: 300px;
 }
 
-.twoColumns > div:first-child {
-  border: 0; /* Should be no border-left on the first module */
-}
-
-.threeColumns > div {
-  width: 33.3333%;
-}
-
-.threeColumns > div:first-child, .threeColumns > div:nth-child(2) {
-  border: 0; /* Should be no border between Assignment and code editor */
+.code {
+  width: calc(100% - 300px);
 }

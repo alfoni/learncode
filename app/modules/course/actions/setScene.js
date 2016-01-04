@@ -1,13 +1,7 @@
 function setScene(input, state, output, services) {
   const currentFileIndex = state.get(['course', 'scenes', input.sceneIndex, 'currentFileIndex']);
 
-  const scene = Object.assign({
-    assignment: {
-      description: '',
-      code: '',
-      result: false
-    }
-  }, input.scene);
+  const scene = input.scene;
 
   // We do not need to put the recording in the state tree
   const recording = scene.recording;

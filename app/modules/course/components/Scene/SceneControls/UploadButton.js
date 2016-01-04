@@ -3,20 +3,12 @@ import styles from './UploadButton.css';
 import icons from 'common/icons.css';
 
 function UploadButton(props) {
-  let className = styles.wrapper;
-
-  if (props.isUploadReady && !props.recorder.isPlaying) {
-    className = styles.upload;
-  }
-
-  if (props.recorder.isUploading) {
-    className = styles.uploading;
-  }
+  const className = styles.wrapper;
 
   return (
-    <div className={className} onClick={() => props.onClick()}>
+    <button className={className} onClick={() => props.onClick()} disabled={props.disabled}>
       <div className={props.recorder.isUploading ? icons.loading : icons.uploadFile}></div>
-    </div>
+    </button>
   );
 }
 

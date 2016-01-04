@@ -20,12 +20,12 @@ export default function getSandboxFile(req, res) {
   const createIndexResponse = (code) => {
     const assignment = sandbox.getAssignment();
 
-    const insertAssignmentScript = ['<script>',
+    const insertAssignmentScript = assignment ? ['<script>',
     assignmentTestRunner
       .toString()
-      .replace('%{CODE}%', assignment.code.replace(/\'/g, '\\\''))
+      .replace('%{CODE}%', assignment.replace(/\'/g, '\\\''))
       .split('\n').join(''),
-    '</script>'].join('');
+    '</script>'].join('') : '';
 
     const insertMouseClickScript = ['<script>',
       mouseClickScript

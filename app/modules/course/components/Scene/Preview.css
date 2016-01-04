@@ -1,7 +1,9 @@
 .preview {
   border: 0;
   height: calc(100% - 36px);
-  width: 100%;
+  width: 50%;
+  box-sizing: border-box;
+  border-left: 2px solid #eee;
   background-color: #FFF;
 }
 

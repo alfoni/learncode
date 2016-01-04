@@ -40,6 +40,7 @@
     "cerebral-react": "^0.6.0",
     "cerebral-router": "^0.7.1",
     "chrome-recorder": "^0.1.4",
+    "classnames": "^2.2.1",
     "codemirror": "^5.7.0",
     "compression": "^1.6.0",
     "cookie-parser": "^1.4.0",

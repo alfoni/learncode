@@ -47,8 +47,8 @@
   }
 }
 
-.addScene {composes: font;}
-.addScene:before {
+.addAssignment {composes: font;}
+.addAssignment:before {
 	content: "\e013";
 }
 
@@ -87,21 +87,6 @@
 	content: "\e085";
 }
 
-.editAssignment {composes: font;}
-.editAssignment:before {
-	content: "\e0c5";
-}
-
-.folder {composes: font;}
-.folder:before {
-	content: "\e101";
-}
-
-.showBrowser {composes: font;}
-.showBrowser:before {
-	content: "\e1a8";
-}
-
 .menu {composes: font;}
 .menu:before {
 	content: "\e20e";
@@ -115,11 +100,6 @@
 .checkbox {composes: font;}
 .checkbox:before {
 	content: "\e25c";
-}
-
-.assignment {composes: font;}
-.assignment:before {
-	content: "\e274";
 }
 
 .delete {composes: font;}
@@ -145,4 +125,24 @@
 .thumbUp {composes: font;}
 .thumbUp:before {
 	content: "\e2ee";
+}
+
+.user {composes: font;}
+.user:before {
+	content: "\e253";
+}
+
+.scene {composes: font;}
+.scene:before {
+	content: "\e12e";
+}
+
+.assignment {composes: font;}
+.assignment:before {
+	content: "\e272";
+}
+
+.assignmentCompleted {composes: font;}
+.assignmentCompleted:before {
+	content: "\e277";
 }

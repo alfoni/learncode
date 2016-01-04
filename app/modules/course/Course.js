@@ -4,14 +4,14 @@ import currentScene from './computed/currentScene';
 
 let Toolbar = null;
 let DurationSlider = null;
-let SceneControls = null;
 let Scene = null;
 let styles = null;
 let MouseCursor = null;
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
-  currentScene: currentScene
+  currentScene: currentScene,
+  user: ['user']
 })
 class Course extends React.Component {
   constructor() {
@@ -28,7 +28,6 @@ class Course extends React.Component {
     require.ensure([], (require) => {
       Toolbar = require('./components/Toolbar.js');
       DurationSlider = require('./components/DurationSlider.js');
-      SceneControls = require('./components/SceneControls.js');
       Scene = require('./components/Scene.js');
       MouseCursor = require('./components/MouseCursor.js');
       styles = require('./Course.css');
@@ -47,7 +46,11 @@ class Course extends React.Component {
   onKeydown(event) {
     if ((event.metaKey || event.ctrlKey) && event.keyCode === 83) {
       event.preventDefault();
-      this.props.signals.course.saveShortcutPressed();
+      if (this.props.user.forceUser || !this.props.user.isAdmin) {
+        this.props.signals.course.runAssignmentClicked();  
+      } else {
+        this.props.signals.course.saveShortcutPressed();
+      }
     }
   }
   assignmentDescriptionChanged(e) {
@@ -67,7 +70,6 @@ class Course extends React.Component {
         <Toolbar/>
         <DurationSlider/>
         <Scene/>
-        <SceneControls/>
         <MouseCursor/>
       </div>
     );

@@ -1,7 +1,7 @@
-import set from 'common/factories/actions/set.js';
+import setLoadingAssignment from '../actions/setLoadingAssignment.js';
 import saveSandboxChain from '../chains/saveSandbox';
 
 export default [
-  ...saveSandboxChain,
-  set(['course', 'showAssignment'], true)
+  setLoadingAssignment,
+  ...saveSandboxChain
 ];

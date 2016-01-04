@@ -2,7 +2,7 @@ function setDefaultCourseState(input, state) {
   state.merge(['course'], {
     name: '',
     isLoading: false,
-    authorId: null,
+    authorId: state.get(['user', 'id']),
     showPreview: true,
     showConsole: false,
     showEditAssignment: false,

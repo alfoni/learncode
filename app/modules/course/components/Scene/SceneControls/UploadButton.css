@@ -1,0 +1,5 @@
+.wrapper {
+  composes: button from './button.css';
+  background-color: #4CAF50;
+  transform: translate3d(100px, 0, 0);
+}

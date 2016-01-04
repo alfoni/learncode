@@ -1,0 +1,50 @@
+.wrapper {
+  height: calc(100% - 300px);
+}
+
+.editor {
+  height: calc(100% - 300px);
+  background-color: white;
+  width: 100%;
+}
+
+.textarea {
+  font-family: monospace;
+  font-size: 14px;
+  border: 0;
+  outline: none;
+  resize: none;
+  height: 100px;
+  padding: 8px 12px;
+  box-sizing: border-box;
+  border-left: 2px solid #EEE;
+  width: 100%;
+}
+
+.run {
+  background-color: #4CAF50;
+  border-radius: 3px;
+  border: 0;
+  padding: 5px;
+  color: #FFF;
+  height: 30px;
+  line-height: 20px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+}
+
+.run:hover {
+  opacity: 0.9;
+}
+
+.run[disabled] {
+  opacity: 0.5;
+}
+
+.result {
+  padding: 10px;
+}

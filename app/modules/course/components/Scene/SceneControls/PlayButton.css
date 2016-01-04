@@ -1,6 +1,7 @@
 .wrapper {
   composes: button from './button.css';
   background-color: #00BCD4;
+  transform: translate3d(10px, 0, 0);
 }
 
 .recording {

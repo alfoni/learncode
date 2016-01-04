@@ -15,6 +15,10 @@ export default function createScene(req, res) {
     files: [{
       name: 'index.html',
       code: defaultIndex
+    }],
+    assignments: [{
+      description: '',
+      code: ''
     }]
   }, req.body);
 

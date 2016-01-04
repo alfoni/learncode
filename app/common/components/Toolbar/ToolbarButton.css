@@ -7,6 +7,7 @@
   text-align: center;
 }
 
+
 .icon {
   font-size: 24px;
   line-height: 56px;
@@ -20,6 +21,16 @@
 .textIcon {
   composes: icon;
   margin-top: -12px;
+}
+
+.iconText {
+  position: absolute;
+  text-align: center;
+  top: 5px;
+  left: 0;
+  line-height: normal;
+  font-size: 10px;
+  width: 100%;
 }
 
 .icon:hover, .button:focus .icon {

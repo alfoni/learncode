@@ -23,6 +23,10 @@ export default function createCourse(req, res) {
       files: [{
         name: 'index.html',
         code: defaultIndex
+      }],
+      assignments: [{
+        description: '',
+        code: ''
       }]
     }]
   };

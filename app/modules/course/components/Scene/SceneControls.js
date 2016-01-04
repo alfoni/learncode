@@ -6,7 +6,8 @@ import styles from './SceneControls.css';
 import {Mixin} from 'cerebral-react';
 import Recorder from 'chrome-recorder';
 import debounce from 'debounce';
-import currentScene from '../computed/currentScene';
+import currentScene from '../../computed/currentScene';
+import isAdminMode from '../../computed/isAdminMode';
 
 // Need access to Cerebral controller, so using normal
 // constructor
@@ -71,8 +72,8 @@ const SceneControls = React.createClass({
     return {
       recorder: ['recorder'],
       course: ['course'],
-      isAdmin: ['user', 'isAdmin'],
-      currentScene: currentScene
+      currentScene: currentScene,
+      isAdminMode: isAdminMode
     };
   },
   updateIsExecutingSignal() {
@@ -329,25 +330,30 @@ const SceneControls = React.createClass({
     });
   },
   render() {
+    const isDisabled = this.state.recorder.isBuffering || this.isExecutingSignal || this.state.course.isLoadingMedia;
+
     return (
       <div className={styles.wrapper}>
-      <UploadButton
-        isUploadReady={this.isUploadReady}
-        recorder={this.state.recorder}
-        onClick={() => this.onUploadClick()}
-      />
         {
-          this.state.isAdmin ?
-            <RecordButton
-              disabled={this.isExecutingSignal || this.state.course.isLoadingMedia}
-              recorder={this.state.recorder}
-              onRecordClick={() => this.onRecordClick()}
-              onStopClick={() => this.onStopClick()}/>
+          this.state.isAdminMode ?
+            <span>
+              <UploadButton
+                disabled={isDisabled || !this.isUploadReady}
+                isUploadReady={this.isUploadReady}
+                recorder={this.state.recorder}
+                onClick={() => this.onUploadClick()}
+              />
+              <RecordButton
+                disabled={isDisabled}
+                recorder={this.state.recorder}
+                onRecordClick={() => this.onRecordClick()}
+                onStopClick={() => this.onStopClick()}/>
+            </span>
           :
             null
         }
         <PlayButton
-          disabled={this.state.recorder.isBuffering || this.isExecutingSignal || this.state.course.isLoadingMedia}
+          disabled={isDisabled || (this.state.isAdminMode && !this.state.recorder.isRecording)}
           recorder={this.state.recorder}
           onPlayClick={() => this.onPlayClick()}
           onPauseClick={() => this.onPauseClick()}/>

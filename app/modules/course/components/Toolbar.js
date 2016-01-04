@@ -4,93 +4,44 @@ import styles from './Toolbar.css';
 import ToolbarButton from 'common/components/Toolbar/ToolbarButton.js';
 import ToolbarSeparator from './Toolbar/ToolbarSeparator.js';
 import ToolbarTitle from 'common/components/Toolbar/ToolbarTitle.js';
-import ToolbarInput from './Toolbar/ToolbarInput.js';
 import ToolbarButtonPopover from 'common/components/Toolbar/ToolbarButtonPopover.js';
-import ToolbarFileListItem from './Toolbar/ToolbarFileListItem.js';
-import AssignmentDescription from './Toolbar/AssignmentDescription.js';
-import AssignmentResult from './Toolbar/AssignmentResult.js';
 import ConfigureScenes from './Toolbar/ConfigureScenes.js';
-import AssignmentIndication from './Toolbar/AssignmentIndication.js';
 import icons from 'common/icons.css';
 import currentScene from '../computed/currentScene';
 import currentFile from '../computed/currentFile';
+import isAdminMode from '../computed/isAdminMode';
+import completedAssignments from '../computed/completedAssignments';
 
 @Cerebral({
+  courseId: ['course', 'courseId'],
   scenes: ['course', 'scenesList'],
-  showPreview: ['course', 'showPreview'],
-  showConsole: ['course', 'showConsole'],
-  newFileName: ['course', 'newFileName'],
-  showScenesList: ['course', 'showScenesList'],
-  showFolder: ['course', 'showFolder'],
-  showAddFileInput: ['course', 'showAddFileInput'],
   showConfigureScenes: ['course', 'showConfigureScenes'],
   showEditAssignment: ['course', 'showEditAssignment'],
-  showAssignment: ['course', 'showAssignment'],
   courseName: ['course', 'name'],
-  isAdmin: ['user', 'isAdmin'],
   isLoadingPreview: ['course', 'isLoadingPreview'],
   recorder: ['recorder'],
   currentFile: currentFile,
-  currentScene: currentScene
+  currentScene: currentScene,
+  user: ['user'],
+  isAdminMode: isAdminMode,
+  completedAssignments: completedAssignments
 })
 class Toolbar extends React.Component {
-  folderClick() {
-    this.props.signals.course.openFolderClicked();
-  }
-  folderFileClicked(index) {
-    this.props.signals.course.folderFileClicked({index: index});
-  }
-  renderFilesList() {
-    const files = this.props.currentScene.sandboxFiles || [];
-
-    return files.map((file, index) => {
-      return (
-        <ToolbarFileListItem
-          icon={icons.description}
-          key={index}
-          name={file.name}
-          onClick={() => this.folderFileClicked(index)}
-          active={file === this.props.currentFile}
-        />
-      );
-    });
-  }
-  listSceneNameClicked(index) {
-    this.props.signals.course.listSceneNameClicked({
-      sceneIndex: index
-    });
-  }
   renderScenesList() {
     const scenes = this.props.scenes;
 
     return scenes.map((scene, index) => {
       return (
-        <ToolbarFileListItem
+        <ToolbarButton
+          icon={icons.scene}
           key={index}
-          onClick={() => this.listSceneNameClicked(index)}
-          name={scene}
-          active={scene === this.props.currentScene.name}
+          onClick={() => this.props.signals.course.listSceneNameClicked({sceneIndex: index})}
+          title={`${this.props.completedAssignments.length} / ${scene.assignmentsCount}`}
+          active={index === this.props.currentScene.index}
+          iconText={`${index + 1}.`}
           />
       );
     });
-  }
-  onAddFileInputChange(e) {
-    const fileName = e.target.value;
-    this.props.signals.course.addFileNameUpdated({fileName: fileName});
-  }
-  onAddFileInputKeyDown(e) {
-    const keyCode = e.keyCode;
-
-    if (keyCode === 27) { // Escape
-      this.props.signals.course.addFileAborted();
-    }
-  }
-  onAddFileSubmit(e) {
-    e.preventDefault();
-    this.props.signals.course.addFileSubmitted();
-  }
-  assignmentClicked() {
-    this.props.signals.course.openAssignmentClicked();
   }
   configureScenesClicked() {
     this.props.signals.course.configureScenesClicked();
@@ -100,59 +51,15 @@ class Toolbar extends React.Component {
   }
   render() {
     return (
-      <div className={styles.background}>
+      <div className={this.props.isAdminMode ? styles.adminWrapper : styles.wrapper}>
         { this.props.recorder.isPlaying ? <div className={styles.toolbarOverlay}></div> : null }
-        <ToolbarButton icon={icons.menu}/>
         <ToolbarSeparator/>
         <ToolbarTitle title={this.props.courseName}/>
-        <ToolbarButton title="Lagre" icon={icons.save} onClick={() => this.props.signals.course.saveSceneClicked()}/>
         <ToolbarSeparator/>
-        <ToolbarButtonPopover title="Filer" onClick={(e) => this.folderClick(e)} show={this.props.showFolder} icon={icons.folder}>
-          {this.renderFilesList()}
-        </ToolbarButtonPopover>
-        <ToolbarButton title="Ny fil" icon={icons.addFile} onClick={() => this.props.signals.course.addFileClicked()}/>
-        <ToolbarInput show={this.props.showAddFileInput}
-                      value={this.props.newFileName}
-                      onChange={(e) => this.onAddFileInputChange(e)}
-                      onSubmit={(e) => this.onAddFileSubmit(e)}
-                      onKeyDown={(e) => this.onAddFileInputKeyDown(e)}
-                      onBlur={() => this.props.signals.course.addFileInputBlurred()}
-                      placeholder="Navn på ny fil..."/>
-        <ToolbarSeparator/>
-        { /* <ToolbarButton active={this.props.showPreview} icon={icons.showBrowser}
-          onClick={() => this.props.signals.course.showPreviewClicked()}/> */ }
-        { /* }<ToolbarButton active={this.props.showConsole} icon={icons.assignment}
-          onClick={() => this.props.signals.course.showConsoleClicked()}/> */ }
-        { /* }<ToolbarSeparator/> */ }
-        <ToolbarButtonPopover
-          title="Oppgave"
-          onClick={(e) => this.assignmentClicked(e)}
-          show={!this.props.isLoadingPreview && this.props.showAssignment} icon={icons.school}>
-          <AssignmentDescription description={this.props.currentScene.assignment.description}/>
-          <AssignmentResult/>
-        </ToolbarButtonPopover>
-        <ToolbarSeparator/>
-        <AssignmentIndication assignmentResult={this.props.currentScene.assignment.result} isRunningAssignment={this.props.isLoadingPreview}/>
-        <ToolbarSeparator/>
-        <ToolbarButtonPopover onClick={(e) => this.sceneNameClicked(e)}
-                              title={this.props.currentScene.name}
-                              show={this.props.showScenesList}>
-          {this.renderScenesList()}
-        </ToolbarButtonPopover>
-        <ToolbarSeparator/>
+        {this.renderScenesList()}
         {
-          this.props.isAdmin ?
-            <ToolbarButton
-              active={this.props.showEditAssignment}
-              onClick={() => this.props.signals.course.editAssignmentClicked()}
-              icon={icons.editAssignment}/>
-          :
-            null
-        }
-        { this.props.isAdmin ?  <ToolbarSeparator/> : null}
-        {
-          this.props.isAdmin ?
-            <ToolbarButtonPopover icon={icons.thumbUp}
+          this.props.isAdminMode ?
+            <ToolbarButtonPopover icon={icons.addCourse}
                                   onClick={(e) => this.configureScenesClicked(e)}
                                   show={this.props.showConfigureScenes}>
               <ConfigureScenes/>
@@ -160,7 +67,18 @@ class Toolbar extends React.Component {
           :
             null
         }
-
+        {
+          this.props.user.isAdmin ?
+            <span>
+              <ToolbarSeparator/>
+              <ToolbarButton
+                active={!this.props.isAdminMode}
+                icon={icons.user}
+                onClick={this.props.signals.course.toggleForceUserClicked}/>
+            </span>
+          :
+            null
+        }
       </div>
     );
   }
