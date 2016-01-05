@@ -1,4 +1,4 @@
-function setUser(input, state) {
+function setUser({input, state}) {
   state.merge(['user'], {
     ...input.user,
     isLoggedIn: true,

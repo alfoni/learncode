@@ -1,6 +1,6 @@
 import currentScene from '../computed/currentScene';
 
-function setLoadedCourse(input, state) {
+function setLoadedCourse({state}) {
   state.set(['course', 'isLoading'], false);
 
   if (Boolean(state.get(currentScene).recording)) {

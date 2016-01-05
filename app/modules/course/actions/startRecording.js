@@ -1,4 +1,4 @@
-function startRecording(input, state, output, services) {
+function startRecording({state, services}) {
   state.merge(['recorder'], {
     isRecording: true,
     isEnded: false

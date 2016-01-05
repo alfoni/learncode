@@ -1,7 +1,7 @@
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 
 function createSession(name, chain) {
-  function createSessionId(input, state, output, services) {
+  function createSessionId({services, output}) {
     services.ajax.post('/API/sessions')
     .then((response) => {
       output.success({sessionId: response.sessionId});
@@ -12,11 +12,11 @@ function createSession(name, chain) {
     });
   }
 
-  function setSessionId(input, state) {
+  function setSessionId({input, state}) {
     state.set(['session', 'sessionId'], input.sessionId);
   }
 
-  function trackData(input, state, output, services) {
+  function trackData({input, state, output, services}) {
     const sessionId = state.get(['session', 'sessionId']);
     services.ajax.post(`/API/sessions/${sessionId}`, {
       name: name,

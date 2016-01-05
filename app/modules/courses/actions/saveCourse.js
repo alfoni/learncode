@@ -1,4 +1,4 @@
-function saveCourse(input, state, output, services) {
+function saveCourse({state, output, services}) {
   services.ajax.post('/API/courses', {
     course: state.get(['courses', 'newCourse'])
   })

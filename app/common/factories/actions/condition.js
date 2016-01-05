@@ -1,5 +1,5 @@
 function condition(path) {
-  function action(input, state, output) {
+  function action({state, output}) {
     output[state.get(path)]();
   }
 

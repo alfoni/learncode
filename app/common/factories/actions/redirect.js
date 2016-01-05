@@ -1,5 +1,5 @@
 function redirect(url) {
-  function action(input, state, output, services) {
+  function action({services}) {
     services.router.redirect(url);
   }
 

@@ -1,4 +1,4 @@
-function saveScene(input, state, output, services) {
+function saveScene({state, output, services}) {
   const courseId = state.get(['course', 'id']);
   const sceneIndex = state.get(['course', 'currentSceneIndex']);
   const files = state.get(['course', 'scenes', sceneIndex, 'sandboxFiles']);

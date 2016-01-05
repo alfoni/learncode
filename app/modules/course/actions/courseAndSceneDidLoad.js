@@ -1,8 +1,8 @@
-function courseAndSceneDidLoad(input, state, output) {
+function courseAndSceneDidLoad({input, output}) {
   if (input.course && input.scene) {
     output.true();
   } else {
-    output.false();  
+    output.false();
   }
 }
 

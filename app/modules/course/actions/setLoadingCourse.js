@@ -1,4 +1,4 @@
-function setLoadingCourse(input, state) {
+function setLoadingCourse({state}) {
   state.merge(['snackbar'], {
     text: 'Laster kurs...',
     show: true

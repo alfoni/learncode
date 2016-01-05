@@ -1,5 +1,5 @@
 function get(url, key) {
-  function action(input, state, output, services) {
+  function action({services, output}) {
     services.ajax.get(url)
       .then((response) => {
         output.success({

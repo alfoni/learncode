@@ -1,4 +1,4 @@
-function setScene(input, state, output, services) {
+function setScene({input, state, services}) {
   const currentFileIndex = state.get(['course', 'scenes', input.sceneIndex, 'currentFileIndex']);
 
   const scene = input.scene;

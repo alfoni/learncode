@@ -1,4 +1,4 @@
-function updateNewCourseName(input, state) {
+function updateNewCourseName({input, state}) {
   state.set(['courses', 'newCourse', input.field], input.value);
 }
 

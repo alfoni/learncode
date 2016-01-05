@@ -1,4 +1,4 @@
-function loadSessions(input, state, output, services) {
+function loadSessions({output, services}) {
   services.ajax.get(`/API/sessions`)
     .then((sessions) => {
       output.success({

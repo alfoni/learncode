@@ -1,4 +1,4 @@
-function setOpenedSignal(input, state) {
+function setOpenedSignal({input, state}) {
   state.set(['sessions', 'openedSignal'], input.index);
 }
 

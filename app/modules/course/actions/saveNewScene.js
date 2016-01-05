@@ -1,4 +1,4 @@
-function saveNewScene(input, state, output, services) {
+function saveNewScene({state, output, services}) {
   const courseId = state.get(['course', 'id']);
 
   services.ajax.post(`/API/courses/${courseId}/scenes`, {

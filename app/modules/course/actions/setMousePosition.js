@@ -1,4 +1,4 @@
-function setMousePosition(input, state, output, services) {
+function setMousePosition({input, state, services}) {
   let mousePositionX = input.mousePositionX;
   let mousePositionY = input.mousePositionY;
 

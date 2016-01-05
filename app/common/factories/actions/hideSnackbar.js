@@ -1,4 +1,4 @@
-function hideSnackbar(input, state) {
+function hideSnackbar({state}) {
   state.merge(['snackbar'], {
     text: '',
     show: false

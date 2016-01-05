@@ -1,4 +1,4 @@
-function setLogs(input, state) {
+function setLogs({input, state}) {
   state.set(['sessions', 'sessionsList'], input.sessions);
 }
 

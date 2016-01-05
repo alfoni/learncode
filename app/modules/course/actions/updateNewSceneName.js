@@ -1,4 +1,4 @@
-function updateNewSceneName(input, state) {
+function updateNewSceneName({input, state}) {
   state.set(['course', 'newSceneName'], input.value);
 }
 

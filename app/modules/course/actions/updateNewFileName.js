@@ -1,4 +1,4 @@
-function updateNewFileName(input, state) {
+function updateNewFileName({input, state}) {
   state.set(['course', 'newFileName'], input.fileName);
 }
 

@@ -1,4 +1,4 @@
-function redirectToCourse(input, state, output, services) {
+function redirectToCourse({input, services}) {
   services.router.redirect(`/courses/${input.id}/scenes/0`);
 }
 

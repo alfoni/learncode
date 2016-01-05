@@ -1,5 +1,5 @@
 function setInput(key, value) {
-  function action(input, state, output) {
+  function action({output}) {
     output({
       [key]: value
     });

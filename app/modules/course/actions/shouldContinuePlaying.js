@@ -1,4 +1,4 @@
-function shouldContinuePlaying(input, state, output) {
+function shouldContinuePlaying({input, state, output}) {
   if (input.continuePlaying) {
     output.true({
       seek: state.get(['recorder', 'currentSeek'])[0]

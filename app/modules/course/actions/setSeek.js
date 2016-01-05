@@ -1,4 +1,4 @@
-function setSeek(input, state, output, services) {
+function setSeek({input, state, services}) {
   const fullSecond = Math.floor(input.seek / 1000) * 1000;
 
   state.set(['recorder', 'isRecording'], true);

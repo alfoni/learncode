@@ -1,5 +1,5 @@
 function showSnackbar(text, persist) {
-  function action(input, state) {
+  function action({state}) {
     state.merge(['snackbar'], {
       text: text,
       show: true,

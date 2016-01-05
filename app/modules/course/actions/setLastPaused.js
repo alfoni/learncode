@@ -1,4 +1,4 @@
-function setLastPaused(input, state, output, services) {
+function setLastPaused({state}) {
   state.merge(['recorder'], {
     lastPaused: Date.now()
   });

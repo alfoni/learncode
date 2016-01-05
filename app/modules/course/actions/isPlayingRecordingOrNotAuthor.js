@@ -1,4 +1,4 @@
-function isPlayingRecordingOrNotAuthor(input, state, output) {
+function isPlayingRecordingOrNotAuthor({state, output}) {
   if (
     state.get(['recorder', 'isPlaying']) ||
     state.get(['recorder', 'isRecording']) ||

@@ -1,4 +1,4 @@
-function canPause(input, state, output) {
+function canPause({state, output}) {
   const lastPaused = state.get(['recorder', 'lastPaused']);
   const isRecording = state.get(['recorder', 'isRecording']);
 

@@ -1,4 +1,4 @@
-function setCodeSelection(input, state) {
+function setCodeSelection({input, state}) {
   state.set(['course', 'codeSelection'], {
     anchor: input.anchor,
     head: input.head

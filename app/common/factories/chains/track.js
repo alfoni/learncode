@@ -1,7 +1,7 @@
 function track(name, chain) {
   return [
     [
-      function trackData(input, state, output, services) {
+      function trackData({input, state, output, services}) {
         const sessionId = state.get(['session', 'sessionId']);
         services.ajax.post(`/API/sessions/${sessionId}`, {
           name: name,

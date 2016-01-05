@@ -1,4 +1,4 @@
-function isSameCourse(input, state, output) {
+function isSameCourse({input, state, output}) {
   if (input.courseId === state.get(['course', 'id'])) {
     output.true();
   } else {

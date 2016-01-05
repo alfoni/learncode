@@ -1,4 +1,4 @@
-function setCompletedAssignment(input, state) {
+function setCompletedAssignment({state}) {
   const courseId = state.get(['course', 'id']);
   const sceneIndex = state.get(['course', 'currentSceneIndex']);
   const assignmentIndex = state.get(['course', 'currentAssignmentIndex']);

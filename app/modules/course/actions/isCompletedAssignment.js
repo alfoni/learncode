@@ -1,6 +1,6 @@
-function isCompletedAssignment(input, state, output) {
+function isCompletedAssignment({input, state, output}) {
   const canUpdate = !state.get(['user', 'isAdmin']) || state.get(['user', 'forceUser']);
-  
+
   if (input.result === true && canUpdate) {
     output.true();
   } else {

@@ -1,5 +1,5 @@
 function setPage(page) {
-  function action(input, state) {
+  function action({state}) {
     state.set('currentPage', page);
   }
 

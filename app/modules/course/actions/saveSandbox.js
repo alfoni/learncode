@@ -1,4 +1,4 @@
-function saveSandbox(input, state, output, services) {
+function saveSandbox({input, state, output, services}) {
   const currentSceneIndex = state.get(['course', 'currentSceneIndex']);
   const currentAssignmentIndex = state.get(['course', 'currentAssignmentIndex']);
   const assignment = state.get(['course', 'scenes', currentSceneIndex, 'assignments', currentAssignmentIndex]);
@@ -11,8 +11,7 @@ function saveSandbox(input, state, output, services) {
   .then(() => {
     output.success();
   })
-  .catch((err) => {
-    console.log(err);
+  .catch(() => {
     output.error({
       message: 'Could not save sandbox files'
     });

@@ -1,4 +1,4 @@
-function setDefaultCourseState(input, state) {
+function setDefaultCourseState({state}) {
   state.merge(['course'], {
     name: '',
     isLoading: false,

@@ -1,5 +1,5 @@
 function toggle(path) {
-  function action(input, state) {
+  function action({state}) {
     state.set(path, !state.get(path));
   }
 

@@ -1,4 +1,4 @@
-function closeScenesList(input, state) {
+function closeScenesList({state}) {
   const currentSceneIndex = state.get(['course', 'currentSceneIndex']);
   state.set(['course', 'scenes', currentSceneIndex, 'showScenesList'], false);
 }

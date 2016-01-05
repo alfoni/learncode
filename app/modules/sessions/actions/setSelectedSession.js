@@ -1,4 +1,4 @@
-function setSelectedSession(input, state) {
+function setSelectedSession({input, state}) {
   state.set(['sessions', 'selectedSession'], input.session);
 }
 

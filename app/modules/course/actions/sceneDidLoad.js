@@ -1,4 +1,4 @@
-function sceneDidLoad(input, state, output) {
+function sceneDidLoad({input, output}) {
   if (input.scene) {
     output.true();
   } else {

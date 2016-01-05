@@ -1,4 +1,4 @@
-function stopRecording(input, state, output, services) {
+function stopRecording({state, services}) {
   state.merge(['recorder'], {
     isRecording: false,
     isPlaying: false,

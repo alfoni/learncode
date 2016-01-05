@@ -1,4 +1,4 @@
-function addNewAssignment(input, state) {
+function addNewAssignment({state}) {
   const currentSceneIndex = state.get(['course', 'currentSceneIndex']);
   const assignmentsPath = ['course', 'scenes', currentSceneIndex, 'assignments'];
   const assignmentsCount = state.get(assignmentsPath).length;

@@ -1,4 +1,4 @@
-function updateAssignmentDescription(input, state) {
+function updateAssignmentDescription({input, state}) {
   const currentSceneIndex = state.get(['course', 'currentSceneIndex']);
   const currentAssignmentIndex = state.get(['course', 'currentAssignmentIndex']);
 

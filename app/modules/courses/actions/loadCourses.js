@@ -1,4 +1,4 @@
-function loadCourses(input, state, output, services) {
+function loadCourses({output, services}) {
   services.ajax.get('/API/courses')
   .then((courses) => {
     output.success({courses: courses});

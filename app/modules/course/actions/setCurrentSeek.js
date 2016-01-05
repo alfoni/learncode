@@ -1,4 +1,4 @@
-function setCurrentSeek(input, state) {
+function setCurrentSeek({input, state}) {
   if ('seek' in input) {
     state.set(['recorder', 'currentSeek'], [input.seek, Date.now()]);
   }

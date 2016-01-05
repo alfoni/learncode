@@ -1,4 +1,4 @@
-function registerSignup(input, state, output, services) {
+function registerSignup({input, output, services}) {
   services.ajax.post('/API/registerSignup', {
     email: input.email
   })
