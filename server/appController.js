@@ -18,6 +18,10 @@ import getUser from './apis/getUser.js';
 import createSession from './apis/createSession.js';
 import trackSession from './apis/trackSession.js';
 import getSessions from './apis/getSessions.js';
+import getDescriptions from './apis/getDescriptions.js';
+import createDescription from './apis/createDescription.js';
+import updateDescription from './apis/updateDescription.js';
+import deleteDescription from './apis/deleteDescription.js';
 
 const verifyUser = (req, res, next) => {
   if (req.cookies.kodeboksen) {
@@ -58,4 +62,8 @@ export default function appController(router) {
   router.post('/API/sessions', verifyUser, createSession);
   router.get('/API/sessions', isAdmin, getSessions);
   router.post('/API/sessions/:id', verifyUser, trackSession);
+  router.get('/API/descriptions', verifyUser, getDescriptions);
+  router.post('/API/descriptions', isAdmin, createDescription);
+  router.patch('/API/descriptions/:tagName', isAdmin, updateDescription);
+  router.delete('/API/descriptions/:tagName', isAdmin, deleteDescription);
 }

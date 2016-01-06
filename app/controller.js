@@ -15,7 +15,23 @@ const model = Model({
   },
   courses: {
     showNewCourse: false,
+    showDescriptions: false,
     isSavingNewCourse: false,
+    isSavingDescription: false,
+    selectedDescription: null,
+    descriptions: [],
+    newDescription: {
+      tagName: '',
+      description: '',
+      exampleType: 'HTML',
+      example: ''
+    },
+    updatedDescription: {
+      tagName: '',
+      description: '',
+      exampleType: 'HTML',
+      example: ''
+    },
     newCourse: {
       courseName: '',
       sceneName: ''
@@ -44,12 +60,17 @@ const model = Model({
       isLoading: false,
       result: null
     },
+    descriptions: [],
     isLoadingMedia: false,
     authorId: null,
     showPreview: true,
     showConsole: false,
     showEditAssignment: false,
     showAssignment: false,
+    tooltip: {
+      visible: null,
+      timeout: null
+    },
     showConfigureScenes: false,
     showScenesList: false,
     showFolder: false,
