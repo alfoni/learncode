@@ -34,7 +34,7 @@ Router(controller, {
   '*': 'missingRouteRouted'
 }, {
   onlyHash: true
-}).trigger();
+});
 
 ReactDOM.render(
   <Container controller={controller}>

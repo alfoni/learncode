@@ -10,7 +10,6 @@ import icons from 'common/icons.css';
 import currentScene from '../computed/currentScene';
 import currentFile from '../computed/currentFile';
 import isAdminMode from '../computed/isAdminMode';
-import completedAssignments from '../computed/completedAssignments';
 
 @Cerebral({
   courseId: ['course', 'courseId'],
@@ -24,7 +23,7 @@ import completedAssignments from '../computed/completedAssignments';
   currentScene: currentScene,
   user: ['user'],
   isAdminMode: isAdminMode,
-  completedAssignments: completedAssignments
+  completedAssignments: ['user', 'assignmentsSolved']
 })
 class Toolbar extends React.Component {
   renderScenesList() {

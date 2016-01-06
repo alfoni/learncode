@@ -34,6 +34,7 @@ const model = Model({
     lastPaused: Date.now()
   },
   course: {
+    id: null,
     name: 'Course 1',
     mousePosition: {
       x: 0,
@@ -44,6 +45,7 @@ const model = Model({
       isLoading: false,
       result: null
     },
+    assignmentPoints: [],
     isLoadingMedia: false,
     authorId: null,
     showPreview: true,
@@ -71,7 +73,7 @@ const model = Model({
     isLoading: false,
     isAdmin: false,
     forceUser: false,
-    completedAssignments: {}
+    assignmentsSolved: []
   },
   sessions: {
     selectedSession: null,
@@ -92,6 +94,24 @@ const services = {
       offsetLeft: previewIframe.offsetParent.offsetLeft + previewIframe.offsetLeft,
       offsetTop: previewIframe.offsetParent.offsetTop + previewIframe.offsetTop
     };
+  },
+  localAssignments: {
+    get(courseId, sceneId) {
+      const assignments = JSON.parse(localStorage.getItem('assignments') || '{}');
+
+      if (assignments[courseId]) {
+        return assignments[courseId][sceneId] || [];
+      }
+
+      return [];
+    },
+    set(courseId, sceneId, updatedAssignments) {
+      const assignments = JSON.parse(localStorage.getItem('assignments') || '{}');
+
+      assignments[courseId] = assignments[courseId] || {};
+      assignments[courseId][sceneId] = updatedAssignments;
+      localStorage.setItem('assignments', JSON.stringify(assignments));
+    }
   }
 };
 

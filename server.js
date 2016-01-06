@@ -2,6 +2,8 @@
 
 import express from 'express';
 import webpack from 'webpack';
+import https from 'https';
+import fs from 'fs';
 import subdomain from 'subdomain';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
@@ -147,7 +149,10 @@ if (isDeveloping) {
 
 db.connect();
 
-app.listen(port, function onStart(err) {
+https.createServer({
+  key: fs.readFileSync('./server.key'),
+  cert: fs.readFileSync('./server.crt')
+}, app).listen(port, function onStart(err) {
   if (err) {
     console.log(err);
   }

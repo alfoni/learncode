@@ -3,7 +3,6 @@ import {Decorator as Cerebral} from 'cerebral-react';
 import currentScene from './computed/currentScene';
 
 let Toolbar = null;
-let DurationSlider = null;
 let Scene = null;
 let styles = null;
 let MouseCursor = null;
@@ -27,7 +26,6 @@ class Course extends React.Component {
     window.addEventListener('keydown', this.onKeydown);
     require.ensure([], (require) => {
       Toolbar = require('./components/Toolbar.js');
-      DurationSlider = require('./components/DurationSlider.js');
       Scene = require('./components/Scene.js');
       MouseCursor = require('./components/MouseCursor.js');
       styles = require('./Course.css');
@@ -47,7 +45,7 @@ class Course extends React.Component {
     if ((event.metaKey || event.ctrlKey) && event.keyCode === 83) {
       event.preventDefault();
       if (this.props.user.forceUser || !this.props.user.isAdmin) {
-        this.props.signals.course.runAssignmentClicked();  
+        this.props.signals.course.runAssignmentClicked();
       } else {
         this.props.signals.course.saveShortcutPressed();
       }
@@ -68,7 +66,6 @@ class Course extends React.Component {
     return (
       <div className={styles.wrapper} onClick={(e) => this.onAppClicked(e)}>
         <Toolbar/>
-        <DurationSlider/>
         <Scene/>
         <MouseCursor/>
       </div>

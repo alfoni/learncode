@@ -5,6 +5,8 @@ import currentScene from '../computed/currentScene';
 
 @Cerebral({
   recorder: ['recorder'],
+  assignmentPoints: ['course', 'assignmentPoints'],
+  assignmentsSolved: ['user', 'assignmentsSolved'],
   currentScene: currentScene
 }, {
 
@@ -16,14 +18,14 @@ class DurationSlider extends React.Component {
   constructor() {
     super();
     this.state = {
-      timer: 0,
+      currentSeek: 0,
       interval: null
     };
   }
   componentWillUpdate(nextProps) {
     if (nextProps.recorder.currentSeek !== this.props.recorder.currentSeek) {
       this.setState({
-        timer: nextProps.recorder.currentSeek[0]
+        currentSeek: nextProps.recorder.currentSeek[0]
       });
     }
   }
@@ -36,10 +38,10 @@ class DurationSlider extends React.Component {
   }
   startInterval(time) {
     this.setState({
-      timer: time,
+      currentSeek: time,
       interval: setInterval(() => {
         if (this.props.recorder.isPlaying) {
-          this.setState({timer: this.state.timer + 1000});
+          this.setState({currentSeek: this.state.currentSeek + 1000});
         }
       }, 1000)
     });
@@ -53,15 +55,24 @@ class DurationSlider extends React.Component {
   handlerPosition() {
     let handlerPosition = 0;
     const duration = ((this.props.currentScene.duration || 0) / 1000).toFixed() - 1;
-    const timer = (this.state.timer / 1000).toFixed();
-    handlerPosition = timer / duration * 100;
+    const currentSeek = (this.state.currentSeek / 1000).toFixed();
+    handlerPosition = currentSeek / duration * 100;
     handlerPosition = handlerPosition > 100 ? 100 : handlerPosition;
 
     return handlerPosition;
   }
-  seek(event) {
+  getSeekByEvent(event) {
+    return this.props.currentScene.duration / event.currentTarget.offsetWidth * (event.clientX - event.currentTarget.offsetLeft);
+  }
+  seek(seek) {
     if (this.props.currentScene.recording && !this.context.controller.store.isExecutingAsync()) {
-      const seek = this.props.currentScene.duration / event.currentTarget.offsetWidth * (event.clientX - event.currentTarget.offsetLeft);
+      const pointsPassed = this.props.assignmentPoints.filter((point) => {
+        return point < seek;
+      });
+
+      if (this.props.assignmentsSolved.length < pointsPassed.length) {
+        return;
+      }
 
       this.props.signals.course.seekChanged({
         seek: seek
@@ -74,7 +85,7 @@ class DurationSlider extends React.Component {
         this.startInterval(seek);
       } else {
         this.setState({
-          timer: seek
+          currentSeek: seek
         });
       }
     }
@@ -91,11 +102,22 @@ class DurationSlider extends React.Component {
 
     return (
       <div className={styles.wrapper}>
-        <div className={styles.currentDuration}>{this.renderTime(this.state.timer)}</div>
-        <div className={styles.lineWrapper} onClick={(event) => this.seek(event)}>
+        <div className={styles.currentDuration}>{this.renderTime(this.state.currentSeek)}</div>
+        <div className={styles.lineWrapper} onClick={(event) => this.seek(this.getSeekByEvent(event))}>
           <div className={styles.line}>
             <div className={styles.progressedLine} style={{right: lineWidth + '%'}}></div>
-            <div className={styles.dot} style={{left: this.handlerPosition() + '%'}}></div>
+            {[0, ...this.props.assignmentPoints].map((point, index) => (
+              <div
+                className={this.props.assignmentsSolved.length >= index ? styles.activePoint : styles.point}
+                style={{left: `${(100 / this.props.currentScene.duration) * point}%`}}
+                onClick={(event) => {
+                  event.stopPropagation();
+                  this.seek(point + 100);
+                }}
+                key={index}>
+                  {index + 1}
+                </div>
+            ))}
           </div>
         </div>
         <div className={styles.durationEnd}>{this.renderTime(this.props.currentScene.duration)}</div>

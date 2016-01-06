@@ -43,25 +43,32 @@
   background-color: #ff4081;
 }
 
-.dot {
-  box-sizing: border-box;
-  position: absolute;
-  pointer-events: inherit;
-  top: 0px;
-  left: -6px;
-  z-index: 1;
-  margin: 1px 0 0;
-  width: 14px;
-  height: 14px;
-  border: 2px solid rgba(0, 0, 0, 0.25);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  background-clip: padding-box;
-}
-
 .durationEnd {
   composes: currentDuration;
   right: 15px;
   left: auto;
+}
+
+.point {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin-left: -10px;
+  top: -10px;
+  color: rgba(0, 0, 0, 0.26);
+  background-color: #FFF;
+  border-radius: 50%;
+  border: 1px solid #DDD;
+  line-height: 20px;
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.activePoint {
+  composes: point;
+  color: #FFF;
+  background-color: #ff4081;
+  border: 1px solid #ff4081;
+  cursor: pointer;
 }

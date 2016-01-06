@@ -12,6 +12,7 @@ import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import saveSandboxChain from './../chains/saveSandbox.js';
 import setLoadingCourse from './../actions/setLoadingCourse';
 import setLoadedCourse from './../actions/setLoadedCourse';
+import setAssignmentPoints from './../actions/setAssignmentPoints';
 
 export default [
   setPage('course'),
@@ -25,6 +26,7 @@ export default [
       sceneDidLoad, {
         true: [
           setScene,
+          setAssignmentPoints,
           ...saveSandboxChain,
           showSnackbar('Scenen er lastet')
         ],
@@ -45,6 +47,7 @@ export default [
         true: [
           setCourse,
           setScene,
+          setAssignmentPoints,
           ...saveSandboxChain,
           setLoadedCourse
         ],

@@ -1,11 +1,9 @@
 function setScene({input, state, services}) {
   const currentFileIndex = state.get(['course', 'scenes', input.sceneIndex, 'currentFileIndex']);
-
   const scene = input.scene;
-
-  // We do not need to put the recording in the state tree
   const recording = scene.recording;
 
+  // We do not need to put the recording in the state tree
   if (scene.recording) {
     scene.duration = scene.recording.duration;
   }
@@ -23,6 +21,7 @@ function setScene({input, state, services}) {
 
   if (recording) {
     services.recorder.loadRecording(recording);
+    state.set(['user', 'assignmentsSolved'], services.localAssignments.get(input.courseId, input.sceneIndex));
   }
 
   state.set(['course', 'currentSceneIndex'], input.sceneIndex);

@@ -1,6 +1,7 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-react';
 import Module from './Scene/Module.js';
+import DurationSlider from './DurationSlider';
 import ModuleToolbar from './Scene/ModuleToolbar.js';
 import ModuleFiles from './Scene/ModuleFiles.js';
 import CodeEditor from './Scene/CodeEditor.js';
@@ -15,7 +16,6 @@ import styles from './Scene.css';
 import currentFile from '../computed/currentFile';
 import currentScene from '../computed/currentScene';
 import isAdminMode from '../computed/isAdminMode';
-import completedAssignments from '../computed/completedAssignments';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
@@ -24,7 +24,7 @@ import completedAssignments from '../computed/completedAssignments';
   showAddFileInput: ['course', 'showAddFileInput'],
   currentAssignmentIndex: ['course', 'currentAssignmentIndex'],
   currentAssignmentStatus: ['course', 'currentAssignmentStatus'],
-  completedAssignments: completedAssignments,
+  completedAssignments: ['user', 'assignmentsSolved'],
   currentFile: currentFile,
   currentScene: currentScene,
   isAdminMode: isAdminMode
@@ -41,6 +41,7 @@ class Scene extends React.Component {
         <Module className={styles.controlsAndAssignments} show>
           <ModuleToolbar title="LÆRER"/>
           <SceneControls/>
+          <DurationSlider/>
           <ModuleToolbar title="OPPGAVER"/>
           <AssignmentsBar
             assignments={this.props.currentScene.assignments}
