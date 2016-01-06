@@ -11,6 +11,7 @@ const responseTypes = {
 
 const assignmentTestRunner = fs.readFileSync(path.resolve(__dirname, '../..', 'assignmentTestRunner.js'));
 const mouseClickScript = fs.readFileSync(path.resolve(__dirname, '../..', 'mouseClickScript.js'));
+const devToolsScript = fs.readFileSync(path.resolve(__dirname, '../..', 'devTools.js'));
 
 export default function getSandboxFile(req, res) {
   const id = req.query.id;
@@ -33,14 +34,16 @@ export default function getSandboxFile(req, res) {
         .split('\n').join(''),
       '</script>'].join('');
 
-    code = code.replace('</body>', [
-      '<span></span>',
-      insertMouseClickScript,
-      '\n</body>'
-    ].join(''));
+    const insertDevToolsScript = ['<script>',
+      devToolsScript
+        .toString()
+        .split('\n').join(''),
+      '</script>'].join('');
 
     code = code.replace('</body>', [
       '<span></span>',
+      insertDevToolsScript,
+      insertMouseClickScript,
       insertAssignmentScript,
       '\n</body>'
     ].join(''));
