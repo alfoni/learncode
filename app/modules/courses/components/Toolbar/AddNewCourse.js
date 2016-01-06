@@ -31,7 +31,7 @@ class AddNewCourse extends React.Component {
             required/>
           <button
             type="submit"
-            className={styles.button}
+            className={elements.button}
             disabled={this.props.isSavingNewCourse}>
             {
               this.props.isSavingNewCourse ?

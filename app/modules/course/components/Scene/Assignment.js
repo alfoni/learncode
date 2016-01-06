@@ -1,12 +1,13 @@
 import React from 'react';
 import styles from './Assignment.css';
+import DescriptionTooltip from './DescriptionTooltip';
 
 function Assignment(props) {
   return (
     <div className={styles.wrapper}>
-      <p className={styles.description}>
-        {props.assignment.description}
-      </p>
+      <div className={styles.description}>
+        <DescriptionTooltip>{props.assignment.description}</DescriptionTooltip>
+      </div>
       <button
         className={styles.run}
         disabled={props.completed || props.currentAssignmentStatus.isLoading}

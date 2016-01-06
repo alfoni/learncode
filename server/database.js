@@ -54,6 +54,18 @@ export default {
       });
     });
   },
+  delete(collectionName, data) {
+    const collection = db.collection(collectionName);
+
+    return new Promise((resolve, reject) => {
+      collection.remove(data, (err, result) => {
+        if (err) {
+          reject(err);
+        }
+        resolve(result);
+      });
+    });
+  },
   upsert(collectionName, data) {
     const collection = db.collection(collectionName);
 

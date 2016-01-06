@@ -1,0 +1,65 @@
+.wrapper {
+  width: 500px;
+  padding: 20px;
+  position: relative;
+}
+
+.column {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.tagNameTitle {
+  padding: 11px 0;
+  display: inline-block;
+}
+
+.description {
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+.delete {
+  display: inline-block;
+  margin-left: 5px;
+  cursor: pointer;
+}
+
+.active {
+  color: #ff4081;
+}
+
+.description:hover {
+  text-decoration: underline;
+}
+
+.descriptionField,
+.exampleField {
+  margin-top: 5px;
+}
+
+.radioButtonWrapper {
+    margin-top: 5px;
+    margin-bottom: -3px;
+    text-align: right;
+}
+
+.radioButtonValue {
+  font-size: 10px;
+  margin-left: 3px;
+  margin-top: 3px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.radioButton {
+  display: inline-block;
+  margin-left: 13px;
+}
+
+.inputHeader {
+  font-size: 13px;
+  font-weight: bold;
+}
