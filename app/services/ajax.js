@@ -53,5 +53,17 @@ export default {
       body: JSON.stringify(data)
     })
     .then(verifyStatusAndParse);
+  },
+  delete(url, data) {
+    return fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      credentials: 'same-origin',
+      body: JSON.stringify(data)
+    })
+    .then(verifyStatusAndParse);
   }
 };

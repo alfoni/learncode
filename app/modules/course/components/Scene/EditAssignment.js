@@ -3,7 +3,7 @@ import styles from './EditAssignment.css';
 import CodeMirror from 'codemirror';
 import '!style!css!./../../../../../node_modules/codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript.js';
-import '!style!css!./CodeEditorStyle.css';
+import '!style!css!common/CodeEditorStyle.css';
 
 class EditAssignment extends React.Component {
   constructor(props) {

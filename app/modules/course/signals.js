@@ -42,6 +42,9 @@ import toggleForceUserClicked from './signals/toggleForceUserClicked';
 import newAssignmentClicked from './signals/newAssignmentClicked';
 import assignmentClicked from './signals/assignmentClicked';
 import runAssignmentClicked from './signals/runAssignmentClicked';
+import tagNameMouseOver from './signals/tagNameMouseOver';
+import tagNameMouseOut from './signals/tagNameMouseOut';
+import descriptionHovered from './signals/descriptionHovered';
 
 export default function(controller) {
   controller.signal('course.courseOpened', createSession('course.courseOpened', authenticate(courseOpened)));
@@ -85,4 +88,7 @@ export default function(controller) {
   controller.signal('course.newAssignmentClicked', newAssignmentClicked);
   controller.signal('course.assignmentClicked', track('course.assignmentClicked', assignmentClicked));
   controller.signal('course.runAssignmentClicked', track('course.runAssignmentClicked', runAssignmentClicked));
+  controller.signal('course.tagNameMouseOver', tagNameMouseOver);
+  controller.signal('course.tagNameMouseOut', tagNameMouseOut);
+  controller.signal('course.descriptionHovered', track('course.descriptionHovered', descriptionHovered));
 }

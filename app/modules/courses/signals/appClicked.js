@@ -1,5 +1,5 @@
-import set from 'common/factories/actions/set.js';
+import closeAllPopovers from '../actions/closeAllPopovers';
 
 export default [
-  set(['courses', 'showNewCourse'], false)
+  closeAllPopovers
 ];
