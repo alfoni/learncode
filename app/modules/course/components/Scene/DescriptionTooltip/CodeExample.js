@@ -2,7 +2,7 @@ import '!style!css!./../../../../../../node_modules/codemirror/lib/codemirror.cs
 import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/mode/css/css.js';
 import 'codemirror/mode/htmlmixed/htmlmixed.js';
-import '!style!css!./CodeEditorStyle.css';
+import '!style!css!common/CodeEditorStyle.css';
 
 import React from 'react';
 import CodeMirror from 'codemirror';
