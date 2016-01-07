@@ -91,8 +91,11 @@ class DurationSlider extends React.Component {
     }
   }
   renderTime(time) {
-    const min = Math.floor(time / 60000);
-    let sec = ((time % 60000) / 1000).toFixed(0);
+    let min = Math.floor(time / 60000);
+    min = min || 0;
+    let sec = ((time % 60000) / 1000);
+    sec = sec || 0;
+    sec = sec.toFixed(0);
     sec = sec < 10 ? '0' + sec : sec;
 
     return min + ':' + sec;
