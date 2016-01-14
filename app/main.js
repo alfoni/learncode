@@ -10,6 +10,7 @@ import courseSignals from './modules/course/signals.js';
 import homeSignals from './modules/home/signals.js';
 import coursesSignals from './modules/courses/signals.js';
 import sessionsSignals from './modules/sessions/signals.js';
+import techTreeSignals from './modules/techTree/signals.js';
 
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/actions/hideSnackbar.js';
@@ -25,12 +26,14 @@ homeSignals(controller);
 courseSignals(controller);
 coursesSignals(controller);
 sessionsSignals(controller);
+techTreeSignals(controller);
 
 Router(controller, {
   '/': 'homeOpened',
   '/courses': 'courses.coursesOpened',
   '/courses/:courseId/scenes/:sceneIndex': 'course.courseOpened',
   '/sessions': 'sessions.sessionsOpened',
+  '/techtree': 'techTree.techTreeOpened',
   '*': 'missingRouteRouted'
 }, {
   onlyHash: true

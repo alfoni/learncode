@@ -1,0 +1,145 @@
+.wrapper {
+  background-color: #3b5157;
+  color: #fff;
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  font-family: Roboto, sans-serif;
+  overflow: auto;
+}
+
+.stage {
+  display: inline-block;
+  vertical-align: middle;
+  width: 245px;
+  border-right: 1px solid #51686e;
+}
+
+.level {
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-bottom: -25px;
+}
+
+.stage > div:first-child > div:first-child {
+  display: none;
+}
+
+.course {
+  width: calc(100% - 30px);
+  height: 50px;
+  border: 1px solid #6c7b80;
+  background-color: #c5d1d4;
+  position: relative;
+  margin: 0 0 10px 20px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.courseDisabled {
+  composes: course;
+  opacity: 0.5;
+  cursor: default;
+}
+
+.courseBadge {
+  margin-top: -6px;
+  margin-left: -30px;
+  box-sizing: border-box;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #789096;
+  background-color: #fff;
+  float: left;
+  text-align: center;
+  color: #576f75;
+  padding-top: 16px;
+  font-size: 24px;
+}
+
+.task {
+  width: 180px;
+  height: 40px;
+  border: 1px solid #6c7b80;
+  background-color: #c5d1d4;
+  position: relative;
+  margin: 0 0 10px 30px;
+  border-radius: 3px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.taskDisabled {
+  composes: task;
+  opacity: 0.5;
+  cursor: default;
+}
+
+.taskBadge {
+  margin-top: -1px;
+  margin-left: -20px;
+  box-sizing: border-box;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #789096;
+  background-color: #fff;
+  float: left;
+  text-align: center;
+  color: #576f75;
+  padding-top: 8px;
+  font-size: 20px;
+}
+
+.titleWrapper {
+  float: left;
+  display: flex;
+  height: 100%;
+  align-items: center;
+  width: calc(100% - 50px);
+  vertical-align: top;
+  margin-left: 10px;
+}
+.title {
+  margin-bottom: -2px;
+  padding-right: 15px;
+  font-size: 12px;
+  color: #151c1f;
+  vertical-align: top;
+  font-weight: bold;
+}
+
+.subTitle {
+  font-size: 10px;
+  color: rgba(0, 0, 20, 0.5);
+  vertical-align: top;
+}
+
+.lineWrapper {
+  position: absolute;
+  margin-top: 20px;
+  margin-left: -10px;
+}
+
+.verticalLineFront {
+  position: absolute;
+  left: -40px;
+  top: 50%;
+  width: 20px;
+  height: 1px;
+  background-color: #51686e;
+}
+
+.verticalLineBack {
+  composes: verticalLineFront;
+  right: -20px;
+  left: auto;
+}
+
+.horizontalLine {
+  width: 1px;
+  height: 50px;
+  background-color: #51686e;
+}
