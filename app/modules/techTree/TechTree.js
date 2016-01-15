@@ -1,5 +1,5 @@
 import React from 'react';
-import {Decorator as Cerebral} from 'cerebral-react';
+import {Decorator as Cerebral} from 'cerebral-view-react';
 import styles from './TechTree.css';
 import icons from 'common/icons.css';
 

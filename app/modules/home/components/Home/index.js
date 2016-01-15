@@ -83,6 +83,10 @@ class Home extends React.Component {
             </div>
           </div>
           <div className={styles.bottomWrapper}>
+            <h1 style={{textAlign: 'center'}}>Vi kommer snart tilbake!</h1>
+            {/*
+
+
             <div className={styles.container}>
               {!isChrome ? this.renderChromeInformation() : null}
               <SuccessMessage
@@ -117,7 +121,9 @@ class Home extends React.Component {
                 Kodeboksen er en helt ny måte å lære kode på.
               </p>
             </div>
+                      */}
           </div>
+
         </div>
       );
     }
