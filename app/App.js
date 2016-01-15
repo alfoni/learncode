@@ -4,13 +4,15 @@ import Course from './modules/course/Course.js';
 import Home from './modules/home/Home.js';
 import Courses from './modules/courses/Courses.js';
 import Sessions from './modules/sessions/Sessions.js';
+import TechTree from './modules/techTree/TechTree.js';
 import styles from './App.css';
 
 const pages = {
   'home': Home,
   'course': Course,
   'courses': Courses,
-  'sessions': Sessions
+  'sessions': Sessions,
+  'techTree': TechTree
 };
 
 @Cerebral({
