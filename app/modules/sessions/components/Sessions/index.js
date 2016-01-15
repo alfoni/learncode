@@ -13,13 +13,23 @@ class Log extends React.Component {
     super();
     this.totalSessionTime = 0;
   }
+  formatDate(time) {
+    const dateObject = new Date(time);
+    const minutes = dateObject.getMinutes() >= 10 ? dateObject.getMinutes() : '0' + dateObject.getMinutes();
+    const hours = dateObject.getHours() >= 10 ? dateObject.getHours() : '0' + dateObject.getHours();
+    const date = dateObject.getDate() >= 10 ? dateObject.getDate() : '0' + dateObject.getDate();
+    const month = dateObject.getMonth() + 1 >= 10 ? dateObject.getMonth() + 1 : '0' + (dateObject.getMonth() + 1);
+    const year = dateObject.getFullYear();
+
+    return date + '.' + month + '.' + year + ' ' + hours + ':' + minutes;
+  }
   renderSessions() {
     return this.props.sessions.map((session, index) => {
       return (
         <option
           key={index}
           value={session.id}>
-            {index}: {session.userId} - Signals:{session.signals.length}
+            {index}: date: {this.formatDate(session.created)} - Signals:{session.signals.length}
         </option>
       );
     });

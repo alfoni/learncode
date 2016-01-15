@@ -4,7 +4,6 @@ import db from './../database.js';
 export default function createSession(req, res) {
   const session = {
     id: uuid.v4(),
-    userId: req.cookies.kodeboksen,
     created: Date.now(),
     signals: []
   };

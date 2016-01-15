@@ -11,6 +11,7 @@ import Home from './modules/home';
 import Sessions from './modules/sessions';
 import Courses from './modules/courses';
 import Course from './modules/course';
+import techTreeSignals from './modules/techTree/signals.js';
 
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/actions/hideSnackbar.js';
@@ -23,6 +24,8 @@ controller.signals({
     showSnackbar('Denne url-en finnes ikke')
   ]
 });
+
+techTreeSignals(controller);
 
 controller.modules({
   home: Home(),
