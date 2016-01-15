@@ -11,7 +11,7 @@ import Home from './modules/home';
 import Sessions from './modules/sessions';
 import Courses from './modules/courses';
 import Course from './modules/course';
-import TechTree from './modules/TechTree';
+import TechTree from './modules/techTree';
 
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/actions/hideSnackbar.js';

@@ -10,8 +10,9 @@ function linkCourses({input, state}) {
   let selectedCourseLevelIndex = null;
   let linkingCourseLevelIndex = null;
   let selectedCourseIsWithinOneLevel = false;
+  let levelIndex = 0;
 
-  state.get(['techTree', 'courseDependencyMap']).forEach((level, levelIndex) => {
+  state.get(['techTree', 'courseDependencyMap']).forEach((level) => {
     if (!level.centerLine && !level.sideLine) {
       const selectedCourseExistsInLevel = level.find((course) => {
         if (!course) {
@@ -35,22 +36,36 @@ function linkCourses({input, state}) {
       if (linkingCourseExistsInLevel) {
         linkingCourseLevelIndex = levelIndex;
       }
+
+      levelIndex++;
     }
   });
 
   if (selectedCourseLevelIndex > linkingCourseLevelIndex) {
-    selectedCourseIsWithinOneLevel = selectedCourseLevelIndex - linkingCourseLevelIndex === 1;
+    selectedCourseIsWithinOneLevel = selectedCourseLevelIndex - linkingCourseLevelIndex === 1 ||
+    selectedCourseLevelIndex - linkingCourseLevelIndex === 2;
   } else {
-    selectedCourseIsWithinOneLevel = linkingCourseLevelIndex - selectedCourseLevelIndex === 1;
+    selectedCourseIsWithinOneLevel = linkingCourseLevelIndex - selectedCourseLevelIndex === 1 ||
+    linkingCourseLevelIndex - selectedCourseLevelIndex === 2;
   }
 
   if (selectedCourseIsWithinOneLevel) {
     if (selectedCourseIndex > dependencyCourseIndex) {
-      state.push(['techTree', 'courseDependencyList', dependencyCourseIndex, 'requiredBy'], selectedCourse.id);
-      state.push(['techTree', 'courseDependencyList', selectedCourseIndex, 'requires'], input.course.id);
+      if (state.get(['techTree', 'courseDependencyList', dependencyCourseIndex, 'requiredBy']).indexOf(selectedCourse.id) < 0) {
+        state.push(['techTree', 'courseDependencyList', dependencyCourseIndex, 'requiredBy'], selectedCourse.id);
+      }
+
+      if (state.get(['techTree', 'courseDependencyList', selectedCourseIndex, 'requires']).indexOf(input.course.id) < 0) {
+        state.push(['techTree', 'courseDependencyList', selectedCourseIndex, 'requires'], input.course.id);
+      }
     } else {
-      state.push(['techTree', 'courseDependencyList', dependencyCourseIndex, 'requires'], selectedCourse.id);
-      state.push(['techTree', 'courseDependencyList', selectedCourseIndex, 'requiredBy'], input.course.id);
+      if (state.get(['techTree', 'courseDependencyList', dependencyCourseIndex, 'requires']).indexOf(selectedCourse.id) < 0) {
+        state.push(['techTree', 'courseDependencyList', dependencyCourseIndex, 'requires'], selectedCourse.id);
+      }
+
+      if (state.get(['techTree', 'courseDependencyList', selectedCourseIndex, 'requiredBy']).indexOf(input.course.id) < 0) {
+        state.push(['techTree', 'courseDependencyList', selectedCourseIndex, 'requiredBy'], input.course.id);
+      }
     }
   }
 }

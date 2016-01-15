@@ -210,7 +210,7 @@ function drawCenterLines(levels, courseDependencyList) {
       const rightLines = levels[currentLevelIndex + 1];
 
       for (let x = 0; x < leftLines.length; x++) {
-        if (!level[x]) {
+        if (typeof level[x] !== 'number') {
           if (typeof rightLines[x] === 'number') {
             const relatedLeftSideLineIndexes = getDepenencyIndexes(rightLines[x], leftLines, courseDependencyList);
             const minIndex = Math.min.apply(Math, relatedLeftSideLineIndexes); // Getting highest number in array
@@ -219,7 +219,7 @@ function drawCenterLines(levels, courseDependencyList) {
             if (minIndex === maxIndex) { // Dependant by a single course
               if (minIndex > x) {
                 for (let y = x; y < minIndex; y++) { // Add the lines that are above the right-side course
-                  if (!level[y]) {
+                  if (typeof level[y] !== 'number') {
                     level[y] = rightLines[x];
                   }
                 }
@@ -261,16 +261,14 @@ function drawFutureLevelDependencyLines(levels, courseDependencyList) {
           });
           const leftSideCourseIsrequiresInFutureLevels = currentCourse.requiredBy.length === leftSideCourserequiresInNextLevel.length;
 
-          // ('leftSideCourseIsrequiresInFutureLevels', leftSideCourseIsrequiresInFutureLevels);
-
           if (!leftSideCourseIsrequiresInFutureLevels) {
             if (x < level.length / 2) { // If should draw line upwards or downwards
               for (let y = 0; y <= x; y++) { // Add the lines that are above the right-side course
-                level[y] = leftLines[x];
+                level[y - 1] = leftLines[x];
               }
               rightLines[0] = level[0];
             } else {
-              for (let y = level.length - 1; y > x; y--) { // Add the lines that are above the right-side course
+              for (let y = level.length - 1; y >= x; y--) { // Add the lines that are above the right-side course
                 level[y] = leftLines[x];
               }
               rightLines[level.length] = level[level.length - 1];
@@ -291,12 +289,12 @@ function drawPreviousLevelDependencyLines(levels, courseDependencyList) {
       const rightLines = levels[currentLevelIndex + 1];
 
       for (let x = 0; x < rightLines.length; x++) {
-        const isDependencyLine = x === 0;
+        const isDependencyLine = x === 0 || x === level.length;
         const currentCourse = getCourse(rightLines[x], courseDependencyList);
 
-        if (rightLines[x] && !isDependencyLine) {
+        if (typeof rightLines[x] === 'number' && !isDependencyLine) {
           const rightSideCourseRequiresInPreviousLevel = leftLines.filter((courseId) => {
-            if (!courseId) {
+            if (typeof courseId !== 'number') {
               return false;
             }
 
@@ -304,19 +302,19 @@ function drawPreviousLevelDependencyLines(levels, courseDependencyList) {
           });
 
           // right side course has requires in previous levels
-          if (!currentCourse.requires.length === rightSideCourseRequiresInPreviousLevel.length) {
+          if (currentCourse.requires.length !== rightSideCourseRequiresInPreviousLevel.length) {
             const rightLinesInPreviousLevel = levels[currentLevelIndex - 3];
             // Draw line upwards or downwards
-            if (rightLinesInPreviousLevel[0] && rightLines[x].requires.indexOf(rightLinesInPreviousLevel[0].course.id) >= 0) {
+            if (rightLinesInPreviousLevel[0] && currentCourse.requires.indexOf(rightLinesInPreviousLevel[0]) >= 0) {
               for (let y = 0; y < x; y++) {
-                level[y] = rightLines[x].id;
+                level[y] = rightLines[x];
               }
-              leftLines[0] = level[0].id;
+              leftLines[0] = level[0];
             } else {
               for (let y = level.length - 1; y >= x; y--) {
-                level[y] = rightLines[x].id;
+                level[y] = rightLines[x];
               }
-              leftLines[level.length] = level[level.length - 1].id;
+              leftLines[level.length] = level[level.length - 1];
             }
           }
         }
