@@ -1,6 +1,6 @@
 import React from 'react';
-import {Decorator as Cerebral} from 'cerebral-react';
-import styles from './CoursesOverview.css';
+import {Decorator as Cerebral} from 'cerebral-view-react';
+import styles from './styles.css';
 
 @Cerebral({
   selectedCourse: ['techTree', 'selectedCourse'],
@@ -8,6 +8,10 @@ import styles from './CoursesOverview.css';
   courseDependencyList: ['techTree', 'courseDependencyList']
 })
 class CoursesOverview extends React.Component {
+  onCourseDependencyClicked(e, course) {
+    e.stopPropagation();
+    this.props.signals.techTree.courseDependencyClicked({course: course});
+  }
   renderCourses(courses) {
     if (!courses) {
       return <div>Ingen kurs er opprettet</div>;
@@ -26,7 +30,7 @@ class CoursesOverview extends React.Component {
         <div
           key={index}
           className={styles.course}
-          onClick={() => this.props.signals.techTree.onCourseDependencyClicked({course: course})}>
+          onClick={(e) => this.onCourseDependencyClicked(e, course)}>
           {course.title}
         </div>
       );
@@ -35,7 +39,7 @@ class CoursesOverview extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        {this.props.selectedCourse ? 'Velg kurs som er avhengig av: ' + this.props.selectedCourse.title : 'Velg kurs:'}
+        {this.props.selectedCourse ? 'Legg til kurs som er avhengig av: ' + this.props.selectedCourse.title : 'Velg kurs:'}
         <br/><br/>
         {this.renderCourses(this.props.courses)}
       </div>
