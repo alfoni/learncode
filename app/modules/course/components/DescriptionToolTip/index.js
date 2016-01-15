@@ -8,7 +8,7 @@ import styles from './styles.css';
   tooltipTimeout: ['course', 'tooltip', 'timeout'],
   visibleTooltip: ['course', 'tooltip', 'visible']
 })
-class DescriptionTooltip extends React.Component {
+class DescriptionToolTip extends React.Component {
   constructor(props) {
     super(props);
   }
@@ -77,4 +77,4 @@ class DescriptionTooltip extends React.Component {
   }
 }
 
-export default DescriptionTooltip;
+export default DescriptionToolTip;
