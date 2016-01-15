@@ -1,5 +1,5 @@
 import React from 'react';
-import {Decorator as Cerebral} from 'cerebral-react';
+import {Decorator as Cerebral} from 'cerebral-view-react';
 import styles from './ToolbarButton.css';
 import Tooltip from 'common/components/Toolbar/Tooltip.js';
 

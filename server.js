@@ -145,16 +145,28 @@ if (isDeveloping) {
   }));
 
   app.use(webpackHotMiddleware(compiler));
+
+  db.connect();
+
+  https.createServer({
+    key: fs.readFileSync('./server.key'),
+    cert: fs.readFileSync('./server.crt')
+  }, app).listen(port, function onStart(err) {
+    if (err) {
+      console.log(err);
+    }
+    console.info('==> 🌎 Listening on port %s');
+  });
+
+} else {
+
+  db.connect();
+
+  app.listen(port, function onStart(err) {
+    if (err) {
+      console.log(err);
+    }
+    console.info('==> 🌎 Listening on port %s');
+  });
+
 }
-
-db.connect();
-
-https.createServer({
-  key: fs.readFileSync('./server.key'),
-  cert: fs.readFileSync('./server.crt')
-}, app).listen(port, function onStart(err) {
-  if (err) {
-    console.log(err);
-  }
-  console.info('==> 🌎 Listening on port %s');
-});

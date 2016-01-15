@@ -1,5 +1,5 @@
 import Controller from 'cerebral';
-import Model from 'cerebral-baobab';
+import Model from 'cerebral-model-baobab';
 import ajax from './services/ajax.js';
 
 const model = Model({
@@ -9,97 +9,12 @@ const model = Model({
     text: '',
     persist: false
   },
-  home: {
-    showSigningupLoader: false,
-    hasRegistered: false
-  },
-  courses: {
-    showNewCourse: false,
-    showDescriptions: false,
-    isSavingNewCourse: false,
-    isSavingDescription: false,
-    selectedDescription: null,
-    descriptions: [],
-    newDescription: {
-      tagName: '',
-      description: '',
-      exampleType: 'HTML',
-      example: ''
-    },
-    updatedDescription: {
-      tagName: '',
-      description: '',
-      exampleType: 'HTML',
-      example: ''
-    },
-    newCourse: {
-      courseName: '',
-      sceneName: ''
-    },
-    courses: []
-  },
-  recorder: {
-    isPlaying: false,
-    isEnded: false,
-    isUploading: false,
-    hasUpload: false,
-    isRecording: false,
-    hasRecorded: false,
-    isBuffering: false,
-    currentSeek: [0, Date.now()],
-    lastPaused: Date.now()
-  },
-  course: {
-    id: null,
-    name: 'Course 1',
-    mousePosition: {
-      x: 0,
-      y: 0
-    },
-    isLoading: false,
-    currentAssignmentStatus: {
-      isLoading: false,
-      result: null
-    },
-    assignmentPoints: [],
-    descriptions: [],
-    isLoadingMedia: false,
-    authorId: null,
-    showPreview: true,
-    showConsole: false,
-    showEditAssignment: false,
-    showAssignment: false,
-    tooltip: {
-      visible: null,
-      timeout: null
-    },
-    showConfigureScenes: false,
-    showScenesList: false,
-    showFolder: false,
-    showAddFileInput: false,
-    currentSceneIndex: 0,
-    currentAssignmentIndex: 0,
-    sandboxSnapshot: null,
-    newSceneName: '',
-    newFileName: '',
-    codeSelection: {
-      anchor: {ch: 0, line: 0},
-      head: {ch: 0, line: 0}
-    },
-    scenes: [],
-    scenesList: []
-  },
   user: {
     isLoggedIn: false,
     isLoading: false,
     isAdmin: false,
     forceUser: false,
     assignmentsSolved: []
-  },
-  sessions: {
-    selectedSession: null,
-    sessionsList: [],
-    openedSignal: null
   },
   session: {
     sessionId: null

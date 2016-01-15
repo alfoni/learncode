@@ -1,0 +1,13 @@
+.wrapper {
+  composes: button from 'common/roundButton.css';
+  background-color: #00BCD4;
+  transform: translate3d(10px, 30px, 0);
+}
+
+.recording {
+  composes: wrapper;
+}
+
+.playing {
+  composes: wrapper;
+}

@@ -1,39 +1,55 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import controller from './controller.js';
-import {Container} from 'cerebral-react';
-import Router from 'cerebral-router';
+import {Container} from 'cerebral-view-react';
+import Router from 'cerebral-module-router';
+import Recorder from 'cerebral-module-recorder';
 
 import App from './App.js';
 
-import courseSignals from './modules/course/signals.js';
-import homeSignals from './modules/home/signals.js';
-import coursesSignals from './modules/courses/signals.js';
-import sessionsSignals from './modules/sessions/signals.js';
+import Home from './modules/home';
+import Sessions from './modules/sessions';
+import Courses from './modules/courses';
+import Course from './modules/course';
 
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/actions/hideSnackbar.js';
 
-controller.signal('snackbarTimedOut', [
-  hideSnackbar
-]);
-controller.signal('missingRouteRouted', [
-  showSnackbar('Denne url-en finnes ikke')
-]);
+controller.signals({
+  snackbarTimedOut: [
+    hideSnackbar
+  ],
+  missingRouteRouted: [
+    showSnackbar('Denne url-en finnes ikke')
+  ]
+});
 
-homeSignals(controller);
-courseSignals(controller);
-coursesSignals(controller);
-sessionsSignals(controller);
+controller.modules({
+  home: Home(),
+  sessions: Sessions(),
+  courses: Courses(),
+  course: Course(),
 
-Router(controller, {
-  '/': 'homeOpened',
-  '/courses': 'courses.coursesOpened',
-  '/courses/:courseId/scenes/:sceneIndex': 'course.courseOpened',
-  '/sessions': 'sessions.sessionsOpened',
-  '*': 'missingRouteRouted'
-}, {
-  onlyHash: true
+  recorder: Recorder({
+    state: {
+      isEnded: false,
+      isUploading: false,
+      hasUpload: false,
+      hasRecorded: false,
+      isBuffering: false,
+      currentSeek: [0, Date.now()],
+      lastPaused: Date.now()
+    }
+  }),
+  router: Router({
+    '/': 'home.opened',
+    '/courses': 'courses.opened',
+    '/courses/:courseId/scenes/:sceneIndex': 'course.opened',
+    '/sessions': 'sessions.opened',
+    '*': 'missingRouteRouted'
+  }, {
+    onlyHash: true
+  })
 });
 
 ReactDOM.render(
