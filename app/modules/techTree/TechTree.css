@@ -129,14 +129,6 @@
   height: 164px;
 }
 
-.depsBox {
-  vertical-align: top;
-  height: 100%;
-  width: 10px;
-  display: inline-block;
-  margin: 0 2px;
-}
-
 .boxLevel:first-child {
   margin-left: 15px;
 }

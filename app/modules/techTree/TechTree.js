@@ -3,162 +3,12 @@ import {Decorator as Cerebral} from 'cerebral-react';
 import styles from './TechTree.css';
 import icons from 'common/icons.css';
 
-const Intro = {
-  title: 'Landingsside intro',
-  type: 'course',
-  finishedPercent: '0%',
-  disabled: false,
-  color: '#e57373' // Lys rød
-};
-const Stylesheet = {
-  title: 'Stylesheet',
-  type: 'task',
-  finishedPercent: '0%',
-  disabled: false,
-  color: '#E91E63' // Rosa
-};
-const Overskrifter = {
-  title: 'Overskrifter',
-  type: 'task',
-  finishedPercent: '0%',
-  disabled: false,
-  color: '#9C27B0' // Rosa
-};
-const ElementSelector = {
-  title: 'CSS Element Selector',
-  type: 'task',
-  finishedPercent: '0%',
-  disabled: false,
-  color: '#FFEB3B'
-};
-const Color = {
-  title: 'Farge på tekst',
-  type: 'task',
-  finishedPercent: '0%',
-  disabled: false,
-  color: '#3F51B5'
-};
-const Bilde = {
-  title: 'Bilde',
-  type: 'task',
-  finishedPercent: '0%',
-  disabled: false,
-  color: '#90CAF9'
-};
-const Landingsside1 = {
-  title: 'Landingsside 1',
-  type: 'course',
-  finishedPercent: '0%',
-  disabled: false,
-  color: '#03A9F4'
-};
-const Landingsside2 = {
-  title: 'Landingsside 2',
-  type: 'task',
-  finishedPercent: '0%',
-  disabled: false,
-  color: '#FFCC80'
-};
-const Tekst = {
-  title: 'Tekst',
-  type: 'task',
-  finishedPercent: '0%',
-  disabled: false,
-  color: '#FFF'
-};
-const Landingsside3 = {
-  title: 'Landingsside 3',
-  type: 'course',
-  finishedPercent: '0%',
-  disabled: false,
-  color: '#009688'
-};
-const Gradient = {
-  title: 'Gradient',
-  type: 'task',
-  finishedPercent: '0%',
-  disabled: false,
-  color: '#afa'
-};
-const Landingsside4 = {
-  title: 'Landingsside 4',
-  type: 'task',
-  finishedPercent: '0%',
-  disabled: false,
-  color: 'deeppink'
-};
-
-let dependencyList = [{
-  course: Gradient,
-  deps: [Color],
-  dependentBy: []
-}, {
-  course: Intro,
-  deps: [],
-  dependentBy: [Bilde, Stylesheet, Overskrifter, ElementSelector, Color]
-}, {
-  course: Bilde,
-  deps: [Intro],
-  dependentBy: [Landingsside3, Tekst]
-}, {
-  course: Stylesheet,
-  deps: [Intro],
-  dependentBy: [Landingsside1]
-}, {
-  course: Overskrifter,
-  deps: [Intro],
-  dependentBy: [Landingsside1]
-}, {
-  course: ElementSelector,
-  deps: [Intro],
-  dependentBy: [Landingsside1]
-}, {
-  course: Color,
-  deps: [Intro],
-  dependentBy: [Landingsside1, Gradient]
-}, {
-  course: Landingsside1,
-  deps: [Stylesheet, Overskrifter, ElementSelector, Color],
-  dependentBy: [Landingsside3]
-}, {
-  course: Landingsside3,
-  deps: [Landingsside1, Bilde],
-  dependentBy: []
-}, {
-  course: Tekst,
-  deps: [Bilde],
-  dependentBy: []
-}];
-
-/* dependencyList = [{
-  course: Gradient,
-  deps: [],
-  dependentBy: [Landingsside4, Landingsside3, Tekst]
-}, {
-  course: Landingsside4,
-  deps: [Gradient],
-  dependentBy: [Color, Bilde]
-}, {
-  course: Landingsside3,
-  deps: [Gradient],
-  dependentBy: [Tekst]
-}, {
-  course: Tekst,
-  deps: [Gradient, Landingsside3],
-  dependentBy: [Bilde]
-}, {
-  course: Color,
-  deps: [Landingsside4],
-  dependentBy: []
-}, {
-  course: Bilde,
-  deps: [Tekst, Landingsside4],
-  dependentBy: []
-}]; */
+let CoursesOverview = null;
 
 @Cerebral({
+  courseDependencyList: ['techTree', 'courseDependencyList']
 })
-class Home extends React.Component {
+class TechTree extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -167,16 +17,22 @@ class Home extends React.Component {
   }
   componentDidMount() {
     require.ensure([], (require) => {
+      CoursesOverview =  require('./components/CoursesOverview');
       this.setState({
         canRender: true
       });
+    });
+  }
+  getCourse(courseId) {
+    return this.props.courseDependencyList.find((course) => {
+      return course.course.id === courseId;
     });
   }
   createLevel(previousLevel, dependencies) {
     const newLevel = [];
     dependencies.forEach((course) => {
       previousLevel.forEach((dependency) => {
-        if (course.deps.indexOf(dependency.course) >= 0 && newLevel.indexOf(course) < 0) {
+        if (course.requires.indexOf(dependency.course.id) >= 0 && newLevel.indexOf(course.id) < 0) {
           newLevel.push(course);
         }
       });
@@ -184,7 +40,7 @@ class Home extends React.Component {
 
     newLevel.forEach((course) => {
       newLevel.forEach((dependencyCourse, index) => {
-        if (course.dependentBy.indexOf(dependencyCourse.course) >= 0) {
+        if (course.requiredBy.indexOf(dependencyCourse.course.id) >= 0) {
           newLevel.splice(index, 1);
         }
       });
@@ -193,19 +49,19 @@ class Home extends React.Component {
     return newLevel;
   }
   createDependencyTree() {
-    const startPoints = dependencyList.filter((course) => {
-      return !course.deps.length;
+    const startPoints = this.props.courseDependencyList.filter((course) => {
+      return !course.requires.length;
     });
 
     const levels = [startPoints];
 
-    // Loop must run until none of the courses in a level has any dependentBy
+    // Loop must run until none of the courses in a level has any requiredBy
     while (true) {
       const previousLevel = levels[levels.length - 1];
       let isLastLevel = true;
 
       previousLevel.forEach((course) => {
-        if (course.dependentBy.length > 0) {
+        if (course.requiredBy.length > 0) {
           isLastLevel = false;
         }
       });
@@ -214,7 +70,7 @@ class Home extends React.Component {
         break;
       }
 
-      levels.push(this.createLevel(previousLevel, dependencyList));
+      levels.push(this.createLevel(previousLevel, this.props.courseDependencyList));
     }
 
     return levels;
@@ -223,57 +79,35 @@ class Home extends React.Component {
     const sortedDependencyTree = [];
     dependencyTree.forEach((level, index) => {
       const previousLevel = dependencyTree[index - 1];
+      const sortedLevel = [];
 
       if (previousLevel) {
         level.forEach((course) => {
-          const depsIndexes = [];
+          const requiresIndexes = [];
           previousLevel.forEach((previousLevelCourse, dependencyIndex) => {
-            if (course.deps.indexOf(previousLevelCourse.course) >= 0) {
-              depsIndexes.push(dependencyIndex);
+            if (course.requires.indexOf(previousLevelCourse.course.id) >= 0) {
+              requiresIndexes.push(dependencyIndex);
             }
           });
-          course.averageDepsIndex = depsIndexes.reduce((previousValue, currentValue) => {
-            return previousValue + currentValue;
-          }) / depsIndexes.length;
+          sortedLevel.push({
+            course: course,
+            averagerequiresIndex: requiresIndexes.reduce((previousValue, currentValue) => {
+              return previousValue + currentValue;
+            }) / requiresIndexes.length
+          });
         });
-        level.sort((a, b) => {
-          return a.averageDepsIndex - b.averageDepsIndex;
+        sortedLevel.sort((a, b) => {
+          return a.averagerequiresIndex - b.averagerequiresIndex;
         });
+        sortedDependencyTree.push(sortedLevel.map((course) => {
+          return course.course;
+        }));
+      } else {
+        sortedDependencyTree.push(level);
       }
-      sortedDependencyTree.push(level);
     });
 
     return sortedDependencyTree;
-  }
-  renderCourse(course, key) { // options: title, finishedPercent, disabled
-    return (
-      <div key={key} className={course.disabled ? styles.courseDisabled : styles.large}>
-        <div className={styles.courseBadge}>
-          <span className={icons.thumbUp}></span>
-        </div>
-        <div className={styles.titleWrapper}>
-          <div className={styles.title}>
-            {course.title}
-            <span className={styles.subTitle}> {course.finishedPercent ? '(' + course.finishedPercent + ')' : ''}</span>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  renderTask(task, key) { // options: name, finishedPercent, disabled
-    return (
-      <div key={key} className={task.disabled ? styles.taskDisabled : styles.small}>
-        <div className={styles.taskBadge}>
-          <span className={icons.scene}></span>
-        </div>
-        <div className={styles.titleWrapper}>
-          <div className={styles.title}>
-            {task.title}
-            <span className={styles.subTitle}> {task.finishedPercent ? '(' + task.finishedPercent + ')' : ''}</span>
-          </div>
-        </div>
-      </div>
-    );
   }
   positionSlots(levels) {
     const positionedLevels = levels;
@@ -333,8 +167,8 @@ class Home extends React.Component {
       centerLine.centerLine = true;
       // Add left lines
       currentLevel.forEach((course) => {
-        if (course && leftLines.indexOf(course) < 0 && course.dependentBy.length) {
-          leftLines.push(course);
+        if (course && leftLines.indexOf(course.course.id) <= 0 && course.requiredBy.length) {
+          leftLines.push(course.course.id);
         } else {
           leftLines.push(null);
         }
@@ -347,8 +181,8 @@ class Home extends React.Component {
       // Add right lines
       if (nextLevel) {
         nextLevel.forEach((course) => {
-          if (course && rightLines.indexOf(course) < 0) {
-            rightLines.push(course);
+          if (course && rightLines.indexOf(course.course.id) <= 0) {
+            rightLines.push(course.course.id);
           } else {
             rightLines.push(null);
           }
@@ -364,10 +198,10 @@ class Home extends React.Component {
     levelsMap.forEach((level, levelIndex) => {
       if (level.sideLines) {
         const positionedLineSlots = level.slice(0);
-        level.forEach((course, courseIndex) => {
-          if (course) {
+        level.forEach((courseId, courseIndex) => {
+          if (typeof courseId === 'number') {
             // Position lines
-            if (course.course.type === 'course') {
+            if (this.getCourse(courseId).course.type === 'course') {
               positionedLineSlots.splice(courseIndex + 1, 4);
               positionedLineSlots.splice(courseIndex, 0, null, null, null, null);
             } else {
@@ -382,10 +216,10 @@ class Home extends React.Component {
 
     return levelsMap;
   }
-  getDepenencyIndexes(course, lineMap) {
+  getDepenencyIndexes(courseId, lines) {
     const relatedIndexes = [];
-    lineMap.forEach((relatedCourse, index) => {
-      if (relatedCourse && relatedCourse.dependentBy.indexOf(course) >= 0) {
+    lines.forEach((relatedCourseId, index) => {
+      if (typeof relatedCourseId === 'number' && this.getCourse(relatedCourseId).requiredBy.indexOf(courseId) >= 0) {
         relatedIndexes.push(index);
       }
     });
@@ -400,8 +234,8 @@ class Home extends React.Component {
 
         for (let x = 0; x < leftLines.length; x++) {
           if (!level[x]) {
-            if (rightLines[x]) {
-              const relatedLeftSideLineIndexes = this.getDepenencyIndexes(rightLines[x].course, leftLines);
+            if (typeof rightLines[x] === 'number') {
+              const relatedLeftSideLineIndexes = this.getDepenencyIndexes(rightLines[x], leftLines);
               const minIndex = Math.min.apply(Math, relatedLeftSideLineIndexes); // Getting highest number in array
               const maxIndex = Math.max.apply(Math, relatedLeftSideLineIndexes); // Getting lowest number in array
 
@@ -437,19 +271,21 @@ class Home extends React.Component {
         const rightLines = levels[currentLevelIndex + 1];
 
         for (let x = 0; x < leftLines.length; x++) {
-          if (leftLines[x]) {
-            const leftSideCourseDepsInNextLevel = rightLines.filter((course, index) => {
-              if (!course) {
+          const currentCourse = this.getCourse(leftLines[x]);
+
+          if (typeof leftLines[x] === 'number') {
+            const leftSideCourserequiresInNextLevel = rightLines.filter((courseId) => {
+              if (!courseId) {
                 return false;
               }
 
-              return leftLines[x].dependentBy.indexOf(course.course) >= 0;
+              return currentCourse.requiredBy.indexOf(courseId) >= 0;
             });
-            const leftSideCourseIsDepsInFutureLevels = leftLines[x].dependentBy.length === leftSideCourseDepsInNextLevel.length;
+            const leftSideCourseIsrequiresInFutureLevels = currentCourse.requiredBy.length === leftSideCourserequiresInNextLevel.length;
 
-            // ('leftSideCourseIsDepsInFutureLevels', leftSideCourseIsDepsInFutureLevels);
+            // ('leftSideCourseIsrequiresInFutureLevels', leftSideCourseIsrequiresInFutureLevels);
 
-            if (!leftSideCourseIsDepsInFutureLevels) {
+            if (!leftSideCourseIsrequiresInFutureLevels) {
               if (x < level.length / 2) { // If should draw line upwards or downwards
                 for (let y = 0; y <= x; y++) { // Add the lines that are above the right-side course
                   level[y] = leftLines[x];
@@ -477,30 +313,31 @@ class Home extends React.Component {
 
         for (let x = 0; x < rightLines.length; x++) {
           const isDependencyLine = x === 0;
+          const currentCourse = this.getCourse(rightLines[x]);
 
           if (rightLines[x] && !isDependencyLine) {
-            const rightSideCourseDepsInPreviousLevel = leftLines.filter((course, index) => {
-              if (!course) {
+            const rightSideCourseRequiresInPreviousLevel = leftLines.filter((courseId) => {
+              if (!courseId) {
                 return false;
               }
 
-              return rightLines[x].deps.indexOf(course.course) >= 0;
+              return currentCourse.requires.indexOf(courseId) >= 0;
             });
-            const rightSideCourseHasDepsInPreviousLevels = rightLines[x].deps.length === rightSideCourseDepsInPreviousLevel.length;
 
-            if (!rightSideCourseHasDepsInPreviousLevels) {
+            // right side course has requires in previous levels
+            if (!currentCourse.requires.length === rightSideCourseRequiresInPreviousLevel.length) {
               const rightLinesInPreviousLevel = levels[currentLevelIndex - 3];
               // Draw line upwards or downwards
-              if (rightLinesInPreviousLevel[0] && rightLines[x].deps.indexOf(rightLinesInPreviousLevel[0].course) >= 0) {
+              if (rightLinesInPreviousLevel[0] && rightLines[x].requires.indexOf(rightLinesInPreviousLevel[0].course.id) >= 0) {
                 for (let y = 0; y < x; y++) {
-                  level[y] = rightLines[x];
+                  level[y] = rightLines[x].id;
                 }
-                leftLines[0] = level[0];
+                leftLines[0] = level[0].id;
               } else {
                 for (let y = level.length - 1; y >= x; y--) {
-                  level[y] = rightLines[x];
+                  level[y] = rightLines[x].id;
                 }
-                leftLines[level.length] = level[level.length - 1];
+                leftLines[level.length] = level[level.length - 1].id;
               }
             }
           }
@@ -552,23 +389,7 @@ class Home extends React.Component {
 
       for (let x = 0; x < level.length; x++) {
         const course = level[x];
-        const courseIndex = x
-
-        const depsBoxes = [];
-
-        if (course && typeof course.position !== 'number') {
-          if (course.deps) {
-            course.deps.forEach((depsCourse, index) => {
-              depsBoxes.push(
-                <div
-                  key={index}
-                  style={{backgroundColor: depsCourse.color}}
-                  className={styles.depsBox}>
-                </div>
-              );
-            });
-          }
-        }
+        const courseIndex = x;
 
         if (course && (course.topLine || course.bottomLine)) {
           levelBoxes.push(
@@ -582,7 +403,7 @@ class Home extends React.Component {
           levelBoxes.push(
             <div
               key={courseIndex}
-              style={{borderTop: course ? '1px solid ' + 'rgba(50, 50, 65, 1)' : ''}}
+              style={{borderTop: typeof course === 'number' ? '1px solid ' + 'rgba(50, 50, 65, 1)' : ''}}
               className={styles.line}>
             </div>
           );
@@ -591,7 +412,7 @@ class Home extends React.Component {
             <div
               key={courseIndex}
               style={{
-                borderLeft: course ? '1px solid rgba(50, 50, 65, 1)' : 'transparent'
+                borderLeft: typeof course === 'number' ? '1px solid rgba(50, 50, 65, 1)' : 'transparent'
               }}
               className={styles.centerLine}>
             </div>
@@ -603,20 +424,16 @@ class Home extends React.Component {
               levelBoxes.push(
                 <div
                   key={courseIndex}
-                  // style={{backgroundColor: course  ? course.course.color : 'transparent'}}
                   className={styles.largeBox}>
                   {this.renderCourse(course.course, courseIndex)}
-                  {/* depsBoxes */}
                 </div>
               );
             } else {
               levelBoxes.push(
                 <div
                   key={courseIndex}
-                  // style={{backgroundColor: course  ? course.course.color : 'transparent'}}
                   className={styles.smallBox}>
                   {this.renderTask(course.course, courseIndex)}
-                  {/* depsBoxes */}
                 </div>
               );
               x = x + 3;
@@ -628,7 +445,6 @@ class Home extends React.Component {
                 style={{backgroundColor: course  ? course.course.color : 'transparent'}}
                 className={styles.box}>
                 {course ? course.course.title : ''}
-                {depsBoxes}
               </div>
             );
           }
@@ -652,11 +468,48 @@ class Home extends React.Component {
 
     return renderedLevels;
   }
+  renderCourse(course, key) {
+    return (
+      <div
+        key={key}
+        className={course.disabled ? styles.courseDisabled : styles.large}
+        onClick={() => this.props.signals.techTree.onCourseClicked({course: course})}>
+        <div className={styles.courseBadge}>
+          <span className={icons.thumbUp}></span>
+        </div>
+        <div className={styles.titleWrapper}>
+          <div className={styles.title}>
+            {course.title}
+            <span className={styles.subTitle}> {course.finishedPercent ? '(' + course.finishedPercent + ')' : ''}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+  renderTask(task, key) {
+    return (
+      <div
+        key={key}
+        className={task.disabled ? styles.taskDisabled : styles.small}
+        onClick={() => this.props.signals.techTree.onCourseClicked({course: task})}>
+        <div className={styles.taskBadge}>
+          <span className={icons.scene}></span>
+        </div>
+        <div className={styles.titleWrapper}>
+          <div className={styles.title}>
+            {task.title}
+            <span className={styles.subTitle}> {task.finishedPercent ? '(' + task.finishedPercent + ')' : ''}</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
   render() {
     if (this.state.canRender) {
       return (
         <div className={styles.wrapper}>
           {this.renderLevels()}
+          <CoursesOverview/>
         </div>
       );
     }
@@ -665,4 +518,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default TechTree;
