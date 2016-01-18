@@ -357,7 +357,10 @@ const SceneControls = React.createClass({
           recorder={this.state.recorder}
           onPlayClick={() => this.onPlayClick()}
           onPauseClick={() => this.onPauseClick()}/>
-        <video ref="video" className={this.state.recorder.isBuffering ? styles.loadingFrame : styles.frame}></video>
+        <div className={this.state.recorder.isBuffering ? styles.loadingFrame : styles.frame}>
+          <video ref="video" className={styles.video}></video>
+          <div className={styles.videoShadow}></div>
+        </div>
         <audio ref="audio"></audio>
       </div>
     );

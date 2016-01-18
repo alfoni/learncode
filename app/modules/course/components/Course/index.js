@@ -65,7 +65,7 @@ class Course extends React.Component {
   renderScene() {
     return (
       <div className={styles.wrapper} onClick={(e) => this.onAppClicked(e)}>
-        <Toolbar/>
+        {/* <Toolbar/> */}
         <Scene/>
         <MouseCursor/>
       </div>

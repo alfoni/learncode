@@ -2,6 +2,8 @@ import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import styles from './styles.css';
 import ToolbarButton from 'common/components/Toolbar/ToolbarButton.js';
+import ToolbarSeparator from '../ToolbarSeparator';
+import ToolbarTitle from 'common/components/Toolbar/ToolbarTitle.js';
 import ToolbarButtonPopover from 'common/components/Toolbar/ToolbarButtonPopover.js';
 import ConfigureScenes from '../ConfigureScenes';
 import icons from 'common/icons.css';
@@ -19,14 +21,10 @@ import isAdminMode from '../../computed/isAdminMode';
   recorder: ['recorder'],
   currentFile: currentFile,
   currentScene: currentScene,
-  user: ['user'],
   isAdminMode: isAdminMode,
   completedAssignments: ['user', 'assignmentsSolved']
 })
 class Toolbar extends React.Component {
-  constructor() {
-    super();
-  }
   renderScenesList() {
     const scenes = this.props.scenes;
 
@@ -53,7 +51,20 @@ class Toolbar extends React.Component {
     return (
       <div className={this.props.isAdminMode ? styles.adminWrapper : styles.wrapper}>
         { this.props.recorder.isPlaying ? <div className={styles.toolbarOverlay}></div> : null }
-        {this.props.children}
+        <ToolbarSeparator/>
+        <ToolbarTitle title={this.props.courseName}/>
+        <ToolbarSeparator/>
+        {this.renderScenesList()}
+        {
+          this.props.isAdminMode ?
+            <ToolbarButtonPopover icon={icons.addCourse}
+                                  onClick={(e) => this.configureScenesClicked(e)}
+                                  show={this.props.showConfigureScenes}>
+              <ConfigureScenes/>
+            </ToolbarButtonPopover>
+          :
+            null
+        }
       </div>
     );
   }

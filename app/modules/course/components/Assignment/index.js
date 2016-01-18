@@ -5,13 +5,12 @@ import DescriptionToolTip from '../DescriptionToolTip';
 function Assignment(props) {
   return (
     <div className={styles.wrapper}>
+      <div className={styles.taskHeader}>Oppgave 1</div>
       <div className={styles.description}>
-        <DescriptionToolTip>{props.assignment.description}</DescriptionToolTip>
+        <DescriptionToolTip>
+          {props.assignment.description}
+        </DescriptionToolTip>
       </div>
-      <button
-        className={styles.run}
-        disabled={props.completed || props.currentAssignmentStatus.isLoading}
-        onClick={() => props.onAssignmentRunClick()}>Kjør oppgaven</button>
       <p className={styles.result}>
         {
           props.currentAssignmentStatus.result === true ?

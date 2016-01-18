@@ -19,6 +19,7 @@
 .description {
   cursor: pointer;
   margin-bottom: 5px;
+  color: #cddceb;
 }
 
 .delete {
@@ -28,11 +29,11 @@
 }
 
 .active {
-  color: #ff4081;
+  color: #eb1e64;
 }
 
 .description:hover {
-  text-decoration: underline;
+  color: #fff;
 }
 
 .descriptionField,
@@ -52,6 +53,7 @@
   margin-top: 3px;
   display: inline-block;
   vertical-align: top;
+  color: #cddceb;
 }
 
 .radioButton {
@@ -62,4 +64,5 @@
 .inputHeader {
   font-size: 13px;
   font-weight: bold;
+  color: #cddceb;
 }

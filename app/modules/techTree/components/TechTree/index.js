@@ -1,9 +1,9 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
-import styles from './styles.css';
-import icons from 'common/icons.css';
 
 let CoursesOverview = null;
+let styles = null;
+let icons = null;
 
 @Cerebral({
   courseDependencyList: ['techTree', 'courseDependencyList'],
@@ -20,6 +20,8 @@ class TechTree extends React.Component {
   componentDidMount() {
     require.ensure([], (require) => {
       CoursesOverview =  require('../CoursesOverview');
+      styles = require('./styles.css');
+      icons = require('common/icons.css');
       this.setState({
         canRender: true
       });
@@ -40,7 +42,7 @@ class TechTree extends React.Component {
           levelBoxes.push(
             <div
               key={courseIndex}
-              style={{borderTop: course ? '1px solid ' + 'rgba(50, 50, 65, 1)' : ''}}
+              style={{borderTop: course ? '1px solid #5a7497' : ''}}
               className={styles.box}>
             </div>
           );
@@ -48,7 +50,7 @@ class TechTree extends React.Component {
           levelBoxes.push(
             <div
               key={courseIndex}
-              style={{borderTop: typeof course === 'number' ? '1px solid ' + 'rgba(50, 50, 65, 1)' : ''}}
+              style={{borderTop: typeof course === 'number' ? '1px solid #5a7497' : ''}}
               className={styles.line}>
             </div>
           );
@@ -57,7 +59,7 @@ class TechTree extends React.Component {
             <div
               key={courseIndex}
               style={{
-                borderLeft: typeof course === 'number' ? '1px solid rgba(50, 50, 65, 1)' : 'transparent'
+                borderLeft: typeof course === 'number' ? '1px solid #5a7497' : 'transparent'
               }}
               className={styles.centerLine}>
             </div>

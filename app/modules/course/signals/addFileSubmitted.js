@@ -7,5 +7,6 @@ export default [
   addNewFile,
   setActiveFile,
   set(['course', 'showFolder'], false),
+  set(['course', 'newFileName'], ''),
   showSnackbar('File created!')
 ];

@@ -22,7 +22,9 @@
   font-size: 14px;
   padding: 8px 10px;
   border-radius: 3px;
-  color: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  resize: none;
+  background-color: #202634;
   border: 1px solid #eee;
   box-shadow:inset 1px 1px 2px 0 rgba(0,0,0,0.15);
   margin-bottom: -4px;
@@ -34,7 +36,7 @@
 
 .button {
   margin-top: 8px;
-  background-color: #ff4081;
+  background-color: #eb1e64;
   width: 100%;
   border: 0;
   color: #fff;

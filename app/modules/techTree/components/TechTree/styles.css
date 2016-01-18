@@ -1,5 +1,5 @@
 .wrapper {
-  background-color: #3b5157;
+  background-color: #28374c;
   color: #fff;
   height: 100vh;
   width: 100%;
@@ -19,8 +19,8 @@
 
 .large {
   height: 60px;
-  border: 1px solid #6c7b80;
-  background-color: #c5d1d4;
+  border: 1px solid #576679;
+  background-color: #aabbd7;
   position: relative;
   margin: 50px 0 10px 20px;
   border-radius: 3px;
@@ -42,7 +42,7 @@
   width: 70px;
   height: 70px;
   border-radius: 50%;
-  border: 2px solid #789096;
+  border: 2px solid #8299b9;
   background-color: #fff;
   float: left;
   text-align: center;
@@ -53,8 +53,8 @@
 
 .small {
   height: 50px;
-  border: 1px solid #6c7b80;
-  background-color: #c5d1d4;
+  border: 1px solid #576679;
+  background-color: #aabbd7;
   position: relative;
   margin: 15px 0 10px 15px;
   border-radius: 3px;
@@ -64,6 +64,7 @@
 }
 
 .taskDisabled {
+  composes: small;
   opacity: 0.5;
   cursor: default;
 }
@@ -75,7 +76,7 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid #789096;
+  border: 2px solid #8299b9;
   background-color: #fff;
   float: left;
   text-align: center;
@@ -97,14 +98,14 @@
   margin-bottom: -2px;
   padding-right: 15px;
   font-size: 12px;
-  color: #151c1f;
+  color: #1b232e;
   vertical-align: top;
   font-weight: bold;
 }
 
 .subTitle {
   font-size: 10px;
-  color: rgba(0, 0, 20, 0.5);
+  color: #435470;
   vertical-align: top;
 }
 

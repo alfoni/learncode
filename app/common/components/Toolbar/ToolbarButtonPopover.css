@@ -5,8 +5,8 @@
 
 .arrowBox {
   position: absolute;
-  top: 45px;
-  margin-left: -20px;
+  top: 50px;
+  margin-left: -25px;
   z-index: 5;
 }
 
@@ -27,13 +27,13 @@
 }
 
 .arrowBox:after {
-  border-bottom-color: #fff;
+  border-bottom-color: #28374c;
 }
 
 .contentBox {
   width: auto;
   border-radius: 2px;
-  background-color: #fff;
+  background-color: #28374c;
   padding: 8px 0;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 6px, rgba(0, 0, 0, 0.24) 0px 1px 4px;
   font-family: Roboto, sans-serif;

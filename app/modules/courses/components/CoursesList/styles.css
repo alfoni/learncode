@@ -1,5 +1,6 @@
 .title {
   font-family: Roboto, sans-serif;
+  color: #cddceb;
 }
 
 .courseWrapper {
@@ -7,17 +8,18 @@
   width: 250px;
   border-radius: 5px;
   padding: 15px 20px;
-  background-color: #fff;
+  background-color: #aabbd7;
   margin: 5px 0;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid #576679;
   cursor: pointer;
   position: relative;
-  color: rgba(0, 0, 0, 0.8);
+  color: #1b232e;
 }
 
 .courseWrapper:hover {
-  color: rgba(0, 0, 0, 1);
-  background-color: #fbfbfb;
+  color: #fff;
+  background-color: #eb1e64;
+  border: 1px solid #eb1e64;
 }
 
 .courseName {

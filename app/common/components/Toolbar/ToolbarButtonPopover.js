@@ -24,7 +24,11 @@ class ToolbarButtonPopover extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        <ToolbarButton icon={this.props.icon} title={this.props.title} onClick={this.props.onClick} tooltip={this.props.tooltip}/>
+        <ToolbarButton
+          active={this.props.show}
+          icon={this.props.icon}
+          title={this.props.title}
+          onClick={this.props.onClick}/>
         {this.props.show ? this.renderBox() : null}
       </div>
     );
