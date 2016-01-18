@@ -1,12 +1,12 @@
 import React from 'react';
 import styles from './styles.css';
-import DescriptionTooltip from '../DescriptionTooltip';
+import DescriptionToolTip from '../DescriptionToolTip';
 
 function Assignment(props) {
   return (
     <div className={styles.wrapper}>
       <div className={styles.description}>
-        <DescriptionTooltip>{props.assignment.description}</DescriptionTooltip>
+        <DescriptionToolTip>{props.assignment.description}</DescriptionToolTip>
       </div>
       <button
         className={styles.run}

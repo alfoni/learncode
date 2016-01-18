@@ -55,6 +55,12 @@ controller.modules({
   })
 });
 
+window.BANAN = function () {
+  controller.getSignals().home.formSubmitted({
+    email: 'christianalfoni@gmail.com'
+  });
+}
+
 ReactDOM.render(
   <Container controller={controller}>
     <App/>
