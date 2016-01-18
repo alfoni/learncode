@@ -121,12 +121,12 @@
 
 .smallBox {
   composes: box;
-  height: 82px;
+  height: 83px;
 }
 
 .largeBox {
   composes: box;
-  height: 164px;
+  height: 167px;
 }
 
 .boxLevel:first-child {
