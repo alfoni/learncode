@@ -20,7 +20,9 @@ function PlayButton(props) {
       className={className}
       onClick={() => isRecordingOrPlaying ? props.onPauseClick() : props.onPlayClick()}
       disabled={props.disabled}>
-      <div className={isRecordingOrPlaying ? icons.pause : icons.play}></div>
+      <div className={styles.iconWrapper}>
+        <div className={isRecordingOrPlaying ? icons.pause : icons.play}></div>
+      </div>
     </button>
   );
 }

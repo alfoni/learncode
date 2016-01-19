@@ -14,7 +14,9 @@ class ToolbarButtonPopover extends React.Component {
   }
   renderBox() {
     return (
-      <div className={styles.arrowBox} onClick={(e) => this.onArrowBoxClick(e)}>
+      <div
+        className={this.props.side === 'right' ? styles.arrowBoxRight : styles.arrowBox} 
+        onClick={(e) => this.onArrowBoxClick(e)}>
         <div className={styles.contentBox}>
           {this.props.children}
         </div>

@@ -39,7 +39,7 @@ class Scene extends React.Component {
   render() {
     return (
       <div className={styles.modules}>
-        <Module className={styles.controlsAndAssignments} show>
+        <Module className={this.props.isAdminMode ? styles.controlsAndAssignmentsAdmin : styles.controlsAndAssignments} show>
           <Toolbar>
             <ToolbarTitle title="Kursoversikt"/>
           </Toolbar>
@@ -48,7 +48,8 @@ class Scene extends React.Component {
             sceneNameClicked={this.props.signals.course.sceneNameClicked}
             showScenesList={this.props.showScenesList}
             scenes={this.props.scenesList}
-            currentScene={this.props.currentScene}/>
+            currentScene={this.props.currentScene}
+            onSceneItemClick={this.props.signals.course.listSceneNameClicked}/>
           <SceneControls/>
           <DurationSlider/>
           <AssignmentsBar

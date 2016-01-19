@@ -56,20 +56,20 @@
   height: 18px;
   margin-left: -10px;
   top: -10px;
-  color: rgba(0, 0, 0, 0.26);
-  background-color: #FFF;
+  color: #587190;
+  background-color: #202633;
   border-radius: 50%;
-  border: 1px solid #DDD;
+  border: 1px solid #587190;
   line-height: 19px;
   font-size: 10px;
   font-weight: bold;
   text-align: center;
+  font-family: Roboto, sans-serif;
 }
 
 .activePoint {
   composes: point;
-  color: #FFF;
-  background-color: #202633;
+  color: #fff;
   border: 1px solid #eb1e64;
   cursor: pointer;
 }

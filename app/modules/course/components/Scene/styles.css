@@ -8,6 +8,11 @@
   border-right: 2px solid #232e3c;
 }
 
+.controlsAndAssignmentsAdmin {
+  composes: controlsAndAssignments;
+  background-color: transparent;
+}
+
 .code {
   width: calc(100% - 300px);
 }

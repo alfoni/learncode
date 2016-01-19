@@ -51,7 +51,8 @@ class Preview extends React.Component {
             <span className={styles.button}>
               <ToolbarButtonPopover icon={icons.addCourse}
                                     onClick={(e) => this.props.signals.course.configureScenesClicked(e)}
-                                    show={this.props.showConfigureScenes}>
+                                    show={this.props.showConfigureScenes}
+                                    side="right">
                 <ConfigureScenes/>
               </ToolbarButtonPopover>
             </span>

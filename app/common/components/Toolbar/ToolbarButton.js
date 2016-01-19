@@ -1,7 +1,6 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import styles from './ToolbarButton.css';
-import Tooltip from 'common/components/Toolbar/Tooltip.js';
 
 @Cerebral()
 class ToolbarButton extends React.Component {
@@ -43,14 +42,14 @@ class ToolbarButton extends React.Component {
   }
   renderIconButton() {
     return (
-      <div className={this.props.active ? styles.activeIcon : styles.icon}>
+      <div className={this.props.active ? styles.activeIcon : styles.icon} disabled={this.props.disabled}>
         <div className={this.props.icon}></div>
       </div>
     );
   }
   render() {
     return (
-      <button className={styles.button} onClick={(e) => this.onClick(e)}>
+      <button className={styles.button} onClick={(e) => this.onClick(e)} disabled={this.props.disabled}>
         { this.props.title && !this.props.icon ? this.renderTextButton() : null }
         { this.props.title && this.props.icon ? this.renderIconTextButton() : null }
         { !this.props.title && this.props.icon ? this.renderIconButton() : null }

@@ -1,14 +1,18 @@
 import React from 'react';
 import styles from './styles.css';
+import ToolbarButton from 'common/components/Toolbar/ToolbarButton';
 import icons from 'common/icons.css';
 
 function UploadButton(props) {
   const className = styles.wrapper;
 
   return (
-    <button className={className} onClick={() => props.onClick()} disabled={props.disabled}>
-      <div className={props.recorder.isUploading ? icons.loading : icons.uploadFile}></div>
-    </button>
+    <div className={className}>
+      <ToolbarButton
+        disabled={props.disabled}
+        icon={props.recorder.isUploading ? icons.loading : icons.uploadFile}
+        onClick={() => props.onClick()}/>
+    </div>
   );
 }
 

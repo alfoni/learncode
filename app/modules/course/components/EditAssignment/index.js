@@ -50,9 +50,6 @@ class EditAssignment extends React.Component {
           onChange={(event) => this.props.onDescriptionChange({description: event.target.value})}/>
         <div className={styles.editor} ref="code"></div>
         <div className={styles.result}>
-          <button
-            className={styles.run}
-            onClick={() => this.props.onAssignmentRunClick()}>Kjør oppgaven</button>
           <p className={styles.resultText}>
             {
               this.props.currentAssignmentStatus.result === true ?

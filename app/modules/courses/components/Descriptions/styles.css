@@ -36,6 +36,10 @@
   color: #fff;
 }
 
+.descriptionField {
+  border: none;
+}
+
 .descriptionField,
 .exampleField {
   margin-top: 5px;

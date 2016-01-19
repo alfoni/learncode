@@ -43,9 +43,21 @@
 }
 
 .scene {
-  padding: 3px 15px;
+  padding: 15px 15px;
   font-size: 14px;
   color: #cddceb;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+}
+
+.scene:hover {
+  color: #fff;
+  background-color: #202634;
+}
+
+.checked {
+  color: #1eaa6e;
+  float: right;
 }
 
 .activeScene {

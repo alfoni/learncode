@@ -7,7 +7,24 @@ function startRecording({state, services}) {
   state.unset(['course', 'scenes', currentSceneIndex, 'duration']);
   state.set(['course', 'scenes', currentSceneIndex, 'recording'], true);
   services.recorder.record({
-    path: ['course']
+    paths: [
+      ['course', 'showPreview'],
+      ['course', 'showConsole'],
+      ['course', 'showEditAssignment'],
+      ['course', 'showAssignment'],
+      ['course', 'tooltip'],
+      ['course', 'showConfigureScenes'],
+      ['course', 'showScenesList'],
+      ['course', 'showFolder'],
+      ['course', 'showAddFileInput'],
+      ['course', 'currentSceneIndex'],
+      ['course', 'currentAssignmentIndex'],
+      ['course', 'newFileName'],
+      ['course', 'codeSelection'],
+      ['course', 'scenes', currentSceneIndex, 'files'],
+      ['course', 'scenes', currentSceneIndex, 'currentFileIndex'],
+      ['course', 'scenes', currentSceneIndex, 'sandboxFiles']
+    ]
   });
 }
 

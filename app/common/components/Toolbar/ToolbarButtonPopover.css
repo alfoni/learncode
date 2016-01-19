@@ -30,6 +30,16 @@
   border-bottom-color: #28374c;
 }
 
+.arrowBoxRight {
+  composes: arrowBox;
+  margin-left: -175px;
+}
+
+.arrowBoxRight:before, .arrowBoxRight:after {
+  left: 65px;
+  margin-left: 120px;
+}
+
 .contentBox {
   width: auto;
   border-radius: 2px;

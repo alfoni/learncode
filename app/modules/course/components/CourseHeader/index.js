@@ -3,18 +3,23 @@ import styles from './styles.css';
 import icons from 'common/icons.css';
 import ToolbarButton from 'common/components/Toolbar/ToolbarButton';
 
-const renderScenes = (scenes, activeSceneIndex) => {
+const renderScenes = (scenes, activeSceneIndex, onSceneItemClick) => {
   return scenes.map((scene, index) => {
     return (
-      <div key={index} className={index === activeSceneIndex ? styles.activeScene : styles.scene}>
-        {index + 1}. {scene.name}
+      <div
+        key={index}
+        className={index === activeSceneIndex ? styles.activeScene : styles.scene}
+        onClick={() => onSceneItemClick({sceneIndex: index})}>
+        <span>{index + 1}. {scene.name}</span>
+        {/* TODO: When scenes have been watched, add this:
+          <span className={`${styles.checked} ${icons.thumbUp}`}></span>
+        */}
       </div>
     );
   });
 };
 
 function CourseHeader(props) {
-  console.log(props);
   return (
     <div className={styles.wrapper}>
       <div className={styles.iconWrapper}>
@@ -28,7 +33,7 @@ function CourseHeader(props) {
             active={props.showScenesList}/>
           {
             props.showScenesList ?
-              <div className={styles.scenesList}>{renderScenes(props.scenes, props.currentScene.index)}</div>
+              <div className={styles.scenesList}>{renderScenes(props.scenes, props.currentScene.index, props.onSceneItemClick)}</div>
             :
               null
           }

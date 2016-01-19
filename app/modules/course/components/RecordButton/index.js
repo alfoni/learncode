@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './styles.css';
+import ToolbarButton from 'common/components/Toolbar/ToolbarButton';
 import icons from 'common/icons.css';
 
 function RecordButton(props) {
@@ -10,12 +11,12 @@ function RecordButton(props) {
   }
 
   return (
-    <button
-      className={className}
-      onClick={() => props.recorder.isRecording ? props.onStopClick() : props.onRecordClick()}
-      disabled={props.disabled}>
-      <div className={props.recorder.isRecording ? icons.stop : icons.mic}></div>
-    </button>
+    <div className={className}>
+      <ToolbarButton
+        disabled={props.disabled}
+        icon={props.recorder.isRecording ? icons.stop : icons.mic}
+        onClick={() => props.recorder.isRecording ? props.onStopClick() : props.onRecordClick()}/>
+    </div>
   );
 }
 

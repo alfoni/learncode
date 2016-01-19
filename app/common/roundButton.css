@@ -1,30 +1,9 @@
 .button {
-  border: 0;
   position: absolute;
   height: 35px;
   width: 35px;
-  top: -136px;
-  padding: 0px;
-  border-radius: 50%;
-  vertical-align: bottom;
-  text-align: center;
-  color: #fff;
-  font-family: Roboto, sans-serif;
-  font-size: 15px;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 10px, rgba(0, 0, 0, 0.23) 0px 3px 10px;
-  cursor: pointer;
+  top: -107px;
+  left: 205px;
   z-index: 3;
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-  box-sizing: content-box;
-  outline: none;
-  margin-left: 150px;
-}
-
-
-.button:hover {
-  opacity: 0.6;
-}
-
-.button[disabled] {
-  opacity: 0.5;
 }

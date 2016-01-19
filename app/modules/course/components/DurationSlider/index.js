@@ -65,7 +65,7 @@ class DurationSlider extends React.Component {
     return this.props.currentScene.duration / event.currentTarget.offsetWidth * (event.clientX - event.currentTarget.offsetLeft);
   }
   seek(seek) {
-    if (this.props.currentScene.recording && !this.context.controller.store.isExecutingAsync()) {
+    if (this.props.currentScene.recording && !this.context.controller.getStore().isExecutingAsync()) {
       const pointsPassed = this.props.assignmentPoints.filter((point) => {
         return point < seek;
       });
@@ -118,7 +118,7 @@ class DurationSlider extends React.Component {
                   this.seek(point + 100);
                 }}
                 key={index}>
-                  {index + 1}
+                  ?
                 </div>
             ))}
           </div>

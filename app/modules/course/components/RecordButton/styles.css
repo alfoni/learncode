@@ -1,7 +1,5 @@
 .wrapper {
   composes: button from 'common/roundButton.css';
-  background-color: #E91E63;
-  transform: translate3d(55px, 30px, 0);
 }
 
 .recording {
