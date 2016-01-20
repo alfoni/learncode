@@ -1,9 +1,16 @@
 .modules {
-  height: calc(100% - 86px);
+  height: 100%;
 }
 
 .controlsAndAssignments {
   width: 300px;
+  background-color: #fff;
+  border-right: 2px solid #232e3c;
+}
+
+.controlsAndAssignmentsAdmin {
+  composes: controlsAndAssignments;
+  background-color: transparent;
 }
 
 .code {

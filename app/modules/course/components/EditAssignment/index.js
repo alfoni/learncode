@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './styles.css';
+import elements from 'common/elements.css';
 import CodeMirror from 'codemirror';
 import '!style!css!./../../../../../node_modules/codemirror/lib/codemirror.css';
 import 'codemirror/mode/javascript/javascript.js';
@@ -43,14 +44,12 @@ class EditAssignment extends React.Component {
     return (
       <div className={styles.wrapper}>
         <textarea
+          placeholder="Oppgavebeskrivelse..."
           value={this.props.assignment.description}
-          className={styles.textarea}
+          className={`${elements.textarea} ${styles.textarea}`}
           onChange={(event) => this.props.onDescriptionChange({description: event.target.value})}/>
         <div className={styles.editor} ref="code"></div>
         <div className={styles.result}>
-          <button
-            className={styles.run}
-            onClick={() => this.props.onAssignmentRunClick()}>Kjør oppgaven</button>
           <p className={styles.resultText}>
             {
               this.props.currentAssignmentStatus.result === true ?

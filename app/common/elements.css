@@ -6,8 +6,9 @@
   font-size: 14px;
   padding: 5px 10px;
   border-radius: 3px;
-  color: rgba(0, 0, 0, 0.6);
-  border: 1px solid #eee;
+  background-color: #202634;
+  color: #cddceb;
+  border: none;
   box-shadow:inset 1px 1px 2px 0 rgba(0,0,0,0.15);
 }
 
@@ -22,8 +23,10 @@
   font-size: 14px;
   padding: 8px 10px;
   border-radius: 3px;
-  color: rgba(0, 0, 0, 0.6);
-  border: 1px solid #eee;
+  color: #cddceb;
+  resize: none;
+  background-color: #202634;
+  border: none;
   box-shadow:inset 1px 1px 2px 0 rgba(0,0,0,0.15);
   margin-bottom: -4px;
 }
@@ -32,9 +35,13 @@
   outline: 0;
 }
 
+.circleButton {
+  
+}
+
 .button {
   margin-top: 8px;
-  background-color: #ff4081;
+  background-color: #eb1e64;
   width: 100%;
   border: 0;
   color: #fff;

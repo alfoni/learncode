@@ -2,32 +2,33 @@ import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import Module from '../Module';
 import DurationSlider from '../DurationSlider';
-import ModuleToolbar from '../ModuleToolbar';
-import ModuleFiles from '../ModuleFiles';
+import ToolbarTitle from 'common/components/Toolbar/ToolbarTitle.js';
+import Toolbar from '../Toolbar';
 import CodeEditor from '../CodeEditor';
 import Preview from '../Preview';
 import SceneControls from '../SceneControls';
-import AddFile from '../AddFile';
+
 import AssignmentsBar from '../AssignmentsBar';
-import RemoveFile from '../RemoveFile';
-import Assignment from '../Assignment';
 import EditAssignment from '../EditAssignment';
 import styles from './styles.css';
 import currentFile from '../../computed/currentFile';
 import currentScene from '../../computed/currentScene';
 import isAdminMode from '../../computed/isAdminMode';
+import Assignment from '../Assignment';
+import CourseHeader from '../CourseHeader';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
   recorder: ['recorder'],
-  newFileName: ['course', 'newFileName'],
-  showAddFileInput: ['course', 'showAddFileInput'],
+  courseName: ['course', 'name'],
   currentAssignmentIndex: ['course', 'currentAssignmentIndex'],
   currentAssignmentStatus: ['course', 'currentAssignmentStatus'],
   completedAssignments: ['user', 'assignmentsSolved'],
   currentFile: currentFile,
   currentScene: currentScene,
-  isAdminMode: isAdminMode
+  isAdminMode: isAdminMode,
+  showScenesList: ['course', 'showScenesList'],
+  scenesList: ['course', 'scenesList']
 })
 class Scene extends React.Component {
   assignmentDescriptionChanged(e) {
@@ -38,11 +39,19 @@ class Scene extends React.Component {
   render() {
     return (
       <div className={styles.modules}>
-        <Module className={styles.controlsAndAssignments} show>
-          <ModuleToolbar title="LÆRER"/>
+        <Module className={this.props.isAdminMode ? styles.controlsAndAssignmentsAdmin : styles.controlsAndAssignments} show>
+          <Toolbar>
+            <ToolbarTitle title="Kursoversikt"/>
+          </Toolbar>
+          <CourseHeader
+            title={this.props.courseName}
+            sceneNameClicked={this.props.signals.course.sceneNameClicked}
+            showScenesList={this.props.showScenesList}
+            scenes={this.props.scenesList}
+            currentScene={this.props.currentScene}
+            onSceneItemClick={this.props.signals.course.listSceneNameClicked}/>
           <SceneControls/>
           <DurationSlider/>
-          <ModuleToolbar title="OPPGAVER"/>
           <AssignmentsBar
             assignments={this.props.currentScene.assignments}
             currentAssignmentIndex={this.props.currentAssignmentIndex}
@@ -67,26 +76,10 @@ class Scene extends React.Component {
                 assignment={this.props.currentScene.assignments[this.props.currentAssignmentIndex]}
                 currentAssignmentStatus={this.props.currentAssignmentStatus}
                 completed={this.props.completedAssignments.indexOf(this.props.currentAssignmentIndex) >= 0}
-                onAssignmentRunClick={this.props.signals.course.runAssignmentClicked}
               />
           }
         </Module>
         <Module className={styles.code} show>
-          <ModuleToolbar title="KODE">
-            <ModuleFiles
-              scene={this.props.currentScene}
-              currentFile={this.props.currentFile}
-              onFileClick={this.props.signals.course.fileClicked}/>
-            <AddFile
-              onAddFileClick={this.props.signals.course.addFileClicked}
-              onFileNameChange={this.props.signals.course.addFileNameUpdated}
-              onFileSubmit={this.props.signals.course.addFileSubmitted}
-              onAddFileAborted={this.props.signals.course.addFileAborted}
-              showInput={this.props.showAddFileInput}
-              placeholder="Skriv filnavn..."
-              value={this.props.newFileName}/>
-          </ModuleToolbar>
-          <RemoveFile show={this.props.currentScene.currentFileIndex !== 0} onClick={() => this.props.signals.course.removeFileClicked()}/>
           <CodeEditor/>
           <Preview show={this.props.showPreview}/>
         </Module>

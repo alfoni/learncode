@@ -65,7 +65,7 @@ class DurationSlider extends React.Component {
     return this.props.currentScene.duration / event.currentTarget.offsetWidth * (event.clientX - event.currentTarget.offsetLeft);
   }
   seek(seek) {
-    if (this.props.currentScene.recording && !this.context.controller.store.isExecutingAsync()) {
+    if (this.props.currentScene.recording && !this.context.controller.getStore().isExecutingAsync()) {
       const pointsPassed = this.props.assignmentPoints.filter((point) => {
         return point < seek;
       });
@@ -100,6 +100,15 @@ class DurationSlider extends React.Component {
 
     return min + ':' + sec;
   }
+  getPointState(index) {
+    if (this.props.assignmentsSolved.length >= index) {
+      return 'active';
+    }
+
+    // TODO: return 'current';
+
+    return 'inactive';
+  }
   render() {
     const lineWidth = (100 - this.handlerPosition()); // Reversing percent
 
@@ -111,15 +120,16 @@ class DurationSlider extends React.Component {
             <div className={styles.progressedLine} style={{right: lineWidth + '%'}}></div>
             {[0, ...this.props.assignmentPoints].map((point, index) => (
               <div
-                className={this.props.assignmentsSolved.length >= index ? styles.activePoint : styles.point}
+                className={this.getPointState(index) === 'active' ? styles.activePoint : styles.point}
                 style={{left: `${(100 / this.props.currentScene.duration) * point}%`}}
                 onClick={(event) => {
                   event.stopPropagation();
                   this.seek(point + 100);
                 }}
                 key={index}>
-                  {index + 1}
-                </div>
+                  ?
+                  <div className={this.getPointState(index) === 'active' ? styles.activeArrow : styles.arrow}></div>
+              </div>
             ))}
           </div>
         </div>

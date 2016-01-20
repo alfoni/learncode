@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles.css';
 import icons from 'common/icons.css';
+import ToolbarButton from 'common/components/Toolbar/ToolbarButton.js';
 
 function AddFile(props) {
   const onAddFileInputChange = (event) => {
@@ -39,8 +40,8 @@ function AddFile(props) {
         </div>
       </div>
     :
-      <div className={styles.addFileWrapper} onClick={props.onAddFileClick}>
-        <div className={icons.addFile}/>
+      <div className={styles.addFileWrapper}>
+        <ToolbarButton icon={icons.addFile} onClick={props.onAddFileClick}/>
       </div>
   );
 }

@@ -3,22 +3,18 @@
 }
 
 .editor {
-  height: calc(100% - 300px);
+  height: calc(100% - 200px);
   background-color: white;
-  width: 100%;
+  width: calc(100% - 20px);
+  margin: 0 10px;
+  box-sizing: border-box;
 }
 
 .textarea {
-  font-family: monospace;
-  font-size: 14px;
-  border: 0;
-  outline: none;
-  resize: none;
   height: 100px;
-  padding: 8px 12px;
+  margin: 5px 10px;
+  width: calc(100% - 20px);
   box-sizing: border-box;
-  border-left: 2px solid #EEE;
-  width: 100%;
 }
 
 .run {

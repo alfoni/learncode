@@ -1,6 +1,6 @@
 .cm-s-learncode.CodeMirror {
-    background: #FFF;
-    color: #3a3432;
+    background: #202634;
+    color: #fff;
     font-size: 14px;
     line-height: 20px;
     height: 100%;
@@ -16,19 +16,19 @@
 }
 
 .cm-s-learncode div.CodeMirror-selected {
-    background: #d6d5d4 !important;
+    background: #171c26 !important;
 }
 
 .cm-s-learncode.CodeMirror::selection {
-    background: #d6d5d4;
+    background: #171c26;
 }
 
 .cm-s-learncode.CodeMirror::-moz-selection {
-    background: #d9d9d9;
+    background: #171c26;
 }
 
 .cm-s-learncode .CodeMirror-gutters {
-    background: #f7f7f7;
+    background: #202634;
     border-right: 0px;
 }
 
@@ -37,11 +37,11 @@
 }
 
 .cm-s-learncode .CodeMirror-guttermarker-subtle {
-    color: #807d7c;
+    color: #646871;
 }
 
 .cm-s-learncode .CodeMirror-linenumber {
-    color: #807d7c;
+    color: #646871;
 }
 
 .cm-s-learncode .CodeMirror-cursor {
@@ -62,20 +62,20 @@
 
 .cm-s-learncode span.cm-property,
 .cm-s-learncode span.cm-attribute {
-    color: #01a252;
+    color: #1eaa6e;
 }
 
 .cm-s-learncode span.cm-keyword {
-    color: #e91e63;
+    color: #597394;
 }
 
 .cm-s-learncode span.cm-qualifier {
-    color: #e91e63;
+    color: #597394;
 }
 
 
 .cm-s-learncode span.cm-string {
-    color: #ff9800;
+    color: #f0b937;
 }
 
 .cm-s-learncode span.cm-variable {
@@ -95,7 +95,7 @@
 }
 
 .cm-s-learncode span.cm-tag {
-    color: #e91e63;
+    color: #597394;
 }
 
 .cm-s-learncode span.cm-link {
@@ -103,7 +103,7 @@
 }
 
 .cm-s-learncode span.cm-meta {
-    color: rgba(0,0,0,0.4);
+    color: #405574;
 }
 
 .cm-s-learncode span.cm-error {

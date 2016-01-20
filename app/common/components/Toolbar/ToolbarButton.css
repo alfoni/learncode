@@ -7,15 +7,17 @@
   text-align: center;
 }
 
-
 .icon {
-  font-size: 24px;
-  line-height: 56px;
-  color: rgba(0, 0, 0, 0.4);
+  border: 2px solid #eb1e64;
+  border-radius: 50%;
+  font-size: 16px;
+  color: #cddceb;
   cursor: pointer;
   transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
   position: relative;
-  width: 48px;
+  padding: 6px;
+  margin-right: 5px;
+  margin-left: 5px;
 }
 
 .textIcon {
@@ -34,12 +36,14 @@
 }
 
 .icon:hover, .button:focus .icon {
-  color: rgba(0, 0, 0, 0.87);
+  color: #fff;
+  background-color: #28374b;
 }
 
 .activeIcon {
   composes: icon;
-  color: #ff4081;
+  background-color: #eb1e64;
+  color: #fff;
 }
 
 .activeTextIcon {
@@ -48,7 +52,8 @@
 }
 
 .activeIcon:hover, .button:focus .activeIcon, .activeTextIcon:hover, .button:focus .activeTextIcon {
-  color: #ff4081;
+  background-color: #eb1e64;
+  color: #fff;
 }
 
 .button:focus{
@@ -56,14 +61,26 @@
 }
 
 .caret {
-  font-size: 8px;
-  margin-left: 5px;
+  font-size: 20px;
+  margin-top: -2px;
+  margin-left: 10px;
+  transform: rotate(90deg);
+  display: inline-block;
+  vertical-align: top;
+}
+
+.activeCaret {
+  font-size: 20px;
+  margin-top: -2px;
+  margin-left: 10px;
+  transform: rotate(270deg);
+  display: inline-block;
+  vertical-align: top;
 }
 
 .title {
-  cursor: pointer;
   font-size: 14px;
-  color: rgba(0, 0, 0, 0.6);
+  color: #cddceb;
 }
 
 .iconTitle {
@@ -72,4 +89,15 @@
   top: 2px;
   text-align: center;
   width: 48px;
+}
+
+.icon[disabled] {
+  opacity: 0.2;
+  cursor: default;
+  border-color: #cddceb;
+}
+
+.icon[disabled]:hover {
+  color: #cddceb;
+  background-color: transparent;
 }

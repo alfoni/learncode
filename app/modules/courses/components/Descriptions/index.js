@@ -50,7 +50,7 @@ class Descriptions extends React.Component {
       <div className={styles.column}>
         <form onSubmit={(e) => this.onSaveDescriptionSubmit(e)}>
           <input
-            className={elements.input}
+            className={`${elements.input} ${styles.input}`}
             value={this.props.newDescription.tagName}
             onChange={(e) => this.props.signals.courses.newDescriptionUpdated.sync({field: 'tagName', value: e.target.value})}
             placeholder="Tag //Eksempel: DIV"

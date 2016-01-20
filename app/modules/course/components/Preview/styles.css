@@ -1,7 +1,14 @@
+.wrapper {
+  width: 50%;
+  height: 100%;
+  display: inline-block;
+  vertical-align: top;
+}
+
 .preview {
   border: 0;
-  height: calc(100% - 36px);
-  width: 50%;
+  height: calc(100% - 56px);
+  width: 100%;
   box-sizing: border-box;
   border-left: 2px solid #eee;
   background-color: #FFF;
@@ -9,4 +16,9 @@
 
 .hidden {
   display: none;
+}
+
+.button {
+  float: right;
+  height: 100%;
 }
