@@ -1,0 +1,90 @@
+.wrapper {
+  background-color: #28374b;
+  height: 190px;
+  width: 100%;
+  font-family: Ubuntu, sans-serif;
+  box-sizing: border-box;
+  border-bottom: 1px solid #415573;
+  text-align: center;
+}
+
+.title {
+  color: #fff;
+  font-size: 38px;
+  font-weight: bold;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+.subTitle {
+  color: #cadaed;
+}
+
+.tiersWrapper {
+  margin-top: 73px;
+  position: relative;
+  padding: 0 50px;
+  text-align: center;
+}
+
+.tier {
+  transition: all 200ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+  width: 140px;
+  height: 32px;
+  background-color: #232d3c;
+  border: 1px solid #28a0aa;
+  color: #cadaed;
+  border-radius: 5px;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 8px 10px;
+  margin: 0 7px;
+  box-sizing: border-box;
+  vertical-align: top;
+  cursor: pointer;
+  z-index: 1000;
+  position: relative;
+}
+
+.tierDisabled {
+  composes: tier;
+  border: 1px solid #415573;
+  color: #5a7396;
+}
+
+.tierSelected {
+  width: 165px;
+  padding: 10px;
+  height: 42px;
+  margin-top: -5px;
+  font-size: 16px;
+}
+
+.tierFinished {
+  border: 1px solid #eb1e64;
+}
+
+.tierAddNew {
+  border: 1px solid #cadaed;
+}
+
+.icon {
+  margin-right: 5px;
+}
+
+.hide {
+  display: none;
+}
+
+.inputAddNewTier {
+  height: 100% !important;
+  line-height: 30px !important;
+  padding: 0 10px;
+  top: 0;
+  left: 0;
+  position: absolute;
+}

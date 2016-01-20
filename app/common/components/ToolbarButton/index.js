@@ -1,6 +1,6 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
-import styles from './ToolbarButton.css';
+import styles from './styles.css';
 
 @Cerebral()
 class ToolbarButton extends React.Component {

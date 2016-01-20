@@ -6,11 +6,6 @@
   box-sizing: border-box;
 }
 
-.adminWrapper {
-  composes: wrapper;
-}
-
-
 .toolbarOverlay {
   position: absolute;
   left: 0;

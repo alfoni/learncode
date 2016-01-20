@@ -1,10 +1,10 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import styles from './styles.css';
-import ToolbarButton from 'common/components/Toolbar/ToolbarButton.js';
+import ToolbarButton from 'common/components/ToolbarButton';
 import ToolbarSeparator from '../ToolbarSeparator';
-import ToolbarTitle from 'common/components/Toolbar/ToolbarTitle.js';
-import ToolbarButtonPopover from 'common/components/Toolbar/ToolbarButtonPopover.js';
+import ToolbarTitle from 'common/components/ToolbarTitle';
+import ToolbarButtonPopover from 'common/components/ToolbarButtonPopover';
 import ConfigureScenes from '../ConfigureScenes';
 import icons from 'common/icons.css';
 import currentScene from '../../computed/currentScene';

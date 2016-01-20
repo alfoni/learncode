@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.css';
 import icons from 'common/icons.css';
-import ToolbarButton from 'common/components/Toolbar/ToolbarButton.js';
+import ToolbarButton from 'common/components/ToolbarButton';
 
 function AddFile(props) {
   const onAddFileInputChange = (event) => {

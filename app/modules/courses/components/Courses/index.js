@@ -1,6 +1,7 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 
+let ToolbarContent = null;
 let Toolbar = null;
 let styles = null;
 let CoursesList = null;
@@ -17,7 +18,8 @@ class Courses extends React.Component {
   }
   componentDidMount() {
     require.ensure([], (require) => {
-      Toolbar = require('../Toolbar');
+      Toolbar = require('common/components/Toolbar');
+      ToolbarContent = require('../ToolbarContent');
       CoursesList = require('../CoursesList');
       styles = require('./styles.css');
       this.setState({
@@ -28,7 +30,9 @@ class Courses extends React.Component {
   renderCourses() {
     return (
       <div className={styles.wrapper} onClick={() => this.props.signals.courses.appClicked()}>
-        <Toolbar/>
+        <Toolbar>
+          <ToolbarContent/>
+        </Toolbar>
         <div className={styles.contentWrapper}>
           <CoursesList/>
         </div>

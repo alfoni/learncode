@@ -14,7 +14,9 @@ const model = Model({
     isLoading: false,
     isAdmin: false,
     forceUser: false,
-    assignmentsSolved: []
+    assignmentsSolved: {
+      0: [true, true]
+    }
   },
   session: {
     sessionId: null

@@ -1,7 +1,7 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
-import ToolbarButton from './ToolbarButton.js';
-import styles from './ToolbarButtonPopover.css';
+import ToolbarButton from 'common/components/ToolbarButton';
+import styles from './styles.css';
 
 @Cerebral()
 class ToolbarButtonPopover extends React.Component {
@@ -15,7 +15,7 @@ class ToolbarButtonPopover extends React.Component {
   renderBox() {
     return (
       <div
-        className={this.props.side === 'right' ? styles.arrowBoxRight : styles.arrowBox} 
+        className={this.props.side === 'right' ? styles.arrowBoxRight : styles.arrowBox}
         onClick={(e) => this.onArrowBoxClick(e)}>
         <div className={styles.contentBox}>
           {this.props.children}

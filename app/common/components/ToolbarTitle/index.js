@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './ToolbarTitle.css';
+import styles from './styles.css';
 
 function ToolbarTitle(props) {
   return (

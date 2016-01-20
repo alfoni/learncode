@@ -1,9 +1,10 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import styles from './styles.css';
+import selectedTier from '../../computed/selectedTier';
 
 @Cerebral({
-  selectedCourse: ['techTree', 'selectedCourse'],
+  selectedTier: selectedTier,
   courses: ['techTree', 'courses'],
   courseDependencyList: ['techTree', 'courseDependencyList']
 })
@@ -18,11 +19,11 @@ class CoursesOverview extends React.Component {
     }
 
     return courses.filter((course) => {
-      if (!this.props.courseDependencyList.length) {
+      if (!this.props.selectedTier.courseDependencyList.length) {
         return true;
       }
 
-      return !this.props.courseDependencyList.find((dependencyCourse) => {
+      return !this.props.selectedTier.courseDependencyList.find((dependencyCourse) => {
         return course.id === dependencyCourse.course.id;
       });
     }).map((course, index) => {
@@ -37,6 +38,10 @@ class CoursesOverview extends React.Component {
     });
   }
   render() {
+    if (!this.props.selectedTier) {
+      return null;
+    }
+
     return (
       <div className={styles.wrapper}>
         {this.props.selectedCourse ? 'Legg til kurs som er avhengig av: ' + this.props.selectedCourse.title : 'Velg kurs:'}

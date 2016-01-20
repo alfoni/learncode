@@ -1,10 +1,10 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
-import Toolbar from '../Toolbar';
+import Toolbar from 'common/components/Toolbar';
 import styles from './styles.css';
 import icons from 'common/icons.css';
-import ToolbarButton from 'common/components/Toolbar/ToolbarButton.js';
-import ToolbarButtonPopover from 'common/components/Toolbar/ToolbarButtonPopover.js';
+import ToolbarButton from 'common/components/ToolbarButton';
+import ToolbarButtonPopover from 'common/components/ToolbarButtonPopover';
 import ConfigureScenes from '../ConfigureScenes';
 import isAdminMode from '../../computed/isAdminMode';
 

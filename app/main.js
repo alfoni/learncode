@@ -48,7 +48,7 @@ controller.modules({
     '/courses': 'courses.opened',
     '/courses/:courseId/scenes/:sceneIndex': 'course.opened',
     '/sessions': 'sessions.opened',
-    '/techTree': 'techTree.opened',
+    '/techtree': 'techTree.opened',
     '*': 'missingRouteRouted'
   }, {
     onlyHash: true

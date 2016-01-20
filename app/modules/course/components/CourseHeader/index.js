@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './styles.css';
 import icons from 'common/icons.css';
-import ToolbarButton from 'common/components/Toolbar/ToolbarButton';
+import ToolbarButton from 'common/components/ToolbarButton';
 
 const renderScenes = (scenes, activeSceneIndex, onSceneItemClick) => {
   return scenes.map((scene, index) => {

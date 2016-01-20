@@ -14,7 +14,7 @@ import currentScene from '../../computed/currentScene';
 import currentFile from '../../computed/currentFile';
 import AddFile from '../AddFile';
 import ModuleFiles from '../ModuleFiles';
-import Toolbar from '../Toolbar';
+import Toolbar from 'common/components/Toolbar';
 import RemoveFile from '../RemoveFile';
 
 @Cerebral({

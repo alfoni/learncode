@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles.css';
-import ToolbarButton from 'common/components/Toolbar/ToolbarButton';
+import ToolbarButton from 'common/components/ToolbarButton';
 import icons from 'common/icons.css';
 
 function UploadButton(props) {

@@ -1,14 +1,18 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
+import selectedTier from '../../computed/selectedTier';
 
+let Toolbar = null;
 let CoursesOverview = null;
 let styles = null;
 let icons = null;
+let Tiers = null;
 
 @Cerebral({
-  courseDependencyList: ['techTree', 'courseDependencyList'],
+  selectedTier: selectedTier,
   selectedCourse: ['techTree', 'selectedCourse'],
-  courseDependencyMap: ['techTree', 'courseDependencyMap']
+  courseDependencyMap: ['techTree', 'courseDependencyMap'],
+  user: ['user']
 })
 class TechTree extends React.Component {
   constructor() {
@@ -19,6 +23,8 @@ class TechTree extends React.Component {
   }
   componentDidMount() {
     require.ensure([], (require) => {
+      Toolbar = require('common/components/Toolbar');
+      Tiers = require('../Tiers');
       CoursesOverview =  require('../CoursesOverview');
       styles = require('./styles.css');
       icons = require('common/icons.css');
@@ -115,6 +121,21 @@ class TechTree extends React.Component {
 
     return renderedLevels;
   }
+  canRemoveCourse(course) {
+    if (!this.props.user.isAdmin) {
+      return false;
+    }
+
+    const courseListObject = this.props.selectedTier.courseDependencyList.find((dependencyCourse) => {
+      return dependencyCourse.course.id === course.id;
+    });
+
+    if (courseListObject && courseListObject.requiredBy.length > 0) {
+      return false;
+    }
+
+    return true;
+  }
   renderCourse(course, key) {
     return (
       <div
@@ -131,6 +152,19 @@ class TechTree extends React.Component {
             <span className={styles.subTitle}> {course.finishedPercent ? '(' + course.finishedPercent + ')' : ''}</span>
           </div>
         </div>
+        {
+          this.canRemoveCourse(course) ?
+            <div
+            onClick={(e) => {
+              e.stopPropagation();
+              this.props.signals.techTree.unlinkCourseClicked({course: course});
+            }}
+              className={styles.removeCourse}>
+              X
+            </div>
+          :
+            null
+        }
       </div>
     );
   }
@@ -150,6 +184,19 @@ class TechTree extends React.Component {
             <span className={styles.subTitle}> {task.finishedPercent ? '(' + task.finishedPercent + ')' : ''}</span>
           </div>
         </div>
+        {
+          this.canRemoveCourse(task) ?
+            <div
+              onClick={(e) => {
+                e.stopPropagation();
+                this.props.signals.techTree.unlinkCourseClicked({course: task});
+              }}
+              className={styles.removeCourse}>
+              X
+            </div>
+          :
+            null
+        }
       </div>
     );
   }
@@ -161,7 +208,11 @@ class TechTree extends React.Component {
     if (this.state.canRender) {
       return (
         <div className={styles.wrapper} onClick={() => this.props.signals.techTree.wrapperClicked()}>
-          {this.renderLevels()}
+          <Toolbar/>
+          <Tiers/>
+          <div className={styles.techTreeWrapper}>
+            {this.renderLevels()}
+          </div>
           <CoursesOverview/>
         </div>
       );

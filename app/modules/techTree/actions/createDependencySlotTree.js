@@ -351,7 +351,13 @@ function drawTopVerticalDependencyLine(levels) {
 }
 
 function createDependencySlotTree({state}) {
-  const courseDependencyList = state.get(['techTree', 'courseDependencyList']);
+  const currentTierIndex = state.get(['techTree', 'selectedTierIndex']);
+  let courseDependencyList = [];
+
+  if (typeof currentTierIndex === 'number') {
+    courseDependencyList = state.get(['techTree', 'tiers', currentTierIndex, 'courseDependencyList']);
+  }
+
   let levels = createDependencyTree(courseDependencyList);
   levels = sortLevels(levels);
   levels = createSlots(levels);

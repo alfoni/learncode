@@ -22,6 +22,9 @@ import getDescriptions from './apis/getDescriptions.js';
 import createDescription from './apis/createDescription.js';
 import updateDescription from './apis/updateDescription.js';
 import deleteDescription from './apis/deleteDescription.js';
+import createTier from './apis/createTier.js';
+import getTiers from './apis/getTiers.js';
+import updateTier from './apis/updateTier.js';
 
 const verifyUser = (req, res, next) => {
   if (req.cookies.kodeboksen) {
@@ -66,4 +69,7 @@ export default function appController(router) {
   router.post('/API/descriptions', isAdmin, createDescription);
   router.patch('/API/descriptions/:tagName', isAdmin, updateDescription);
   router.delete('/API/descriptions/:tagName', isAdmin, deleteDescription);
+  router.post('/API/tiers', isAdmin, createTier);
+  router.get('/API/tiers', verifyUser, getTiers);
+  router.patch('/API/tiers/:id', isAdmin, updateTier);
 }

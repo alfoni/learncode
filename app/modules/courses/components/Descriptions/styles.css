@@ -19,7 +19,7 @@
 .description {
   cursor: pointer;
   margin-bottom: 5px;
-  color: #cddceb;
+  color: #cadaed;
 }
 
 .delete {
@@ -57,7 +57,7 @@
   margin-top: 3px;
   display: inline-block;
   vertical-align: top;
-  color: #cddceb;
+  color: #cadaed;
 }
 
 .radioButton {
@@ -68,5 +68,5 @@
 .inputHeader {
   font-size: 13px;
   font-weight: bold;
-  color: #cddceb;
+  color: #cadaed;
 }

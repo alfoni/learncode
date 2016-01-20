@@ -4,7 +4,7 @@
   background-color: #eb1e64;
   margin-top: -2px;
   color: #fff;
-  font-family: Roboto, sans-serif;
+  font-family: Ubuntu, sans-serif;
   overflow: auto;
 }
 
@@ -45,7 +45,7 @@
 .scene {
   padding: 15px 15px;
   font-size: 14px;
-  color: #cddceb;
+  color: #cadaed;
   cursor: pointer;
   border-bottom: 1px solid transparent;
 }
