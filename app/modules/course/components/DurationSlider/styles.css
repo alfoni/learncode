@@ -73,3 +73,18 @@
   border: 1px solid #eb1e64;
   cursor: pointer;
 }
+
+.arrow {
+  display: inline-block;
+	border-left: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid #fff;
+  position: absolute;
+  margin-left: -9px;
+  margin-top: 24px;
+}
+
+.activeArrow {
+  composes: arrow;
+  opacity: 1;
+}
