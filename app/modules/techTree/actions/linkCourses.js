@@ -2,10 +2,10 @@ function linkCourses({input, state}) {
   const selectedTierIndex = state.get(['techTree', 'selectedTierIndex']);
   const selectedCourse = state.get(['techTree', 'selectedCourse']);
   const selectedCourseIndex = state.get(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList']).findIndex((dependencyCourse) => {
-    return selectedCourse.id === dependencyCourse.course.id;
+    return selectedCourse.id === dependencyCourse.courseId;
   });
   const dependencyCourseIndex = state.get(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList']).findIndex((dependencyCourse) => {
-    return input.course.id === dependencyCourse.course.id;
+    return input.course.id === dependencyCourse.courseId;
   });
 
   let selectedCourseLevelIndex = null;
@@ -14,20 +14,20 @@ function linkCourses({input, state}) {
   let levelIndex = 0;
 
   state.get(['techTree', 'courseDependencyMap']).forEach((level) => {
-    if (!level.centerLine && !level.sideLine) {
+    if (!level.centerLine && !level.sideLine) {
       const selectedCourseExistsInLevel = level.find((course) => {
         if (!course) {
           return false;
         }
 
-        return course.course.id === selectedCourse.id;
+        return course.courseId === selectedCourse.id;
       });
       const linkingCourseExistsInLevel = level.find((course) => {
         if (!course) {
           return false;
         }
 
-        return course.course.id === input.course.id;
+        return course.courseId === input.course.id;
       });
 
       if (selectedCourseExistsInLevel) {

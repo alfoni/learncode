@@ -15,7 +15,10 @@ const model = Model({
     isAdmin: false,
     forceUser: false,
     assignmentsSolved: {
-      0: [true, true]
+      0: [true, true, true],
+      8: [true, true],
+      1: [true, true],
+      4: [true]
     }
   },
   session: {

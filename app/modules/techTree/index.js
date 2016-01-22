@@ -80,7 +80,7 @@ const Tekst = {
   finishedPercent: '0%',
   disabled: false,
   id: 8,
-  assignmentPoints: []
+  assignmentPoints: [123]
 };
 const Landingsside3 = {
   title: 'Landingsside 3',

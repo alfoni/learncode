@@ -5,19 +5,19 @@ function setCourseDependency({state, input}) {
   if (!selectedCourse) {
     // Starting point
     state.push(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList'], {
-      course: input.course,
+      courseId: input.course.id,
       requires: [],
       requiredBy: []
     });
   } else {
     state.push(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList'], {
-      course: input.course,
+      courseId: input.course.id,
       requires: [selectedCourse.id],
       requiredBy: []
     });
 
     const selectedCourseIndex = state.get(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList']).findIndex((course) => {
-      return course.course.id === selectedCourse.id;
+      return course.courseId === selectedCourse.id;
     });
 
     state.push(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList', selectedCourseIndex, 'requiredBy'], input.course.id);

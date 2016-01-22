@@ -9,16 +9,39 @@ import elements from 'common/elements.css';
   selectedTierIndex: ['techTree', 'selectedTierIndex'],
   showAddNewTierInput: ['techTree', 'showAddNewTierInput'],
   newTierName: ['techTree', 'newTierName'],
+  courses: ['techTree', 'courses'],
   user: ['user']
 })
 class Tiers extends React.Component {
   constructor() {
     super();
   }
-  tierIsSolved(tier) {
-    return tier.courseDependencyList.find((course) => {
-      return true;
+  getCourse(courseId) {
+    return this.props.courses.find((course) => {
+      return course.id === courseId;
     });
+  }
+  tierIsSolved(tier) {
+    if (!tier.courseDependencyList.length) {
+      return false;
+    }
+
+    return tier.courseDependencyList.every((course) => {
+      if (!this.props.user.assignmentsSolved[course.courseId]) {
+        return false;
+      }
+
+      return this.props.user.assignmentsSolved[course.courseId].length === this.getCourse(course.courseId).assignmentPoints.length + 1;
+    });
+  }
+  tierIsActive(tier, index) {
+    if (index === 0) {
+      return true;
+    }
+
+    if (this.tierIsSolved(this.props.tiers[index - 1])) {
+      return true;
+    }
   }
   renderTiers() {
     return this.props.tiers.map((tier, index) => {
@@ -28,7 +51,7 @@ class Tiers extends React.Component {
           onClick={() => this.props.signals.techTree.tierClicked({index: index})}
           className={`
             ${this.props.selectedTierIndex === index ? styles.tierSelected : styles.tier}
-            ${index > 0 ? styles.tierDisabled : styles.tier}
+            ${this.tierIsActive(tier, index) ? styles.tier : styles.tierDisabled}
             ${this.tierIsSolved(tier) ? styles.tierFinished : styles.tier}
         `}>
           <span className={`${icons.thumbDown} ${tier.disabled ? styles.icon : styles.hide}`}></span>

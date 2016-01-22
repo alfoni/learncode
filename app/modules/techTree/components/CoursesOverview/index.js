@@ -24,7 +24,7 @@ class CoursesOverview extends React.Component {
       }
 
       return !this.props.selectedTier.courseDependencyList.find((dependencyCourse) => {
-        return course.id === dependencyCourse.course.id;
+        return course.id === dependencyCourse.courseId;
       });
     }).map((course, index) => {
       return (

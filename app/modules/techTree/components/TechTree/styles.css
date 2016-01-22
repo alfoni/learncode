@@ -20,7 +20,7 @@
   padding: 0 30px;
 }
 
-.large {
+.course {
   height: 60px;
   border: 1px solid #415573;
   background-color: #5a7396;
@@ -32,8 +32,13 @@
   text-align: left
 }
 
+.courseCompleted {
+  background-color: #eb1e64 !important;
+  border-color: #eb1e64 !important;
+}
+
 .courseDisabled {
-  composes: large;
+  composes: course;
   opacity: 0.5;
   cursor: default;
 }
@@ -54,7 +59,12 @@
   font-size: 24px;
 }
 
-.small {
+.courseBadgeCompleted {
+  background-color: #fff !important;
+  border: 2px solid #eb1e64 !important;
+}
+
+.task {
   height: 50px;
   border: 1px solid #415573;
   background-color: #5a7396;
@@ -67,7 +77,7 @@
 }
 
 .taskDisabled {
-  composes: small;
+  composes: task;
   opacity: 0.5;
   cursor: default;
 }
@@ -106,10 +116,18 @@
   font-weight: bold;
 }
 
+.titleCompleted, .titleActive {
+  color: #fff !important;
+}
+
 .subTitle {
   font-size: 10px;
   color: #435470;
   vertical-align: top;
+}
+
+.subTitleCompleted, .subTitleActive {
+  color: #fff;
 }
 
 .box {
