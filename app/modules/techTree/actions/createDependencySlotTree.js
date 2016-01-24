@@ -188,7 +188,7 @@ function createDependencySlotTree({state}) {
       if (level.sideLine) {
         const positionedLineSlots = level.slice(0);
         level.forEach((courseId, courseIndex) => {
-          if (typeof courseId === 'number') {
+          if (typeof courseId === 'number' || typeof courseId === 'string') {
             // Position lines
             if (getCourse(courseId).type === 'course') {
               positionedLineSlots.splice(courseIndex + 1, 4);
@@ -209,7 +209,8 @@ function createDependencySlotTree({state}) {
   function getDepenencyIndexes(courseId, lines) {
     const relatedIndexes = [];
     lines.forEach((relatedCourseId, index) => {
-      if (typeof relatedCourseId === 'number' && getDepenencyCourse(relatedCourseId).requiredBy.indexOf(courseId) >= 0) {
+      if ((typeof relatedCourseId === 'number' || typeof relatedCourseId === 'string') &&
+      getDepenencyCourse(relatedCourseId).requiredBy.indexOf(courseId) >= 0) {
         relatedIndexes.push(index);
       }
     });
@@ -224,8 +225,8 @@ function createDependencySlotTree({state}) {
         const rightLines = levels[currentLevelIndex + 1];
 
         for (let x = 0; x < leftLines.length; x++) {
-          if (typeof level[x] !== 'number') {
-            if (typeof rightLines[x] === 'number') {
+          if (typeof level[x] !== 'number' && typeof level[x] !== 'string') {
+            if (typeof rightLines[x] === 'number' || typeof rightLines[x] === 'string') {
               const relatedLeftSideLineIndexes = getDepenencyIndexes(rightLines[x], leftLines);
               const minIndex = Math.min.apply(Math, relatedLeftSideLineIndexes); // Getting highest number in array
               const maxIndex = Math.max.apply(Math, relatedLeftSideLineIndexes); // Getting lowest number in array
@@ -233,7 +234,7 @@ function createDependencySlotTree({state}) {
               if (minIndex === maxIndex) { // Dependant by a single course
                 if (minIndex > x) {
                   for (let y = x; y < minIndex; y++) { // Add the lines that are above the right-side course
-                    if (typeof level[y] !== 'number') {
+                    if (typeof level[y] !== 'number' && typeof level[y] !== 'string') {
                       level[y] = rightLines[x];
                     }
                   }
@@ -265,7 +266,7 @@ function createDependencySlotTree({state}) {
         for (let x = 0; x < leftLines.length; x++) {
           const currentCourse = getDepenencyCourse(leftLines[x]);
 
-          if (typeof leftLines[x] === 'number') {
+          if (typeof leftLines[x] === 'number' || typeof leftLines[x] === 'string') {
             const leftSideCourserequiresInNextLevel = rightLines.filter((courseId) => {
               if (!courseId) {
                 return false;
@@ -306,9 +307,9 @@ function createDependencySlotTree({state}) {
           const isDependencyLine = x === 0 || x === level.length;
           const currentCourse = getDepenencyCourse(rightLines[x]);
 
-          if (typeof rightLines[x] === 'number' && !isDependencyLine) {
+          if ((typeof rightLines[x] === 'number' || typeof rightLines[x] === 'string') && !isDependencyLine) {
             const rightSideCourseRequiresInPreviousLevel = leftLines.filter((courseId) => {
-              if (typeof courseId !== 'number') {
+              if (typeof courseId !== 'number' && typeof courseId !== 'string') {
                 return false;
               }
 
@@ -345,16 +346,16 @@ function createDependencySlotTree({state}) {
         const leftLines = levels[currentLevelIndex - 1];
         const rightLines = levels[currentLevelIndex + 1];
 
-        if (leftLines && typeof leftLines[0] === 'number' &&
-            rightLines && typeof rightLines[0] === 'number') {
+        if (leftLines && (typeof leftLines[0] === 'number' || typeof leftLines[0] === 'string') &&
+            rightLines && (typeof rightLines[0] === 'number') || typeof rightLines[0] === 'string') {
           level[0] = {
             topLine: true,
             course: rightLines[0]
           };
         }
 
-        if (leftLines && typeof leftLines[rightLines.length - 1] === 'number' &&
-            rightLines && typeof rightLines[rightLines.length - 1] === 'number') {
+        if (leftLines && (typeof leftLines[rightLines.length - 1] === 'number' || typeof leftLines[rightLines.length - 1] === 'string') &&
+            rightLines && (typeof rightLines[rightLines.length - 1] === 'number' || typeof rightLines[rightLines.length - 1] === 'number')) {
           level[rightLines.length - 1] = {
             bottomLine: true,
             course: rightLines[rightLines.length - 1]

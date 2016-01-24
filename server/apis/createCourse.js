@@ -17,6 +17,9 @@ export default function createCourse(req, res) {
     created: Date.now(),
     name: req.body.course.courseName,
     authorId: req.cookies.kodeboksen,
+    type: req.body.course.type,
+    description: req.body.course.description,
+    skillLevel: req.body.course.skillLevel,
     scenes: [{
       name: req.body.course.sceneName,
       currentFileIndex: 0,

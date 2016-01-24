@@ -39,7 +39,8 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      'common': path.join(__dirname, 'app/common')
+      'common': path.join(__dirname, 'app/common'),
+      'modules': path.join(__dirname, 'app/modules')
     }
   },
   module: {

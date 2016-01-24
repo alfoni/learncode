@@ -18,6 +18,7 @@
   padding: 6px;
   margin-right: 5px;
   margin-left: 5px;
+  display: inline-block;
 }
 
 .textIcon {
@@ -83,12 +84,21 @@
   color: #cadaed;
 }
 
+.iconTitleWrapper {
+  position: relative;
+  cursor: pointer;
+}
+
 .iconTitle {
-  font-size: 10px;
-  position: absolute;
-  top: 2px;
+  font-size: 14px;
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 9px;
+  margin-left: 5px;
+  margin-right: 40px;
   text-align: center;
-  width: 48px;
+  color: #cadaed;
+  font-family: Ubuntu, sans-serif;
 }
 
 .icon[disabled] {

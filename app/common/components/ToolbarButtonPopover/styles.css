@@ -1,6 +1,7 @@
 .wrapper {
   height: 100%;
   float: left;
+  position: relative;
 }
 
 .arrowBox {
@@ -32,12 +33,13 @@
 
 .arrowBoxRight {
   composes: arrowBox;
-  margin-left: -175px;
+  right: -15px;
 }
 
 .arrowBoxRight:before, .arrowBoxRight:after {
-  left: 65px;
-  margin-left: 120px;
+  right: 26px;
+  margin-left: 0;
+  left: auto;
 }
 
 .contentBox {

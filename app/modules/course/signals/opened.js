@@ -15,6 +15,7 @@ import setLoadedCourse from './../actions/setLoadedCourse';
 import setAssignmentPoints from './../actions/setAssignmentPoints';
 import loadDescriptions from '../actions/loadDescriptions';
 import setDescriptions from '../actions/setDescriptions';
+import getTechTreeData from 'modules/techTree/chains/getTechTreeData';
 
 export default [
   setPage('course'),
@@ -64,5 +65,7 @@ export default [
       success: [setDescriptions],
       error: [showSnackbar('Innlasting av beskrivelser feilet!')]
     }
-  ]
+  ],
+  ...getTechTreeData,
+  set(['techTree', 'opened'], false)
 ];

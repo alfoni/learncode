@@ -108,7 +108,7 @@ class Tiers extends React.Component {
         <div className={styles.title}>Hei!</div>
         <div className={styles.subTitle}>Velkommen til kodeboksen.</div>
         <div className={styles.tiersWrapper}>
-          {this.renderTiers()}
+          {this.props.tiers ? this.renderTiers() : null}
           {this.renderAddNewTier()}
         </div>
       </div>

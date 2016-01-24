@@ -2,18 +2,19 @@ import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import Module from '../Module';
 import DurationSlider from '../DurationSlider';
-import ToolbarTitle from 'common/components/ToolbarTitle';
+import ToolbarButton from 'common/components/ToolbarButton';
 import Toolbar from 'common/components/Toolbar';
 import CodeEditor from '../CodeEditor';
 import Preview from '../Preview';
 import SceneControls from '../SceneControls';
-
+import icons from 'common/icons.css';
 import AssignmentsBar from '../AssignmentsBar';
 import EditAssignment from '../EditAssignment';
 import styles from './styles.css';
 import currentFile from '../../computed/currentFile';
 import currentScene from '../../computed/currentScene';
 import isAdminMode from '../../computed/isAdminMode';
+import completedAssignments from '../../computed/completedAssignments';
 import Assignment from '../Assignment';
 import CourseHeader from '../CourseHeader';
 
@@ -21,9 +22,10 @@ import CourseHeader from '../CourseHeader';
   isLoading: ['course', 'isLoading'],
   recorder: ['recorder'],
   courseName: ['course', 'name'],
+  courseId: ['course', 'id'],
   currentAssignmentIndex: ['course', 'currentAssignmentIndex'],
   currentAssignmentStatus: ['course', 'currentAssignmentStatus'],
-  completedAssignments: ['user', 'assignmentsSolved'],
+  completedAssignments: completedAssignments,
   currentFile: currentFile,
   currentScene: currentScene,
   isAdminMode: isAdminMode,
@@ -41,7 +43,7 @@ class Scene extends React.Component {
       <div className={styles.modules}>
         <Module className={this.props.isAdminMode ? styles.controlsAndAssignmentsAdmin : styles.controlsAndAssignments} show>
           <Toolbar>
-            <ToolbarTitle title="Kursoversikt"/>
+            <ToolbarButton icon={icons.chevronLeft} title="Kursoversikt" onClick={() => this.props.signals.techTree.toggled()}/>
           </Toolbar>
           <CourseHeader
             title={this.props.courseName}

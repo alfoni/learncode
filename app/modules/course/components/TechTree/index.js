@@ -1,18 +1,25 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import selectedTier from '../../computed/selectedTier';
+import classNames from 'classnames';
 
 let Toolbar = null;
 let CoursesOverview = null;
 let styles = null;
 let icons = null;
 let Tiers = null;
+let ToolbarButton = null;
+let ToolbarButtonPopover = null;
+let AddNewCourse = null;
+let OpenedTechTreeCourse = null;
 
 @Cerebral({
   selectedTier: selectedTier,
   selectedCourse: ['techTree', 'selectedCourse'],
   courseDependencyMap: ['techTree', 'courseDependencyMap'],
   courses: ['techTree', 'courses'],
+  opened: ['techTree', 'opened'],
+  showNewCourse: ['courses', 'showNewCourse'],
   user: ['user']
 })
 class TechTree extends React.Component {
@@ -29,6 +36,10 @@ class TechTree extends React.Component {
       CoursesOverview =  require('../CoursesOverview');
       styles = require('./styles.css');
       icons = require('common/icons.css');
+      ToolbarButton = require('common/components/ToolbarButton');
+      ToolbarButtonPopover = require('common/components/ToolbarButtonPopover');
+      AddNewCourse = require('../AddNewCourse');
+      OpenedTechTreeCourse = require('../OpenedTechTreeCourse');
       this.setState({
         canRender: true
       });
@@ -37,6 +48,11 @@ class TechTree extends React.Component {
   getCourse(courseId) {
     return this.props.courses.find((course) => {
       return course.id === courseId;
+    });
+  }
+  getCourseDependencyObject(courseId) {
+    return this.props.selectedTier.courseDependencyList.find((course) => {
+      return course.courseId === courseId;
     });
   }
   renderLevels() {
@@ -62,7 +78,7 @@ class TechTree extends React.Component {
           levelBoxes.push(
             <div
               key={courseIndex}
-              style={{borderTop: typeof course === 'number' ? '1px solid #5a7497' : ''}}
+              style={{borderTop: typeof course === 'number' || typeof course === 'string' ? '1px solid #5a7497' : ''}}
               className={styles.line}>
             </div>
           );
@@ -71,7 +87,7 @@ class TechTree extends React.Component {
             <div
               key={courseIndex}
               style={{
-                borderLeft: typeof course === 'number' ? '1px solid #5a7497' : 'transparent'
+                borderLeft: typeof course === 'number' || typeof course === 'string' ? '1px solid #5a7497' : 'transparent'
               }}
               className={styles.centerLine}>
             </div>
@@ -149,43 +165,78 @@ class TechTree extends React.Component {
     return this.props.user.assignmentsSolved[course.id].length === course.assignmentPoints.length + 1;
   }
   courseIsActive(course) {
+    if (this.courseIsCompleted(course)) {
+      return false;
+    }
+    const courseDependencyObject = this.getCourseDependencyObject(course.id);
+
+    if (courseDependencyObject) {
+      return courseDependencyObject.requires.every((courseId) => {
+        return this.courseIsCompleted(this.getCourse(courseId));
+      });
+    }
+
     return false;
+  }
+  courseIsStarted(course) {
+    if (!this.courseIsActive(course)) {
+      return false;
+    }
+
+    return this.props.user.assignmentsSolved[course.id] && this.props.user.assignmentsSolved[course.id].length;
+  }
+  getProgressPercent(course) {
+    const finishedTasks = this.props.user.assignmentsSolved[course.id].length;
+    const totalTasks = course.assignmentPoints.length + 1;
+
+    return Math.round((finishedTasks / totalTasks) * 100);
+  }
+  renderProgressBar(course) {
+    return (
+      <div className={styles.progressWrapper}>
+        <div className={styles.progressBar}>
+          <div className={styles.progressed} style={{width: this.getProgressPercent(course)}}></div>
+        </div>
+      </div>
+    );
   }
   renderCourse(course, key) {
     const courseIsCompleted = this.courseIsCompleted(course);
     const courseIsActive = this.courseIsActive(course);
+    const courseIsStarted = this.courseIsStarted(course);
+    const courseIsDisabled = !courseIsStarted && !courseIsActive && !courseIsCompleted;
 
     return (
       <div
         key={key}
-        className={`
-          ${course.disabled ? styles.courseDisabled : styles.course}
-          ${courseIsCompleted ? styles.courseCompleted : styles.course}
-          ${courseIsActive ? styles.courseActive : styles.course}
-        `}
-        style={this.props.selectedCourse && this.props.selectedCourse.id === course.id ? {border: '3px solid #4CAF50'} : {}}
+        className={classNames(styles.course, {
+          [styles.courseCompleted]: courseIsCompleted && !courseIsActive,
+          [styles.courseActive]: courseIsActive,
+          [styles.courseStarted]: courseIsStarted,
+          [styles.courseSelected]: this.props.selectedCourse && this.props.selectedCourse.id === course.id
+        })}
         onClick={(e) => this.onCourseClicked(e, course)}>
-        <div className={`
-          ${course.disabled ? styles.courseBadgeDisabled : styles.courseBadge}
-          ${courseIsCompleted ? styles.courseBadgeCompleted : styles.courseBadge}
-          ${courseIsActive ? styles.courseBadgeActive : styles.courseBadge}
-        `}>
-          <span className={icons.thumbUp}></span>
+        <div className={classNames(styles.courseBadge, {
+          [styles.courseBadgeCompleted]: courseIsCompleted && !courseIsActive,
+          [styles.courseBadgeActive]: courseIsActive || courseIsStarted
+        })}>
+          <span className={courseIsDisabled ? icons.lock : icons.school}></span>
         </div>
         <div className={styles.titleWrapper}>
-          <div className={`
-            ${course.disabled ? styles.titleDisabled : styles.title}
-            ${courseIsCompleted ? styles.titleCompleted : styles.title}
-            ${courseIsActive ? styles.titleActive : styles.title}
-          `}>
-            {course.title}
-            <span className={`
-              ${course.disabled ? styles.titleDisabled : styles.subTitle}
-              ${courseIsCompleted ? styles.titleCompleted : styles.subTitle}
-              ${courseIsActive ? styles.titleActive : styles.subTitle}
-            `}> {course.finishedPercent ? '(' + course.finishedPercent + ')' : ''}</span>
+          <div className={classNames(styles.title, {
+            [styles.titleCompleted]: courseIsCompleted,
+            [styles.titleActive]: courseIsActive || courseIsStarted
+          })}>
+            {course.name}
           </div>
+          {
+            courseIsStarted ?
+              <span className={styles.subTitle}>{this.getProgressPercent(course)}%</span>
+            :
+              null
+          }
         </div>
+        {courseIsStarted ? this.renderProgressBar(course) : null}
         {
           this.canRemoveCourse(course) ?
             <div
@@ -205,38 +256,40 @@ class TechTree extends React.Component {
   renderTask(task, key) {
     const taskIsCompleted = this.courseIsCompleted(task);
     const taskIsActive = this.courseIsActive(task);
+    const taskIsStarted = this.courseIsStarted(task);
+    const taskIsDisabled = !taskIsStarted && !taskIsActive && !taskIsCompleted;
 
     return (
       <div
         key={key}
-        className={`
-          ${task.disabled ? styles.courseDisabled : styles.task}
-          ${taskIsCompleted ? styles.courseCompleted : styles.task}
-          ${taskIsActive ? styles.courseActive : styles.task}
-        `}
-        style={this.props.selectedCourse && this.props.selectedCourse.id === task.id ? {border: '3px solid #4CAF50'} : {}}
+        className={classNames(styles.task, {
+          [styles.courseCompleted]: taskIsCompleted && !taskIsActive,
+          [styles.courseActive]: taskIsActive,
+          [styles.courseStarted]: taskIsStarted,
+          [styles.courseSelected]: this.props.selectedCourse && this.props.selectedCourse.id === task.id
+        })}
         onClick={(e) => this.onCourseClicked(e, task)}>
-        <div className={`
-          ${task.disabled ? styles.courseBadgeDisabled : styles.taskBadge}
-          ${taskIsCompleted ? styles.courseBadgeCompleted : styles.taskBadge}
-          ${taskIsActive ? styles.courseBadgeActive : styles.taskBadge}
-        `}>
-          <span className={icons.scene}></span>
+        <div className={classNames(styles.taskBadge, {
+          [styles.courseBadgeCompleted]: taskIsCompleted && !taskIsActive,
+          [styles.courseBadgeActive]: taskIsActive || taskIsStarted
+        })}>
+          <span className={taskIsDisabled ? icons.lock : icons.light}></span>
         </div>
-        <div className={styles.titleWrapper}>
-          <div className={`
-            ${task.disabled ? styles.titleDisabled : styles.title}
-            ${taskIsCompleted ? styles.titleCompleted : styles.title}
-            ${taskIsActive ? styles.titleActive : styles.title}
-          `}>
-            {task.title}
-            <span className={`
-              ${task.disabled ? styles.titleDisabled : styles.subTitle}
-              ${taskIsCompleted ? styles.titleCompleted : styles.subTitle}
-              ${taskIsActive ? styles.titleActive : styles.subTitle}
-            `}> {task.finishedPercent ? '(' + task.finishedPercent + ')' : ''}</span>
+        <div className={taskIsStarted ? styles.titleProgressWrapper : styles.titleWrapper}>
+          <div className={classNames(styles.title, {
+            [styles.titleCompleted]: taskIsCompleted && !taskIsActive,
+            [styles.titleActive]: taskIsActive || taskIsStarted
+          })}>
+            {task.name}
           </div>
+          {
+            taskIsStarted ?
+              <span className={styles.subTitle}>{this.getProgressPercent(task)}%</span>
+            :
+              null
+          }
         </div>
+        {taskIsStarted ? this.renderProgressBar(task) : null}
         {
           this.canRemoveCourse(task) ?
             <div
@@ -255,18 +308,47 @@ class TechTree extends React.Component {
   }
   onCourseClicked(e, course) {
     e.stopPropagation();
-    this.props.signals.techTree.courseClicked({course: course});
+    const container = e.currentTarget;
+    const offsetLeft = container.offsetLeft;
+    const offsetTop = container.offsetTop + container.offsetHeight;
+
+    this.props.signals.techTree.courseClicked({
+      course: course,
+      courseIsCompleted: this.courseIsCompleted(course),
+      courseIsActive: this.courseIsActive(course),
+      courseIsStarted: this.courseIsStarted(course),
+      position: {
+        left: offsetLeft,
+        top: offsetTop
+      }
+    });
   }
   render() {
     if (this.state.canRender) {
       return (
-        <div className={styles.wrapper} onClick={() => this.props.signals.techTree.wrapperClicked()}>
-          <Toolbar/>
+        <div className={this.props.opened ? styles.wrapper : styles.wrapperClosed} onClick={() => this.props.signals.techTree.wrapperClicked()}>
+          <Toolbar>
+            <ToolbarButton icon={icons.chevronRight} title="Fortsett kurs" onClick={() => this.props.signals.techTree.toggled()}/>
+            {
+              this.props.user.isAdmin ?
+                <ToolbarButtonPopover
+                  side="right"
+                  className={styles.addNewCourseButton}
+                  icon={icons.addFile}
+                  onClick={() => this.props.signals.courses.newCourseClicked()}
+                  show={this.props.showNewCourse}>
+                  <AddNewCourse/>
+                </ToolbarButtonPopover>
+              :
+                null
+            }
+          </Toolbar>
           <Tiers/>
           <div className={styles.techTreeWrapper}>
+            <OpenedTechTreeCourse/>
             {this.renderLevels()}
           </div>
-          <CoursesOverview/>
+          {this.props.user.isAdmin ? <CoursesOverview/> : null}
         </div>
       );
     }

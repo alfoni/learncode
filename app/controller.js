@@ -17,7 +17,7 @@ const model = Model({
     assignmentsSolved: {
       0: [true, true, true],
       8: [true, true],
-      1: [true, true],
+      1: [true, true, true, true, true],
       4: [true]
     }
   },

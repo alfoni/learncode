@@ -5,7 +5,8 @@ import styles from './styles.css';
 import elements from 'common/elements.css';
 
 @Cerebral({
-  isSavingNewCourse: ['courses', 'isSavingNewCourse']
+  isSavingNewCourse: ['courses', 'isSavingNewCourse'],
+  newCourse: ['courses', 'newCourse']
 })
 class AddNewCourse extends React.Component {
   onNewCourseSubmit(e) {
@@ -29,6 +30,33 @@ class AddNewCourse extends React.Component {
             placeholder="Navn på første scene"
             disabled={this.props.isSavingNewCourse}
             required/>
+          <textarea
+            className={`${elements.textarea} ${styles.sceneInput}`}
+            onChange={(e) => this.props.signals.courses.newCourseUpdated.sync({field: 'description', value: e.target.value})}
+            placeholder="Beskrivelse"
+            disabled={this.props.isSavingNewCourse}
+            required>
+          </textarea>
+          <input
+            className={`${elements.input} ${styles.sceneInput}`}
+            onChange={(e) => this.props.signals.courses.newCourseUpdated.sync({field: 'skillLevel', value: e.target.value})}
+            placeholder="Ferdighetsnivå"
+            disabled={this.props.isSavingNewCourse}
+            required/>
+          <input
+            type="radio"
+            className={styles.radioButton}
+            checked={this.props.newCourse.type === 'course'}
+            onChange={() => this.props.signals.courses.newCourseUpdated.sync({field: 'type', value: 'course'})}
+            disabled={this.props.isSavingNewCourse}/>
+          <div className={styles.radioLabel}>Kurs</div>
+          <input
+            type="radio"
+            className={styles.radioButton}
+            checked={this.props.newCourse.type === 'task'}
+            onChange={() => this.props.signals.courses.newCourseUpdated.sync({field: 'type', value: 'task'})}
+            disabled={this.props.isSavingNewCourse}/>
+          <div className={styles.radioLabel}>Ferdighet</div>
           <button
             type="submit"
             className={elements.button}

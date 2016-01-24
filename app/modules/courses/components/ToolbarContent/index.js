@@ -2,7 +2,6 @@ import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import ToolbarButtonPopover from 'common/components/ToolbarButtonPopover';
 import ToolbarTitle from 'common/components/ToolbarTitle';
-import AddNewCourse from '../AddNewCourse';
 import Descriptions from '../Descriptions';
 import icons from 'common/icons.css';
 import styles from './styles.css';
@@ -19,9 +18,7 @@ class ToolbarContent extends React.Component {
         <ToolbarButtonPopover
           icon={icons.addFile}
           onClick={() => this.props.signals.courses.newCourseClicked()}
-          show={this.props.showNewCourse}>
-          <AddNewCourse/>
-        </ToolbarButtonPopover>
+          show={this.props.showNewCourse} />
         <ToolbarButtonPopover
           icon={icons.addAssignment}
           onClick={() => this.props.signals.courses.showDescriptionsClicked()}

@@ -49,7 +49,7 @@ export default function appController(router) {
   router.post('/API/courses', isAdmin, createCourse);
   router.patch('/API/courses/:id', isAdmin, updateCourse);
   router.get('/API/courses/:id', verifyUser, getCourse);
-  router.get('/API/courses', isAdmin, getCourses);
+  router.get('/API/courses', verifyUser, getCourses);
   router.get('/API/courses/:id/scenes/:index', verifyUser, getScene);
   router.put('/API/courses/:id/scenes/:index/recording', isAdmin, addRecording);
   router.post('/API/sandbox', verifyUser, updateSandbox);

@@ -5,6 +5,7 @@ import currentScene from '../../computed/currentScene';
 let Scene = null;
 let styles = null;
 let MouseCursor = null;
+let TechTree = null;
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
@@ -27,6 +28,7 @@ class Course extends React.Component {
       Scene = require('../Scene');
       MouseCursor = require('../MouseCursor');
       styles = require('./styles.css');
+      TechTree = require('../TechTree');
 
       if (this.hasMounted) {
         this.setState({
@@ -64,6 +66,7 @@ class Course extends React.Component {
   renderScene() {
     return (
       <div className={styles.wrapper} onClick={(e) => this.onAppClicked(e)}>
+        <TechTree/>
         <Scene/>
         <MouseCursor/>
       </div>

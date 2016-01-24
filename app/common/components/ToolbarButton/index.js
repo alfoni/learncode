@@ -25,17 +25,8 @@ class ToolbarButton extends React.Component {
   }
   renderIconTextButton() {
     return (
-      <div
-        className={this.props.active ? styles.activeTextIcon : styles.textIcon}
-        onMouseOver={() => this.showTooltip()}
-        onMouseOut={() => this.hideTooltip()}>
-        <div className={this.props.icon}></div>
-        {
-          this.props.iconText ?
-            <div className={styles.iconText}>{this.props.iconText}</div>
-          :
-            null
-        }
+      <div className={styles.iconTitleWrapper}>
+        {this.renderIconButton()}
         <div className={styles.iconTitle}>{this.props.title}</div>
       </div>
     );

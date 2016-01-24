@@ -34,7 +34,10 @@ export default () => {
       },
       newCourse: {
         courseName: '',
-        sceneName: ''
+        sceneName: '',
+        type: 'course',
+        skillLevel: '',
+        description: ''
       },
       courses: []
     });

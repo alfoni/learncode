@@ -1,13 +1,10 @@
 .wrapper {
-  position: absolute;
-  right: 0;
-  top: 285px;
-  width: 200px;
+  width: calc(100% - 30px);
   background-color: #202634;
   padding: 20px;
-  border-left: 1px solid #415573;
-  border-bottom: 1px solid #415573;
-  border-top: 1px solid #415573;
+  border: 1px solid #415573;
+  box-sizing: border-box;
+  margin-left: 15px;
 }
 
 .course {
@@ -19,6 +16,9 @@
   color: #1b232e;
   font-size: 12px;
   cursor: pointer;
+  width: calc(33.33% - 10px);
+  display: inline-block;
+  box-sizing: border-box;
 }
 
 .course:hover {

@@ -146,3 +146,38 @@
 .assignmentCompleted:before {
 	content: "\e277";
 }
+
+.light {composes: font; transform: rotate(180deg); display: inline-block;}
+.light:before {
+    content: "\e1bf";
+}
+
+.check {composes: font;}
+.check:before {
+    content: "\e206";
+}
+
+.chevronLeft {composes: font;}
+.chevronLeft:before {
+    content: "\e207";
+}
+
+.chevronRight {composes: font;}
+.chevronRight:before {
+    content: "\e208";
+}
+
+.notification {composes: font;}
+.notification:before {
+    content: "\e24b";
+}
+
+.lock {composes: font;}
+.lock:before {
+    content: "\e2ab";
+}
+
+.search {composes: font;}
+.search:before {
+    content: "\e2ca";
+}

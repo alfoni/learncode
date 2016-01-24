@@ -61,6 +61,12 @@ window.BANAN = function () {
   });
 }
 
+window.EPLE = function () {
+  controller.getSignals().home.formSubmitted({
+    email: 'tommy.ostgaard@gmail.com'
+  });
+}
+
 ReactDOM.render(
   <Container controller={controller}>
     <App/>

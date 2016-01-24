@@ -12,7 +12,7 @@ const renderScenes = (scenes, activeSceneIndex, onSceneItemClick) => {
         onClick={() => onSceneItemClick({sceneIndex: index})}>
         <span>{index + 1}. {scene.name}</span>
         {/* TODO: When scenes have been watched, add this:
-          <span className={`${styles.checked} ${icons.thumbUp}`}></span>
+          <span className={`${styles.checked} ${icons.checked}`}></span>
         */}
       </div>
     );

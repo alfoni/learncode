@@ -32,7 +32,7 @@ class CoursesOverview extends React.Component {
           key={index}
           className={styles.course}
           onClick={(e) => this.onCourseDependencyClicked(e, course)}>
-          {course.title}
+          {course.name}
         </div>
       );
     });
