@@ -4,6 +4,7 @@ import controller from './controller.js';
 import {Container} from 'cerebral-view-react';
 import Router from 'cerebral-module-router';
 import Recorder from 'cerebral-module-recorder';
+import Devtools from 'cerebral-module-devtools';
 
 import App from './App.js';
 
@@ -43,6 +44,7 @@ controller.modules({
       lastPaused: Date.now()
     }
   }),
+  devtools: Devtools(),
   router: Router({
     '/': 'home.opened',
     '/courses': 'courses.opened',
