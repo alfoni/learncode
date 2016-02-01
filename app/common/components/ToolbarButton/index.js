@@ -8,7 +8,10 @@ class ToolbarButton extends React.Component {
     super();
   }
   onClick(e) {
-    e.stopPropagation();
+    if (this.props.stopPropagation || this.props.stopPropagation === undefined) {
+      e.stopPropagation();
+    }
+
     this.props.signals.course.buttonPopoverClicked({
       mousePositionX: e.clientX,
       mousePositionY: e.clientY
@@ -33,7 +36,7 @@ class ToolbarButton extends React.Component {
   }
   renderIconButton() {
     return (
-      <div className={this.props.active ? styles.activeIcon : styles.icon} disabled={this.props.disabled}>
+      <div className={this.props.active ? styles.activeIcon : this.props.disabled ? styles.disabledIcon : styles.icon}>
         <div className={this.props.icon}></div>
       </div>
     );

@@ -21,7 +21,7 @@ const renderScenes = (scenes, activeSceneIndex, onSceneItemClick) => {
 
 function CourseHeader(props) {
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} onClick={(e) => {e.stopPropagation(); props.sceneNameClicked();}}>
       <div className={styles.iconWrapper}>
         <div className={`${styles.icon} ${icons.school}`}></div>
       </div>
@@ -29,8 +29,8 @@ function CourseHeader(props) {
         <div className={styles.title}>{props.title}</div>
           <ToolbarButton
             title={(props.currentScene.index + 1) + '. ' + props.currentScene.name}
-            onClick={(e) => props.sceneNameClicked(e)}
-            active={props.showScenesList}/>
+            active={props.showScenesList}
+            stopPropagation={false}/>
           {
             props.showScenesList ?
               <div className={styles.scenesList}>{renderScenes(props.scenes, props.currentScene.index, props.onSceneItemClick)}</div>

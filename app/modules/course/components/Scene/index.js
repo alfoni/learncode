@@ -38,6 +38,34 @@ class Scene extends React.Component {
       description: e.target.value
     });
   }
+  renderAssignment() {
+
+    if (!this.props.recorder.hasRecorded) {
+      return null;
+    }
+
+    if (this.props.isAdminMode && !this.props.recorder.isRecording) {
+      return (
+        <EditAssignment
+          currentScene={this.props.currentScene}
+          currentAssignmentIndex={this.props.currentAssignmentIndex}
+          assignment={this.props.currentScene.assignments[this.props.currentAssignmentIndex]}
+          onDescriptionChange={this.props.signals.course.assignmentDescriptionChanged}
+          onCodeChange={this.props.signals.course.assignmentCodeChanged}
+          currentAssignmentStatus={this.props.currentAssignmentStatus}
+          onAssignmentRunClick={this.props.signals.course.runAssignmentClicked}
+        />
+      );
+    }
+
+    return (
+      <Assignment
+        assignment={this.props.currentScene.assignments[this.props.currentAssignmentIndex]}
+        currentAssignmentStatus={this.props.currentAssignmentStatus}
+        completed={this.props.completedAssignments.indexOf(this.props.currentAssignmentIndex) >= 0}
+      />
+    );
+  }
   render() {
     return (
       <div className={styles.modules}>
@@ -54,32 +82,17 @@ class Scene extends React.Component {
             onSceneItemClick={this.props.signals.course.listSceneNameClicked}/>
           <SceneControls/>
           <DurationSlider/>
-          <AssignmentsBar
-            assignments={this.props.currentScene.assignments}
-            currentAssignmentIndex={this.props.currentAssignmentIndex}
-            isAdminMode={this.props.isAdminMode && !this.props.recorder.isRecording}
-            onAssignmentClick={this.props.signals.course.assignmentClicked}
-            onNewAssignmentClick={this.props.signals.course.newAssignmentClicked}
-            completedAssignments={this.props.completedAssignments}
-          />
-          {
-            this.props.isAdminMode && !this.props.recorder.isRecording ?
-              <EditAssignment
-                currentScene={this.props.currentScene}
-                currentAssignmentIndex={this.props.currentAssignmentIndex}
-                assignment={this.props.currentScene.assignments[this.props.currentAssignmentIndex]}
-                onDescriptionChange={this.props.signals.course.assignmentDescriptionChanged}
-                onCodeChange={this.props.signals.course.assignmentCodeChanged}
-                currentAssignmentStatus={this.props.currentAssignmentStatus}
-                onAssignmentRunClick={this.props.signals.course.runAssignmentClicked}
-              />
-            :
-              <Assignment
-                assignment={this.props.currentScene.assignments[this.props.currentAssignmentIndex]}
-                currentAssignmentStatus={this.props.currentAssignmentStatus}
-                completed={this.props.completedAssignments.indexOf(this.props.currentAssignmentIndex) >= 0}
-              />
-          }
+          {/*
+            <AssignmentsBar
+              assignments={this.props.currentScene.assignments}
+              currentAssignmentIndex={this.props.currentAssignmentIndex}
+              isAdminMode={this.props.isAdminMode && !this.props.recorder.isRecording}
+              onAssignmentClick={this.props.signals.course.assignmentClicked}
+              onNewAssignmentClick={this.props.signals.course.newAssignmentClicked}
+              completedAssignments={this.props.completedAssignments}
+            />
+          */}
+          {this.renderAssignment()}
         </Module>
         <Module className={styles.code} show>
           <CodeEditor/>
