@@ -50,7 +50,7 @@
   left: auto;
 }
 
-.point {
+.assignment {
   position: absolute;
   width: 18px;
   height: 18px;
@@ -67,8 +67,16 @@
   font-family: Ubuntu, sans-serif;
 }
 
-.activePoint {
-  composes: point;
+.currentAssignment {
+  composes: assignment;
+  color: #fff;
+  border: 1px solid #eb1e64;
+  background-color: #eb1e64;
+  cursor: pointer;
+}
+
+.activeAssignment {
+  composes: assignment;
   color: #fff;
   border: 1px solid #eb1e64;
   cursor: pointer;

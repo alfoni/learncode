@@ -162,7 +162,11 @@ class TechTree extends React.Component {
       return false;
     }
 
-    return this.props.user.assignmentsSolved[course.id].length === course.assignmentPoints.length + 1;
+    const finishedAssignments = Object.keys(this.props.user.assignmentsSolved[course.id]).reduce((total, key) => {
+      return total + this.props.user.assignmentsSolved[course.id][key];
+    }, 0);
+
+    return finishedAssignments === course.assignmentsCount;
   }
   courseIsActive(course) {
     if (this.courseIsCompleted(course)) {
@@ -183,13 +187,18 @@ class TechTree extends React.Component {
       return false;
     }
 
-    return this.props.user.assignmentsSolved[course.id] && this.props.user.assignmentsSolved[course.id].length;
+    return this.props.user.assignmentsSolved[course.id] && Object.keys(this.props.user.assignmentsSolved[course.id]).length;
   }
   getProgressPercent(course) {
-    const finishedTasks = this.props.user.assignmentsSolved[course.id].length;
-    const totalTasks = course.assignmentPoints.length + 1;
+    if (!this.props.user.assignmentsSolved[course.id]) {
+      return 0;
+    }
 
-    return Math.round((finishedTasks / totalTasks) * 100);
+    const solvedAssignmentsCount = Object.keys(this.props.user.assignmentsSolved[course.id]).reduce((total, key) => {
+      return total + this.props.user.assignmentsSolved[course.id][key];
+    }, 0);
+
+    return Math.round((solvedAssignmentsCount / course.assignmentsCount) * 100);
   }
   renderProgressBar(course) {
     return (

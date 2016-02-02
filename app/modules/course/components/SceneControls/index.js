@@ -8,6 +8,7 @@ import Recorder from 'chrome-recorder';
 import debounce from 'debounce';
 import currentScene from '../../computed/currentScene';
 import isAdminMode from '../../computed/isAdminMode';
+import currentAssignmentsSolvedCount from '../../computed/currentAssignmentsSolvedCount';
 
 // Need access to Cerebral controller, so using normal
 // constructor
@@ -73,7 +74,10 @@ const SceneControls = React.createClass({
       recorder: ['recorder'],
       course: ['course'],
       currentScene: currentScene,
-      isAdminMode: isAdminMode
+      isAdminMode: isAdminMode,
+      user: ['user'],
+      assignmentsPositions: ['course', 'assignmentsPositions'],
+      assignmentsSolvedCount: currentAssignmentsSolvedCount
     };
   },
   updateIsExecutingSignal() {
@@ -98,10 +102,10 @@ const SceneControls = React.createClass({
       this.refs.audio.play();
 
       return;
-    } else {
-      this.refs.video.pause();
-      this.refs.audio.pause();
     }
+
+    this.refs.video.pause();
+    this.refs.audio.pause();
 
     // this.refs.video.removeEventListener('waiting', this.onWaiting);
     // this.refs.video.removeEventListener('canplaythrough', this.onCanPlayThrough);
@@ -248,8 +252,18 @@ const SceneControls = React.createClass({
     }, 250);
   },
   onPlayClick() {
+    const seek = this.refs.video.currentTime * 1000;
+
+    const assignmentsPassed = this.state.assignmentsPositions.filter((point) => {
+      return point < seek;
+    });
+
+    if (!this.state.user.isAdmin && this.state.assignmentsSolvedCount < assignmentsPassed.length) {
+      return;
+    }
+
     this.signals.course.playClicked({
-      seek: this.state.recorder.isEnded ? 0 : this.refs.video.currentTime * 1000
+      seek: this.state.recorder.isEnded ? 0 : seek
     });
   },
   onPauseClick() {

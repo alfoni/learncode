@@ -12,7 +12,7 @@ import styles from './styles.css';
 import icons from 'common/icons.css';
 import currentScene from '../../computed/currentScene';
 import currentFile from '../../computed/currentFile';
-import completedAssignments from '../../computed/completedAssignments';
+import currentAssignmentsSolvedCount from '../../computed/currentAssignmentsSolvedCount';
 import AddFile from '../AddFile';
 import ModuleFiles from '../ModuleFiles';
 import Toolbar from 'common/components/Toolbar';
@@ -29,7 +29,7 @@ import RemoveFile from '../RemoveFile';
   showAddFileInput: ['course', 'showAddFileInput'],
   currentAssignmentStatus: ['course', 'currentAssignmentStatus'],
   currentAssignmentIndex: ['course', 'currentAssignmentIndex'],
-  completedAssignments: completedAssignments,
+  currentAssignmentsSolvedCount: currentAssignmentsSolvedCount,
 })
 class CodeEditor extends React.Component {
   constructor(props) {
@@ -138,7 +138,7 @@ class CodeEditor extends React.Component {
         <div ref="code" className={styles.editor}/>
         <button
           className={styles.run}
-          disabled={this.props.completedAssignments.indexOf(this.props.currentAssignmentIndex) >= 0 || this.props.currentAssignmentStatus.isLoading}
+          disabled={this.props.currentAssignmentsSolvedCount >= 0 || this.props.currentAssignmentStatus.isLoading}
           onClick={this.props.signals.course.runAssignmentClicked}>
             <i className={`${icons.play} ${styles.playIcon}`}></i>
             <span className={styles.buttonText}>Kjør kode</span>

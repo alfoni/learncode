@@ -29,7 +29,9 @@ class Preview extends React.Component {
     window.removeEventListener('message', this.onSandboxMessage);
   }
   onSandboxMessage(event) {
-    this.props.signals.course[event.data.signal](event.data.payload);
+    if (event.data.signal) {
+      this.props.signals.course[event.data.signal](event.data.payload);
+    }
   }
   render() {
     return (

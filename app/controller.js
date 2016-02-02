@@ -14,12 +14,7 @@ const model = Model({
     isLoading: false,
     isAdmin: false,
     forceUser: false,
-    assignmentsSolved: {
-      0: [true, true, true],
-      8: [true, true],
-      1: [true, true, true, true, true],
-      4: [true]
-    }
+    assignmentsSolved: {}
   },
   session: {
     sessionId: null
@@ -37,21 +32,26 @@ const services = {
     };
   },
   localAssignments: {
+    getAll() {
+      return JSON.parse(localStorage.getItem('assignmentsSolved') || '{}');
+    },
     get(courseId, sceneId) {
-      const assignments = JSON.parse(localStorage.getItem('assignments') || '{}');
+      const assignments = JSON.parse(localStorage.getItem('assignmentsSolved') || '{}');
 
       if (assignments[courseId]) {
-        return assignments[courseId][sceneId] || [];
+        return assignments[courseId][sceneId] || {};
       }
 
-      return [];
+      return 0;
     },
-    set(courseId, sceneId, updatedAssignments) {
-      const assignments = JSON.parse(localStorage.getItem('assignments') || '{}');
+    set(courseId, sceneId, assignmentsSolvedCount) {
+      const assignments = JSON.parse(localStorage.getItem('assignmentsSolved') || '{}');
 
       assignments[courseId] = assignments[courseId] || {};
-      assignments[courseId][sceneId] = updatedAssignments;
-      localStorage.setItem('assignments', JSON.stringify(assignments));
+      assignments[courseId][sceneId] = assignmentsSolvedCount;
+      localStorage.setItem('assignmentsSolved', JSON.stringify(assignments));
+
+      return assignments;
     }
   }
 };

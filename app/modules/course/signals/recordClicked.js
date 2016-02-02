@@ -1,7 +1,7 @@
 import startRecording from './../actions/startRecording.js';
-import resetAssignmentPoints from './../actions/resetAssignmentPoints';
+import resetAssignments from './../actions/resetAssignments';
 
 export default [
-  resetAssignmentPoints,
+  resetAssignments,
   startRecording
 ];

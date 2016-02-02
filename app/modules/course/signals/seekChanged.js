@@ -1,11 +1,11 @@
 import setSeek from './../actions/setSeek';
 import setCurrentSeek from '../actions/setCurrentSeek.js';
 import saveSandbox from '../chains/saveSandbox.js';
-import setAssignmentPoints from '../actions/setAssignmentPoints';
+import setCurrentAssignment from '../actions/setCurrentAssignment';
 
 export default [
   setSeek,
   setCurrentSeek,
-  setAssignmentPoints,
+  setCurrentAssignment,
   ...saveSandbox
 ];

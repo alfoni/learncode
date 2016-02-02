@@ -17,7 +17,7 @@ const Intro = {
   finishedPercent: '0%',
   disabled: false,
   id: 0,
-  assignmentPoints: [6453, 12835]
+  assignments: [6453, 12835]
 };
 
 export default () => {

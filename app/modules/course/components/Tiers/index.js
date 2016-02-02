@@ -31,7 +31,10 @@ class Tiers extends React.Component {
         return false;
       }
 
-      return this.props.user.assignmentsSolved[course.courseId].length === this.getCourse(course.courseId).assignmentPoints.length + 1;
+      const solvedAssignmentsCount = Object.keys(this.props.user.assignmentsSolved[course.id]).reduce((total, key) => {
+        return total + this.props.user.assignmentsSolved[course.id][key];
+      }, 0);
+      return solvedAssignmentsCount === this.getCourse(course.courseId).assignments.length;
     });
   }
   tierIsActive(tier, index) {

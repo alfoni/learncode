@@ -10,7 +10,6 @@ import showPreviewClicked from './signals/showPreviewClicked';
 import showConsoleClicked from './signals/showConsoleClicked';
 import fileClicked from './signals/fileClicked';
 import addFileAborted from './signals/addFileAborted';
-import editAssignmentClicked from './signals/editAssignmentClicked';
 import assignmentCodeChanged from './signals/assignmentCodeChanged';
 import assignmentDescriptionChanged from './signals/assignmentDescriptionChanged';
 import addFileSubmitted from './signals/addFileSubmitted';
@@ -39,8 +38,6 @@ import buttonPopoverClicked from './signals/buttonPopoverClicked';
 import sandboxClicked from './signals/sandboxClicked';
 import videoBuffered from './signals/videoBuffered';
 import toggleForceUserClicked from './signals/toggleForceUserClicked';
-import newAssignmentClicked from './signals/newAssignmentClicked';
-import assignmentClicked from './signals/assignmentClicked';
 import runAssignmentClicked from './signals/runAssignmentClicked';
 import tagNameMouseOver from './signals/tagNameMouseOver';
 import tagNameMouseOut from './signals/tagNameMouseOut';
@@ -60,7 +57,7 @@ export default () => {
         isLoading: false,
         result: null
       },
-      assignmentPoints: [],
+      assignmentsPositions: [],
       descriptions: [],
       isLoadingMedia: false,
       authorId: null,
@@ -111,12 +108,10 @@ export default () => {
       seekChanged: track('course.seeked', seekChanged),
       sandboxClicked: track('course.sandboxClicked', sandboxClicked),
       videoBuffered: track('course.videoBuffered', videoBuffered),
-      assignmentClicked: track('course.assignmentClicked', assignmentClicked),
       runAssignmentClicked: track('course.runAssignmentClicked', runAssignmentClicked),
       descriptionHovered: track('course.descriptionHovered', descriptionHovered),
       appClicked,
       codeChanged,
-      editAssignmentClicked,
       assignmentCodeChanged,
       recordClicked,
       stopClicked,
@@ -130,7 +125,6 @@ export default () => {
       codeCursorChanged,
       buttonPopoverClicked,
       toggleForceUserClicked,
-      newAssignmentClicked,
       tagNameMouseOver,
       tagNameMouseOut
     });

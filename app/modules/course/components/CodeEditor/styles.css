@@ -8,6 +8,8 @@
 }
 
 .editor {
+  padding-top: 20px;
+  background-color: #202634;
   width: 100%;
   display: inline-block;
   height: calc(100% - 56px);

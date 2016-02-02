@@ -1,15 +1,18 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import styles from './styles.css';
+import classnames from 'classnames';
 import currentScene from '../../computed/currentScene';
+import currentAssignmentsSolvedCount from '../../computed/currentAssignmentsSolvedCount';
+import isAdminMode from '../../computed/isAdminMode';
 
 @Cerebral({
   recorder: ['recorder'],
-  assignmentPoints: ['course', 'assignmentPoints'],
-  assignmentsSolved: ['user', 'assignmentsSolved'],
-  currentScene: currentScene
-}, {
-
+  assignmentsPositions: ['course', 'assignmentsPositions'],
+  assignmentsSolvedCount: currentAssignmentsSolvedCount,
+  currentAssignmentIndex: ['course', 'currentAssignmentIndex'],
+  currentScene: currentScene,
+  isAdminMode: isAdminMode
 })
 class DurationSlider extends React.Component {
   static contextTypes = {
@@ -66,11 +69,11 @@ class DurationSlider extends React.Component {
   }
   seek(seek) {
     if (this.props.currentScene.recording && !this.context.controller.getStore().isExecutingAsync()) {
-      const pointsPassed = this.props.assignmentPoints.filter((point) => {
+      const assignmentsPassed = this.props.assignmentsPositions.filter((point) => {
         return point < seek;
       });
 
-      if (this.props.assignmentsSolved.length < pointsPassed.length) {
+      if (!this.props.isAdminMode && this.props.assignmentsSolvedCount < assignmentsPassed.length) {
         return;
       }
 
@@ -100,14 +103,33 @@ class DurationSlider extends React.Component {
 
     return min + ':' + sec;
   }
-  getPointState(index) {
-    if (this.props.assignmentsSolved.length >= index) {
-      return 'active';
-    }
-
-    // TODO: return 'current';
-
-    return 'inactive';
+  onAssignmentClick(position) {
+    this.seek(position + 100);
+  }
+  renderAssignmentPosition(position, index) {
+    const className = classnames({
+      [styles.assignment]: this.props.assignmentsSolvedCount < index,
+      [styles.activeAssignment]: this.props.isAdminMode || this.props.assignmentsSolvedCount > index,
+      [styles.currentAssignment]: index === this.props.currentAssignmentIndex
+    })
+    return (
+      <div
+        className={className}
+        style={{left: `${(100 / this.props.currentScene.duration) * position}%`}}
+        onClick={(event) => {
+          event.stopPropagation();
+          this.onAssignmentClick(position);
+        }}
+        key={index}>
+          ?
+          {
+            this.props.isAdminMode ?
+              null
+            :
+              <div className={index === this.props.currentAssignmentIndex ? styles.activeArrow : styles.arrow}></div>
+          }
+      </div>
+    );
   }
   render() {
     const lineWidth = (100 - this.handlerPosition()); // Reversing percent
@@ -118,19 +140,7 @@ class DurationSlider extends React.Component {
         <div className={styles.lineWrapper} onClick={(event) => this.seek(this.getSeekByEvent(event))}>
           <div className={styles.line}>
             <div className={styles.progressedLine} style={{right: lineWidth + '%'}}></div>
-            {[0, ...this.props.assignmentPoints].map((point, index) => (
-              <div
-                className={this.getPointState(index) === 'active' ? styles.activePoint : styles.point}
-                style={{left: `${(100 / this.props.currentScene.duration) * point}%`}}
-                onClick={(event) => {
-                  event.stopPropagation();
-                  this.seek(point + 100);
-                }}
-                key={index}>
-                  ?
-                  <div className={this.getPointState(index) === 'active' ? styles.activeArrow : styles.arrow}></div>
-              </div>
-            ))}
+            {[0, ...this.props.assignmentsPositions].map((position, index) => this.renderAssignmentPosition(position, index))}
           </div>
         </div>
         <div className={styles.durationEnd}>{this.renderTime(this.props.currentScene.duration)}</div>

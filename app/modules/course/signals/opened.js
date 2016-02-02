@@ -12,7 +12,7 @@ import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import saveSandboxChain from './../chains/saveSandbox.js';
 import setLoadingCourse from './../actions/setLoadingCourse';
 import setLoadedCourse from './../actions/setLoadedCourse';
-import setAssignmentPoints from './../actions/setAssignmentPoints';
+import setAssignmentsPositions from './../actions/setAssignmentsPositions';
 import loadDescriptions from '../actions/loadDescriptions';
 import setDescriptions from '../actions/setDescriptions';
 import getTechTreeData from 'modules/techTree/chains/getTechTreeData';
@@ -29,7 +29,7 @@ export default [
       sceneDidLoad, {
         true: [
           setScene,
-          setAssignmentPoints,
+          setAssignmentsPositions,
           ...saveSandboxChain,
           showSnackbar('Scenen er lastet')
         ],
@@ -50,7 +50,7 @@ export default [
         true: [
           setCourse,
           setScene,
-          setAssignmentPoints,
+          setAssignmentsPositions,
           ...saveSandboxChain,
           setLoadedCourse
         ],

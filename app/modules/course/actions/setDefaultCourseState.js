@@ -13,12 +13,6 @@ function setDefaultCourseState({state}) {
     showAddFileInput: false,
     currentSceneIndex: 0,
     sandboxSnapshot: null,
-    recorder: {
-      isPlaying: false,
-      isUploading: false,
-      isRecording: false,
-      hasRecorded: false
-    },
     scenes: []
   });
 }

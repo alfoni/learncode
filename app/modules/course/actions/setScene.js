@@ -21,7 +21,9 @@ function setScene({input, state, services}) {
 
   if (recording) {
     services.recorder.loadRecording(recording);
-    state.set(['user', 'assignmentsSolved'], services.localAssignments.get(input.courseId, input.sceneIndex));
+
+    // When tier opens we should download the status of solved assignments
+    state.set(['user', 'assignmentsSolved'], services.localAssignments.getAll());
   }
 
   state.set(['course', 'currentSceneIndex'], input.sceneIndex);

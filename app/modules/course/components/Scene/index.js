@@ -14,7 +14,7 @@ import styles from './styles.css';
 import currentFile from '../../computed/currentFile';
 import currentScene from '../../computed/currentScene';
 import isAdminMode from '../../computed/isAdminMode';
-import completedAssignments from '../../computed/completedAssignments';
+import currentAssignmentsSolvedCount from '../../computed/currentAssignmentsSolvedCount';
 import Assignment from '../Assignment';
 import CourseHeader from '../CourseHeader';
 
@@ -25,7 +25,7 @@ import CourseHeader from '../CourseHeader';
   courseId: ['course', 'id'],
   currentAssignmentIndex: ['course', 'currentAssignmentIndex'],
   currentAssignmentStatus: ['course', 'currentAssignmentStatus'],
-  completedAssignments: completedAssignments,
+  currentAssignmentsSolvedCount: currentAssignmentsSolvedCount,
   currentFile: currentFile,
   currentScene: currentScene,
   isAdminMode: isAdminMode,
@@ -39,8 +39,7 @@ class Scene extends React.Component {
     });
   }
   renderAssignment() {
-
-    if (!this.props.recorder.hasRecorded) {
+    if (!this.props.currentScene.recording || !this.props.currentScene.assignments[this.props.currentAssignmentIndex]) {
       return null;
     }
 
@@ -62,7 +61,7 @@ class Scene extends React.Component {
       <Assignment
         assignment={this.props.currentScene.assignments[this.props.currentAssignmentIndex]}
         currentAssignmentStatus={this.props.currentAssignmentStatus}
-        completed={this.props.completedAssignments.indexOf(this.props.currentAssignmentIndex) >= 0}
+        completed={this.props.currentAssignmentsSolvedCount >= 0}
       />
     );
   }

@@ -4,7 +4,7 @@ import icons from 'common/icons.css';
 
 function AssignmentsBar(props) {
   const renderAssignment = (assignment, index) => {
-    const isCompleted = props.completedAssignments.indexOf(index) >= 0;
+    const isCompleted = props.currentAssignmentsSolvedCount >= index;
 
     return (
       <li

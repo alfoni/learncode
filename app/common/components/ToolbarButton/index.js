@@ -16,7 +16,8 @@ class ToolbarButton extends React.Component {
       mousePositionX: e.clientX,
       mousePositionY: e.clientY
     });
-    this.props.onClick();
+
+    this.props.onClick && this.props.onClick();
   }
   renderTextButton() {
     return (

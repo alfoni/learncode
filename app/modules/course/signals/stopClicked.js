@@ -1,9 +1,13 @@
-import stopRecording from './../actions/stopRecording.js';
-import setLastPaused from './../actions/setLastPaused.js';
-import setCurrentSeek from '../actions/setCurrentSeek.js';
+import stopRecording from './../actions/stopRecording';
+import setLastPaused from './../actions/setLastPaused';
+import setCurrentSeek from '../actions/setCurrentSeek';
+import createAssignmentPlaceholders from '../actions/createAssignmentPlaceholders';
+import setAssignmentsPositions from './../actions/setAssignmentsPositions';
 
 export default [
   setLastPaused,
   setCurrentSeek,
-  stopRecording
+  stopRecording,
+  createAssignmentPlaceholders,
+  setAssignmentsPositions
 ];

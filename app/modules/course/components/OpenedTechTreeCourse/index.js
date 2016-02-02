@@ -45,10 +45,12 @@ class OpenedTechTreeCourse extends React.Component {
     if (!this.props.user.assignmentsSolved[course.id]) {
       return 0;
     }
-    const finishedTasks = this.props.user.assignmentsSolved[course.id].length;
-    const totalTasks = course.assignmentPoints.length + 1;
 
-    return Math.round((finishedTasks / totalTasks) * 100);
+    const solvedAssignmentsCount = Object.keys(this.props.user.assignmentsSolved[course.id]).reduce((total, key) => {
+      return total + this.props.user.assignmentsSolved[course.id][key];
+    }, 0);
+
+    return Math.round((solvedAssignmentsCount / course.assignmentsCount) * 100);
   }
   openCourse() {
     this.props.signals.course.opened({

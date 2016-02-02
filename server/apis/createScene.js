@@ -16,10 +16,7 @@ export default function createScene(req, res) {
       name: 'index.html',
       code: defaultIndex
     }],
-    assignments: [{
-      description: '',
-      code: ''
-    }]
+    assignments: []
   }, req.body);
 
   db.update('courses', {
