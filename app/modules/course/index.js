@@ -42,10 +42,14 @@ import runAssignmentClicked from './signals/runAssignmentClicked';
 import tagNameMouseOver from './signals/tagNameMouseOver';
 import tagNameMouseOut from './signals/tagNameMouseOut';
 import descriptionHovered from './signals/descriptionHovered';
+import assignmentStatusClosed from './signals/assignmentStatusClosed';
+import assignmentStatusOpened from './signals/assignmentStatusOpened';
+import assignmentSuccessCelebrated from './signals/assignmentSuccessCelebrated';
+import continueCourseClicked from './signals/continueCourseClicked';
 
 export default () => {
   return (module) => {
-    module.state({
+    module.addState({
       id: null,
       name: 'Course 1',
       mousePosition: {
@@ -57,6 +61,7 @@ export default () => {
         isLoading: false,
         result: null
       },
+      showAssignmentStatus: false,
       assignmentsPositions: [],
       descriptions: [],
       isLoadingMedia: false,
@@ -86,7 +91,7 @@ export default () => {
       scenesList: []
     });
 
-    module.signals({
+    module.addSignals({
       opened: createSession('course.opened', authenticate(opened)),
       addFileClicked: track('course.addFileClicked', addFileClicked),
       showPreviewClicked: track('course.showPreviewClicked', showPreviewClicked),
@@ -126,11 +131,15 @@ export default () => {
       buttonPopoverClicked,
       toggleForceUserClicked,
       tagNameMouseOver,
-      tagNameMouseOut
-    });
-
-    module.signalsSync({
-      assignmentDescriptionChanged
+      tagNameMouseOut,
+      assignmentSuccessCelebrated,
+      continueCourseClicked,
+      assignmentStatusClosed: track('course.assignmentStatusClosed', assignmentStatusClosed),
+      assignmentStatusOpened: track('course.assignmentStatusClosed', assignmentStatusOpened),
+      assignmentDescriptionChanged: {
+        chain: assignmentDescriptionChanged,
+        sync: true
+      }
     });
   };
 };

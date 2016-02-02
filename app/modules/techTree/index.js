@@ -22,7 +22,7 @@ const Intro = {
 
 export default () => {
   return (module) => {
-    module.state({
+    module.addState({
       tiers: [],
       opened: false,
       selectedTierIndex: null,
@@ -34,7 +34,7 @@ export default () => {
       courses: []
     });
 
-    module.signals({
+    module.addSignals({
       opened: authenticate(opened),
       courseClicked,
       courseDependencyClicked,

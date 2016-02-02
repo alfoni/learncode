@@ -13,7 +13,7 @@ import radioButtonClicked from './signals/radioButtonClicked';
 
 export default () => {
   return (module) => {
-    module.state({
+    module.addState({
       showNewCourse: false,
       showDescriptions: false,
       isSavingNewCourse: false,
@@ -42,7 +42,7 @@ export default () => {
       courses: []
     });
 
-    module.signals({
+    module.addSignals({
       opened,
       newCourseClicked,
       appClicked,

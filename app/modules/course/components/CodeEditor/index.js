@@ -17,6 +17,8 @@ import AddFile from '../AddFile';
 import ModuleFiles from '../ModuleFiles';
 import Toolbar from 'common/components/Toolbar';
 import RemoveFile from '../RemoveFile';
+import AssignmentResult from '../AssignmentResult';
+import AssignmentSuccess from '../AssignmentSuccess';
 
 @Cerebral({
   recorder: ['recorder'],
@@ -136,10 +138,12 @@ class CodeEditor extends React.Component {
         </Toolbar>
         <RemoveFile show={this.props.currentScene.currentFileIndex !== 0} onClick={() => this.props.signals.course.removeFileClicked()}/>
         <div ref="code" className={styles.editor}/>
+        <AssignmentResult/>
+        <AssignmentSuccess/>
         <button
           className={styles.run}
-          disabled={this.props.currentAssignmentsSolvedCount >= 0 || this.props.currentAssignmentStatus.isLoading}
-          onClick={this.props.signals.course.runAssignmentClicked}>
+          disabled={this.props.currentAssignmentStatus.isLoading}
+          onClick={() => this.props.signals.course.runAssignmentClicked()}>
             <i className={`${icons.play} ${styles.playIcon}`}></i>
             <span className={styles.buttonText}>Kjør kode</span>
         </button>

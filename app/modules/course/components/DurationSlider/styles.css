@@ -82,6 +82,13 @@
   cursor: pointer;
 }
 
+.solvedAssignment {
+  composes: assignment;
+  color: #fff;
+  background-color: #329696;
+  border: 1px solid #329696;
+}
+
 .arrow {
 	border-left: 6px solid transparent;
 	border-right: 6px solid transparent;

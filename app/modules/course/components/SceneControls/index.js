@@ -17,8 +17,13 @@ const SceneControls = React.createClass({
     controller: React.PropTypes.object
   },
   mixins: [Mixin],
+  getInitialState() {
+    return {
+      isExecutingSignal: this.context.controller.isExecuting()
+    }
+  },
   componentWillMount() {
-    this.isExecutingSignal = this.context.controller.getStore().isExecutingAsync();
+    this.context.controller.on('signalEnd', this.updateExecutingSignal);
   },
   componentDidMount() {
     this.recorder = new Recorder(this.refs.video, {
@@ -30,7 +35,6 @@ const SceneControls = React.createClass({
     if (this.state.currentScene.recording) {
       this.loadAudioAndVideo();
     }
-    this.context.controller.on('change', this.updateIsExecutingSignal);
   },
   componentDidUpdate(prevProps, prevState) {
     if (prevState.currentScene.name !== this.state.currentScene.name) {
@@ -63,12 +67,11 @@ const SceneControls = React.createClass({
     }
   },
   componentWillUnmount() {
-    this.context.controller.removeListener('change', this.updateIsExecutingSignal);
+    this.context.controller.removeListener('signalEnd', this.updateExecuting);
   },
   recorder: null,
   isUploadReady: false,
   isRecording: false,
-  isExecutingSignal: false,
   getStatePaths() {
     return {
       recorder: ['recorder'],
@@ -80,12 +83,11 @@ const SceneControls = React.createClass({
       assignmentsSolvedCount: currentAssignmentsSolvedCount
     };
   },
-  updateIsExecutingSignal() {
-    const forceUpdate = this.isExecutingSignal !== this.context.controller.getStore().isExecutingAsync();
-    this.isExecutingSignal = this.context.controller.getStore().isExecutingAsync();
-
-    if (forceUpdate) {
-      this.forceUpdate();
+  updateExecutingSignal() {
+    if (this.state.isExecutingSignal !== this.context.controller.isExecuting()) {
+      this.setState({
+        isExecutingSignal: this.context.controller.isExecuting()
+      });
     }
   },
   seek: debounce(function (isSame) {
@@ -344,7 +346,7 @@ const SceneControls = React.createClass({
     });
   },
   render() {
-    const isDisabled = this.state.recorder.isBuffering || this.isExecutingSignal || this.state.course.isLoadingMedia;
+    const isDisabled = this.state.recorder.isBuffering || this.state.isExecutingSignal || this.state.course.isLoadingMedia;
 
     return (
       <div className={styles.wrapper}>

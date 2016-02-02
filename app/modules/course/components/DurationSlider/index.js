@@ -1,6 +1,7 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import styles from './styles.css';
+import icons from 'common/icons.css';
 import classnames from 'classnames';
 import currentScene from '../../computed/currentScene';
 import currentAssignmentsSolvedCount from '../../computed/currentAssignmentsSolvedCount';
@@ -22,8 +23,13 @@ class DurationSlider extends React.Component {
     super();
     this.state = {
       currentSeek: 0,
-      interval: null
+      interval: null,
+      isExecutingSignal: false
     };
+    this.updateExecutingSignal = this.updateExecutingSignal.bind(this);
+  }
+  componentWillMount() {
+    this.context.controller.on('signalEnd', this.updateExecutingSignal);
   }
   componentWillUpdate(nextProps) {
     if (nextProps.recorder.currentSeek !== this.props.recorder.currentSeek) {
@@ -37,6 +43,16 @@ class DurationSlider extends React.Component {
       this.startInterval(this.props.recorder.currentSeek[0]);
     } else if (prevProps.recorder.isPlaying && !this.props.recorder.isPlaying) {
       this.stopInterval();
+    }
+  }
+  componentWillUnmount() {
+    this.context.controller.removeListener('signalEnd', this.updateExecutingSignal);
+  }
+  updateExecutingSignal() {
+    if (this.state.isExecutingSignal !== this.context.controller.isExecuting()) {
+      this.setState({
+        isExecutingSignal: this.context.controller.isExecuting()
+      });
     }
   }
   startInterval(time) {
@@ -68,7 +84,7 @@ class DurationSlider extends React.Component {
     return this.props.currentScene.duration / event.currentTarget.offsetWidth * (event.clientX - event.currentTarget.offsetLeft);
   }
   seek(seek) {
-    if (this.props.currentScene.recording && !this.context.controller.getStore().isExecutingAsync()) {
+    if (this.props.currentScene.recording && !this.state.isExecutingSignal) {
       const assignmentsPassed = this.props.assignmentsPositions.filter((point) => {
         return point < seek;
       });
@@ -107,13 +123,17 @@ class DurationSlider extends React.Component {
     this.seek(position + 100);
   }
   renderAssignmentPosition(position, index) {
+    const isSolved = !this.props.isAdminMode && this.props.assignmentsSolvedCount > index;
     const className = classnames({
-      [styles.assignment]: this.props.assignmentsSolvedCount < index,
-      [styles.activeAssignment]: this.props.isAdminMode || this.props.assignmentsSolvedCount > index,
-      [styles.currentAssignment]: index === this.props.currentAssignmentIndex
-    })
+      [styles.assignment]: true,
+      [styles.activeAssignment]: this.props.isAdminMode || this.props.assignmentsSolvedCount >= index,
+      [styles.currentAssignment]: index === this.props.currentAssignmentIndex,
+      [styles.solvedAssignment]: isSolved
+    });
+
     return (
       <div
+        id={'assignment_' + index}
         className={className}
         style={{left: `${(100 / this.props.currentScene.duration) * position}%`}}
         onClick={(event) => {
@@ -121,7 +141,7 @@ class DurationSlider extends React.Component {
           this.onAssignmentClick(position);
         }}
         key={index}>
-          ?
+          {isSolved ? <i className={icons.check}/> : '?'}
           {
             this.props.isAdminMode ?
               null

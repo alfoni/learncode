@@ -6,13 +6,13 @@ import sessionSignalClicked from './signals/sessionSignalClicked';
 
 export default () => {
   return (module) => {
-    module.state({
+    module.addState({
       selectedSession: null,
       sessionsList: [],
       openedSignal: null
     });
 
-    module.signals({
+    module.addSignals({
       opened: authenticate(opened),
       sessionSelected,
       sessionSignalClicked

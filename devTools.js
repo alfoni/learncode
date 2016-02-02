@@ -13,7 +13,7 @@ $ = function (query) {
     },
     text: function (text) {
       if (text) {
-        return this.elms[0].textContent.toLowerCase() === text.toLowerCase();
+        return this.elms[0].childNodes[0].textContent.toLowerCase().trim() === text.toLowerCase().trim();
       }
 
       return this.elms[0].textContent;

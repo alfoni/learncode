@@ -1,3 +1,4 @@
+import set from 'cerebral-addons/set';
 import setAssignmentResult from '../actions/setAssignmentResult.js';
 import isCompletedAssignment from '../actions/isCompletedAssignment.js';
 import setCompletedAssignment from '../actions/setCompletedAssignment.js';
@@ -8,6 +9,8 @@ export default [
     true: [
       setCompletedAssignment
     ],
-    false: []
+    false: [
+      set('state://./showAssignmentStatus', true)
+    ]
   }
 ];

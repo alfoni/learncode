@@ -3,12 +3,12 @@ import formSubmitted from './signals/formSubmitted.js';
 
 export default () => {
   return (module) => {
-    module.state({
+    module.addState({
       showSigningupLoader: false,
       hasRegistered: false
     });
 
-    module.signals({
+    module.addSignals({
       opened,
       formSubmitted
     });

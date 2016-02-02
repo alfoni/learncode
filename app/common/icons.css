@@ -47,6 +47,11 @@
   }
 }
 
+.close {composes: font;}
+.close:before {
+    content: "\e209";
+}
+
 .addAssignment {composes: font;}
 .addAssignment:before {
 	content: "\e013";

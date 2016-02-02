@@ -49,16 +49,6 @@ class EditAssignment extends React.Component {
           className={`${elements.textarea} ${styles.textarea}`}
           onChange={(event) => this.props.onDescriptionChange({description: event.target.value})}/>
         <div className={styles.editor} ref="code"></div>
-        <div className={styles.result}>
-          <p className={styles.resultText}>
-            {
-              this.props.currentAssignmentStatus.result === true ?
-                'Du klarte det! Bra jobba!'
-              :
-                this.props.currentAssignmentStatus.result
-            }
-          </p>
-        </div>
       </div>
 
     );

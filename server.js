@@ -21,6 +21,14 @@ const isDeveloping = process.env.NODE_ENV !== 'production';
 const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
 
+app.use((req, res, next) => {
+  if (!isDeveloping && !req.secure) {
+    res.redirect('https://www.kodeboksen.no');
+    
+    return;
+  }
+  next();
+});
 app.use(cookieParser('some secret'));
 app.use(compression());
 app.use(subdomain({
