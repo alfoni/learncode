@@ -4,15 +4,17 @@ function nextCourseStep({module, output}) {
   const scenes = module.state.get(['scenes']);
   const currentSceneIndex = module.state.get(['currentSceneIndex']);
 
-  const isLastAssignment = currentAssignmentIndex === [0, ...assignmentsPositions].length - 1;
-  const isLastScene = currentSceneIndex === scenes.length - 1;
+  const noMoreAssignments = currentAssignmentIndex === [0, ...assignmentsPositions].length;
+  const isLastScene = Number(currentSceneIndex) === Number(scenes.length - 1);
 
-  if (isLastAssignment && isLastScene) {
+  if (noMoreAssignments && isLastScene) {
     output.course();
-  } else if (isLastAssignment) {
+  } else if (noMoreAssignments) {
     output.scene();
   } else {
-    output.assignment();
+    output.assignment({
+      seek: [0, ...assignmentsPositions][currentAssignmentIndex] + 100
+    });
   }
 }
 

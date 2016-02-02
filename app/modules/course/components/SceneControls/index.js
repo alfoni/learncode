@@ -43,6 +43,7 @@ const SceneControls = React.createClass({
       return;
     }
 
+    const isSameDuration = parseInt(prevState.recorder.currentSeek[0], 10) === parseInt(this.state.recorder.currentSeek[0], 10);
     const hasChangedPlayMode = prevState.recorder.isPlaying !== this.state.recorder.isPlaying;
 
     if (
@@ -50,10 +51,7 @@ const SceneControls = React.createClass({
     !this.state.recorder.isEnded &&
     !hasChangedPlayMode &&
     prevState.recorder.currentSeek !== this.state.recorder.currentSeek) {
-      this.seek(
-        parseInt(prevState.recorder.currentSeek[0], 10) ===
-        parseInt(this.state.recorder.currentSeek[0], 10)
-      );
+      this.seek(isSameDuration);
     }
 
     if (!this.state.recorder.isRecording && prevState.recorder.isPlaying && !this.state.recorder.isPlaying) {

@@ -5,8 +5,10 @@ function setCompletedAssignment({state, services}) {
   const assignmentsSolvedCount = services.localAssignments.get(courseId, sceneIndex);
 
   let assignmentsSolved;
+
   if (user.isAdmin) {
-    assignmentsSolved = services.localAssignments.setFake(courseId, sceneIndex, assignmentsSolvedCount + 1);
+    const currentAssignmentIndex = state.get(['course', 'currentAssignmentIndex']);
+    assignmentsSolved = services.localAssignments.setFake(courseId, sceneIndex, currentAssignmentIndex + 1);
   } else {
     assignmentsSolved = services.localAssignments.set(courseId, sceneIndex, assignmentsSolvedCount + 1);
   }

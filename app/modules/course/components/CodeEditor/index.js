@@ -19,6 +19,7 @@ import Toolbar from 'common/components/Toolbar';
 import RemoveFile from '../RemoveFile';
 import AssignmentResult from '../AssignmentResult';
 import AssignmentSuccess from '../AssignmentSuccess';
+import isAdminMode from '../../computed/isAdminMode';
 
 @Cerebral({
   recorder: ['recorder'],
@@ -32,6 +33,7 @@ import AssignmentSuccess from '../AssignmentSuccess';
   currentAssignmentStatus: ['course', 'currentAssignmentStatus'],
   currentAssignmentIndex: ['course', 'currentAssignmentIndex'],
   currentAssignmentsSolvedCount: currentAssignmentsSolvedCount,
+  isAdminMode: isAdminMode
 })
 class CodeEditor extends React.Component {
   constructor(props) {
@@ -142,7 +144,7 @@ class CodeEditor extends React.Component {
         <AssignmentSuccess/>
         <button
           className={styles.run}
-          disabled={this.props.currentAssignmentStatus.isLoading}
+          disabled={this.props.isAdminMode || this.props.recorder.isPlaying || this.props.currentAssignmentStatus.isLoading}
           onClick={() => this.props.signals.course.runAssignmentClicked()}>
             <i className={`${icons.play} ${styles.playIcon}`}></i>
             <span className={styles.buttonText}>Kjør kode</span>

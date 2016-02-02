@@ -3,11 +3,15 @@ import setLastPaused from './../actions/setLastPaused';
 import setCurrentSeek from '../actions/setCurrentSeek';
 import createAssignmentPlaceholders from '../actions/createAssignmentPlaceholders';
 import setAssignmentsPositions from './../actions/setAssignmentsPositions';
+import isAdminMode from '../actions/isAdminMode';
 
 export default [
   setLastPaused,
   setCurrentSeek,
   stopRecording,
-  createAssignmentPlaceholders,
+  isAdminMode, {
+    true: [createAssignmentPlaceholders],
+    false: []
+  },
   setAssignmentsPositions
 ];
