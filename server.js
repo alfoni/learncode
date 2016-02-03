@@ -22,9 +22,9 @@ const port = isDeveloping ? 3000 : process.env.PORT;
 const app = express();
 
 app.use((req, res, next) => {
-  if (!isDeveloping && !req.secure) {
+  if (!isDeveloping && req.protocol !== 'https') {
     res.redirect('https://www.kodeboksen.no');
-    
+
     return;
   }
   next();
