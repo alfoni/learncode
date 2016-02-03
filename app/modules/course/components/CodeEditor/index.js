@@ -143,7 +143,7 @@ class CodeEditor extends React.Component {
         <AssignmentResult/>
         <AssignmentSuccess/>
         {
-          Boolean(this.props.currentAssignmentStatus.result) && !this.props.currentAssignmentStatus.isLoading ?
+          this.props.currentAssignmentStatus.result === true && !this.props.currentAssignmentStatus.isLoading ?
             null
           :
             <button
