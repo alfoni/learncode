@@ -1,5 +1,8 @@
-import opened from './signals/opened.js';
-import formSubmitted from './signals/formSubmitted.js';
+import opened from './signals/opened';
+import formSubmitted from './signals/formSubmitted';
+import startCourseClicked from './signals/startCourseClicked';
+import restartCourseClicked from './signals/restartCourseClicked';
+import continueCourseClicked from './signals/continueCourseClicked';
 
 export default () => {
   return (module) => {
@@ -10,7 +13,10 @@ export default () => {
 
     module.addSignals({
       opened,
-      formSubmitted
+      formSubmitted,
+      startCourseClicked,
+      restartCourseClicked,
+      continueCourseClicked
     });
   };
 };

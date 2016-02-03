@@ -166,7 +166,7 @@ class TechTree extends React.Component {
       return total + this.props.user.assignmentsSolved[course.id][key];
     }, 0);
 
-    return finishedAssignments === course.assignmentsCount;
+    return finishedAssignments === this.getTotalAssignments(course);
   }
   courseIsActive(course) {
     if (this.courseIsCompleted(course)) {
@@ -198,13 +198,20 @@ class TechTree extends React.Component {
       return total + this.props.user.assignmentsSolved[course.id][key];
     }, 0);
 
-    return Math.round((solvedAssignmentsCount / course.assignmentsCount) * 100);
+    return Math.round((solvedAssignmentsCount / this.getTotalAssignments(course)) * 100);
+  }
+  getTotalAssignments(course) {
+    return course.scenes.map((scene) => {
+      return scene.assignments.length;
+    }).reduce((total, assignments) => {
+      return total + assignments;
+    });
   }
   renderProgressBar(course) {
     return (
       <div className={styles.progressWrapper}>
         <div className={styles.progressBar}>
-          <div className={styles.progressed} style={{width: this.getProgressPercent(course)}}></div>
+          <div className={styles.progressed} style={{width: this.getProgressPercent(course) + '%'}}></div>
         </div>
       </div>
     );

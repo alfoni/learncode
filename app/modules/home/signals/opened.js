@@ -1,5 +1,7 @@
-import setPage from 'common/factories/actions/setPage.js';
+import setPage from 'common/factories/actions/setPage';
+import setAssignmentsSolved from '../actions/setAssignmentsSolved';
 
 export default [
-  setPage('home')
+  setPage('home'),
+  setAssignmentsSolved
 ];

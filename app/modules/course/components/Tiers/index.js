@@ -26,15 +26,23 @@ class Tiers extends React.Component {
       return false;
     }
 
-    return tier.courseDependencyList.every((course) => {
-      if (!this.props.user.assignmentsSolved[course.courseId]) {
+    return tier.courseDependencyList.every((dependencyCourse) => {
+      if (!this.props.user.assignmentsSolved[dependencyCourse.courseId] || !this.getCourse(dependencyCourse.courseId)) {
         return false;
       }
 
-      const solvedAssignmentsCount = Object.keys(this.props.user.assignmentsSolved[course.id]).reduce((total, key) => {
-        return total + this.props.user.assignmentsSolved[course.id][key];
+      const solvedAssignmentsCount = Object.keys(this.props.user.assignmentsSolved[dependencyCourse.courseId]).reduce((total, key) => {
+        return total + this.props.user.assignmentsSolved[dependencyCourse.courseId][key];
       }, 0);
-      return solvedAssignmentsCount === this.getCourse(course.courseId).assignments.length;
+
+      return solvedAssignmentsCount === this.getTotalAssignments(this.getCourse(dependencyCourse.courseId));
+    });
+  }
+  getTotalAssignments(course) {
+    return course.scenes.map((scene) => {
+      return scene.assignments.length;
+    }).reduce((total, assignments) => {
+      return total + assignments;
     });
   }
   tierIsActive(tier, index) {

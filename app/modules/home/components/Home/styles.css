@@ -3,28 +3,12 @@
   height: 100%;
   width: 100%;
   overflow: auto;
-  font-family: Helvetica, sans-serif;
-  background-color: #F7F7F7;
+  font-family: Ubuntu, sans-serif;
   box-sizing: border-box;
   -webkit-overflow-scrolling: touch;
-}
-
-.container {
-  width: 920px;
-}
-
-.topWrapper {
-  position: relative;
-  padding-top: 90px;
-}
-
-.darkBackground {
-  position: absolute;
-  left: 0;
-  top: -75px;
-  background-color: #E2E2E2;
-  width: 100%;
-  height: 100%;
+  padding-top: 60px;
+  color: #cadaed;
+  text-align: center;
 }
 
 .logo {
@@ -40,73 +24,34 @@
 h1 {
   margin-top: 15px;
   font-size: 32px;
-  color: rgba(0, 0, 0, 0.8);
-}
-
-.descText {
-  margin-top: -10px;
-  font-size: 16px;
-  color: rgba(0, 0, 0, 0.6);
-}
-
-.subTitle {
-  margin-top: -20px;
-  font-size: 58px;
+  color: #fff;
 }
 
 .container {
-  width: 920px;
+  max-width: 920px;
   margin: 0 auto;
   position: relative;
-}
-
-.bottomWrapper {
-  padding-top: 210px;
-  padding-bottom: 100px;
-  width: 100%;
-  margin-top: -80px;
-  padding-bottom: 20px;
-}
-
-.column1, .column2 {
-  width: 50%;
-  height: 350px;
   box-sizing: border-box;
-  padding: 20px;
-  display: inline-block;
-  vertical-align: top;
-  color: rgba(0, 0, 0, 0.8);
-  position: relative;
+  padding: 0 30px;
 }
 
-.column1 {
-  padding-right: 25px;
-  padding-left: 0;
-  text-align: center;
+.descText {
+  font-size: 14px;
+  line-height: 28px;
 }
 
-.column2 {
-  padding-right: 0;
-  padding-left: 25px;
-}
-
-.formWrapper {
-  margin-top: -20px;
-  text-align: center;
-  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-  opacity: 1;
-  visibility: visible;
-}
-
-.formWrapperHidden {
-  composes: formWrapper;
-  opacity: 0;
-  visibility: hidden;
+.showYouHowText {
+  font-weight: bold;
+  color: #fff;
+  font-size: 16px;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .button {
   width: 250px;
-  background-color: #e91e63;
+  background-color: #eb1e64;
+  font-weight: bold;
   color: #fff;
   border: 0;
   padding: 18px 20px;
@@ -115,9 +60,10 @@ h1 {
   cursor: pointer;
   display: inline-block;
   vertical-align: top;
-  margin-left: 15px;
+  margin-left: 8px;
+  margin-right: 8px;
   height: 57px;
-  transition: all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms,
+  transition: all 1000ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
 }
 
 .button:hover {
@@ -127,195 +73,4 @@ h1 {
 .button:focus {
   outline: 0;
   background-color: #ff5091;
-}
-
-.buttonDisabled {
-  composes: button;
-  opacity: 0.5;
-}
-
-.loadingIcon {
-  font-size: 38px;
-  line-height: 22px !important;
-}
-
-.input {
-  box-shadow:inset 1px 1px 3px 0 rgba(0,0,0,0.2);
-  vertical-align: top;
-  display: inline-block;
-  padding: 15px;
-  width: 350px;
-  border: 0;
-  font-size: 22px;
-  border-radius: 5px;
-  background-color: #fff;
-  color: rgba(0, 0, 0, 0.8);
-  box-sizing: border-box;
-  margin: 0 0px 0 0;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-}
-
-.inputDisabled {
-  composes: input;
-  opacity: 0.5;
-}
-
-.emailDesc {
-  text-align: center;
-  margin-top: 5px;
-  font-size: 12px;
-  margin-bottom: 40px;
-  color: rgba(0, 0, 0, 0.4);
-}
-
-.formDisabled {
-  composes: formWrapper;
-  opacity: 0.2;
-}
-
-.formDisabled button {
-  cursor: default;
-}
-
-.formDisabled button:hover {
-  background-color: #e91e63;
-}
-
-.chromeInformationWrapper {
-  position: relative;
-  margin-top: -80px;
-  margin-bottom: 40px;
-  text-align: center;
-}
-
-.chromeLogo {
-  background-image: url('/images/chrome_logo.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 50px;
-  height: 50px;
-  display: inline-block;
-}
-
-.chromeText {
-  color: rgba(0, 0, 0, 0.6);
-  line-height: 18px;
-  display: inline-block;
-  font-size: 13px;
-  margin-left: 20px;
-  margin-top: 2px;
-  vertical-align: top;
-  font-weight: bold;
-}
-
-.chromeDownloadLink {
-  color: rgba(0, 0, 0, 1);
-}
-
-.caret {
-  margin-top: 10px;
-  display: inline-block;
-}
-
-@media screen and (max-device-width: 920px) {
-
-  .topWrapper {
-    padding-top: 40px;
-  }
-  .logo {
-    margin-bottom: 50px;
-  }
-
-  .container {
-    width: 100%;
-    padding: 20px;
-    box-sizing: border-box;
-    overflow-x: hidden;
-  }
-
-  h1 {
-    margin-top: 15px;
-    font-size: 26px;
-    color: rgba(0, 0, 0, 0.8);
-  }
-
-  .subTitle {
-    margin-top: -20px;
-    font-size: 44px;
-  }
-
-}
-
-.information {
-  font-size: 1.2em;
-  line-height: 1.8em;
-  text-align: center;
-}
-
-@media screen and (max-device-width: 760px) {
-
-  .topWrapper {
-    padding-top: 0px;
-  }
-  .logo {
-    margin-bottom: 0px;
-  }
-
-  h1 {
-    font-size: 44px;
-  }
-
-  .subTitle {
-    margin-top: -20px;
-    font-size: 78px;
-  }
-
-  .container {
-    width: 100%;
-    padding: 20px;
-  }
-
-  .column1, .column2 {
-    width: 100%;
-    padding: 0;
-  }
-
-  .column1 {
-    height: auto;
-    padding-bottom: 40px;
-  }
-
-  .column2 {
-    height: 280px;
-  }
-
-  .bottomWrapper {
-    padding-top: 120px;
-  }
-
-}
-
-@media screen and (max-device-width: 654px) {
-  h1 {
-    margin-top: 15px;
-    font-size: 22px;
-    color: rgba(0, 0, 0, 0.8);
-  }
-
-  .subTitle {
-    margin-top: -20px;
-    font-size: 36px;
-  }
-
-  .button {
-    width: 100%;
-    margin-left: 0;
-    margin-top: 5px;
-  }
-
-  .input {
-    width: 100%;
-  }
 }

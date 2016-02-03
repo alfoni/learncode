@@ -20,6 +20,11 @@ export default {
 
     return assignments;
   },
+  reset() {
+    localStorage.setItem('assignmentsSolved', '{}');
+
+    return {};
+  },
   setFake(courseId, sceneId, assignmentsSolvedCount) {
     return {
       [courseId]: {
