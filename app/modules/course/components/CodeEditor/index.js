@@ -142,13 +142,18 @@ class CodeEditor extends React.Component {
         <div ref="code" className={styles.editor}/>
         <AssignmentResult/>
         <AssignmentSuccess/>
-        <button
-          className={styles.run}
-          disabled={this.props.isAdminMode || this.props.recorder.isPlaying || this.props.currentAssignmentStatus.isLoading}
-          onClick={() => this.props.signals.course.runAssignmentClicked()}>
-            <i className={`${icons.play} ${styles.playIcon}`}></i>
-            <span className={styles.buttonText}>Kjør kode</span>
-        </button>
+        {
+          this.props.currentAssignmentStatus.result === false && !this.props.currentAssignmentStatus.isLoading ?
+            null
+          :
+            <button
+              className={styles.run}
+              disabled={this.props.isAdminMode || this.props.recorder.isPlaying || this.props.currentAssignmentStatus.isLoading}
+              onClick={() => this.props.signals.course.runAssignmentClicked()}>
+                <i className={`${icons.play} ${styles.playIcon}`}></i>
+                <span className={styles.buttonText}>Kjør kode</span>
+            </button>
+        }
       </div>
     );
   }
