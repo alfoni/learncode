@@ -9,9 +9,6 @@ function setRemovedCourseIds(courses, newCoursesIds) {
 }
 
 function setIsInTier(courseIds, value, callback) {
-  console.log('Updating these courses:');
-  console.log(courseIds);
-  console.log('to have isIniter as: ' + value);
   db.update('courses', {
     id: {
       $in: courseIds
@@ -62,7 +59,7 @@ export default function updateTier(req, res) {
   .then((tier) => {
     removedCourseIds = setRemovedCourseIds(tier.courseDependencyList, newCoursesIds);
     setIsInTier(removedCourseIds, false, () => {
-      setIsInTier(newCoursesIds, true, () => {
+      setIsInTier(newCoursesIds, tier.id, () => {
         db.update('tiers', {
           id: req.params.id
         }, {

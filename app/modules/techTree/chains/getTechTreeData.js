@@ -11,6 +11,7 @@ import setAllTiersLoaded from '../actions/setAllTiersLoaded';
 import isAdmin from '../actions/isAdmin';
 import getAllCourses from '../actions/getAllCourses';
 import allTiersAreLoaded from '../actions/allTiersAreLoaded';
+import tiersExists from '../actions/tiersExists';
 
 export default [
   [
@@ -42,24 +43,31 @@ export default [
             }
           ],
           false: [
-            tierCoursesAreLoaded, {
+            tiersExists, {
               true: [
-                setSelectedTierIndex,
-                createDependencySlotTree
+                tierCoursesAreLoaded, {
+                  true: [
+                    setSelectedTierIndex,
+                    createDependencySlotTree
+                  ],
+                  false: [
+                    [
+                      getCoursesInSelectedTier, {
+                        success: [
+                          updateCourses,
+                          setTierCoursesLoaded,
+                          setSelectedTierIndex,
+                          createDependencySlotTree,
+                          showSnackbar('Tech treet er lastet')
+                        ],
+                        error: [showSnackbar('Det oppstod en feil ved henting av kurs!')]
+                      }
+                    ]
+                  ]
+                }
               ],
               false: [
-                [
-                  getCoursesInSelectedTier, {
-                    success: [
-                      updateCourses,
-                      setTierCoursesLoaded,
-                      setSelectedTierIndex,
-                      createDependencySlotTree,
-                      showSnackbar('Tech treet er lastet')
-                    ],
-                    error: [showSnackbar('Det oppstod en feil ved henting av kurs!')]
-                  }
-                ]
+                createDependencySlotTree
               ]
             }
           ]
