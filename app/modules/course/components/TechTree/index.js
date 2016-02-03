@@ -238,7 +238,7 @@ class TechTree extends React.Component {
         })}>
           <span className={courseIsDisabled ? icons.lock : icons.school}></span>
         </div>
-        <div className={styles.titleWrapper}>
+        <div className={courseIsStarted ? styles.titleProgressWrapper : styles.titleWrapper}>
           <div className={classNames(styles.title, {
             [styles.titleCompleted]: courseIsCompleted,
             [styles.titleActive]: courseIsActive || courseIsStarted

@@ -141,6 +141,7 @@
 }
 
 .buttonCompleted {
+  composes: button;
   background-color: #28a0aa;
 }
 
