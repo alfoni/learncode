@@ -255,7 +255,7 @@ const SceneControls = React.createClass({
     if (!this.refs.video) {
       return false;
     }
-    
+
     const seek = this.refs.video.currentTime * 1000;
     const assignmentsPassed = this.state.assignmentsPositions.filter((point) => {
       return point < seek;
@@ -349,6 +349,11 @@ const SceneControls = React.createClass({
   },
   render() {
     const isDisabled = this.state.recorder.isBuffering || this.state.isExecutingSignal || this.state.course.isLoadingMedia;
+    console.log(
+      'buffering: ' + this.state.recorder.isBuffering,
+      'executingSignal: ' + this.state.isExecutingSignal,
+      'media: ' + this.state.course.isLoadingMedia
+    );
 
     return (
       <div className={styles.wrapper}>
