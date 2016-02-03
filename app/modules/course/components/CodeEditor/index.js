@@ -148,7 +148,11 @@ class CodeEditor extends React.Component {
           :
             <button
               className={styles.run}
-              disabled={this.props.isAdminMode || this.props.recorder.isPlaying || this.props.currentAssignmentStatus.isLoading}
+              disabled={
+                this.props.isAdminMode ||
+                this.props.recorder.isPlaying ||
+                this.props.currentAssignmentStatus.isLoading ||
+                this.props.currentAssignmentsSolvedCount > this.props.currentAssignmentIndex}
               onClick={() => this.props.signals.course.runAssignmentClicked()}>
                 <i className={`${icons.play} ${styles.playIcon}`}></i>
                 <span className={styles.buttonText}>Kjør kode</span>

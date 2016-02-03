@@ -371,7 +371,7 @@ const SceneControls = React.createClass({
             null
         }
         {
-          !this.state.isAdminMode && this.canPlay() ?
+          (!this.state.isAdminMode && this.canPlay()) || this.state.recorder.isRecording ?
             <PlayButton
               disabled={isDisabled || (this.state.isAdminMode && !this.state.recorder.isRecording)}
               recorder={this.state.recorder}

@@ -56,7 +56,7 @@ export default () => {
         x: 0,
         y: 0
       },
-      isLoading: false,
+      isLoading: true,
       currentAssignmentStatus: {
         isLoading: false,
         result: null
