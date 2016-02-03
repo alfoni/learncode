@@ -1,4 +1,4 @@
-function getCourses({output, services}) {
+function getAllCourses({output, services}) {
   services.ajax.get('/API/courses')
   .then((courses) => {
     output.success({courses: courses});
@@ -8,4 +8,4 @@ function getCourses({output, services}) {
   });
 }
 
-export default getCourses;
+export default getAllCourses;

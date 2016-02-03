@@ -46,7 +46,7 @@
   box-sizing: border-box;
   vertical-align: top;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 3;
   position: relative;
 }
 

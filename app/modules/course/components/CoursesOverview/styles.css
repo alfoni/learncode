@@ -5,6 +5,8 @@
   border: 1px solid #415573;
   box-sizing: border-box;
   margin-left: 15px;
+  border-radius: 5px;
+  margin-bottom: 15px;
 }
 
 .course {

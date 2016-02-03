@@ -19,6 +19,10 @@ class CoursesOverview extends React.Component {
     }
 
     return courses.filter((course) => {
+      if (course.isInTier) {
+        return false;
+      }
+
       if (!this.props.selectedTier.courseDependencyList.length) {
         return true;
       }

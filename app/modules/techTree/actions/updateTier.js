@@ -5,8 +5,8 @@ function updateTier({state, services, output}) {
   services.ajax.patch('/API/tiers/' + selectedTier.id, {
     courseDependencyList: selectedTier.courseDependencyList
   })
-  .then(() => {
-    output.success();
+  .then((updatedCourses) => {
+    output.success({courses: updatedCourses});
   })
   .catch((e) => {
     console.log('Could not update tier', e);

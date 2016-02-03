@@ -11,19 +11,11 @@ import newTierSubmitted from './signals/newTierSubmitted';
 import unlinkCourseClicked from './signals/unlinkCourseClicked';
 import toggled from './signals/toggled';
 
-const Intro = {
-  title: 'Landingsside intro',
-  type: 'course',
-  finishedPercent: '0%',
-  disabled: false,
-  id: 0,
-  assignments: [6453, 12835]
-};
-
 export default () => {
   return (module) => {
     module.addState({
       tiers: [],
+      loadedTiers: [],
       opened: false,
       selectedTierIndex: null,
       selectedCourse: null,

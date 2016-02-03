@@ -25,6 +25,7 @@ import deleteDescription from './apis/deleteDescription.js';
 import createTier from './apis/createTier.js';
 import getTiers from './apis/getTiers.js';
 import updateTier from './apis/updateTier.js';
+import getCoursesInTier from './apis/getCoursesInTier.js';
 
 const verifyUser = (req, res, next) => {
   if (req.cookies.kodeboksen) {
@@ -72,4 +73,5 @@ export default function appController(router) {
   router.post('/API/tiers', isAdmin, createTier);
   router.get('/API/tiers', verifyUser, getTiers);
   router.patch('/API/tiers/:id', isAdmin, updateTier);
+  router.get('/API/tiers/:id/courses', verifyUser, getCoursesInTier);
 }

@@ -78,11 +78,11 @@ export default {
       });
     });
   },
-  update(collectionName, query, data) {
+  update(collectionName, query, data, options) {
     const collection = db.collection(collectionName);
 
     return new Promise((resolve, reject) => {
-      collection.update(query, data, (err, result) => {
+      collection.update(query, data, options, (err, result) => {
         if (err) {
           reject(err);
         }
