@@ -251,16 +251,16 @@ const SceneControls = React.createClass({
       this.refs.audio.src = window.URL.createObjectURL(blobs.audio);
     }, 250);
   },
-  onPlayClick() {
+  canPlay() {
     const seek = this.refs.video.currentTime * 1000;
-
     const assignmentsPassed = this.state.assignmentsPositions.filter((point) => {
       return point < seek;
     });
 
-    if (!this.state.user.isAdmin && this.state.assignmentsSolvedCount < assignmentsPassed.length) {
-      return;
-    }
+    return this.state.assignmentsSolvedCount >= assignmentsPassed.length;
+  },
+  onPlayClick() {
+    const seek = this.refs.video.currentTime * 1000;
 
     this.signals.course.playClicked({
       seek: this.state.recorder.isEnded ? 0 : seek
@@ -367,7 +367,7 @@ const SceneControls = React.createClass({
             null
         }
         {
-          (this.state.isAdminMode && this.state.recorder.isRecording) || !this.state.isAdminMode ?
+          !this.state.isAdminMode && this.canPlay() ?
             <PlayButton
               disabled={isDisabled || (this.state.isAdminMode && !this.state.recorder.isRecording)}
               recorder={this.state.recorder}
