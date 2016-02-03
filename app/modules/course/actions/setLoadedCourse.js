@@ -1,8 +1,6 @@
 import currentScene from '../computed/currentScene';
 
 function setLoadedCourse({state}) {
-  state.set(['course', 'isLoading'], false);
-
   if (Boolean(state.get(currentScene).recording)) {
     state.merge(['snackbar'], {
       text: 'Laster video og lyd...',

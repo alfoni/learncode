@@ -349,11 +349,6 @@ const SceneControls = React.createClass({
   },
   render() {
     const isDisabled = this.state.recorder.isBuffering || this.state.isExecutingSignal || this.state.course.isLoadingMedia;
-    console.log(
-      'buffering: ' + this.state.recorder.isBuffering,
-      'executingSignal: ' + this.state.isExecutingSignal,
-      'media: ' + this.state.course.isLoadingMedia
-    );
 
     return (
       <div className={styles.wrapper}>

@@ -1,6 +1,5 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
-import currentScene from '../../computed/currentScene';
 
 let Scene = null;
 let styles = null;
@@ -9,7 +8,6 @@ let TechTree = null;
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
-  currentScene: currentScene,
   user: ['user']
 })
 class Course extends React.Component {

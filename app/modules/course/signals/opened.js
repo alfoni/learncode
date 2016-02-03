@@ -55,7 +55,8 @@ export default [
           setAssignmentsPositions,
           addonsSet('state://./currentAssignmentIndex', 0),
           ...saveSandboxChain,
-          setLoadedCourse
+          setLoadedCourse,
+          set(['course', 'isLoading'], false)
         ],
         false: [
           showSnackbar('Innlasting av kurset feilet!')
