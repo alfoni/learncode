@@ -18,3 +18,18 @@
 .result {
   padding: 10px;
 }
+
+.assignmentItem {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.assignmentNumber {
+  color: #849aba;
+  font-weight: bold;
+  flex: 0 0 40px;
+}
+
+.assignmentText {
+  flex: 1;
+}

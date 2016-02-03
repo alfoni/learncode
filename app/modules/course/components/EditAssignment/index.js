@@ -9,7 +9,12 @@ import '!style!css!common/CodeEditorStyle.css';
 class EditAssignment extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      showFullEditor: false
+    };
     this.onEditorChange = this.onEditorChange.bind(this);
+    this.onFocus = this.onFocus.bind(this);
+    this.onBlur = this.onBlur.bind(this);
   }
   componentDidMount() {
     this.codemirror = CodeMirror(this.refs.code, {
@@ -20,6 +25,8 @@ class EditAssignment extends React.Component {
       tabSize: 2
     });
     this.codemirror.on('change', this.onEditorChange);
+    this.codemirror.on('focus', this.onFocus);
+    this.codemirror.on('blur', this.onBlur);
   }
   componentDidUpdate(prevProps) {
     if (
@@ -37,6 +44,16 @@ class EditAssignment extends React.Component {
   onEditorChange() {
     this.props.onCodeChange({code: this.codemirror.getDoc().getValue()});
   }
+  onFocus() {
+    this.setState({
+      showFullEditor: true
+    });
+  }
+  onBlur() {
+    this.setState({
+      showFullEditor: false
+    });
+  }
   getCode() {
     return this.props.assignment.code;
   }
@@ -48,7 +65,7 @@ class EditAssignment extends React.Component {
           value={this.props.assignment.description}
           className={`${elements.textarea} ${styles.textarea}`}
           onChange={(event) => this.props.onDescriptionChange({description: event.target.value})}/>
-        <div className={styles.editor} ref="code"></div>
+        <div className={this.state.showFullEditor ? styles.fullEditor : styles.editor} ref="code"></div>
       </div>
 
     );

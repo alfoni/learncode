@@ -1,4 +1,5 @@
 import setPage from 'common/factories/actions/setPage.js';
+import addonsSet from 'cerebral-addons/set';
 import set from 'common/factories/actions/set.js';
 import loadCourse from './../actions/loadCourse.js';
 import loadScene from './../actions/loadScene.js';
@@ -30,6 +31,7 @@ export default [
         true: [
           setScene,
           setAssignmentsPositions,
+          addonsSet('state://./currentAssignmentIndex', 0),
           ...saveSandboxChain,
           showSnackbar('Scenen er lastet')
         ],
@@ -51,6 +53,7 @@ export default [
           setCourse,
           setScene,
           setAssignmentsPositions,
+          addonsSet('state://./currentAssignmentIndex', 0),
           ...saveSandboxChain,
           setLoadedCourse
         ],

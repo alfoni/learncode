@@ -9,6 +9,16 @@
   width: calc(100% - 20px);
   margin: 0 10px;
   box-sizing: border-box;
+  border: 2px solid transparent;
+}
+
+.fullEditor {
+  composes: editor;
+  position: fixed;
+  height: calc(100% - 500px);
+  width: 500px;
+  z-index: 999999999;
+  border: 2px solid #232d3c;
 }
 
 .textarea {

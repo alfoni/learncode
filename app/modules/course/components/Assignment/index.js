@@ -9,14 +9,39 @@ import currentAssignment from '../../computed/currentAssignment';
   currentAssignmentIndex: ['course', 'currentAssignmentIndex']
 })
 class Assignment extends React.Component {
+  createAssignmentList(assignments, assignment) {
+    const lastAssignment = assignments[assignments.length - 1];
+
+    if (assignment === '') {
+      assignments.push([]);
+
+      return assignments;
+    }
+
+    lastAssignment.push(assignment);
+
+    return assignments;
+  }
+  renderAssignment(descriptions, index) {
+    const text = descriptions.join(' ');
+
+    return (
+      <div className={styles.assignmentItem} key={index}>
+        <div className={styles.assignmentNumber}>{'0' + (index + 1)}</div>
+        <div className={styles.assignmentText}>
+          <DescriptionToolTip>
+            {text}
+          </DescriptionToolTip>
+        </div>
+      </div>
+    );
+  }
   render() {
     return (
       <div className={styles.wrapper}>
         <div className={styles.taskHeader}>Oppgave {this.props.currentAssignmentIndex + 1}</div>
         <div className={styles.description}>
-          <DescriptionToolTip>
-            {this.props.assignment.description}
-          </DescriptionToolTip>
+          {this.props.assignment.description.split('\n').reduce(this.createAssignmentList, [[]]).map(this.renderAssignment)}
         </div>
       </div>
     );

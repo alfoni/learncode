@@ -10,7 +10,9 @@ function nextCourseStep({module, output}) {
   if (noMoreAssignments && isLastScene) {
     output.course();
   } else if (noMoreAssignments) {
-    output.scene();
+    output.scene({
+      sceneIndex: Number(currentSceneIndex) + 1
+    });
   } else {
     output.assignment({
       seek: [0, ...assignmentsPositions][currentAssignmentIndex] + 100

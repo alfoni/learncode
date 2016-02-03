@@ -28,7 +28,7 @@ const SceneControls = React.createClass({
   componentDidMount() {
     this.recorder = new Recorder(this.refs.video, {
       audio: {
-        sampleRate: 44100
+        sampleRate: 48000
       }
     });
 
@@ -65,7 +65,7 @@ const SceneControls = React.createClass({
     }
   },
   componentWillUnmount() {
-    this.context.controller.removeListener('signalEnd', this.updateExecuting);
+    this.context.controller.removeListener('signalEnd', this.updateExecutingSignal);
   },
   recorder: null,
   isUploadReady: false,
@@ -366,11 +366,16 @@ const SceneControls = React.createClass({
           :
             null
         }
-        <PlayButton
-          disabled={isDisabled || (this.state.isAdminMode && !this.state.recorder.isRecording)}
-          recorder={this.state.recorder}
-          onPlayClick={() => this.onPlayClick()}
-          onPauseClick={() => this.onPauseClick()}/>
+        {
+          (this.state.isAdminMode && this.state.recorder.isRecording) || !this.state.isAdminMode ?
+            <PlayButton
+              disabled={isDisabled || (this.state.isAdminMode && !this.state.recorder.isRecording)}
+              recorder={this.state.recorder}
+              onPlayClick={() => this.onPlayClick()}
+              onPauseClick={() => this.onPauseClick()}/>
+            :
+          null
+        }
         <div className={this.state.recorder.isBuffering ? styles.loadingFrame : styles.frame}>
           <video ref="video" className={styles.video}></video>
           <div className={styles.videoShadow}></div>
