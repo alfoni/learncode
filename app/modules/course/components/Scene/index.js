@@ -39,8 +39,17 @@ class Scene extends React.Component {
     });
   }
   renderAssignment() {
-    if (!this.props.currentScene.recording || !this.props.currentScene.assignments[this.props.currentAssignmentIndex]) {
+    if (!this.props.currentScene.recording) {
       return null;
+    }
+    
+    if (!this.props.currentScene.assignments[this.props.currentAssignmentIndex]) {
+      return (
+        <div className={styles.finishedHeader}>
+          Du har fullført alle oppgavene!
+          <div className={styles.finishedSubheader}>Trykk "Fortsett" for å lære mer</div>
+        </div>
+      );
     }
 
     if (this.props.isAdminMode && !this.props.recorder.isRecording) {
@@ -81,16 +90,6 @@ class Scene extends React.Component {
             onSceneItemClick={this.props.signals.course.listSceneNameClicked}/>
           <SceneControls/>
           <DurationSlider/>
-          {/*
-            <AssignmentsBar
-              assignments={this.props.currentScene.assignments}
-              currentAssignmentIndex={this.props.currentAssignmentIndex}
-              isAdminMode={this.props.isAdminMode && !this.props.recorder.isRecording}
-              onAssignmentClick={this.props.signals.course.assignmentClicked}
-              onNewAssignmentClick={this.props.signals.course.newAssignmentClicked}
-              completedAssignments={this.props.completedAssignments}
-            />
-          */}
           {this.renderAssignment()}
         </Module>
         <Module className={styles.code} show>

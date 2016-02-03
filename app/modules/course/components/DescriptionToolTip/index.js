@@ -55,11 +55,11 @@ class DescriptionToolTip extends React.Component {
     return (
       <span key={index}>
         <span ref={description.tagName} className={this.props.visibleTooltip === description.tagName ? styles.tooltipWrapper : styles.hide}>
+          <b className={styles.tooltipHeader}>{description.tagName}</b>
           <p>{description.description}</p>
-          <span>
-            <b className={styles.tooltipHeader}>Eksempel:</b>
+          <div className={styles.codeWrapper}>
             <CodeExample description={description}/>
-          </span>
+          </div>
         </span>
         <span
           className={styles.tagName}

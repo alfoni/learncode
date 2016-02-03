@@ -12,6 +12,7 @@ export default [
       set('state://./currentAssignmentIndex', 0)
     ],
     false: [
+      set('state://./currentAssignmentIndex', 0),
       setInput('seek', 0),
       setCurrentSeek,
       setSeek
