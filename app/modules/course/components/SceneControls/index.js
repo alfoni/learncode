@@ -28,7 +28,7 @@ const SceneControls = React.createClass({
   componentDidMount() {
     this.recorder = new Recorder(this.refs.video, {
       audio: {
-        sampleRate: 48000
+        sampleRate: process.env.NODE_ENV === 'production' ? 42000 : 48000
       }
     });
 
