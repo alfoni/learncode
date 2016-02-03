@@ -252,6 +252,10 @@ const SceneControls = React.createClass({
     }, 250);
   },
   canPlay() {
+    if (!this.refs.video) {
+      return false;
+    }
+    
     const seek = this.refs.video.currentTime * 1000;
     const assignmentsPassed = this.state.assignmentsPositions.filter((point) => {
       return point < seek;
