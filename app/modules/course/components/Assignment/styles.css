@@ -33,3 +33,18 @@
 .assignmentText {
   flex: 1;
 }
+
+.finishedHeader {
+  font-family: Ubuntu, sans-serif;
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 50px 10px 0 10px;
+  color: #849aba;
+}
+
+.finishedSubheader {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #5a7396;
+}

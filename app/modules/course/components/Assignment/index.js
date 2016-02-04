@@ -6,7 +6,8 @@ import currentAssignment from '../../computed/currentAssignment';
 
 @Cerebral({
   currentAssignment: currentAssignment,
-  currentAssignmentIndex: ['course', 'currentAssignmentIndex']
+  currentAssignmentIndex: ['course', 'currentAssignmentIndex'],
+  recorder: ['recorder']
 })
 class Assignment extends React.Component {
   createAssignmentList(assignments, assignment) {
@@ -36,12 +37,21 @@ class Assignment extends React.Component {
       </div>
     );
   }
+  renderCompletedText() {
+    return (
+      <div className={styles.finishedHeader}>
+        Fullført
+        <div className={styles.finishedSubheader}>Trykk "Fortsett" for å lære mer</div>
+      </div>
+    );
+  }
   render() {
     return (
       <div className={styles.wrapper}>
         <div className={styles.taskHeader}>Oppgave {this.props.currentAssignmentIndex + 1}</div>
         <div className={styles.description}>
           {this.props.assignment.description.split('\n').reduce(this.createAssignmentList, [[]]).map(this.renderAssignment)}
+          {this.props.completed && !this.props.recorder.isPlaying ? this.renderCompletedText() : null}
         </div>
       </div>
     );

@@ -4,7 +4,7 @@ function nextCourseStep({module, output}) {
   const scenes = module.state.get(['scenes']);
   const currentSceneIndex = module.state.get(['currentSceneIndex']);
 
-  const noMoreAssignments = currentAssignmentIndex === [0, ...assignmentsPositions].length;
+  const noMoreAssignments = currentAssignmentIndex === assignmentsPositions.length - 1;
   const isLastScene = Number(currentSceneIndex) === Number(scenes.length - 1);
 
   if (noMoreAssignments && isLastScene) {
@@ -15,7 +15,7 @@ function nextCourseStep({module, output}) {
     });
   } else {
     output.assignment({
-      seek: [0, ...assignmentsPositions][currentAssignmentIndex] + 100
+      seek: assignmentsPositions[currentAssignmentIndex] + 100
     });
   }
 }

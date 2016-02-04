@@ -44,7 +44,6 @@ import tagNameMouseOut from './signals/tagNameMouseOut';
 import descriptionHovered from './signals/descriptionHovered';
 import assignmentStatusClosed from './signals/assignmentStatusClosed';
 import assignmentStatusOpened from './signals/assignmentStatusOpened';
-import assignmentSuccessCelebrated from './signals/assignmentSuccessCelebrated';
 import continueCourseClicked from './signals/continueCourseClicked';
 
 export default () => {
@@ -79,7 +78,7 @@ export default () => {
       showFolder: false,
       showAddFileInput: false,
       currentSceneIndex: 0,
-      currentAssignmentIndex: 0,
+      currentAssignmentIndex: -1,
       sandboxSnapshot: null,
       newSceneName: '',
       newFileName: '',
@@ -132,7 +131,6 @@ export default () => {
       toggleForceUserClicked,
       tagNameMouseOver,
       tagNameMouseOut,
-      assignmentSuccessCelebrated,
       continueCourseClicked,
       assignmentStatusClosed: track('course.assignmentStatusClosed', assignmentStatusClosed),
       assignmentStatusOpened: track('course.assignmentStatusClosed', assignmentStatusOpened),

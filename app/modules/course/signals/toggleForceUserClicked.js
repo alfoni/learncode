@@ -9,10 +9,10 @@ export default [
   toggleForceUser,
   condition(['user', 'forceUser']), {
     true: [
-      set('state://./currentAssignmentIndex', 0)
+      set('state://./currentAssignmentIndex', -1)
     ],
     false: [
-      set('state://./currentAssignmentIndex', 0),
+      set('state://./currentAssignmentIndex', -1),
       setInput('seek', 0),
       setCurrentSeek,
       setSeek

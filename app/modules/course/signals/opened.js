@@ -17,9 +17,11 @@ import setAssignmentsPositions from './../actions/setAssignmentsPositions';
 import loadDescriptions from '../actions/loadDescriptions';
 import setDescriptions from '../actions/setDescriptions';
 import getTechTreeData from 'modules/techTree/chains/getTechTreeData';
+import resetAssignment from '../actions/resetAssignment';
 
 export default [
   setPage('course'),
+  resetAssignment,
   isSameCourse, {
     true: [
       showSnackbar('Laster scene...'),
@@ -31,7 +33,7 @@ export default [
         true: [
           setScene,
           setAssignmentsPositions,
-          addonsSet('state://./currentAssignmentIndex', 0),
+          addonsSet('state://./currentAssignmentIndex', -1),
           ...saveSandboxChain,
           showSnackbar('Scenen er lastet')
         ],
@@ -53,7 +55,7 @@ export default [
           setCourse,
           setScene,
           setAssignmentsPositions,
-          addonsSet('state://./currentAssignmentIndex', 0),
+          addonsSet('state://./currentAssignmentIndex', -1),
           ...saveSandboxChain,
           setLoadedCourse,
           set(['course', 'isLoading'], false)

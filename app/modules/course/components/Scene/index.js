@@ -39,11 +39,20 @@ class Scene extends React.Component {
     });
   }
   renderAssignment() {
-    if (!this.props.currentScene.recording) {
+    if (!this.props.currentScene.recording || (this.props.recorder.isPlaying && this.props.currentAssignmentIndex === -1)) {
       return null;
     }
-    
-    if (!this.props.currentScene.assignments[this.props.currentAssignmentIndex]) {
+
+    if (this.props.currentAssignmentIndex === -1) {
+      return (
+        <div className={styles.finishedHeader}>
+          Klar til å lære?
+          <div className={styles.finishedSubheader}>Trykk "Play" for å starte kurset</div>
+        </div>
+      );
+    }
+
+    if (currentAssignmentsSolvedCount === this.props.currentScene.assignments.length) {
       return (
         <div className={styles.finishedHeader}>
           Du har fullført alle oppgavene!
@@ -70,7 +79,7 @@ class Scene extends React.Component {
       <Assignment
         assignment={this.props.currentScene.assignments[this.props.currentAssignmentIndex]}
         currentAssignmentStatus={this.props.currentAssignmentStatus}
-        completed={this.props.currentAssignmentsSolvedCount >= 0}
+        completed={this.props.currentAssignmentsSolvedCount > this.props.currentAssignmentIndex}
       />
     );
   }

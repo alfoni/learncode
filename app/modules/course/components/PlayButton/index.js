@@ -15,10 +15,21 @@ function PlayButton(props) {
 
   const isRecordingOrPlaying = props.recorder.isRecording || props.recorder.isPlaying;
 
+  function onClick(event) {
+    // Have to stop as last signal should be pause
+    event.stopPropagation();
+    
+    if (isRecordingOrPlaying) {
+      props.onPauseClick();
+    } else {
+      props.onPlayClick();
+    }
+  }
+
   return (
     <button
       className={className}
-      onClick={() => isRecordingOrPlaying ? props.onPauseClick() : props.onPlayClick()}
+      onClick={onClick}
       disabled={props.disabled}>
       <div className={styles.iconWrapper}>
         <div className={isRecordingOrPlaying ? icons.pause : icons.play}></div>

@@ -6,7 +6,7 @@ function setAssignmentsPositions({state, services}) {
   if (scene.recording) {
     const recording = services.recorder.getRecording();
     const assignments = recording.signals.filter((signal) => {
-      return signal.name === 'course.pauseClicked';
+      return signal.name === 'course.pauseClicked' || signal.name === 'course.stopClicked';
     }).map((signal) => {
       return signal.start - recording.start;
     });

@@ -29,7 +29,6 @@ class AssignmentSuccess extends React.Component {
             runSuccessAnimation: false,
             show: false
           });
-          this.props.signals.course.assignmentSuccessCelebrated();
         }, 1000);
       }, 1500);
     }

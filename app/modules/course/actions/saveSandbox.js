@@ -6,7 +6,7 @@ function saveSandbox({input, state, output, services}) {
 
   services.ajax.post('/API/sandbox?id=' + input.requestId, {
     files: sandboxFiles,
-    assignment: input.runAssigment ? assignment.code : null
+    assignment: input.runAssigment && assignment ? assignment.code : null
   })
   .then(() => {
     output.success();
