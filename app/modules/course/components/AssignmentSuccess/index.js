@@ -31,7 +31,7 @@ class AssignmentSuccess extends React.Component {
           });
           this.props.signals.course.assignmentSuccessCelebrated();
         }, 1000);
-      }, 2000);
+      }, 1500);
     }
   }
   render() {
