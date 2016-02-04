@@ -15,6 +15,7 @@ import Sessions from './modules/sessions';
 import Courses from './modules/courses';
 import Course from './modules/course';
 import TechTree from './modules/techTree';
+import Sandbox from './modules/sandbox';
 
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/actions/hideSnackbar.js';
@@ -39,7 +40,7 @@ controller.addServices({
     };
   },
   localAssignments
-})
+});
 
 controller.addModules({
   home: Home(),
@@ -47,6 +48,7 @@ controller.addModules({
   courses: Courses(),
   course: Course(),
   techTree: TechTree(),
+  sandbox: Sandbox(),
 
   recorder: Recorder({
     state: {
@@ -66,6 +68,7 @@ controller.addModules({
     '/courses/:courseId/scenes/:sceneIndex': 'course.opened',
     '/sessions': 'sessions.opened',
     '/techtree': 'techTree.opened',
+    '/sandbox/:tierId': 'sandbox.opened',
     '*': 'missingRouteRouted'
   }, {
     onlyHash: true

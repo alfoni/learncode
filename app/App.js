@@ -4,13 +4,15 @@ import Course from './modules/course/components/Course';
 import Home from './modules/home/components/Home';
 import Courses from './modules/courses/components/Courses';
 import Sessions from './modules/sessions/components/Sessions';
+import Sandbox from './modules/sandbox/components/Sandbox';
 import styles from './App.css';
 
 const pages = {
   'home': Home,
   'course': Course,
   'courses': Courses,
-  'sessions': Sessions
+  'sessions': Sessions,
+  'sandbox': Sandbox
 };
 
 @Cerebral({

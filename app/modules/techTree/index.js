@@ -10,6 +10,7 @@ import newTierNameUpdated from './signals/newTierNameUpdated';
 import newTierSubmitted from './signals/newTierSubmitted';
 import unlinkCourseClicked from './signals/unlinkCourseClicked';
 import toggled from './signals/toggled';
+import sandboxButtonClicked from './signals/sandboxButtonClicked';
 
 export default () => {
   return (module) => {
@@ -37,7 +38,8 @@ export default () => {
       newTierNameUpdated,
       newTierSubmitted,
       unlinkCourseClicked,
-      toggled
+      toggled,
+      sandboxButtonClicked
     });
   };
 };

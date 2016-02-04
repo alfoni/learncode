@@ -26,6 +26,7 @@ import createTier from './apis/createTier.js';
 import getTiers from './apis/getTiers.js';
 import updateTier from './apis/updateTier.js';
 import getCoursesInTier from './apis/getCoursesInTier.js';
+import getSandboxCourse from './apis/getSandboxCourse.js';
 
 const verifyUser = (req, res, next) => {
   if (req.cookies.kodeboksen) {
@@ -54,6 +55,7 @@ export default function appController(router) {
   router.get('/API/courses/:id/scenes/:index', verifyUser, getScene);
   router.put('/API/courses/:id/scenes/:index/recording', isAdmin, addRecording);
   router.post('/API/sandbox', verifyUser, updateSandbox);
+  router.get('/API/sandbox/:id', verifyUser, getSandboxCourse);
   router.post('/API/courses/:id/scenes', isAdmin, createScene);
   router.patch('/API/courses/:id/scenes/:index', isAdmin, updateScene);
   router.post('/API/courses/:id/scenes/:index/audio', isAdmin, saveAudio);

@@ -12,6 +12,7 @@ let ToolbarButton = null;
 let ToolbarButtonPopover = null;
 let AddNewCourse = null;
 let TechTreeCoursePopup = null;
+let elements = null;
 
 @Cerebral({
   selectedTier: selectedTier,
@@ -25,11 +26,13 @@ let TechTreeCoursePopup = null;
 class TechTree extends React.Component {
   constructor() {
     super();
+    this.hasMounted = false;
     this.state = {
       canRender: false
     };
   }
   componentDidMount() {
+    this.hasMounted = true;
     require.ensure([], (require) => {
       Toolbar = require('common/components/Toolbar');
       Tiers = require('../Tiers');
@@ -40,10 +43,17 @@ class TechTree extends React.Component {
       ToolbarButtonPopover = require('common/components/ToolbarButtonPopover');
       AddNewCourse = require('../AddNewCourse');
       TechTreeCoursePopup = require('../TechTreeCoursePopup');
-      this.setState({
-        canRender: true
-      });
+      elements = require('common/elements.css');
+
+      if (this.hasMounted) {
+        this.setState({
+          canRender: true
+        });
+      }
     });
+  }
+  componentWillUnmount() {
+    this.hasMounted = false;
   }
   getCourse(courseId) {
     return this.props.courses.find((course) => {
@@ -156,6 +166,20 @@ class TechTree extends React.Component {
     }
 
     return true;
+  }
+  tierIsCompleted() {
+    if (!this.props.selectedTier || !this.props.selectedTier.courseDependencyList.length) {
+      return false;
+    }
+    const courses = this.props.selectedTier.courseDependencyList;
+    console.log(courses);
+    const lastCourse = courses[courses.length - 1];
+
+    if (this.courseIsCompleted(lastCourse)) {
+      return true;
+    }
+
+    return false;
   }
   courseIsCompleted(course) {
     if (!this.props.user.assignmentsSolved[course.id]) {
@@ -361,6 +385,18 @@ class TechTree extends React.Component {
           </Toolbar>
           <Tiers/>
           <div className={styles.techTreeWrapper}>
+          {
+            this.props.selectedTier ?
+              <button
+                disabled={!this.tierIsCompleted()}
+                className={`${elements.button} ${styles.sandboxButton}`}
+                onClick={() => this.props.signals.techTree.sandboxButtonClicked()}>
+                Sandkasse
+              </button>
+            :
+              null
+          }
+            <div className={styles.sandboxDescription}>Du må fullføre seksjonen for å låse opp sandkasse-modusen.</div>
             <TechTreeCoursePopup/>
             {this.renderLevels()}
           </div>

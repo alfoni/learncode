@@ -120,9 +120,10 @@
   display: flex;
   height: 100%;
   align-items: center;
-  width: calc(100% - 50px);
+  width: calc(100% - 60px);
   vertical-align: top;
   margin-left: 10px;
+  padding-right: 10px;
 }
 .titleProgressWrapper {
   composes: titleWrapper;
@@ -159,7 +160,9 @@
   height: 55%;
   align-items: center;
   margin-left: 10px;
-  width: calc(100% - 50px);
+  width: calc(100% - 60px);
+  padding-right: 10px;
+  box-sizing: border-box;
 }
 
 .progressBar {
@@ -273,4 +276,25 @@
 .addNewCourseButton {
   float: right;
   margin-right: 20px;
+}
+
+.sandboxButton {
+  width: 160px;
+  display: inline-block;
+  left: 50%;
+  position: absolute;
+  margin-left: -80px;
+  top: 290px;
+}
+
+.sandboxDescription {
+  width: 400px;
+  position: absolute;
+  margin-left: -200px;
+  top: 350px;
+  text-align: center;
+  font-size: 12px;
+  left: 50%;
+  white-space: normal;
+  color: #cadaed;
 }
