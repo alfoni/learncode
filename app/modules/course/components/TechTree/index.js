@@ -11,7 +11,7 @@ let Tiers = null;
 let ToolbarButton = null;
 let ToolbarButtonPopover = null;
 let AddNewCourse = null;
-let OpenedTechTreeCourse = null;
+let TechTreeCoursePopup = null;
 
 @Cerebral({
   selectedTier: selectedTier,
@@ -39,7 +39,7 @@ class TechTree extends React.Component {
       ToolbarButton = require('common/components/ToolbarButton');
       ToolbarButtonPopover = require('common/components/ToolbarButtonPopover');
       AddNewCourse = require('../AddNewCourse');
-      OpenedTechTreeCourse = require('../OpenedTechTreeCourse');
+      TechTreeCoursePopup = require('../TechTreeCoursePopup');
       this.setState({
         canRender: true
       });
@@ -361,7 +361,7 @@ class TechTree extends React.Component {
           </Toolbar>
           <Tiers/>
           <div className={styles.techTreeWrapper}>
-            <OpenedTechTreeCourse/>
+            <TechTreeCoursePopup/>
             {this.renderLevels()}
           </div>
           {this.props.user.isAdmin ? <CoursesOverview/> : null}

@@ -11,6 +11,7 @@
   border-radius: 5px;
   z-index: 3;
   border: 2px solid #1c222e;
+  box-sizing: border-box;
 }
 
 .wrapper:after, .wrapper:before {
@@ -33,6 +34,14 @@
   z-index: 3;
 }
 
+.arrowBottom {
+  composes: arrow;
+  border-top: 13px solid #202633;
+  border-bottom: none;
+  bottom: -13px;
+  top: auto;
+}
+
 .arrowBorder {
   composes: arrow;
   border-bottom: 15px solid #1c222e;
@@ -40,6 +49,14 @@
 	border-right: 15px solid transparent;
   top: -15px;
   z-index: 2;
+}
+
+.arrowBottomBorder {
+  composes: arrowBorder;
+  border-top: 15px solid #1c222e;
+  border-bottom: none;
+  bottom: -15px;
+  top: auto;
 }
 
 .icon {

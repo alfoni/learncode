@@ -5,6 +5,7 @@ import icons from 'common/icons.css';
 
 const containerMarginLeft = -337; // from CSS
 const containerWidth = 685 + containerMarginLeft; // from CSS
+const containerHeight = 210; // from CSS
 const rightMargin = 30;
 const leftMargin = 10;
 const arrowMarginLeft = 327;
@@ -13,7 +14,7 @@ const arrowMarginLeft = 327;
   openedCourse: ['techTree', 'openedCourse'],
   user: ['user']
 })
-class OpenedTechTreeCourse extends React.Component {
+class TechTreeCoursePopup extends React.Component {
   constructor() {
     super();
   }
@@ -120,17 +121,11 @@ class OpenedTechTreeCourse extends React.Component {
       </div>
     );
   }
-  render() {
-    if (!this.props.openedCourse) {
-      return null;
-    }
+  renderTopArrow() {
     const leftArrowPosition = this.getLeftArrowPosition(this.props.openedCourse.position.left);
 
     return (
-      <div
-        ref="wrapper"
-        style={{left: this.getLeftPosition(this.props.openedCourse.position.left), top: this.props.openedCourse.position.top}}
-        className={styles.wrapper}>
+      <div>
         <div
           style={{left: leftArrowPosition}}
           className={styles.arrow}>
@@ -139,6 +134,58 @@ class OpenedTechTreeCourse extends React.Component {
           style={{left: leftArrowPosition - 2}}
           className={styles.arrowBorder}>
         </div>
+      </div>
+    );
+  }
+  renderBottomArrow() {
+    const leftArrowPosition = this.getLeftArrowPosition(this.props.openedCourse.position.left);
+
+    return (
+      <div>
+        <div
+          style={{left: leftArrowPosition}}
+          className={styles.arrowBottom}>
+        </div>
+        <div
+          style={{left: leftArrowPosition - 2}}
+          className={styles.arrowBottomBorder}>
+        </div>
+      </div>
+    );
+  }
+  getDuration(course) {
+    const milliseconds = course.scenes.map((scene) => {
+      if (scene.recording) {
+        return scene.recording.duration * 2;
+      }
+
+      return 0;
+    }).reduce((total, sceneDuration) => {
+      return total + sceneDuration;
+    });
+
+    const minutes = Math.ceil(milliseconds / 60000);
+
+    return minutes + ' min';
+  }
+  render() {
+    if (!this.props.openedCourse) {
+      return null;
+    }
+    const topPosition = this.props.openedCourse.position.top;
+    const techTreeCourseHeight = this.props.openedCourse.course.type === 'course' ? 75 : 60;
+    const displayBoxBelowCourse = topPosition + containerHeight >= window.innerHeight ? false : true;
+
+    return (
+      <div
+        ref="wrapper"
+        style={{
+          left: this.getLeftPosition(this.props.openedCourse.position.left),
+          top: displayBoxBelowCourse ? topPosition : topPosition - containerHeight - techTreeCourseHeight
+        }}
+        className={styles.wrapper}>
+        {displayBoxBelowCourse ? this.renderTopArrow() : this.renderBottomArrow()}
+
         {this.renderIcon()}
         <div className={styles.textWrapper}>
           <div className={styles.title}>{this.props.openedCourse.course.name}</div>
@@ -153,7 +200,7 @@ class OpenedTechTreeCourse extends React.Component {
             <div className={styles.label}>Fullført</div>
           </div>
           <div className={styles.detail}>
-            <div className={styles.value}>10 min</div>
+            <div className={styles.value}>{this.getDuration(this.props.openedCourse.course)}</div>
             <div className={styles.label}>Estimert kurstid</div>
           </div>
           <div className={styles.detail}>
@@ -167,4 +214,4 @@ class OpenedTechTreeCourse extends React.Component {
   }
 }
 
-export default OpenedTechTreeCourse;
+export default TechTreeCoursePopup;
