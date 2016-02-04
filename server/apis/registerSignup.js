@@ -4,17 +4,18 @@ import db from './../database.js';
 import email from './../email.js';
 
 export default function registerSignup(req, res) {
+  var id = String(Date.now());
   db.findOne('users', {
-    id: req.body.email
+    id: id
   })
     .then((user) => {
       if (user) {
         return;
       }
-
+      /*
       return Promise.all([
         db.insert('users', {
-          id: req.body.email
+          id: id
         }),
         email({
           html: registration(),
@@ -40,22 +41,23 @@ export default function registerSignup(req, res) {
           }]
         })
       ]);
+      */
     })
     .then(() => (
       db.insert('logs', {
-        id: req.body.email,
+        id: id,
         date: Date.now(),
         type: 'LOGGED_IN'
       })
     ))
     .then(() => {
-      res.cookie('kodeboksen', req.body.email, {
+      res.cookie('kodeboksen', id, {
         maxAge: 86400 * 1000,
-        domain: process.env.NODE_ENV === 'production' ? '.kodeboksen.no' : '.kodeboksen.dev', 
+        domain: process.env.NODE_ENV === 'production' ? '.kodeboksen.no' : '.kodeboksen.dev',
         httpOnly: true
       });
       res.send({
-        id: req.body.email,
+        id: id,
         isAdmin: req.body.email === 'christianalfoni@gmail.com'
       });
     })

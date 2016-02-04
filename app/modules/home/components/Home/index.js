@@ -32,14 +32,14 @@ class Home extends React.Component {
     if (Object.keys(this.props.assignmentsSolved).length) {
       return (
         <div>
-          <button className={styles.button} onClick={this.props.signals.home.continueCourseClicked}>Fortsett</button>
-          <button className={styles.button} onClick={this.props.signals.home.restartCourseClicked}>Start på nytt</button>
+          <button className={styles.button} onClick={() => this.props.signals.home.continueCourseClicked()}>Fortsett</button>
+          <button className={styles.button} onClick={() => this.props.signals.home.restartCourseClicked()}>Start på nytt</button>
         </div>
       );
     }
 
     return (
-      <button className={styles.button} onClick={this.props.signals.home.startCourseClicked}>Start</button>
+      <button className={styles.button} onClick={() => this.props.signals.home.formSubmitted()}>Start</button>
     );
   }
   render() {
