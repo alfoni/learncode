@@ -10,9 +10,11 @@ import setLoadedCourse from 'modules/course/actions/setLoadedCourse';
 import getTechTreeData from 'modules/techTree/chains/getTechTreeData';
 import setAssignmentsPositions from 'modules/course/actions/setAssignmentsPositions';
 import addonsSet from 'cerebral-addons/set';
+import resetAssignment from 'modules/course/actions/resetAssignment';
 
 export default [
   setPage('sandbox'),
+  resetAssignment,
   setDefaultCourseState,
   setLoadingCourse,
   set(['course', 'isLoading'], true),

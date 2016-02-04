@@ -64,7 +64,6 @@ class Course extends React.Component {
   renderScene() {
     return (
       <div className={styles.wrapper} onClick={(e) => this.onAppClicked(e)}>
-        <TechTree/>
         <Scene/>
         <MouseCursor/>
       </div>
@@ -74,6 +73,7 @@ class Course extends React.Component {
     if (this.state.canRender) {
       return (
         <div>
+          <TechTree/>
           <div className={this.props.isLoading ? styles.overlayVisible : styles.overlay}></div>
           {this.props.isLoading ? null : this.renderScene()}
         </div>
