@@ -16,7 +16,7 @@ $ = function (query) {
         return this.elms[0].childNodes[0].textContent.toLowerCase().trim() === text.toLowerCase().trim();
       }
 
-      return this.elms[0].textContent;
+      return this.elms[0].childNodes[0].textContent.textContent;
     },
     characters: function (count) {
       if (count || typeof count === 'number') {
