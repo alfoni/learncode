@@ -172,8 +172,7 @@ class TechTree extends React.Component {
       return false;
     }
     const courses = this.props.selectedTier.courseDependencyList;
-    console.log(courses);
-    const lastCourse = courses[courses.length - 1];
+    const lastCourse = this.getCourse(courses[courses.length - 1].courseId);
 
     if (this.courseIsCompleted(lastCourse)) {
       return true;
