@@ -160,7 +160,7 @@ class DurationSlider extends React.Component {
         <div className={styles.lineWrapper} onClick={(event) => this.seek(this.getSeekByEvent(event))}>
           <div className={styles.line}>
             <div className={styles.progressedLine} style={{right: lineWidth + '%'}}></div>
-            
+
             {this.props.assignmentsPositions.map((position, index) => this.renderAssignmentPosition(position, index))}
           </div>
         </div>

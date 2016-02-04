@@ -16,9 +16,13 @@ import isAdminMode from '../../computed/isAdminMode';
   showConfigureScenes: ['course', 'showConfigureScenes']
 })
 class Preview extends React.Component {
+  constructor(props) {
+    super(props);
+    this.onSandboxMessage = this.onSandboxMessage.bind(this);
+  }
   componentDidMount() {
     this.refs.preview.src = this.props.url;
-    window.addEventListener('message', (e) => this.onSandboxMessage(e));
+    window.addEventListener('message', this.onSandboxMessage);
   }
   componentDidUpdate(prevProps) {
     if (prevProps.url !== this.props.url) {

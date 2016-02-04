@@ -6,7 +6,7 @@ export default {
     const assignments = JSON.parse(localStorage.getItem('assignmentsSolved') || '{}');
 
     if (assignments[courseId]) {
-      return assignments[courseId][sceneId] || {};
+      return assignments[courseId][sceneId] || 0;
     }
 
     return 0;

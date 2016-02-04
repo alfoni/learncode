@@ -4,7 +4,7 @@ import db from './../database.js';
 import email from './../email.js';
 
 export default function registerSignup(req, res) {
-  var id = String(Date.now());
+  var id = req.body.email || String(Date.now());
   db.findOne('users', {
     id: id
   })

@@ -11,5 +11,6 @@
         result: result
       }
     }, location.origin.replace('sandbox', 'www'));
+
   });
 }(window));
