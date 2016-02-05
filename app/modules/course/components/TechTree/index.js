@@ -386,16 +386,20 @@ class TechTree extends React.Component {
           <div className={styles.techTreeWrapper}>
           {
             this.props.selectedTier ?
-              <button
-                disabled={!this.tierIsCompleted()}
-                className={`${elements.button} ${styles.sandboxButton}`}
-                onClick={() => this.props.signals.techTree.sandboxButtonClicked()}>
-                Sandkasse
-              </button>
+              <div>
+                <button
+                  disabled={!this.tierIsCompleted()}
+                  className={`${elements.button} ${styles.sandboxButton}`}
+                  onClick={() => this.props.signals.techTree.sandboxButtonClicked()}>
+                  Sandkasse
+                </button>
+                {!this.tierIsCompleted() ?
+                  <div className={styles.sandboxDescription}>Du må fullføre seksjonen for å låse opp sandkasse-modusen.</div>
+                : null}
+              </div>
             :
               null
           }
-            <div className={styles.sandboxDescription}>Du må fullføre seksjonen for å låse opp sandkasse-modusen.</div>
             <TechTreeCoursePopup/>
             {this.renderLevels()}
           </div>

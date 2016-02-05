@@ -16,7 +16,8 @@ function startRecording({state, services}) {
       ['course', 'codeSelection'],
       ['course', 'scenes', currentSceneIndex, 'files'],
       ['course', 'scenes', currentSceneIndex, 'currentFileIndex'],
-      ['course', 'scenes', currentSceneIndex, 'sandboxFiles']
+      ['course', 'scenes', currentSceneIndex, 'sandboxFiles'],
+      ['recorder', 'clientSize']
     ]
   });
 }
