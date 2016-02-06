@@ -4,6 +4,13 @@ $ = function (query) {
     exist: function () {
       return this.elms.length > 0;
     },
+    hasChild: function (query) {
+      if (!this.elms.length) {
+        return false;
+      }
+
+      return this.elms[0].querySelectorAll(query).length > 0;
+    },
     count: function (count) {
       if (count || typeof count === 'number') { /* if number is 0 */
         return this.elms.length === count;
