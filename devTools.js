@@ -4,22 +4,20 @@ var onlyElements = function (elms) {
   });
 };
 
-$ = function (query) {
+var createTool = function (elms) {
   return {
-    elms: document.querySelectorAll(query),
+    elms: elms,
     get: function (index) {
-      this.elms = [this.elms[index]];
-      return this;
+      return createTool([this.elms[index]]);
     },
     getChild: function (index) {
-      this.elms = onlyElements(this.elms[0].childNodes)[index] ? [onlyElements(this.elms[0].childNodes)[index]] : [];
-      return this;
+      return createTool(onlyElements(this.elms[0].childNodes)[index] ? [onlyElements(this.elms[0].childNodes)[index]] : []);
     },
     is: function (tagName) {
       if (!onlyElements(this.elms).length) {
         return false;
       }
-      
+
       return onlyElements(this.elms)[0].tagName === tagName.toUpperCase();
     },
     exist: function () {
@@ -61,4 +59,8 @@ $ = function (query) {
       return this.elms[0].className;
     }
   };
+};
+
+$ = function (query) {
+  return createTool(document.querySelectorAll(query));
 };
