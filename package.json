@@ -39,7 +39,7 @@
     "cerebral-addons": "^0.4.7",
     "cerebral-model-baobab": "^0.4.7",
     "cerebral-module-devtools": "^0.5.3",
-    "cerebral-module-recorder": "^0.5.4",
+    "cerebral-module-recorder": "^0.5.5",
     "cerebral-module-router": "^0.12.4",
     "cerebral-view-react": "^0.11.2",
     "chrome-recorder": "^0.1.4",
