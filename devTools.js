@@ -8,7 +8,7 @@ var createTool = function (elms) {
   return {
     elms: elms,
     get: function (index) {
-      return createTool([this.elms[index]]);
+      return createTool(this.elms[index] ? [this.elms[index]] : []);
     },
     getChild: function (index) {
       return createTool(onlyElements(this.elms[0].childNodes)[index] ? [onlyElements(this.elms[0].childNodes)[index]] : []);
