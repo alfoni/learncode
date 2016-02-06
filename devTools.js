@@ -8,11 +8,15 @@ var createTool = function (elms) {
   return {
     elms: elms,
     get: function (index) {
-      return createTool(this.elms[index] ? [this.elms[index]] : []);
+      var elements = this.elms[index] ? [this.elms[index]] : [];
+
+      return createTool(elements);
     },
     getChild: function (index) {
       var elements = onlyElements(this.elms[0].childNodes);
-      return createTool(elements[index] ? [elements[index]] : []);
+      elements = elements[index] ? [elements[index]] : [];
+
+      return createTool(elements);
     },
     is: function (tagName) {
       if (!onlyElements(this.elms).length) {
@@ -32,7 +36,7 @@ var createTool = function (elms) {
       return this.elms[0].querySelectorAll(query).length > 0;
     },
     count: function (count) {
-      if (count || typeof count === 'number') { /* if number is 0 */
+      if (count || typeof count === 'number') {
         return this.elms.length === count;
       }
 
