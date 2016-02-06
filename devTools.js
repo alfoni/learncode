@@ -15,6 +15,13 @@ $ = function (query) {
       this.elms = onlyElements(this.elms[0].childNodes)[index] ? [onlyElements(this.elms[0].childNodes)[index]] : [];
       return this;
     },
+    is: function (tagName) {
+      if (!onlyElements(this.elms).length) {
+        return false;
+      }
+      
+      return onlyElements(this.elms)[0].tagName === tagName.toUpperCase();
+    },
     exist: function () {
       return this.elms.length > 0;
     },
