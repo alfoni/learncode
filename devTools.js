@@ -1,6 +1,20 @@
+var onlyElements = function (elms) {
+  return Array.from(elms).filter(function (elm) {
+    return elm.nodeType !== 3;
+  });
+};
+
 $ = function (query) {
   return {
     elms: document.querySelectorAll(query),
+    get: function (index) {
+      this.elms = [this.elms[index]];
+      return this;
+    },
+    getChild: function (index) {
+      this.elms = onlyElements(this.elms[0].childNodes)[index] ? [onlyElements(this.elms[0].childNodes)[index]] : [];
+      return this;
+    },
     exist: function () {
       return this.elms.length > 0;
     },
