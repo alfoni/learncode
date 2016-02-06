@@ -48,7 +48,10 @@ class Assignment extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        <div className={styles.taskHeader}>Oppgave {this.props.currentAssignmentIndex + 1}</div>
+        <div className={styles.taskHeader}>
+          Oppgave {this.props.currentAssignmentIndex + 1}
+          {this.props.completed ? <span className={styles.completedText}>fullført</span> : null}
+        </div>
         <div className={styles.description}>
           {this.props.assignment.description.split('\n').reduce(this.createAssignmentList, [[]]).map(this.renderAssignment)}
           {this.props.completed && !this.props.recorder.isPlaying ? this.renderCompletedText() : null}

@@ -48,3 +48,8 @@
   font-size: 16px;
   color: #5a7396;
 }
+
+.completedText {
+  color: #329696;
+  margin-left: 5px;
+}

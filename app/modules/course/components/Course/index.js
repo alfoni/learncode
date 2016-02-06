@@ -15,6 +15,11 @@ class Course extends React.Component {
     super();
     this.onKeydown = this.onKeydown.bind(this);
     this.hasMounted = false;
+    this.mouseDown = {
+      mousePositionX: 0,
+      mousePositionY: 0,
+      time: null
+    };
     this.state = {
       canRender: false
     };
@@ -55,15 +60,25 @@ class Course extends React.Component {
       description: e.target.value
     });
   }
-  onAppClicked(e) {
-    this.props.signals.course.appClicked({
-      mousePositionX: e.clientX,
-      mousePositionY: e.clientY
-    });
+  onMouseDown() {
+    this.mouseDown.time = Date.now();
+  }
+  onMouseUp(e) {
+    const time = Date.now();
+
+    if (time - this.mouseDown.time < 100) {
+      this.props.signals.course.appClicked({
+        mousePositionX: e.clientX,
+        mousePositionY: e.clientY
+      });
+    }
   }
   renderScene() {
     return (
-      <div className={styles.wrapper} onClick={(e) => this.onAppClicked(e)}>
+      <div
+        className={styles.wrapper}
+        onMouseDown={() => this.onMouseDown()}
+        onMouseUp={(e) => this.onMouseUp(e)}>
         <Scene/>
         <MouseCursor/>
       </div>
