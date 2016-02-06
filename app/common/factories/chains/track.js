@@ -1,5 +1,5 @@
 function track(name, chain) {
-  return [
+  return chain.concat([
     [
       function trackData({input, state, output, services}) {
         const sessionId = state.get(['session', 'sessionId']);
@@ -18,7 +18,7 @@ function track(name, chain) {
         error: []
       }
     ]
-  ].concat(chain);
+  ]);
 }
 
 export default track;
