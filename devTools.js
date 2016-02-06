@@ -11,7 +11,8 @@ var createTool = function (elms) {
       return createTool(this.elms[index] ? [this.elms[index]] : []);
     },
     getChild: function (index) {
-      return createTool(onlyElements(this.elms[0].childNodes)[index] ? [onlyElements(this.elms[0].childNodes)[index]] : []);
+      var elements = onlyElements(this.elms[0].childNodes);
+      return createTool(elements[index] ? [elements[index]] : []);
     },
     is: function (tagName) {
       if (!onlyElements(this.elms).length) {
