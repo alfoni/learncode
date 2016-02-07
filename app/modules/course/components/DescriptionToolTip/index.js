@@ -82,7 +82,7 @@ class DescriptionToolTip extends React.Component {
     );
   }
   renderURL(tagContent, index) {
-    const url = 'http://' + tagContent.split('http://')[1]; // Cannot split on ':' due to URL containing ':'
+    const url = 'http' + tagContent.split('http')[1]; // Cannot split on ':' due to URL containing ':'
     const text = tagContent.split(':')[1];
 
     return (
