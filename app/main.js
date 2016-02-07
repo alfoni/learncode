@@ -7,6 +7,7 @@ import Recorder from 'cerebral-module-recorder';
 import Devtools from 'cerebral-module-devtools';
 import ajax from './services/ajax';
 import localAssignments from './services/localAssignments';
+import localLastCourse from './services/localLastCourse';
 
 import App from './App.js';
 
@@ -39,7 +40,8 @@ controller.addServices({
       offsetTop: previewIframe.offsetParent.offsetTop + previewIframe.offsetTop
     };
   },
-  localAssignments
+  localAssignments,
+  localLastCourse
 });
 
 controller.addModules({

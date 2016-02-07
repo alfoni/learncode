@@ -47,7 +47,13 @@ class CodeEditor extends React.Component {
       mode: this.getMode(),
       theme: 'learncode',
       lineNumbers: true,
-      tabSize: 2
+      indentUnit: 2,
+      extraKeys: {
+        Tab(cm) {
+          const spaces = Array(cm.getOption('indentUnit') + 1).join(' ');
+          cm.replaceSelection(spaces);
+        }
+      }
     });
     this.codemirror.on('change', this.onEditorChange);
     this.codemirror.on('cursorActivity', this.onCursorActivity);
@@ -149,11 +155,12 @@ class CodeEditor extends React.Component {
             <button
               className={styles.run}
               disabled={
-                this.props.isAdminMode ||
+                !this.props.sandboxMode &&
+                (this.props.isAdminMode ||
                 this.props.recorder.isPlaying ||
                 this.props.currentAssignmentStatus.isLoading ||
-                this.props.currentAssignmentsSolvedCount > this.props.currentAssignmentIndex}
-              onClick={() => this.props.signals.course.runAssignmentClicked()}>
+                this.props.currentAssignmentsSolvedCount > this.props.currentAssignmentIndex)}
+              onClick={() => this.props.sandboxMode ? this.props.signals.course.saveSceneClicked() : this.props.signals.course.runAssignmentClicked()}>
                 <i className={`${icons.play} ${styles.playIcon}`}></i>
                 <span className={styles.buttonText}>Kjør kode</span>
             </button>

@@ -36,7 +36,7 @@ class Scene extends React.Component {
           <Assignments tierCourses={this.props.tierCourses}/>
         </Module>
         <Module className={styles.code} show>
-          <CodeEditor/>
+          <CodeEditor sandboxMode/>
           <Preview show={this.props.showPreview}/>
         </Module>
       </div>

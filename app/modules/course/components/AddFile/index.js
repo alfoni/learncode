@@ -34,14 +34,14 @@ function AddFile(props) {
               className={styles.input}
               autoFocus
               placeholder={props.placeholder}
-              onBlur={props.onAddFileAborted}>
+              onBlur={() => props.onAddFileAborted()}>
             </input>
           </form>
         </div>
       </div>
     :
       <div className={styles.addFileWrapper}>
-        <ToolbarButton icon={icons.addFile} onClick={props.onAddFileClick}/>
+        <ToolbarButton icon={icons.addFile} onClick={() => props.onAddFileClick()}/>
       </div>
   );
 }
