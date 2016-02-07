@@ -6,7 +6,7 @@ import showSnackbar from 'common/factories/actions/showSnackbar';
 import updateTier from '../actions/updateTier';
 import updateCourses from '../actions/updateCourses';
 import isAdmin from '../actions/isAdmin';
-import setOpenedCourse from '../actions/setOpenedCourse';
+import setOpenedCoursePopup from '../actions/setOpenedCoursePopup';
 
 export default [
   isAdmin, {
@@ -28,7 +28,7 @@ export default [
       }
     ],
     false: [
-      setOpenedCourse
+      setOpenedCoursePopup
     ]
   }
 ];

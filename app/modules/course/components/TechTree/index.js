@@ -21,7 +21,8 @@ let elements = null;
   courses: ['techTree', 'courses'],
   opened: ['techTree', 'opened'],
   showNewCourse: ['courses', 'showNewCourse'],
-  user: ['user']
+  user: ['user'],
+  openedCoursePopup: ['techTree', 'openedCoursePopup'],
 })
 class TechTree extends React.Component {
   constructor() {
@@ -384,23 +385,23 @@ class TechTree extends React.Component {
           </Toolbar>
           <Tiers/>
           <div className={styles.techTreeWrapper}>
-          {
-            this.props.selectedTier ?
-              <div>
-                <button
-                  disabled={!this.tierIsCompleted()}
-                  className={`${elements.button} ${styles.sandboxButton}`}
-                  onClick={() => this.props.signals.techTree.sandboxButtonClicked()}>
-                  Sandkasse
-                </button>
-                {!this.tierIsCompleted() ?
-                  <div className={styles.sandboxDescription}>Du må fullføre seksjonen for å låse opp sandkasse-modusen.</div>
-                : null}
-              </div>
-            :
-              null
-          }
-            <TechTreeCoursePopup/>
+            {
+              this.props.selectedTier ?
+                <div>
+                  <button
+                    disabled={!this.tierIsCompleted()}
+                    className={`${elements.button} ${styles.sandboxButton}`}
+                    onClick={() => this.props.signals.techTree.sandboxButtonClicked()}>
+                    Sandkasse
+                  </button>
+                  {!this.tierIsCompleted() ?
+                    <div className={styles.sandboxDescription}>Du må fullføre seksjonen for å låse opp sandkasse-modusen.</div>
+                  : null}
+                </div>
+              :
+                null
+            }
+            {this.props.openedCoursePopup ? <TechTreeCoursePopup/> : null}
             {this.renderLevels()}
           </div>
           {this.props.user.isAdmin ? <CoursesOverview/> : null}

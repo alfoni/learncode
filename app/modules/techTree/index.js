@@ -23,7 +23,7 @@ export default () => {
       newTierName: '',
       showAddNewTierInput: false,
       courseDependencyMap: [],
-      openedCourse: null,
+      openedCoursePopup: null,
       courses: []
     });
 

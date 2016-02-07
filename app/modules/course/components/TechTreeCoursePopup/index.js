@@ -5,18 +5,33 @@ import icons from 'common/icons.css';
 
 const containerMarginLeft = -337; // from CSS
 const containerWidth = 685 + containerMarginLeft; // from CSS
-const containerHeight = 210; // from CSS
 const rightMargin = 30;
 const leftMargin = 10;
 const arrowMarginLeft = 327;
+const bottomMargin = 15;
 
 @Cerebral({
-  openedCourse: ['techTree', 'openedCourse'],
+  openedCoursePopup: ['techTree', 'openedCoursePopup'],
   user: ['user']
 })
 class TechTreeCoursePopup extends React.Component {
   constructor() {
     super();
+    this.state = {
+      containerHeight: 210 // default value
+    };
+  }
+  componentDidMount() {
+    this.setState({
+      containerHeight: this.refs.wrapper.offsetHeight
+    });
+  }
+  componentDidUpdate(prevProps) {
+    if (prevProps.openedCoursePopup.course.id !== this.props.openedCoursePopup.course.id) {
+      this.setState({
+        containerHeight: this.refs.wrapper.offsetHeight
+      });
+    }
   }
   getLeftPosition(originalPosition) {
     if (originalPosition + containerMarginLeft - leftMargin <= leftMargin) {
@@ -41,7 +56,7 @@ class TechTreeCoursePopup extends React.Component {
     return arrowMarginLeft;
   }
   getProgressPercent() {
-    const course = this.props.openedCourse.course;
+    const course = this.props.openedCoursePopup.course;
 
     if (!this.props.user.assignmentsSolved[course.id]) {
       return 0;
@@ -62,12 +77,12 @@ class TechTreeCoursePopup extends React.Component {
   }
   openCourse() {
     this.props.signals.course.opened({
-      courseId: this.props.openedCourse.course.id.toString(),
+      courseId: this.props.openedCoursePopup.course.id.toString(),
       sceneIndex: '0'
     });
   }
   renderButton() {
-    if (this.props.openedCourse.courseIsStarted) {
+    if (this.props.openedCoursePopup.courseIsStarted) {
       return (
         <button className={styles.button} onClick={() => this.openCourse()}>
           <span className={`${icons.play} ${styles.buttonIcon}`}></span>
@@ -76,7 +91,7 @@ class TechTreeCoursePopup extends React.Component {
       );
     }
 
-    if (this.props.openedCourse.courseIsActive) {
+    if (this.props.openedCoursePopup.courseIsActive) {
       return (
         <button className={styles.button} onClick={() => this.openCourse()}>
           <span className={`${icons.play} ${styles.buttonIcon}`}></span>
@@ -85,7 +100,7 @@ class TechTreeCoursePopup extends React.Component {
       );
     }
 
-    if (this.props.openedCourse.courseIsCompleted) {
+    if (this.props.openedCoursePopup.courseIsCompleted) {
       return (
         <button className={styles.buttonCompleted} onClick={() => this.openCourse()}>
           <span className={`${icons.play} ${styles.buttonIcon}`}></span>
@@ -97,7 +112,7 @@ class TechTreeCoursePopup extends React.Component {
     return null;
   }
   renderIcon() {
-    const course = this.props.openedCourse;
+    const course = this.props.openedCoursePopup;
 
     if (!course.courseIsCompleted && !course.courseIsActive && !course.courseIsStarted) {
       return (
@@ -122,7 +137,7 @@ class TechTreeCoursePopup extends React.Component {
     );
   }
   renderTopArrow() {
-    const leftArrowPosition = this.getLeftArrowPosition(this.props.openedCourse.position.left);
+    const leftArrowPosition = this.getLeftArrowPosition(this.props.openedCoursePopup.position.left);
 
     return (
       <div>
@@ -138,7 +153,7 @@ class TechTreeCoursePopup extends React.Component {
     );
   }
   renderBottomArrow() {
-    const leftArrowPosition = this.getLeftArrowPosition(this.props.openedCourse.position.left);
+    const leftArrowPosition = this.getLeftArrowPosition(this.props.openedCoursePopup.position.left);
 
     return (
       <div>
@@ -169,27 +184,24 @@ class TechTreeCoursePopup extends React.Component {
     return minutes + ' min';
   }
   render() {
-    if (!this.props.openedCourse) {
-      return null;
-    }
-    const topPosition = this.props.openedCourse.position.top;
-    const techTreeCourseHeight = this.props.openedCourse.course.type === 'course' ? 75 : 60;
-    const displayBoxBelowCourse = topPosition + containerHeight >= window.innerHeight ? false : true;
+    const topPosition = this.props.openedCoursePopup.position.top;
+    const techTreeCourseHeight = this.props.openedCoursePopup.course.type === 'course' ? 75 : 60;
+    const displayBoxBelowCourse = topPosition + this.state.containerHeight + bottomMargin >= window.innerHeight ? false : true;
 
     return (
       <div
         ref="wrapper"
         style={{
-          left: this.getLeftPosition(this.props.openedCourse.position.left),
-          top: displayBoxBelowCourse ? topPosition : topPosition - containerHeight - techTreeCourseHeight
+          left: this.getLeftPosition(this.props.openedCoursePopup.position.left),
+          top: displayBoxBelowCourse ? topPosition : topPosition - this.state.containerHeight - techTreeCourseHeight
         }}
         className={styles.wrapper}>
         {displayBoxBelowCourse ? this.renderTopArrow() : this.renderBottomArrow()}
 
         {this.renderIcon()}
         <div className={styles.textWrapper}>
-          <div className={styles.title}>{this.props.openedCourse.course.name}</div>
-          <div className={styles.description}>{this.props.openedCourse.course.description}</div>
+          <div className={styles.title}>{this.props.openedCoursePopup.course.name}</div>
+          <div className={styles.description}>{this.props.openedCoursePopup.course.description}</div>
         </div>
         <div className={styles.progressBar}>
           <div className={styles.progressed} style={{width: this.getProgressPercent() + '%'}}></div>
@@ -200,11 +212,11 @@ class TechTreeCoursePopup extends React.Component {
             <div className={styles.label}>Fullført</div>
           </div>
           <div className={styles.detail}>
-            <div className={styles.value}>{this.getDuration(this.props.openedCourse.course)}</div>
+            <div className={styles.value}>{this.getDuration(this.props.openedCoursePopup.course)}</div>
             <div className={styles.label}>Estimert kurstid</div>
           </div>
           <div className={styles.detail}>
-            <div className={styles.value}>{this.props.openedCourse.course.skillLevel}</div>
+            <div className={styles.value}>{this.props.openedCoursePopup.course.skillLevel}</div>
             <div className={styles.label}>Ferdighetsnivå</div>
           </div>
           {this.renderButton()}
