@@ -37,7 +37,7 @@ class DescriptionToolTip extends React.Component {
     });
   }
   replaceTagsWithDescriptions(text) {
-    const tags = text.match(/\$\{(.*?)\}/g);
+    const tags = text.match(/\$\{(.*?)\}/g) || [];
     let currentTagIndex = 0;
 
     const textWithReplacedTags = text.replace(/\$\{(.*?)\}/g, () => {
@@ -82,11 +82,8 @@ class DescriptionToolTip extends React.Component {
     );
   }
   renderURL(tagContent, index) {
-    console.log();
     const url = 'http://' + tagContent.split('http://')[1]; // Cannot split on ':' due to URL containing ':'
     const text = tagContent.split(':')[1];
-    console.log('text', text);
-    console.log('url', url);
 
     return (
       <a className={styles.url} href={url} key={index} target="_blank">{text}</a>

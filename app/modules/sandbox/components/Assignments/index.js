@@ -34,8 +34,13 @@ function renderAssignment(descriptions, index) {
 function Assignments(props) {
   const courses = props.tierCourses.map((course, courseIndex) => {
     const scenes = course.scenes.map((scene, sceneIndex) => {
+      let taskIndex = -1;
       const assignments = scene.assignments.map((assignment) => {
-        return assignment.description.split('\n').reduce(createAssignmentList, [[]]).map(renderAssignment);
+        return assignment.description.split('\n').reduce(createAssignmentList, [[]]).map((descriptions) => {
+          taskIndex++;
+
+          return renderAssignment(descriptions, taskIndex);
+        });
       });
 
       return (
