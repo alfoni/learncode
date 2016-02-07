@@ -35,6 +35,9 @@ var createTool = function (elms) {
 
       return this.elms[0].querySelectorAll(query).length > 0;
     },
+    style: function (type) {
+      return this.elms[0].style[type];
+    },
     count: function (count) {
       if (count || typeof count === 'number') {
         return this.elms.length === count;
@@ -44,7 +47,7 @@ var createTool = function (elms) {
     },
     text: function (text) {
       if (text) {
-        return this.elms[0].childNodes[0].textContent.toLowerCase().trim() === text.toLowerCase().trim();
+        return !!this.elms[0].childNodes[0] && this.elms[0].childNodes[0].textContent.toLowerCase().trim() === text.toLowerCase().trim();
       }
 
       return this.elms[0].childNodes[0].textContent;
