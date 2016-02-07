@@ -16,7 +16,7 @@
   composes: editor;
   position: fixed;
   height: calc(100% - 500px);
-  width: 500px;
+  width: 1000px;
   z-index: 999999999;
   border: 2px solid #232d3c;
 }
