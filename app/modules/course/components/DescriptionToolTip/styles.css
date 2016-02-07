@@ -39,3 +39,12 @@
 .tooltipHeader {
   font-size: 16px;
 }
+
+.url {
+  text-decoration: none;
+  color: #004b87;
+}
+
+.url:hover {
+  text-decoration: underline;
+}

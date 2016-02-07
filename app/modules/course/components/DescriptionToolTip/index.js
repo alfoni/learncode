@@ -37,15 +37,28 @@ class DescriptionToolTip extends React.Component {
     });
   }
   replaceTagsWithDescriptions(text) {
-    const self = this;
+    const tags = text.match(/\$\{(.*?)\}/g);
+    let currentTagIndex = 0;
 
-    return text.split(' ').map((word, index) => {
-      const isDescriptionWord = word.indexOf('${') === 0;
-      const descriptionWord = word.substr(2, word.length - 3);
-      const description = this.getDescription(descriptionWord);
+    const textWithReplacedTags = text.replace(/\$\{(.*?)\}/g, () => {
+      return '§?§';
+    }).split(' ');
 
-      if (isDescriptionWord && description) {
-        return self.renderDescriptionWord(description, index);
+    return textWithReplacedTags.map((word, index) => {
+      const isReplacedTag = word === '§?§';
+      const tag = tags[currentTagIndex];
+
+      if (isReplacedTag && tag) {
+        const tagContent = tag.substr(2, tag.length - 3);
+        const description = this.getDescription(tagContent);
+        const isUrl = tagContent.split(':').length > 1;
+        currentTagIndex++;
+
+        if (isUrl) {
+          return this.renderURL(tagContent, index);
+        } else if (description) {
+          return this.renderDescriptionWord(description, index);
+        }
       }
 
       return ' ' + word + ' ';
@@ -66,6 +79,17 @@ class DescriptionToolTip extends React.Component {
           onMouseOver={(e) => this.onTagNameMouseOver(e, description.tagName)}
           onMouseOut={() => this.onTagNameMouseOut()}>{description.tagName}</span>
       </span>
+    );
+  }
+  renderURL(tagContent, index) {
+    console.log();
+    const url = 'http://' + tagContent.split('http://')[1]; // Cannot split on ':' due to URL containing ':'
+    const text = tagContent.split(':')[1];
+    console.log('text', text);
+    console.log('url', url);
+
+    return (
+      <a className={styles.url} href={url} key={index} target="_blank">{text}</a>
     );
   }
   render() {
