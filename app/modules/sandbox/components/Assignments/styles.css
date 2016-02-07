@@ -1,10 +1,14 @@
+.mainWrapper {
+  padding: 10px;
+  height: calc(100% - 56px);
+  overflow-y: scroll;
+  background-color: #FFF;
+  box-sizing: border-box;
+}
+
 .wrapper {
   padding: 10px;
   font-family: Ubuntu, sans-serif;
-  box-sizing: border-box;
-  background-color: #FFF;
-  height: calc(100% - 56px);
-  overflow-y: scroll;
 }
 
 .courseName {
