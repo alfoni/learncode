@@ -51,7 +51,9 @@ const SceneControls = React.createClass({
     !this.state.recorder.isEnded &&
     !hasChangedPlayMode &&
     prevState.recorder.currentSeek !== this.state.recorder.currentSeek) {
-      this.seek(isSameDuration);
+      requestAnimationFrame(() => {
+        this.seek(isSameDuration);
+      });
     }
 
     if (!this.state.recorder.isRecording && prevState.recorder.isPlaying && !this.state.recorder.isPlaying) {
