@@ -41,7 +41,6 @@ export default function getSandboxFile(req, res) {
       '</script>'].join('');
 
     code = code.replace('</head>', [
-      '<span></span>',
       insertDevToolsScript,
       insertMouseClickScript,
       insertAssignmentScript,
