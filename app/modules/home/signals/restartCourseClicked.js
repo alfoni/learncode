@@ -5,7 +5,7 @@ export default [
   resetUserAssignments,
   redirect(
     process.env.NODE_ENV === 'production' ?
-      '/courses/f644e54e-d6d1-44ae-ac97-ac5cea6be209/scenes/0'
+      '/courses/ff81d96c-f73d-4049-a4a3-f27b38811182/scenes/0'
     :
       '/courses'
     )
