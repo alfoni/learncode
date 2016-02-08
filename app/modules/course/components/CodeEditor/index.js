@@ -1,7 +1,12 @@
 import '!style!css!./../../../../../node_modules/codemirror/lib/codemirror.css';
+import '!style!css!./lint.css';
 import 'codemirror/mode/javascript/javascript.js';
 import 'codemirror/mode/css/css.js';
 import 'codemirror/mode/htmlmixed/htmlmixed.js';
+import 'codemirror/addon/edit/matchtags.js';
+import 'codemirror/addon/edit/closetag.js';
+import 'codemirror/addon/lint/lint.js';
+import 'codemirror/addon/lint/html-lint.js';
 import '!style!css!common/CodeEditorStyle.css';
 
 import React from 'react';
@@ -20,6 +25,7 @@ import RemoveFile from '../RemoveFile';
 import AssignmentResult from '../AssignmentResult';
 import AssignmentSuccess from '../AssignmentSuccess';
 import isAdminMode from '../../computed/isAdminMode';
+import htmlHint from './htmlHint';
 
 @Cerebral({
   recorder: ['recorder'],
@@ -33,6 +39,7 @@ import isAdminMode from '../../computed/isAdminMode';
   currentAssignmentStatus: ['course', 'currentAssignmentStatus'],
   currentAssignmentIndex: ['course', 'currentAssignmentIndex'],
   currentAssignmentsSolvedCount: currentAssignmentsSolvedCount,
+  verifyingCode: ['course', 'verifyingCode'],
   isAdminMode: isAdminMode
 })
 class CodeEditor extends React.Component {
@@ -40,13 +47,22 @@ class CodeEditor extends React.Component {
     super(props);
     this.onEditorChange = this.onEditorChange.bind(this);
     this.onCursorActivity = this.onCursorActivity.bind(this);
+    this.onUpdateLinting = this.onUpdateLinting.bind(this);
+    this.widgets = [];
   }
   componentDidMount() {
     this.codemirror = CodeMirror(this.refs.code, {
       value: this.getCode(),
       mode: this.getMode(),
       theme: 'learncode',
+      matchTags: {bothTags: true},
+      autoCloseTags: true,
+      gutters: ["CodeMirror-lint-markers"],
       lineNumbers: true,
+      lint: {
+        getAnnotations: htmlHint(CodeMirror),
+        onUpdateLinting: this.onUpdateLinting
+      },
       indentUnit: 2,
       extraKeys: {
         Tab(cm) {
@@ -78,6 +94,11 @@ class CodeEditor extends React.Component {
     if (this.props.recorder.isPlaying) {
       this.codemirror.getDoc().setSelection(this.props.codeSelection.anchor, this.props.codeSelection.head);
     }
+  }
+  onUpdateLinting(errors) {
+    this.props.signals.course.codeVerified({
+      hasError: Boolean(errors.length)
+    });
   }
   onCursorActivity() {
     const range = this.codemirror.getDoc().listSelections()[0];
@@ -127,6 +148,15 @@ class CodeEditor extends React.Component {
       });
     }
   }
+  onRunCodeClick() {
+    if (this.props.sandboxMode) {
+      this.props.signals.course.saveSceneClicked();
+    } else {
+      this.props.signals.course.runAssignmentClicked({
+        hasError: Boolean(this.refs.code.querySelectorAll('.cm-error').length)
+      });
+    }
+  }
   render() {
     return (
       <div className={styles.wrapper}>
@@ -159,8 +189,9 @@ class CodeEditor extends React.Component {
                 (this.props.isAdminMode ||
                 this.props.recorder.isPlaying ||
                 this.props.currentAssignmentStatus.isLoading ||
-                this.props.currentAssignmentsSolvedCount > this.props.currentAssignmentIndex)}
-              onClick={() => this.props.sandboxMode ? this.props.signals.course.saveSceneClicked() : this.props.signals.course.runAssignmentClicked()}>
+                this.props.currentAssignmentsSolvedCount > this.props.currentAssignmentIndex) ||
+                this.props.verifyingCode}
+              onClick={() => this.onRunCodeClick()}>
                 <i className={`${icons.play} ${styles.playIcon}`}></i>
                 <span className={styles.buttonText}>Kjør kode</span>
             </button>

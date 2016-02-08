@@ -45,6 +45,7 @@ import descriptionHovered from './signals/descriptionHovered';
 import assignmentStatusClosed from './signals/assignmentStatusClosed';
 import assignmentStatusOpened from './signals/assignmentStatusOpened';
 import continueCourseClicked from './signals/continueCourseClicked';
+import codeVerified from './signals/codeVerified';
 
 export default () => {
   return (module) => {
@@ -80,6 +81,7 @@ export default () => {
       currentSceneIndex: 0,
       currentAssignmentIndex: -1,
       sandboxSnapshot: null,
+      verifyingCode: false,
       newSceneName: '',
       newFileName: '',
       codeSelection: {
@@ -132,6 +134,7 @@ export default () => {
       tagNameMouseOver,
       tagNameMouseOut,
       continueCourseClicked,
+      codeVerified,
       assignmentStatusClosed: track('course.assignmentStatusClosed', assignmentStatusClosed),
       assignmentStatusOpened: track('course.assignmentStatusClosed', assignmentStatusOpened),
       assignmentDescriptionChanged: {

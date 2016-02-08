@@ -16,6 +16,7 @@ function codeChanged({input, state}) {
 
   state.set(['course', 'scenes', currentSceneIndex, 'sandboxFiles', currentFileIndex, 'code'], code);
   state.set(['course', 'lastEvent'], event);
+  state.set(['course', 'verifyingCode'], true);
 }
 
 export default codeChanged;

@@ -40,12 +40,12 @@ export default function getSandboxFile(req, res) {
         .split('\n').join(''),
       '</script>'].join('');
 
-    code = code.replace('</body>', [
+    code = code.replace('</head>', [
       '<span></span>',
       insertDevToolsScript,
       insertMouseClickScript,
       insertAssignmentScript,
-      '\n</body>'
+      '\n</head>'
     ].join(''));
 
     return code;

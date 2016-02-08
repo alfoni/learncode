@@ -45,7 +45,7 @@
 }
 
 .cm-s-learncode .CodeMirror-cursor {
-    border-left: 1px solid #5c5855 !important;
+    border-left: 1px solid #FFF !important;
 }
 
 .cm-s-learncode span.cm-comment {
@@ -108,7 +108,7 @@
 
 .cm-s-learncode span.cm-error {
     /* background: rgba(0,0,0,0.1); */
-    background-color: #F44336;
+    background-color: #eb1e64;
     color: #fff;
 }
 
@@ -119,4 +119,8 @@
 .cm-s-learncode .CodeMirror-matchingbracket {
     text-decoration: underline;
     color: #a16a94 !important;
+}
+
+.cm-s-learncode .CodeMirror-matchingtag {
+  background-color: #171c26;
 }
