@@ -4,6 +4,7 @@ import styles from './styles.css';
 import icons from 'common/icons.css';
 
 @Cerebral({
+  recorder: ['recorder'],
   currentAssignmentStatus: ['course', 'currentAssignmentStatus'],
   showAssignmentStatus: ['course', 'showAssignmentStatus']
 })
@@ -45,6 +46,10 @@ class AssignmentResult extends React.Component {
     );
   }
   render() {
+    if (this.props.recorder.isPlaying) {
+      return null;
+    }
+
     if (this.props.currentAssignmentStatus.result === true) {
       return this.renderSuccess();
     } else if (this.props.currentAssignmentStatus.result) {

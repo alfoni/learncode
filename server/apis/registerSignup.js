@@ -12,11 +12,11 @@ export default function registerSignup(req, res) {
       if (user) {
         return;
       }
-      /*
       return Promise.all([
         db.insert('users', {
           id: id
         }),
+        /*
         email({
           html: registration(),
           subject: 'Registration confirmation',
@@ -40,8 +40,8 @@ export default function registerSignup(req, res) {
             name: 'Tommy Østgaard'
           }]
         })
+        */
       ]);
-      */
     })
     .then(() => (
       db.insert('logs', {
@@ -52,7 +52,7 @@ export default function registerSignup(req, res) {
     ))
     .then(() => {
       res.cookie('kodeboksen', id, {
-        maxAge: 86400 * 1000,
+        maxAge: 86400 * 1000 * 3,
         domain: process.env.NODE_ENV === 'production' ? '.kodeboksen.no' : '.kodeboksen.dev',
         httpOnly: true
       });

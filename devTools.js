@@ -72,3 +72,17 @@ var createTool = function (elms) {
 $ = function (query) {
   return createTool(document.querySelectorAll(query));
 };
+
+$.rgbaEquals = function (rgbaSrc, rgbaTarget) {
+  try {
+    var rgbaSrcArray = rgbaSrc.split(',');
+    var rgbaTargetArray = rgbaTarget.split(',');
+    var opacitySrc = Math.round(Number(rgbaSrc.replace(')', '').split(',')[3]) * 10);
+    var opacityTarget = Math.round(Number(rgbaTarget.replace(')', '').split(',')[3]) * 10);
+    rgbaSrcArray[3] = opacitySrc + ')';
+    rgbaTargetArray[3] = opacityTarget + ')';
+    return rgbaSrcArray.join('') === rgbaTargetArray.join('');
+  } catch (e) {
+    return false;
+  }
+};
