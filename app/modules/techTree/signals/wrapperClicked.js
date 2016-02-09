@@ -5,5 +5,6 @@ import closeAllPopovers from 'modules/courses/actions/closeAllPopovers';
 export default [
   setSelectedCourse,
   set(['techTree', 'openedCoursePopup'], null),
-  closeAllPopovers
+  closeAllPopovers,
+  set(['techTree', 'showMainAssignmentPopup'], false)
 ];

@@ -150,7 +150,7 @@ class CodeEditor extends React.Component {
   }
   onRunCodeClick() {
     if (this.props.sandboxMode) {
-      this.props.signals.course.saveSceneClicked();
+      this.props.signals.mainAssignment.saveMainAssignmentClicked();
     } else {
       this.props.signals.course.runAssignmentClicked({
         hasError: Boolean(this.refs.code.querySelectorAll('.cm-error').length)

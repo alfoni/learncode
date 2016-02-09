@@ -23,6 +23,7 @@ let elements = null;
   showNewCourse: ['courses', 'showNewCourse'],
   user: ['user'],
   openedCoursePopup: ['techTree', 'openedCoursePopup'],
+  showMainAssignmentPopup: ['techTree', 'showMainAssignmentPopup']
 })
 class TechTree extends React.Component {
   constructor() {
@@ -363,6 +364,24 @@ class TechTree extends React.Component {
       }
     });
   }
+  renderStartMainAssignmentPopup() {
+    return (
+      <div className={this.props.showMainAssignmentPopup ? styles.startMainAssignmentPopup : styles.hidden} onClick={(e) => {e.stopPropagation();}}>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          this.props.signals.techTree.startMainAssignmentClicked();
+        }}>
+          <input
+            className={`${elements.input} ${styles.mainAssignmentNameInput}`}
+            placeholder="Ditt navn"
+            onChange={(e) => this.props.signals.techTree.nameInputChanged({value: e.target.value})}/>
+          <button type="submit" className={`${elements.button} ${styles.startMainAssignmentButton}`}>Start</button>
+        </form>
+        <div className={styles.mainAssignmentArrow}></div>
+        <div className={styles.mainAssignmentArrowBorder}></div>
+      </div>
+    );
+  }
   render() {
     if (this.state.canRender) {
       return (
@@ -388,14 +407,18 @@ class TechTree extends React.Component {
             {
               this.props.selectedTier ?
                 <div>
+                  {this.renderStartMainAssignmentPopup()}
                   <button
-                    disabled={!this.tierIsCompleted()}
+                    // disabled={!this.tierIsCompleted()}
                     className={`${elements.button} ${styles.sandboxButton}`}
-                    onClick={() => this.props.signals.techTree.sandboxButtonClicked()}>
-                    Sandkasse
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      this.props.signals.techTree.mainAssignmentButtonClicked();
+                    }}>
+                    Hovedoppgave
                   </button>
                   {!this.tierIsCompleted() ?
-                    <div className={styles.sandboxDescription}>Du må fullføre seksjonen for å låse opp sandkasse-modusen.</div>
+                    <div className={styles.sandboxDescription}>Du må fullføre seksjonen for å låse opp hovedoppgaven.</div>
                   : null}
                 </div>
               :

@@ -1,8 +1,8 @@
 import setPage from 'common/factories/actions/setPage';
 import set from 'common/factories/actions/set';
-import loadSandboxCourse from '../actions/loadSandboxCourse';
+import getMainAssignment from '../actions/getMainAssignment';
 import setDefaultCourseState from 'modules/course/actions/setDefaultCourseState';
-import setSandboxCourse from '../actions/setSandboxCourse';
+import setMainAssignment from '../actions/setMainAssignment';
 import showSnackbar from 'common/factories/actions/showSnackbar';
 import saveSandboxChain from 'modules/course/chains/saveSandbox';
 import setLoadingCourse from 'modules/course/actions/setLoadingCourse';
@@ -10,18 +10,20 @@ import setLoadedCourse from 'modules/course/actions/setLoadedCourse';
 import getTechTreeData from 'modules/techTree/chains/getTechTreeData';
 import setAssignmentsPositions from 'modules/course/actions/setAssignmentsPositions';
 import addonsSet from 'cerebral-addons/set';
+import loadDescriptions from 'modules/course/actions/loadDescriptions';
+import setDescriptions from '../actions/setDescriptions';
 import resetAssignment from 'modules/course/actions/resetAssignment';
 
 export default [
-  setPage('sandbox'),
+  setPage('mainAssignment'),
   resetAssignment,
   setDefaultCourseState,
   setLoadingCourse,
   set(['course', 'isLoading'], true),
   [
-    loadSandboxCourse, {
+    getMainAssignment, {
       success: [
-        setSandboxCourse,
+        setMainAssignment,
         setAssignmentsPositions,
         addonsSet('state://./currentAssignmentIndex', 0),
         ...saveSandboxChain,
@@ -31,6 +33,12 @@ export default [
       error: [
         showSnackbar('Innlasting av sandkasse feilet!')
       ]
+    }
+  ],
+  [
+    loadDescriptions, {
+      success: [setDescriptions],
+      error: [showSnackbar('Innlasting av beskrivelser feilet!')]
     }
   ],
   ...getTechTreeData,

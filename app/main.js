@@ -16,7 +16,7 @@ import Sessions from './modules/sessions';
 import Courses from './modules/courses';
 import Course from './modules/course';
 import TechTree from './modules/techTree';
-import Sandbox from './modules/sandbox';
+import MainAssignment from './modules/mainAssignment';
 
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/actions/hideSnackbar.js';
@@ -50,7 +50,7 @@ controller.addModules({
   courses: Courses(),
   course: Course(),
   techTree: TechTree(),
-  sandbox: Sandbox(),
+  mainAssignment: MainAssignment(),
 
   recorder: Recorder({
     state: {
@@ -70,24 +70,24 @@ controller.addModules({
     '/courses/:courseId/scenes/:sceneIndex': 'course.opened',
     '/sessions': 'sessions.opened',
     '/techtree': 'techTree.opened',
-    '/sandbox/:tierId': 'sandbox.opened',
+    '/mainassignment/:tierId/:mainAssignmentSessionId': 'mainAssignment.opened',
     '*': 'missingRouteRouted'
   }, {
     onlyHash: true
   })
 });
 
-window.BANAN = function () {
+window.BANAN = () => {
   controller.getSignals().home.formSubmitted({
     email: 'christianalfoni@gmail.com'
   });
-}
+};
 
-window.EPLE = function () {
+window.EPLE = () => {
   controller.getSignals().home.formSubmitted({
     email: 'tommy.ostgaard@gmail.com'
   });
-}
+};
 
 ReactDOM.render(
   <Container controller={controller}>

@@ -10,7 +10,9 @@ import newTierNameUpdated from './signals/newTierNameUpdated';
 import newTierSubmitted from './signals/newTierSubmitted';
 import unlinkCourseClicked from './signals/unlinkCourseClicked';
 import toggled from './signals/toggled';
-import sandboxButtonClicked from './signals/sandboxButtonClicked';
+import mainAssignmentButtonClicked from './signals/mainAssignmentButtonClicked';
+import startMainAssignmentClicked from './signals/startMainAssignmentClicked';
+import nameInputChanged from './signals/nameInputChanged';
 
 export default () => {
   return (module) => {
@@ -24,7 +26,9 @@ export default () => {
       showAddNewTierInput: false,
       courseDependencyMap: [],
       openedCoursePopup: null,
-      courses: []
+      courses: [],
+      showMainAssignmentPopup: false,
+      authorName: ''
     });
 
     module.addSignals({
@@ -39,7 +43,12 @@ export default () => {
       newTierSubmitted,
       unlinkCourseClicked,
       toggled,
-      sandboxButtonClicked
+      mainAssignmentButtonClicked,
+      startMainAssignmentClicked,
+      nameInputChanged: {
+        chain: nameInputChanged,
+        sync: true
+      }
     });
   };
 };

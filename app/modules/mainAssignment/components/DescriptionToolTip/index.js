@@ -1,10 +1,10 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
-import CodeExample from '../CodeExample';
+import CodeExample from 'modules/course/components/CodeExample';
 import styles from './styles.css';
 
 @Cerebral({
-  descriptions: ['course', 'descriptions'],
+  descriptions: ['mainAssignment', 'descriptions'],
   tooltipTimeout: ['course', 'tooltip', 'timeout'],
   visibleTooltip: ['course', 'tooltip', 'visible']
 })
@@ -36,34 +36,6 @@ class DescriptionToolTip extends React.Component {
       return description.tagName === descriptionWord;
     });
   }
-  replaceTagsWithDescriptions(text) {
-    const tags = text.match(/\$\{(.*?)\}/g) || [];
-    let currentTagIndex = 0;
-
-    const textWithReplacedTags = text.replace(/\$\{(.*?)\}/g, () => {
-      return '§?§';
-    }).split(' ');
-
-    return textWithReplacedTags.map((word, index) => {
-      const isReplacedTag = word === '§?§';
-      const tag = tags[currentTagIndex];
-
-      if (isReplacedTag && tag) {
-        const tagContent = tag.substr(2, tag.length - 3);
-        const description = this.getDescription(tagContent);
-        const isUrl = tagContent.split(':').length > 1;
-        currentTagIndex++;
-
-        if (isUrl) {
-          return this.renderURL(tagContent, index);
-        } else if (description) {
-          return this.renderDescriptionWord(description, index);
-        }
-      }
-
-      return ' ' + word + ' ';
-    });
-  }
   renderDescriptionWord(description, index) {
     return (
       <span key={index}>
@@ -81,19 +53,11 @@ class DescriptionToolTip extends React.Component {
       </span>
     );
   }
-  renderURL(tagContent, index) {
-    const url = 'http' + tagContent.split('http')[1]; // Cannot split on ':' due to URL containing ':'
-    const text = tagContent.split(':')[1];
-
-    return (
-      <a className={styles.url} href={url} key={index} target="_blank">{text}</a>
-    );
-  }
   render() {
-    const description = this.replaceTagsWithDescriptions(this.props.children);
+    const description = this.renderDescriptionWord(this.props.children);
 
     return (
-      <span>{description}</span>
+      <div className={styles.wrapper}>{description}</div>
     );
   }
 }

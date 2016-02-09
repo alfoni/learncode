@@ -23,6 +23,9 @@ import tagNameMouseOver from 'modules/course/signals/tagNameMouseOver';
 import tagNameMouseOut from 'modules/course/signals/tagNameMouseOut';
 import descriptionHovered from 'modules/course/signals/descriptionHovered';
 import continueCourseClicked from 'modules/course/signals/continueCourseClicked';
+import googleSearchSubmitted from './signals/googleSearchSubmitted';
+import googleInputChanged from './signals/googleInputChanged';
+import saveMainAssignmentClicked from './signals/saveMainAssignmentClicked';
 
 export default () => {
   return (module) => {
@@ -70,19 +73,19 @@ export default () => {
     });
 
     module.addSignals({
-      opened: createSession('sandbox.opened', authenticate(opened)),
-      addFileClicked: track('course.addFileClicked', addFileClicked),
-      fileClicked: track('course.fileClicked', fileClicked),
-      addFileAborted: track('course.addFileAborted', addFileAborted),
-      addFileSubmitted: track('course.addFileSubmitted', addFileSubmitted),
-      saveShortcutPressed: track('course.saveShortcutPressed', saveSceneClicked),
-      saveSceneClicked: track('course.saveSceneClicked', saveSceneClicked),
-      removeFileClicked: track('course.removeFileClicked', removeFileClicked),
-      pauseClicked: track('course.pauseClicked', pauseClicked),
-      seekChanged: track('course.seeked', seekChanged),
-      sandboxClicked: track('course.sandboxClicked', sandboxClicked),
-      runAssignmentClicked: track('course.runAssignmentClicked', runAssignmentClicked),
-      descriptionHovered: track('course.descriptionHovered', descriptionHovered),
+      opened: createSession('mainAssignment.opened', authenticate(opened)),
+      addFileClicked: track('mainAssignment.addFileClicked', addFileClicked),
+      fileClicked: track('mainAssignment.fileClicked', fileClicked),
+      addFileAborted: track('mainAssignment.addFileAborted', addFileAborted),
+      addFileSubmitted: track('mainAssignment.addFileSubmitted', addFileSubmitted),
+      saveShortcutPressed: track('mainAssignment.saveShortcutPressed', saveSceneClicked),
+      saveSceneClicked: track('mainAssignment.saveSceneClicked', saveSceneClicked),
+      removeFileClicked: track('mainAssignment.removeFileClicked', removeFileClicked),
+      pauseClicked: track('mainAssignment.pauseClicked', pauseClicked),
+      seekChanged: track('mainAssignment.seeked', seekChanged),
+      sandboxClicked: track('mainAssignment.sandboxClicked', sandboxClicked),
+      runAssignmentClicked: track('mainAssignment.runAssignmentClicked', runAssignmentClicked),
+      descriptionHovered: track('mainAssignment.descriptionHovered', descriptionHovered),
       appClicked,
       codeChanged,
       addFileNameUpdated,
@@ -91,7 +94,13 @@ export default () => {
       toggleForceUserClicked,
       tagNameMouseOver,
       tagNameMouseOut,
-      continueCourseClicked
+      continueCourseClicked,
+      googleSearchSubmitted,
+      googleInputChanged: {
+        chain: googleInputChanged,
+        sync: true
+      },
+      saveMainAssignmentClicked
     });
   };
 };

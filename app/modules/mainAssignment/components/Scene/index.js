@@ -8,7 +8,7 @@ import Preview from 'modules/course/components/Preview';
 import icons from 'common/icons.css';
 import styles from 'modules/course/components/Scene/styles.css';
 import isAdminMode from 'modules/course/computed/isAdminMode';
-import Assignments from '../Assignments';
+import Descriptions from '../Descriptions';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
@@ -33,7 +33,7 @@ class Scene extends React.Component {
           <Toolbar>
             <ToolbarButton icon={icons.chevronLeft} title="Kursoversikt" onClick={() => this.props.signals.techTree.toggled()}/>
           </Toolbar>
-          <Assignments tierCourses={this.props.tierCourses}/>
+          <Descriptions/>
         </Module>
         <Module className={styles.code} show>
           <CodeEditor sandboxMode/>

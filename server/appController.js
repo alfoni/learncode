@@ -28,7 +28,12 @@ import getTiers from './apis/getTiers.js';
 import updateTier from './apis/updateTier.js';
 import getCoursesInTier from './apis/getCoursesInTier.js';
 import getSandboxCourse from './apis/getSandboxCourse.js';
+<<<<<<< Updated upstream
 import sessionCache from './sessionCache';
+=======
+import updateMainAssignments from './apis/updateMainAssignments.js';
+import getMainAssignment from './apis/getMainAssignment.js';
+>>>>>>> Stashed changes
 
 const verifyUser = (req, res, next) => {
   if (req.cookies.kodeboksen && sessionCache.get(req.cookies.kodeboksen)) {
@@ -101,4 +106,6 @@ export default function appController(router) {
   router.get('/API/tiers', verifyUser, getTiers);
   router.patch('/API/tiers/:id', isAdmin, updateTier);
   router.get('/API/tiers/:id/courses', verifyUser, getCoursesInTier);
+  router.patch('/API/mainAssignments/:tierId/:sessionId', verifyUser, updateMainAssignments);
+  router.get('/API/mainAssignments/:tierId/:sessionId', verifyUser, getMainAssignment);
 }

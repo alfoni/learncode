@@ -298,3 +298,56 @@
   white-space: normal;
   color: #cadaed;
 }
+
+.startMainAssignmentPopup {
+  width: 400px;
+  background-color: #202633;
+  border-radius: 5px;
+  padding: 15px;
+  position: absolute;
+  left: 50%;
+  margin-left: -200px;
+  z-index: 5;
+  margin-top: -80px;
+  box-sizing: border-box;
+  border: 2px solid #1c222e;
+  opacity: 1;
+  display: block;
+  transition: opacity 400ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.hidden {
+  composes: wrapper;
+  opacity: 0;
+  display: none;
+}
+
+.startMainAssignmentButton {
+  display: block;
+}
+
+.mainAssignmentNameInput {
+  background-color: #fff;
+  color: #202634;
+}
+
+.mainAssignmentArrow {
+  position: absolute;
+  border-left: 13px solid transparent;
+  border-right: 13px solid transparent;
+  border-top: 13px solid #202633;
+  bottom: -13px;
+  z-index: 3;
+  left: 50%;
+  margin-left: -13px;
+}
+
+.mainAssignmentArrowBorder {
+  composes: mainAssignmentArrow;
+  border-top: 15px solid #1c222e;
+  border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+  bottom: -15px;
+  z-index: 2;
+  margin-left: -15px;
+}

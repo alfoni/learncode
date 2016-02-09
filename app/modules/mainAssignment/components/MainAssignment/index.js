@@ -10,7 +10,7 @@ let TechTree = null;
   isLoading: ['course', 'isLoading'],
   user: ['user']
 })
-class Course extends React.Component {
+class MainAssignment extends React.Component {
   constructor() {
     super();
     this.onKeydown = this.onKeydown.bind(this);
@@ -84,4 +84,4 @@ class Course extends React.Component {
   }
 }
 
-export default Course;
+export default MainAssignment;
