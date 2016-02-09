@@ -1,8 +1,5 @@
-function getMainAssignment({services, output, state}) {
-  const tierIndex = state.get(['techTree', 'selectedTierIndex']);
-  const tierId = state.get(['techTree', 'tiers', tierIndex, 'id']);
-
-  services.ajax.get(`/API/mainAssignments/${tierId}`)
+function getMainAssignment({services, output, input}) {
+  services.ajax.get(`/API/mainAssignments/${input.tierId}/${input.userId}`)
     .then((mainAssignment) => {
       output.success({
         mainAssignment: mainAssignment

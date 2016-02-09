@@ -2,7 +2,7 @@ import db from './../database.js';
 
 export default function getMainAssignment(req, res) {
   db.findOne('mainAssignments', {
-    userId: req.user.id
+    userId: req.params.userId
   })
   .then((mainAssignment) => {
     res.type('json');

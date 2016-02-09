@@ -12,6 +12,12 @@ const defaultIndex = `<!DOCTYPE html>
 
 export default function updateMainAssignments(req, res) {
 
+  if (req.params.userId !== req.user.id) {
+    res.status(401);
+    res.send({});
+    return;
+  }
+
   const data = {
     files: req.body.files ? req.body.files : [{
       code: defaultIndex,

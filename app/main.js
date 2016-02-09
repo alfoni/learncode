@@ -70,7 +70,7 @@ controller.addModules({
     '/courses/:courseId/scenes/:sceneIndex': 'course.opened',
     '/sessions': 'sessions.opened',
     '/techtree': 'techTree.opened',
-    '/mainassignment/:tierId': 'mainAssignment.opened',
+    '/mainassignment/:tierId/:userId': 'mainAssignment.opened',
     '*': 'missingRouteRouted'
   }, {
     onlyHash: true
