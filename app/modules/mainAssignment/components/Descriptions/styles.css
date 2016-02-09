@@ -2,7 +2,8 @@
   font-family: Ubuntu, sans-serif;
   padding: 15px;
   background-color: #28374b;
-  height: 100%;
+  height: calc(100% - 86px);
+  overflow-y: auto;
 }
 
 .header {
