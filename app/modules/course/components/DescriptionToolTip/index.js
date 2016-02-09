@@ -54,8 +54,8 @@ class DescriptionToolTip extends React.Component {
       const isReplacedTag = word.indexOf('§?§') >= 0;
       const contentBeforeTag = word.split('§?§')[0];
       const contentAfterTag = word.split('§?§')[1];
-      const tag = tags[currentTagIndex].tag;
-      const tagId = tags[currentTagIndex].id;
+      const tag = tags[currentTagIndex] && tags[currentTagIndex].tag;
+      const tagId = tags[currentTagIndex] && tags[currentTagIndex].id;
 
       if (isReplacedTag && tag) {
         const tagContent = tag.substr(2, tag.length - 3);
