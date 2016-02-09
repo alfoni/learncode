@@ -28,12 +28,9 @@ import getTiers from './apis/getTiers.js';
 import updateTier from './apis/updateTier.js';
 import getCoursesInTier from './apis/getCoursesInTier.js';
 import getSandboxCourse from './apis/getSandboxCourse.js';
-<<<<<<< Updated upstream
 import sessionCache from './sessionCache';
-=======
 import updateMainAssignments from './apis/updateMainAssignments.js';
 import getMainAssignment from './apis/getMainAssignment.js';
->>>>>>> Stashed changes
 
 const verifyUser = (req, res, next) => {
   if (req.cookies.kodeboksen && sessionCache.get(req.cookies.kodeboksen)) {
