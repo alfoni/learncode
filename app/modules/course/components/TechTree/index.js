@@ -427,8 +427,8 @@ class TechTree extends React.Component {
           </Toolbar>
           <Tiers/>
           <div className={styles.techTreeWrapper}>
-            {this.props.openedCoursePopup ? <TechTreeCoursePopup/> : null}
             {this.renderLevels()}
+            {this.props.openedCoursePopup ? <TechTreeCoursePopup/> : null}
           </div>
           {this.props.user.isAdmin ? <CoursesOverview/> : null}
         </div>
