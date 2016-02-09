@@ -1,5 +1,4 @@
 function setDescriptions({state, input}) {
-  console.log(input.descriptions);
   state.set(['mainAssignment', 'descriptions'], input.descriptions.sort((a, b) => {
     if (a.tagName < b.tagName) {
       return -1;
