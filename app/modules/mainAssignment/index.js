@@ -30,46 +30,11 @@ import saveMainAssignmentClicked from './signals/saveMainAssignmentClicked';
 export default () => {
   return (module) => {
     module.addState({
-      id: null,
-      name: 'Course 1',
-      mousePosition: {
-        x: 0,
-        y: 0
-      },
       isLoading: true,
-      currentAssignmentStatus: {
-        isLoading: false,
-        result: null
-      },
-      showAssignmentStatus: false,
-      assignmentsPositions: [],
       descriptions: [],
-      isLoadingMedia: false,
-      authorId: null,
-      showPreview: true,
-      showConsole: false,
-      showEditAssignment: false,
-      showAssignment: false,
-      tooltip: {
-        visible: null,
-        timeout: null
-      },
-      showConfigureScenes: false,
-      showScenesList: false,
-      showFolder: false,
-      showAddFileInput: false,
-      currentSceneIndex: 0,
-      currentAssignmentIndex: 0,
-      sandboxSnapshot: null,
-      newSceneName: '',
-      newFileName: '',
-      codeSelection: {
-        anchor: {ch: 0, line: 0},
-        head: {ch: 0, line: 0}
-      },
-      scenes: [],
-      scenesList: [],
-      tierCourses: []
+      currentFileIndex: 0,
+      files: [],
+      existingAssignment: false
     });
 
     module.addSignals({

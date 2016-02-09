@@ -13,6 +13,7 @@ import toggled from './signals/toggled';
 import mainAssignmentButtonClicked from './signals/mainAssignmentButtonClicked';
 import startMainAssignmentClicked from './signals/startMainAssignmentClicked';
 import nameInputChanged from './signals/nameInputChanged';
+import continueMainAssignmentClicked from './signals/continueMainAssignmentClicked';
 
 export default () => {
   return (module) => {
@@ -45,6 +46,7 @@ export default () => {
       toggled,
       mainAssignmentButtonClicked,
       startMainAssignmentClicked,
+      continueMainAssignmentClicked,
       nameInputChanged: {
         chain: nameInputChanged,
         sync: true

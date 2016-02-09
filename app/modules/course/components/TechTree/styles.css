@@ -279,11 +279,11 @@
 }
 
 .sandboxButton {
-  width: 160px;
+  width: 180px;
   display: inline-block;
   left: 50%;
   position: absolute;
-  margin-left: -80px;
+  margin-left: -90px;
   top: 290px;
 }
 
@@ -308,7 +308,6 @@
   left: 50%;
   margin-left: -200px;
   z-index: 5;
-  margin-top: -80px;
   box-sizing: border-box;
   border: 2px solid #1c222e;
   opacity: 1;

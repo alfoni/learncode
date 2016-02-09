@@ -12,6 +12,10 @@ import isAdmin from '../actions/isAdmin';
 import getAllCourses from '../actions/getAllCourses';
 import allTiersAreLoaded from '../actions/allTiersAreLoaded';
 import tiersExists from '../actions/tiersExists';
+import getMainAssignment from 'modules/mainAssignment/actions/getMainAssignment';
+import setMainAssignment from 'modules/mainAssignment/actions/setMainAssignment';
+import createMainAssignment from 'modules/mainAssignment/actions/createMainAssignment';
+import set from 'common/factories/actions/set';
 
 export default [
   [
@@ -71,7 +75,16 @@ export default [
               ]
             }
           ]
-        }
+        },
+        [
+          getMainAssignment, {
+            success: [
+              setMainAssignment,
+              set(['mainAssignment', 'existingAssignment'], true)
+            ],
+            error: []
+          }
+        ]
       ],
       error: [showSnackbar('Innlasting av Tech treet feilet!')]
     }

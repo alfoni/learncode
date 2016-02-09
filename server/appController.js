@@ -57,7 +57,7 @@ const verifyUser = (req, res, next) => {
     .catch(() => {
       res.status(401);
       res.send({});
-    })
+    });
   } else {
     res.status(401);
     res.send({});
@@ -103,6 +103,6 @@ export default function appController(router) {
   router.get('/API/tiers', verifyUser, getTiers);
   router.patch('/API/tiers/:id', isAdmin, updateTier);
   router.get('/API/tiers/:id/courses', verifyUser, getCoursesInTier);
-  router.patch('/API/mainAssignments/:tierId/:sessionId', verifyUser, updateMainAssignments);
-  router.get('/API/mainAssignments/:tierId/:sessionId', verifyUser, getMainAssignment);
+  router.patch('/API/mainAssignments/:tierId', verifyUser, updateMainAssignments);
+  router.get('/API/mainAssignments/:tierId', verifyUser, getMainAssignment);
 }

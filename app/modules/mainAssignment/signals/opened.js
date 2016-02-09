@@ -13,6 +13,7 @@ import addonsSet from 'cerebral-addons/set';
 import loadDescriptions from 'modules/course/actions/loadDescriptions';
 import setDescriptions from '../actions/setDescriptions';
 import resetAssignment from 'modules/course/actions/resetAssignment';
+import setMainAssignmentAsCourse from '../actions/setMainAssignmentAsCourse';
 
 export default [
   setPage('mainAssignment'),
@@ -24,6 +25,7 @@ export default [
     getMainAssignment, {
       success: [
         setMainAssignment,
+        setMainAssignmentAsCourse,
         setAssignmentsPositions,
         addonsSet('state://./currentAssignmentIndex', 0),
         ...saveSandboxChain,
