@@ -101,30 +101,35 @@ $.selector = function (className, property, value) {
       }
     }
   }
-  var styleContent = style.match(/\{(.*?)\}/)[1];
-  var properties = [];
-  if (styleContent) {properties = styleContent.split(';')}
 
-  if (value) {
-    if (properties.length) {
-      var cssValue;
-      var cssProperty;
-      for (var x = 0; x < properties.length; x++) {
-        if (properties[x].split(':')[0].trim() === property) {
-          cssValue = properties[x].split(':')[1].trim();
-          cssProperty = properties[x].split(':')[0].trim();
+  if (style) {
+    var styleContent = style.match(/\{(.*?)\}/)[1];
+    var properties = [];
+    if (styleContent) {properties = styleContent.split(';')}
+
+    if (value) {
+      if (properties.length) {
+        var cssValue;
+        var cssProperty;
+        for (var x = 0; x < properties.length; x++) {
+          if (properties[x].split(':')[0].trim() === property) {
+            cssValue = properties[x].split(':')[1].trim();
+            cssProperty = properties[x].split(':')[0].trim();
+          }
         }
+
+        return cssValue ? true : false;
       }
 
-      return cssValue ? true : false;
+      return false;
     }
 
-    return false;
+    if (property) {
+      return styleContent.indexOf(property) >= 0;
+    }
+
+    return style;
   }
 
-  if (property) {
-    return styleContent.indexOf(property) >= 0;
-  }
-
-  return style;
+  return null;
 };
