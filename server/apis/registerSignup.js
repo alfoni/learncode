@@ -2,20 +2,24 @@ import registration from './../emailTemplates/registration';
 import confirmation from './../emailTemplates/confirmation';
 import db from './../database.js';
 import email from './../email.js';
+import sessionCache from '../sessionCache';
 
 export default function registerSignup(req, res) {
-  var id = req.body.email || String(Date.now());
+  const id = req.body.email || req.cookies.kodeboksen || (String(Date.now() + (Math.round(Math.random * 10000))));
   db.findOne('users', {
     id: id
   })
     .then((user) => {
+      sessionCache.set(id);
+
       if (user) {
         return;
       }
+
       return Promise.all([
         db.insert('users', {
           id: id
-        }),
+        })
         /*
         email({
           html: registration(),
@@ -52,7 +56,7 @@ export default function registerSignup(req, res) {
     ))
     .then(() => {
       res.cookie('kodeboksen', id, {
-        maxAge: 86400 * 1000 * 3,
+        maxAge: 86400 * 1000 * 4,
         domain: process.env.NODE_ENV === 'production' ? '.kodeboksen.no' : '.kodeboksen.dev',
         httpOnly: true
       });

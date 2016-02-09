@@ -1,3 +1,4 @@
+import db from './database';
 import createCourse from './apis/createCourse.js';
 import updateCourse from './apis/updateCourse.js';
 import getCourse from './apis/getCourse.js';
@@ -27,10 +28,34 @@ import getTiers from './apis/getTiers.js';
 import updateTier from './apis/updateTier.js';
 import getCoursesInTier from './apis/getCoursesInTier.js';
 import getSandboxCourse from './apis/getSandboxCourse.js';
+import sessionCache from './sessionCache';
 
 const verifyUser = (req, res, next) => {
-  if (req.cookies.kodeboksen) {
+  if (req.cookies.kodeboksen && sessionCache.get(req.cookies.kodeboksen)) {
+    req.user = {
+      id: req.cookies.kodeboksen
+    };
     next();
+  } else if (req.cookies.kodeboksen) {
+    db.findOne('users', {
+      id: req.cookies.kodeboksen
+    })
+    .then((user) => {
+      if (!user) {
+        res.status(401);
+        res.send({});
+      } else {
+        req.user = {
+          id: user.id
+        };
+        sessionCache.set(user.id);
+        next();
+      }
+    })
+    .catch(() => {
+      res.status(401);
+      res.send({});
+    })
   } else {
     res.status(401);
     res.send({});
