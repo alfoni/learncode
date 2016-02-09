@@ -118,7 +118,7 @@ class Tiers extends React.Component {
   renderContinueMainAssignmentPopup() {
     return (
       <div
-        className={this.props.showMainAssignmentPopup ? styles.startMainAssignmentPopup : styles.hidden}
+        className={styles.startMainAssignmentPopup}
         onClick={(e) => {e.stopPropagation();}}>
         <form onSubmit={(e) => {
           e.preventDefault();
@@ -136,7 +136,7 @@ class Tiers extends React.Component {
   renderStartMainAssignmentPopup() {
     return (
       <div
-        className={this.props.showMainAssignmentPopup ? styles.startMainAssignmentPopup : styles.hidden}
+        className={styles.startMainAssignmentPopup}
         onClick={(e) => {e.stopPropagation();}}>
         <form onSubmit={(e) => {
           e.preventDefault();
@@ -145,6 +145,7 @@ class Tiers extends React.Component {
           <input
             className={`${elements.input} ${styles.mainAssignmentNameInput}`}
             placeholder="Ditt navn"
+            autoFocus
             onChange={(e) => this.props.signals.techTree.nameInputChanged({value: e.target.value})}/>
           <button type="submit" className={`${elements.button} ${styles.startMainAssignmentButton}`}>
             Start
@@ -155,14 +156,20 @@ class Tiers extends React.Component {
       </div>
     );
   }
+  renderMainAssignmentPopup() {
+    if (this.props.isExistingAssignment) {
+      return this.renderContinueMainAssignmentPopup();
+    }
+
+    return this.renderStartMainAssignmentPopup();
+  }
   render() {
     return (
       <div className={styles.wrapper}>
         <div className={styles.mainAssignmentWrapper}>
-          {this.props.isExistingAssignment ?
-            this.renderContinueMainAssignmentPopup()
-          :
-            this.renderStartMainAssignmentPopup()
+          {this.props.showMainAssignmentPopup ?
+            this.renderMainAssignmentPopup()
+            : null
           }
           <button
             className={`${elements.button} ${styles.mainAssignmentButton}`}
