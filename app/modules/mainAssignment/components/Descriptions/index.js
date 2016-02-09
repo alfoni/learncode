@@ -23,7 +23,7 @@ class Descriptions extends React.Component {
   }
   render() {
     return (
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} id="descriptions">
         <h1 className={styles.header}>Søk på google</h1>
         <form onSubmit={(e) => this.onGoogleSearchSubmit(e)}>
           <input
@@ -38,7 +38,9 @@ class Descriptions extends React.Component {
           </button>
         </form>
         <h1 className={styles.header}>Beskrivelser</h1>
-        {this.renderDescriptions()}
+        <div className={styles.descriptionWrapper}>
+          {this.renderDescriptions()}
+        </div>
       </div>
     );
   }

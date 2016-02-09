@@ -6,6 +6,10 @@
   overflow-y: auto;
 }
 
+.descriptionWrapper {
+  padding-bottom: 60px;
+}
+
 .header {
   font-size: 22px;
 }

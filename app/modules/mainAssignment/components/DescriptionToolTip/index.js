@@ -15,7 +15,9 @@ class DescriptionToolTip extends React.Component {
   positionTooltipWrapper(e, description) {
     const tooltipWrapper = this.refs[description];
     const marginToDescriptionName = 5;
+    const defaultMarginTop = -45;
     tooltipWrapper.style.marginLeft = (e.target.offsetWidth + marginToDescriptionName) + 'px';
+    tooltipWrapper.style.marginTop = (-Math.abs(document.getElementById('descriptions').scrollTop) + defaultMarginTop) + 'px';
   }
   onTagNameMouseOver(e, description) {
     this.positionTooltipWrapper(e, description);
@@ -38,7 +40,7 @@ class DescriptionToolTip extends React.Component {
   }
   renderDescriptionWord(description, index) {
     return (
-      <span key={index}>
+      <span key={index} className={styles.descriptionWordWrapper}>
         <span ref={description.tagName} className={this.props.visibleTooltip === description.tagName ? styles.tooltipWrapper : styles.hide}>
           <b className={styles.tooltipHeader}>{description.tagName}</b>
           <p>{description.description}</p>
