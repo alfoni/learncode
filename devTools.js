@@ -65,6 +65,47 @@ var createTool = function (elms) {
       }
 
       return this.elms[0].className;
+    },
+    cssStyle: function (className, property, value) {
+      var style = null;
+      var styleSheets = document.styleSheets;
+
+      if (className) {
+        for (var x = 0; x < styleSheets.length; x++) {
+          var classes = styleSheets[x].rules; /* cssRules */
+          for (var y = 0; y < classes.length; y++) {
+            if (classes[y].selectorText === className) {
+              (classes[y].cssText) ? style = classes[y].cssText : style = classes[y].style.cssText;
+            }
+          }
+        }
+      }
+      var styleContent = style.match(/\{(.*?)\}/)[1];
+      var properties = [];
+      if (styleContent) {properties = styleContent.split(';')}
+
+      if (value) {
+        if (properties.length) {
+          var cssValue;
+          var cssProperty;
+          for (var x = 0; x < properties.length; x++) {
+            if (properties[x].split(':')[0].trim() === property) {
+              cssValue = properties[x].split(':')[1].trim();
+              cssProperty = properties[x].split(':')[0].trim();
+            }
+          }
+
+          return cssValue ? true : false;
+        }
+
+        return false;
+      }
+
+      if (property) {
+        return styleContent.indexOf(property) >= 0;
+      }
+
+      return style;
     }
   };
 };

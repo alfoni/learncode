@@ -45,7 +45,9 @@ class DescriptionToolTip extends React.Component {
     }).split(' ');
 
     return textWithReplacedTags.map((word, index) => {
-      const isReplacedTag = word === '§?§';
+      const isReplacedTag = word.indexOf('§?§') >= 0;
+      const contentBeforeTag = word.split('§?§')[0];
+      const contentAfterTag = word.split('§?§')[1];
       const tag = tags[currentTagIndex];
 
       if (isReplacedTag && tag) {
@@ -55,38 +57,46 @@ class DescriptionToolTip extends React.Component {
         currentTagIndex++;
 
         if (isUrl) {
-          return this.renderURL(tagContent, index);
+          return this.renderURL(tagContent, index, contentBeforeTag, contentAfterTag);
         } else if (description) {
-          return this.renderDescriptionWord(description, index);
+          return this.renderDescriptionWord(description, index, contentBeforeTag, contentAfterTag);
         }
       }
 
       return ' ' + word + ' ';
     });
   }
-  renderDescriptionWord(description, index) {
+  renderDescriptionWord(description, index, contentBeforeTag, contentAfterTag) {
     return (
       <span key={index}>
-        <span ref={description.tagName} className={this.props.visibleTooltip === description.tagName ? styles.tooltipWrapper : styles.hide}>
-          <b className={styles.tooltipHeader}>{description.tagName}</b>
-          <p>{description.description}</p>
-          <div className={styles.codeWrapper}>
-            <CodeExample description={description}/>
-          </div>
-        </span>
-        <span
-          className={styles.tagName}
-          onMouseOver={(e) => this.onTagNameMouseOver(e, description.tagName)}
-          onMouseOut={() => this.onTagNameMouseOut()}>{description.tagName}</span>
+        <span>{contentBeforeTag}</span>
+        <span>
+          <span ref={description.tagName} className={this.props.visibleTooltip === description.tagName ? styles.tooltipWrapper : styles.hide}>
+            <b className={styles.tooltipHeader}>{description.tagName}</b>
+            <p>{description.description}</p>
+            <div className={styles.codeWrapper}>
+              <CodeExample description={description}/>
+            </div>
+          </span>
+          <span
+            className={styles.tagName}
+            onMouseOver={(e) => this.onTagNameMouseOver(e, description.tagName)}
+            onMouseOut={() => this.onTagNameMouseOut()}>{description.tagName}</span>
+          </span>
+          <span>{contentAfterTag}</span>
       </span>
     );
   }
-  renderURL(tagContent, index) {
+  renderURL(tagContent, index, contentBeforeTag, contentAfterTag) {
     const url = 'http' + tagContent.split('http')[1]; // Cannot split on ':' due to URL containing ':'
     const text = tagContent.split(':')[1];
 
     return (
-      <a className={styles.url} href={url} key={index} target="_blank">{text}</a>
+      <span>
+        <span>{contentBeforeTag}</span>
+        <a className={styles.url} href={url} key={index} target="_blank">{text}</a>
+        <span>{contentAfterTag}</span>
+      </span>
     );
   }
   render() {

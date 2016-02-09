@@ -10,7 +10,9 @@ import elements from 'common/elements.css';
   showAddNewTierInput: ['techTree', 'showAddNewTierInput'],
   newTierName: ['techTree', 'newTierName'],
   courses: ['techTree', 'courses'],
-  user: ['user']
+  user: ['user'],
+  showMainAssignmentPopup: ['techTree', 'showMainAssignmentPopup'],
+  isExistingAssignment: ['mainAssignment', 'existingAssignment']
 })
 class Tiers extends React.Component {
   constructor() {
@@ -113,11 +115,64 @@ class Tiers extends React.Component {
       </div>
     );
   }
+  renderContinueMainAssignmentPopup() {
+    return (
+      <div
+        className={this.props.showMainAssignmentPopup ? styles.startMainAssignmentPopup : styles.hidden}
+        onClick={(e) => {e.stopPropagation();}}>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          this.props.signals.techTree.continueMainAssignmentClicked();
+        }}>
+          <button type="submit" className={`${elements.button} ${styles.startMainAssignmentButton}`}>
+            Fortsett
+          </button>
+        </form>
+        <div className={styles.mainAssignmentArrow}></div>
+        <div className={styles.mainAssignmentArrowBorder}></div>
+      </div>
+    );
+  }
+  renderStartMainAssignmentPopup() {
+    return (
+      <div
+        className={this.props.showMainAssignmentPopup ? styles.startMainAssignmentPopup : styles.hidden}
+        onClick={(e) => {e.stopPropagation();}}>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          this.props.signals.techTree.startMainAssignmentClicked();
+        }}>
+          <input
+            className={`${elements.input} ${styles.mainAssignmentNameInput}`}
+            placeholder="Ditt navn"
+            onChange={(e) => this.props.signals.techTree.nameInputChanged({value: e.target.value})}/>
+          <button type="submit" className={`${elements.button} ${styles.startMainAssignmentButton}`}>
+            Start
+          </button>
+        </form>
+        <div className={styles.mainAssignmentArrow}></div>
+        <div className={styles.mainAssignmentArrowBorder}></div>
+      </div>
+    );
+  }
   render() {
     return (
       <div className={styles.wrapper}>
-        <div className={styles.title}>Hei!</div>
-        <div className={styles.subTitle}>Velkommen til kodeboksen.</div>
+        <div className={styles.mainAssignmentWrapper}>
+          {this.props.isExistingAssignment ?
+            this.renderContinueMainAssignmentPopup()
+          :
+            this.renderStartMainAssignmentPopup()
+          }
+          <button
+            className={`${elements.button} ${styles.mainAssignmentButton}`}
+            onClick={(e) => {
+              e.stopPropagation();
+              this.props.signals.techTree.mainAssignmentButtonClicked();
+            }}>
+            Hovedoppgave
+          </button>
+        </div>
         <div className={styles.tiersWrapper}>
           {this.props.tiers ? this.renderTiers() : null}
           {this.renderAddNewTier()}

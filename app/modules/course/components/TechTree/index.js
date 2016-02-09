@@ -22,9 +22,7 @@ let elements = null;
   opened: ['techTree', 'opened'],
   showNewCourse: ['courses', 'showNewCourse'],
   user: ['user'],
-  openedCoursePopup: ['techTree', 'openedCoursePopup'],
-  showMainAssignmentPopup: ['techTree', 'showMainAssignmentPopup'],
-  isExistingAssignment: ['mainAssignment', 'existingAssignment']
+  openedCoursePopup: ['techTree', 'openedCoursePopup']
 })
 class TechTree extends React.Component {
   constructor() {
@@ -429,30 +427,6 @@ class TechTree extends React.Component {
           </Toolbar>
           <Tiers/>
           <div className={styles.techTreeWrapper}>
-            {
-              this.props.selectedTier ?
-                <div>
-                  {this.props.isExistingAssignment ?
-                    this.renderContinueMainAssignmentPopup()
-                  :
-                    this.renderStartMainAssignmentPopup()
-                  }
-                  <button
-                    // disabled={!this.tierIsCompleted()}
-                    className={`${elements.button} ${styles.sandboxButton}`}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      this.props.signals.techTree.mainAssignmentButtonClicked();
-                    }}>
-                    Hovedoppgave
-                  </button>
-                  {!this.tierIsCompleted() ?
-                    <div className={styles.sandboxDescription}>Du må fullføre seksjonen for å låse opp hovedoppgaven.</div>
-                  : null}
-                </div>
-              :
-                null
-            }
             {this.props.openedCoursePopup ? <TechTreeCoursePopup/> : null}
             {this.renderLevels()}
           </div>
