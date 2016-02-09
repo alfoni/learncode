@@ -2,7 +2,7 @@ import sandbox from './../sandbox';
 import responseSync from './../responseSync';
 
 export default function updateSandbox(req, res) {
-  sandbox.update(req.body);
+  sandbox.update(req.user.id, req.body);
   res.type('json');
   res.send({});
 

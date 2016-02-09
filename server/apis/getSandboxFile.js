@@ -15,11 +15,11 @@ const devToolsScript = fs.readFileSync(path.resolve(__dirname, '../..', 'devTool
 
 export default function getSandboxFile(req, res) {
   const id = req.query.id;
-  const file = sandbox.getFile(req.path.replace('/subdomain/sandbox', ''));
+  const file = sandbox.getFile(req.user.id, req.path.replace('/subdomain/sandbox', ''));
   const type = responseTypes[path.extname(file.name)];
 
   const createIndexResponse = (code) => {
-    const assignment = sandbox.getAssignment();
+    const assignment = sandbox.getAssignment(req.user.id);
 
     const insertAssignmentScript = assignment ? ['<script>',
     assignmentTestRunner
@@ -52,13 +52,13 @@ export default function getSandboxFile(req, res) {
 
   if (file.name === 'index.html' && !responseSync[id]) {
     responseSync[id] = function response() {
-      const index = createIndexResponse(sandbox.getFile(req.path.replace('/subdomain/sandbox', '')).code);
+      const index = createIndexResponse(sandbox.getFile(req.user.id, req.path.replace('/subdomain/sandbox', '')).code);
       res.type(type);
       res.send(index);
       delete responseSync[id];
     };
   } else if (file.name === 'index.html') {
-    const index = createIndexResponse(sandbox.getFile(req.path.replace('/subdomain/sandbox', '')).code);
+    const index = createIndexResponse(sandbox.getFile(req.user.id, req.path.replace('/subdomain/sandbox', '')).code);
     res.type(type);
     res.send(index);
     delete responseSync[id];
