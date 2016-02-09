@@ -2,7 +2,7 @@ import db from './../database.js';
 
 export default function updateMainAssignments(req, res) {
   db.update('mainAssignments', {
-    id: req.params.tierId + '-' + req.params.sessionId
+    userId: req.user.id
   }, {
     $set: req.body
   }, {

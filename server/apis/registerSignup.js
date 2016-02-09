@@ -5,7 +5,7 @@ import email from './../email.js';
 import sessionCache from '../sessionCache';
 
 export default function registerSignup(req, res) {
-  const id = req.body.email || req.cookies.kodeboksen || (String(Date.now() + (Math.round(Math.random() * 10000))));
+  const id = req.body.email || req.cookies.kodeboksen || (String(Date.now()) + String((Math.round(Math.random() * 10000))));
   db.findOne('users', {
     id: id
   })

@@ -12,19 +12,16 @@ const defaultIndex = `<!DOCTYPE html>
 
 export default function getMainAssignment(req, res) {
   db.findOne('mainAssignments', {
-    id: req.params.tierId + '-' + req.params.sessionId
+    userId: req.user.id
   })
   .then((mainAssignment) => {
-    console.log('id:' + req.params.tierId + '-' + req.params.sessionId);
-    console.log(mainAssignment);
     res.type('json');
-    res.send(mainAssignment || {
-      files: [{
-        code: defaultIndex,
-        name: 'index.html'
-      }],
-      autorName: ''
-    });
+    if (!mainAssignment) {
+      res.status(404);
+      res.send({});
+    } else {
+      res.send(mainAssignment);
+    }
   })
   .catch(() => {
     console.log('Could not get main assignment');
