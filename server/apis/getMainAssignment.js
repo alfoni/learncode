@@ -1,15 +1,5 @@
 import db from './../database.js';
 
-const defaultIndex = `<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8"/>
-  </head>
-  <body>
-
-  </body>
-</html>`;
-
 export default function getMainAssignment(req, res) {
   db.findOne('mainAssignments', {
     userId: req.user.id
