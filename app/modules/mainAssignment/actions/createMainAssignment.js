@@ -7,7 +7,10 @@ function createMainAssignment({services, output, state}) {
     authorName: state.get(['techTree', 'authorName'])
   })
   .then(() => {
-    output.success();
+    output.success({
+      tierId: currentTierId,
+      userId: userId
+    });
   })
   .catch(() => {
     output.error();
