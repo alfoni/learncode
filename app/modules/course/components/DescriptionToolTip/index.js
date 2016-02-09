@@ -17,12 +17,12 @@ class DescriptionToolTip extends React.Component {
     const marginToDescriptionName = 5;
     tooltipWrapper.style.marginLeft = (e.target.offsetWidth + marginToDescriptionName) + 'px';
   }
-  onTagNameMouseOver(e, description) {
+  onTagNameMouseOver(e, description, id) {
     this.positionTooltipWrapper(e, description);
     this.props.signals.course.tagNameMouseOver({
       timeout: setTimeout(() => {
         this.props.signals.course.descriptionHovered({
-          tooltip: description
+          tooltip: description + id
         });
       }, 200)
     });
@@ -36,8 +36,14 @@ class DescriptionToolTip extends React.Component {
       return description.tagName === descriptionWord;
     });
   }
-  replaceTagsWithDescriptions(text) {
-    const tags = text.match(/\$\{(.*?)\}/g) || [];
+  replaceTagsWithDescriptions(text, id) {
+    let tags = text.match(/\$\{(.*?)\}/g) || [];
+    tags = tags.map((tag, index) => {
+      return {
+        tag: tag,
+        id: id + ' ' + index
+      };
+    });
     let currentTagIndex = 0;
 
     const textWithReplacedTags = text.replace(/\$\{(.*?)\}/g, () => {
@@ -48,7 +54,8 @@ class DescriptionToolTip extends React.Component {
       const isReplacedTag = word.indexOf('§?§') >= 0;
       const contentBeforeTag = word.split('§?§')[0];
       const contentAfterTag = word.split('§?§')[1];
-      const tag = tags[currentTagIndex];
+      const tag = tags[currentTagIndex].tag;
+      const tagId = tags[currentTagIndex].id;
 
       if (isReplacedTag && tag) {
         const tagContent = tag.substr(2, tag.length - 3);
@@ -59,19 +66,19 @@ class DescriptionToolTip extends React.Component {
         if (isUrl) {
           return this.renderURL(tagContent, index, contentBeforeTag, contentAfterTag);
         } else if (description) {
-          return this.renderDescriptionWord(description, index, contentBeforeTag, contentAfterTag);
+          return this.renderDescriptionWord(description, index, tagId, contentBeforeTag, contentAfterTag);
         }
       }
 
       return ' ' + word + ' ';
     });
   }
-  renderDescriptionWord(description, index, contentBeforeTag, contentAfterTag) {
+  renderDescriptionWord(description, index, id, contentBeforeTag, contentAfterTag) {
     return (
       <span key={index}>
         <span>{contentBeforeTag}</span>
         <span>
-          <span ref={description.tagName} className={this.props.visibleTooltip === description.tagName ? styles.tooltipWrapper : styles.hide}>
+          <span ref={description.tagName} className={this.props.visibleTooltip === description.tagName + id ? styles.tooltipWrapper : styles.hide}>
             <b className={styles.tooltipHeader}>{description.tagName}</b>
             <p>{description.description}</p>
             <div className={styles.codeWrapper}>
@@ -80,8 +87,8 @@ class DescriptionToolTip extends React.Component {
           </span>
           <span
             className={styles.tagName}
-            onMouseOver={(e) => this.onTagNameMouseOver(e, description.tagName)}
-            onMouseOut={() => this.onTagNameMouseOut()}>{description.tagName}</span>
+            onMouseOver={(e) => this.onTagNameMouseOver(e, description.tagName, id)}
+            onMouseOut={() => this.onTagNameMouseOut()}>{description.tagName.toLowerCase()}</span>
           </span>
           <span>{contentAfterTag}</span>
       </span>
@@ -100,7 +107,7 @@ class DescriptionToolTip extends React.Component {
     );
   }
   render() {
-    const description = this.replaceTagsWithDescriptions(this.props.children);
+    const description = this.replaceTagsWithDescriptions(this.props.children, this.props.id);
 
     return (
       <span>{description}</span>

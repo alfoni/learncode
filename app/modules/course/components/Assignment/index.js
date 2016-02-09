@@ -30,7 +30,7 @@ class Assignment extends React.Component {
       <div className={styles.assignmentItem} key={index}>
         <div className={styles.assignmentNumber}>{'0' + (index + 1)}</div>
         <div className={styles.assignmentText}>
-          <DescriptionToolTip>
+          <DescriptionToolTip id={Math.random() * 1000}>
             {text}
           </DescriptionToolTip>
         </div>
