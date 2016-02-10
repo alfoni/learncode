@@ -8,9 +8,7 @@ function setSelectedTierIndex({state, input}) {
     selectedTierIndex = input.tierIndex;
   }
 
-  console.log(selectedTierIndex);
-
-  state.set(['techTree', 'selectedTierIndex'], selectedTierIndex);
+  state.set(['techTree', 'selectedTierIndex'], selectedTierIndex === -1 ? 0 : selectedTierIndex);
 }
 
 export default setSelectedTierIndex;
