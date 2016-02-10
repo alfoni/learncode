@@ -63,7 +63,7 @@ controller.addModules({
       lastPaused: Date.now()
     }
   }),
-  devtools: Devtools(),
+  devtools: process.env.NODE_ENV === 'production' ? () => {} : Devtools(),
   router: Router({
     '/': 'home.opened',
     '/courses': 'courses.opened',
