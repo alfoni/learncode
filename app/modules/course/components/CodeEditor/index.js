@@ -18,9 +18,6 @@ import icons from 'common/icons.css';
 import currentScene from '../../computed/currentScene';
 import currentFile from '../../computed/currentFile';
 import currentAssignmentsSolvedCount from '../../computed/currentAssignmentsSolvedCount';
-import AddFile from '../AddFile';
-import ModuleFiles from '../ModuleFiles';
-import Toolbar from 'common/components/Toolbar';
 import RemoveFile from '../RemoveFile';
 import AssignmentResult from '../AssignmentResult';
 import AssignmentSuccess from '../AssignmentSuccess';
@@ -160,20 +157,6 @@ class CodeEditor extends React.Component {
   render() {
     return (
       <div className={styles.wrapper}>
-        <Toolbar>
-          <ModuleFiles
-            scene={this.props.currentScene}
-            currentFile={this.props.currentFile}
-            onFileClick={this.props.signals.course.fileClicked}/>
-          <AddFile
-            onAddFileClick={this.props.signals.course.addFileClicked}
-            onFileNameChange={this.props.signals.course.addFileNameUpdated}
-            onFileSubmit={this.props.signals.course.addFileSubmitted}
-            onAddFileAborted={this.props.signals.course.addFileAborted}
-            showInput={this.props.showAddFileInput}
-            placeholder="Filnavn..."
-            value={this.props.newFileName}/>
-        </Toolbar>
         <RemoveFile show={this.props.currentScene.currentFileIndex !== 0} onClick={() => this.props.signals.course.removeFileClicked()}/>
         <div ref="code" className={styles.editor}/>
         <AssignmentResult/>

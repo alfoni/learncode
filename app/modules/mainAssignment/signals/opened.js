@@ -14,35 +14,46 @@ import loadDescriptions from 'modules/course/actions/loadDescriptions';
 import setDescriptions from '../actions/setDescriptions';
 import resetAssignment from 'modules/course/actions/resetAssignment';
 import setMainAssignmentAsCourse from '../actions/setMainAssignmentAsCourse';
+import mainAssignmentIsLoaded from '../actions/mainAssignmentIsLoaded';
+import setPreviewState from '../actions/setPreviewState';
 
 export default [
   setPage('mainAssignment'),
   resetAssignment,
-  setDefaultCourseState,
-  setLoadingCourse,
-  set(['course', 'isLoading'], true),
-  [
-    getMainAssignment, {
-      success: [
-        setMainAssignment,
-        setMainAssignmentAsCourse,
-        setAssignmentsPositions,
-        addonsSet('state://./currentAssignmentIndex', 0),
-        ...saveSandboxChain,
-        setLoadedCourse,
-        set(['course', 'isLoading'], false)
+  mainAssignmentIsLoaded, {
+    true: [
+      setPreviewState,
+      ...saveSandboxChain
+    ],
+    false: [
+      setDefaultCourseState,
+      setLoadingCourse,
+      set(['course', 'isLoading'], true),
+      [
+        getMainAssignment, {
+          success: [
+            setMainAssignment,
+            setMainAssignmentAsCourse,
+            setAssignmentsPositions,
+            setPreviewState,
+            addonsSet('state://./currentAssignmentIndex', 0),
+            ...saveSandboxChain,
+            setLoadedCourse,
+            set(['course', 'isLoading'], false)
+          ],
+          error: [
+            showSnackbar('Innlasting av sandkasse feilet!')
+          ]
+        }
       ],
-      error: [
-        showSnackbar('Innlasting av sandkasse feilet!')
-      ]
-    }
-  ],
-  [
-    loadDescriptions, {
-      success: [setDescriptions],
-      error: [showSnackbar('Innlasting av beskrivelser feilet!')]
-    }
-  ],
-  ...getTechTreeData,
-  set(['techTree', 'opened'], false)
+      [
+        loadDescriptions, {
+          success: [setDescriptions],
+          error: [showSnackbar('Innlasting av beskrivelser feilet!')]
+        }
+      ],
+      ...getTechTreeData,
+      set(['techTree', 'opened'], false)
+    ]
+  }
 ];

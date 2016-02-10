@@ -71,9 +71,11 @@ controller.addModules({
     '/sessions': 'sessions.opened',
     '/techtree': 'techTree.opened',
     '/mainassignment/:tierId/:userId': 'mainAssignment.opened',
+    '/mainassignment/:tierId/:userId/:preview': 'mainAssignment.previewOpened',
     '*': 'missingRouteRouted'
   }, {
-    onlyHash: true
+    onlyHash: true,
+    mapper: {query: true}
   })
 });
 

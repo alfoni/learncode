@@ -31,3 +31,16 @@
   font-size: 16px;
   color: #5a7396;
 }
+
+.section {
+  width: 50%;
+  display: inline-block;
+  position: relative;
+  vertical-align: top;
+  height: 100%;
+}
+
+.toolbarButtonRight {
+  float: right;
+  height: 100%;
+}

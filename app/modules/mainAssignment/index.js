@@ -34,11 +34,13 @@ export default () => {
       descriptions: [],
       currentFileIndex: 0,
       files: [],
-      existingAssignment: false
+      existingAssignment: false,
+      preview: false
     });
 
     module.addSignals({
       opened: createSession('mainAssignment.opened', authenticate(opened)),
+      previewOpened: createSession('mainAssignment.previewOpened', authenticate(opened)),
       addFileClicked: track('mainAssignment.addFileClicked', addFileClicked),
       fileClicked: track('mainAssignment.fileClicked', fileClicked),
       addFileAborted: track('mainAssignment.addFileAborted', addFileAborted),

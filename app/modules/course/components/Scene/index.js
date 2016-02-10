@@ -8,7 +8,6 @@ import CodeEditor from '../CodeEditor';
 import Preview from '../Preview';
 import SceneControls from '../SceneControls';
 import icons from 'common/icons.css';
-import AssignmentsBar from '../AssignmentsBar';
 import EditAssignment from '../EditAssignment';
 import styles from './styles.css';
 import currentFile from '../../computed/currentFile';
@@ -17,9 +16,15 @@ import isAdminMode from '../../computed/isAdminMode';
 import currentAssignmentsSolvedCount from '../../computed/currentAssignmentsSolvedCount';
 import Assignment from '../Assignment';
 import CourseHeader from '../CourseHeader';
+import ToolbarButtonPopover from 'common/components/ToolbarButtonPopover';
+import ConfigureScenes from '../ConfigureScenes';
+import AddFile from '../AddFile';
+import ModuleFiles from '../ModuleFiles';
 
 @Cerebral({
   isLoading: ['course', 'isLoading'],
+  isRecording: ['recorder', 'isRecording'],
+  user: ['user'],
   recorder: ['recorder'],
   courseName: ['course', 'name'],
   courseId: ['course', 'id'],
@@ -30,7 +35,10 @@ import CourseHeader from '../CourseHeader';
   currentScene: currentScene,
   isAdminMode: isAdminMode,
   showScenesList: ['course', 'showScenesList'],
-  scenesList: ['course', 'scenesList']
+  scenesList: ['course', 'scenesList'],
+  showConfigureScenes: ['course', 'showConfigureScenes'],
+  showAddFileInput: ['course', 'showAddFileInput'],
+  newFileName: ['course', 'newFileName']
 })
 class Scene extends React.Component {
   assignmentDescriptionChanged(e) {
@@ -102,8 +110,52 @@ class Scene extends React.Component {
           {this.renderAssignment()}
         </Module>
         <Module className={styles.code} show>
-          <CodeEditor/>
-          <Preview show={this.props.showPreview}/>
+          <div className={styles.section}>
+            <Toolbar>
+              <ModuleFiles
+                scene={this.props.currentScene}
+                currentFile={this.props.currentFile}
+                onFileClick={this.props.signals.course.fileClicked}/>
+              <AddFile
+                onAddFileClick={this.props.signals.course.addFileClicked}
+                onFileNameChange={this.props.signals.course.addFileNameUpdated}
+                onFileSubmit={this.props.signals.course.addFileSubmitted}
+                onAddFileAborted={this.props.signals.course.addFileAborted}
+                showInput={this.props.showAddFileInput}
+                placeholder="Filnavn..."
+                value={this.props.newFileName}/>
+            </Toolbar>
+            <CodeEditor/>
+          </div>
+          <div className={styles.section}>
+            <Toolbar>
+            {
+              this.props.user.isAdmin ?
+                <span className={styles.toolbarButtonRight}>
+                  <ToolbarButton
+                    active={!this.props.isAdminMode}
+                    icon={icons.user}
+                    onClick={this.props.signals.course.toggleForceUserClicked}/>
+                </span>
+              :
+                null
+            }
+            {
+              this.props.isAdminMode ?
+                <span className={styles.toolbarButtonRight}>
+                  <ToolbarButtonPopover icon={icons.addCourse}
+                                        onClick={(e) => this.props.signals.course.configureScenesClicked(e)}
+                                        show={this.props.showConfigureScenes}
+                                        side="right">
+                    <ConfigureScenes/>
+                  </ToolbarButtonPopover>
+                </span>
+              :
+                null
+            }
+            </Toolbar>
+            <Preview show={this.props.showPreview}/>
+          </div>
         </Module>
       </div>
     );
