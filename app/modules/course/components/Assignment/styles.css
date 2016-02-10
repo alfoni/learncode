@@ -1,6 +1,8 @@
 .wrapper {
-  padding: 10px;
+  padding: 10px 10px 100px 10px;
   font-family: Ubuntu, sans-serif;
+  height: calc(100% - 455px);
+  overflow-y: auto;
 }
 
 .taskHeader {

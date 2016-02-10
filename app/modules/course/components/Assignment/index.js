@@ -47,7 +47,7 @@ class Assignment extends React.Component {
   }
   render() {
     return (
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} id="taskWrapper">
         <div className={styles.taskHeader}>
           Oppgave {this.props.currentAssignmentIndex + 1}
           {this.props.completed ? <span className={styles.completedText}>fullført</span> : null}

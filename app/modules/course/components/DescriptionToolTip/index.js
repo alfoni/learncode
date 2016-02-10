@@ -15,7 +15,9 @@ class DescriptionToolTip extends React.Component {
   positionTooltipWrapper(e, description) {
     const tooltipWrapper = this.refs[description];
     const marginToDescriptionName = 5;
+    const defaultMarginTop = -45;
     tooltipWrapper.style.marginLeft = (e.target.offsetWidth + marginToDescriptionName) + 'px';
+    tooltipWrapper.style.marginTop = (-Math.abs(document.getElementById('taskWrapper').scrollTop) + defaultMarginTop) + 'px';
   }
   onTagNameMouseOver(e, description, id) {
     this.positionTooltipWrapper(e, description);
