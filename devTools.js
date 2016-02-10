@@ -14,7 +14,7 @@ var createTool = function (elms) {
     },
     getChild: function (index) {
       var elements = onlyElements(this.elms[0].childNodes);
-      elements = elements[index] ? [elements[index]] : [];
+      elements = !elements || !elements[index] ? [] : [elements[index]];
 
       return createTool(elements);
     },
