@@ -25,10 +25,11 @@ class Assignment extends React.Component {
   }
   renderAssignment(descriptions, index) {
     const text = descriptions.join(' ');
+    const number = index + 1 < 10 ? '0' + (index + 1) : String(index + 1);
 
     return (
       <div className={styles.assignmentItem} key={index}>
-        <div className={styles.assignmentNumber}>{'0' + (index + 1)}</div>
+        <div className={styles.assignmentNumber}>{number}</div>
         <div className={styles.assignmentText}>
           <DescriptionToolTip id={Math.random() * 1000}>
             {text}
