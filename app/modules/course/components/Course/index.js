@@ -70,8 +70,6 @@ class Course extends React.Component {
       this.props.signals.course.appClicked({
         mousePositionX: e.clientX,
         mousePositionY: e.clientY
-      }, {
-        isRecorded: true
       });
     }
   }
