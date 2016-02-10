@@ -61,7 +61,7 @@ class Tiers extends React.Component {
       return (
         <div
           key={tier.id}
-          onClick={() => this.props.signals.techTree.tierClicked({index: index})}
+          onClick={() => this.props.signals.techTree.tierClicked({tierIndex: index})}
           className={`
             ${this.props.selectedTierIndex === index ? styles.tierSelected : styles.tier}
             ${this.tierIsActive(tier, index) ? styles.tier : styles.tierDisabled}
