@@ -7,7 +7,6 @@ function getCoursesInSelectedTier({services, state, output, input}) {
   if (typeof input.tierIndex === 'number') {
     selectedTierIndex = input.tierIndex;
   }
-  console.log(selectedTierIndex);
   const selectedTierId = state.get(['techTree', 'tiers', selectedTierIndex, 'id']);
 
   services.ajax.get('/API/tiers/' + selectedTierId + '/courses')

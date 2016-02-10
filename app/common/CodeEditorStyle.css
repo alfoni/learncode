@@ -6,6 +6,10 @@
     height: 100%;
 }
 
+.CodeMirror-scrollbar-filler {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
 .cm-s-learncode.CodeMirror .CodeMirror-lines {
   padding-top: 0;
 }
