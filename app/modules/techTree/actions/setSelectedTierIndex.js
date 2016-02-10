@@ -8,8 +8,6 @@ function setSelectedTierIndex({state, input}) {
     selectedTierIndex = input.tierIndex;
   }
 
-  console.log(selectedTierIndex);
-
   state.set(['techTree', 'selectedTierIndex'], selectedTierIndex);
 }
 
