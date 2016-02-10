@@ -8,6 +8,9 @@
           mousePositionX: e.clientX,
           mousePositionY: e.clientY,
           sandbox: true
+        },
+        options: {
+          isRecorded: true
         }
       }, location.origin.replace('sandbox', 'www'));
     });

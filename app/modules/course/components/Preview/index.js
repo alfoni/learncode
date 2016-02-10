@@ -34,7 +34,7 @@ class Preview extends React.Component {
   }
   onSandboxMessage(event) {
     if (event.data.signal) {
-      this.props.signals.course[event.data.signal](event.data.payload);
+      this.props.signals.course[event.data.signal](event.data.payload, event.data.options);
     }
   }
   render() {
