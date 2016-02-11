@@ -77,6 +77,11 @@
 	content: "\e018";
 }
 
+.eye {composes: font;}
+.eye:before {
+	content: "\e1a8";
+}
+
 .stop {composes: font}
 .stop:before {
 	content: "\e02a";
