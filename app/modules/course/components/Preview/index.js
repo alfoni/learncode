@@ -3,6 +3,7 @@ import {Decorator as Cerebral} from 'cerebral-view-react';
 import styles from './styles.css';
 import icons from 'common/icons.css';
 import isAdminMode from '../../computed/isAdminMode';
+import classNames from 'classnames';
 
 @Cerebral({
   url: ['course', 'previewUrl'],
@@ -32,7 +33,7 @@ class Preview extends React.Component {
   }
   render() {
     return (
-      <div className={styles.wrapper}>
+      <div className={classNames(styles.wrapper, {[styles.fullSize]: this.props.fullSize})}>
         <iframe id="previewIframe" ref="preview" className={styles.preview} src="about:blank"/>
       </div>
     );

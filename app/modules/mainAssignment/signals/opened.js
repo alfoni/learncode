@@ -20,8 +20,7 @@ export default [
   resetAssignment,
   mainAssignmentIsLoaded, {
     true: [
-      setPreviewState,
-      ...saveSandboxChain
+      setPreviewState
     ],
     false: [
       setDefaultCourseState,

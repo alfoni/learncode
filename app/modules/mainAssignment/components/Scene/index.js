@@ -11,6 +11,7 @@ import isAdminMode from 'modules/course/computed/isAdminMode';
 import Descriptions from '../Descriptions';
 import AddFile from 'modules/course/components/AddFile';
 import ModuleFiles from 'modules/course/components/ModuleFiles';
+import classNames from 'classnames';
 
 import currentScene from 'modules/course/computed/currentScene';
 import currentFile from 'modules/course/computed/currentFile';
@@ -40,25 +41,7 @@ class Scene extends React.Component {
     });
   }
   render() {
-    if (this.props.mainAssignment.preview) {
-      return (
-        <div className={styles.modules}>
-            <Toolbar>
-              <ToolbarButton icon={icons.chevronLeft} title="Kursoversikt" onClick={() => this.props.signals.techTree.toggled()}/>
-              <span className={styles.toolbarButtonRight}>
-                <ToolbarButton
-                  active={this.props.mainAssignment.preview}
-                  icon={icons.eye}
-                  onClick={() => this.props.signals.mainAssignment.opened({
-                    tierId: this.props.mainAssignment.tierId,
-                    userId: this.props.mainAssignment.userId
-                  })}/>
-              </span>
-            </Toolbar>
-            <Preview show={this.props.showPreview}/>
-        </div>
-      );
-    }
+    const preview = this.props.mainAssignment.preview;
 
     return (
       <div className={styles.modules}>
@@ -71,18 +54,22 @@ class Scene extends React.Component {
         <Module className={styles.code} show>
           <div className={styles.section}>
             <Toolbar>
-              <ModuleFiles
-                scene={this.props.currentScene}
-                currentFile={this.props.currentFile}
-                onFileClick={this.props.signals.course.fileClicked}/>
-              <AddFile
-                onAddFileClick={this.props.signals.course.addFileClicked}
-                onFileNameChange={this.props.signals.course.addFileNameUpdated}
-                onFileSubmit={this.props.signals.course.addFileSubmitted}
-                onAddFileAborted={this.props.signals.course.addFileAborted}
-                showInput={this.props.showAddFileInput}
-                placeholder="Filnavn..."
-                value={this.props.newFileName}/>
+              <div className={classNames(styles.codeEditorToolbarWrapper, {
+                [styles.hidden]: preview
+              })}>
+                <ModuleFiles
+                  scene={this.props.currentScene}
+                  currentFile={this.props.currentFile}
+                  onFileClick={this.props.signals.course.fileClicked}/>
+                <AddFile
+                  onAddFileClick={this.props.signals.course.addFileClicked}
+                  onFileNameChange={this.props.signals.course.addFileNameUpdated}
+                  onFileSubmit={this.props.signals.course.addFileSubmitted}
+                  onAddFileAborted={this.props.signals.course.addFileAborted}
+                  showInput={this.props.showAddFileInput}
+                  placeholder="Filnavn..."
+                  value={this.props.newFileName}/>
+              </div>
             </Toolbar>
             <CodeEditor sandboxMode/>
           </div>
@@ -90,16 +77,16 @@ class Scene extends React.Component {
             <Toolbar>
               <span className={styles.toolbarButtonRight}>
                 <ToolbarButton
-                  active={this.props.mainAssignment.preview}
+                  active={preview}
                   icon={icons.eye}
                   onClick={() => this.props.signals.mainAssignment.opened({
                     tierId: this.props.mainAssignment.tierId,
                     userId: this.props.mainAssignment.userId,
-                    preview: true
+                    preview: preview ? false : true
                   })}/>
               </span>
             </Toolbar>
-            <Preview show={this.props.showPreview}/>
+            <Preview show={this.props.showPreview} fullSize={preview}/>
           </div>
         </Module>
       </div>
