@@ -28,7 +28,7 @@ export default (req, res, next) => {
       res.send({});
     });
   } else {
-    const id = req.body.email || req.cookies.kodeboksen || (String(Date.now()) + String((Math.round(Math.random() * 10000))));
+    const id = req.cookies.kodeboksen || (String(Date.now()) + String((Math.round(Math.random() * 10000))));
     db.findOne('users', {
       id: id
     })
@@ -54,14 +54,11 @@ export default (req, res, next) => {
       ))
       .then(() => {
         res.cookie('kodeboksen', id, {
-          maxAge: 86400 * 1000 * 4,
+          maxAge: 86400 * 1000,
           domain: process.env.NODE_ENV === 'production' ? '.kodeboksen.no' : '.kodeboksen.dev',
           httpOnly: true
         });
-        res.send({
-          id: id,
-          isAdmin: req.body.email === 'christianalfoni@gmail.com'
-        });
+        next();
       })
       .catch((e) => {
         console.log('Could not handle user', e);

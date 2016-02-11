@@ -10,6 +10,7 @@ import updateScene from './apis/updateScene.js';
 import saveAudio from './apis/saveAudio.js';
 import saveVideo from './apis/saveVideo.js';
 import registerSignup from './apis/registerSignup.js';
+import login from './apis/login.js';
 import getAudio from './apis/getAudio.js';
 import getVideo from './apis/getVideo.js';
 import saveLog from './apis/saveLog.js';
@@ -57,6 +58,7 @@ export default function appController(router) {
   router.get('/API/courses/:id/scenes/:index/audio', verifyUser, getAudio);
   router.get('/API/courses/:id/scenes/:index/video', verifyUser, getVideo);
   router.post('/API/registerSignup', registerSignup);
+  router.post('/API/login', login);
   router.post('/API/logs', verifyUser, saveLog);
   router.get('/API/logs', getLogs);
   router.post('/API/sessions', verifyUser, createSession);

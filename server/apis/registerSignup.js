@@ -5,20 +5,21 @@ import email from './../email.js';
 import sessionCache from '../sessionCache';
 
 export default function registerSignup(req, res) {
-  const id = req.body.email || req.cookies.kodeboksen || (String(Date.now()) + String((Math.round(Math.random() * 10000))));
+  const id = req.body.email;
+  const password = req.body.password;
+
   db.findOne('users', {
     id: id
   })
     .then((user) => {
-      sessionCache.set(id);
-
       if (user) {
-        return;
+        throw new Error('User already exists');
       }
 
       return Promise.all([
         db.insert('users', {
-          id: id
+          id: id,
+          password: password
         })
         /*
         email({
@@ -47,13 +48,15 @@ export default function registerSignup(req, res) {
         */
       ]);
     })
-    .then(() => (
+    .then(() => {
+      sessionCache.set(id);
+
       db.insert('logs', {
         id: id,
         date: Date.now(),
         type: 'LOGGED_IN'
-      })
-    ))
+      });
+    })
     .then(() => {
       res.cookie('kodeboksen', id, {
         maxAge: 86400 * 1000 * 4,
@@ -68,6 +71,6 @@ export default function registerSignup(req, res) {
     .catch((e) => {
       console.log('Could not handle user', e);
       res.status(500);
-      res.send({});
+      res.send(e.message);
     });
 }

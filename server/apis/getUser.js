@@ -3,7 +3,7 @@ export default function getUser(req, res) {
 
   res.send({
     id: id,
-    isAdmin: id === 'christianalfoni@gmail.com',
+    isAdmin: id === 'post@kodeboksen.no',
     completedAssignments: {}
   });
 }
