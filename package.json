@@ -35,7 +35,7 @@
     "babel-plugin-react-transform": "^1.0.5",
     "baobab": "^2.0.0",
     "body-parser": "^1.14.1",
-    "cerebral": "^0.33.24",
+    "cerebral": "^0.33.25",
     "cerebral-addons": "^0.4.7",
     "cerebral-model-baobab": "^0.4.7",
     "cerebral-module-devtools": "^0.5.3",

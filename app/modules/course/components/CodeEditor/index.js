@@ -93,11 +93,19 @@ class CodeEditor extends React.Component {
     }
   }
   onUpdateLinting(errors) {
+    if (this.props.recorder.isPlaying) {
+      return;
+    }
+
     this.props.signals.course.codeVerified({
       hasError: Boolean(errors.length)
     });
   }
   onCursorActivity() {
+    if (this.props.recorder.isPlaying) {
+      return;
+    }
+
     const range = this.codemirror.getDoc().listSelections()[0];
 
     this.props.signals.course.codeCursorChanged({
