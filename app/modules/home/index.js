@@ -1,22 +1,43 @@
 import opened from './signals/opened';
-import formSubmitted from './signals/formSubmitted';
+import testKodeboksenClicked from './signals/testKodeboksenClicked';
 import startCourseClicked from './signals/startCourseClicked';
 import restartCourseClicked from './signals/restartCourseClicked';
 import continueCourseClicked from './signals/continueCourseClicked';
+import registerFormSubmitted from './signals/registerFormSubmitted';
+import loginFormSubmitted from './signals/loginFormSubmitted';
+import inputChange from './signals/inputChange';
 
 export default () => {
   return (module) => {
     module.addState({
-      showSigningupLoader: false,
-      hasRegistered: false
+      isLoggingIn: false,
+      isRegistering: false,
+      hasRegistered: false,
+      loginErrorMessage: false,
+      registerErrorMessage: false,
+      loginForm: {
+        email: '',
+        password: ''
+      },
+      registerForm: {
+        email: '',
+        password: '',
+        repeatedPassword: ''
+      }
     });
 
     module.addSignals({
       opened,
-      formSubmitted,
+      testKodeboksenClicked,
       startCourseClicked,
       restartCourseClicked,
-      continueCourseClicked
+      continueCourseClicked,
+      registerFormSubmitted,
+      loginFormSubmitted,
+      inputChange: {
+        chain: inputChange,
+        sync: true
+      }
     });
   };
 };

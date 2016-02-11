@@ -3,7 +3,9 @@ const verifyStatusAndParse = (response) => {
     return response.json();
   }
 
-  throw new Error('Error response on request');
+  return response.json().then((errorResponse) => {
+    throw errorResponse;
+  });
 };
 
 export default () => {

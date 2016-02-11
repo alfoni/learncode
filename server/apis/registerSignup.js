@@ -13,7 +13,7 @@ export default function registerSignup(req, res) {
   })
     .then((user) => {
       if (user) {
-        throw new Error('User already exists');
+        throw new Error('USER_EXISTS');
       }
 
       return Promise.all([
@@ -71,6 +71,6 @@ export default function registerSignup(req, res) {
     .catch((e) => {
       console.log('Could not handle user', e);
       res.status(500);
-      res.send(e.message);
+      res.send({message: e.message});
     });
 }

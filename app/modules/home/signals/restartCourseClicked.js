@@ -1,7 +1,7 @@
 import resetUserAssignments from '../actions/resetUserAssignments';
-import formSubmitted from './formSubmitted';
+import testKodeboksenClicked from './testKodeboksenClicked';
 
 export default [
   resetUserAssignments,
-  ...formSubmitted
+  ...testKodeboksenClicked
 ];
