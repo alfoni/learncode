@@ -53,8 +53,8 @@ class Home extends React.Component {
             {
               Object.keys(this.props.assignmentsSolved).length ?
                 <div>
-                  <button className={styles.button} onClick={() => this.props.signals.home.continueCourseClicked()}>Fortsett</button>
-                  <button className={styles.button} onClick={() => this.props.signals.home.restartCourseClicked()}>Start på nytt</button>
+                  <button className={styles.submitButton} onClick={() => this.props.signals.home.continueCourseClicked()}>Fortsett</button>
+                  <button className={styles.submitButton} onClick={() => this.props.signals.home.restartCourseClicked()}>Start på nytt</button>
                 </div>
               :
                 <div>
