@@ -1,5 +1,13 @@
-function getMainAssignment({services, output, input}) {
-  services.ajax.get(`/API/mainAssignments/${input.tierId}/${input.userId}`)
+function getMainAssignment({services, output, input, state}) {
+  let tierId = input.tierId;
+  let userId = input.userId;
+
+  if (!tierId || !userId) {
+    tierId = state.get(['course', 'isInTier']);
+    userId = state.get(['user', 'id']);
+  }
+
+  services.ajax.get(`/API/mainAssignments/${tierId}/${userId}`)
     .then((mainAssignment) => {
       output.success({
         mainAssignment: mainAssignment
