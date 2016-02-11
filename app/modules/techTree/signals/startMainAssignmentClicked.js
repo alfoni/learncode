@@ -12,11 +12,11 @@ export default [
           getMainAssignment, {
             success: [
               setMainAssignmentAsCourse,
-              redirectToMainAssignment,
-              set(['techTree', 'showMainAssignmentPopup'], false)
+              set(['techTree', 'showMainAssignmentPopup'], false),
+              redirectToMainAssignment
             ],
             error: []
-          }  
+          }
         ]
       ],
       error: []

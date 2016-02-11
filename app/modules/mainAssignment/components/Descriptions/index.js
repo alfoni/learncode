@@ -5,7 +5,7 @@ import DescriptionToolTip from '../DescriptionToolTip';
 import elements from 'common/elements.css';
 
 @Cerebral({
-  descriptions: ['mainAssignment', 'descriptions'],
+  descriptions: ['descriptions', 'list'],
   googleInput: ['mainAssignment', 'googleInput']
 })
 class Descriptions extends React.Component {

@@ -1,4 +1,4 @@
-function loadDescriptions({services, output}) {
+function getDescriptions({services, output}) {
   services.ajax.get('/API/descriptions')
   .then((descriptions) => {
     output.success({descriptions: descriptions});
@@ -8,4 +8,4 @@ function loadDescriptions({services, output}) {
   });
 }
 
-export default loadDescriptions;
+export default getDescriptions;

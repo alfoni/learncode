@@ -70,6 +70,6 @@ export default function appController(router) {
   router.get('/API/tiers', verifyUser, getTiers);
   router.patch('/API/tiers/:id', isAdmin, updateTier);
   router.get('/API/tiers/:id/courses', verifyUser, getCoursesInTier);
-  router.patch('/API/mainAssignments/:tierId/:userId', verifyUser, updateMainAssignments);
-  router.get('/API/mainAssignments/:tierId/:userId', verifyUser, getMainAssignment);
+  router.patch('/API/mainAssignments/:userId', verifyUser, updateMainAssignments);
+  router.get('/API/mainAssignments/:userId', verifyUser, getMainAssignment);
 }

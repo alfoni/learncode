@@ -4,6 +4,7 @@ import setMainAssignmentAsCourse from 'modules/mainAssignment/actions/setMainAss
 
 export default [
   setMainAssignmentAsCourse,
-  redirectToMainAssignment,
-  set(['techTree', 'showMainAssignmentPopup'], false)
+  set(['techTree', 'opened'], false),
+  set(['techTree', 'showMainAssignmentPopup'], false),
+  redirectToMainAssignment
 ];

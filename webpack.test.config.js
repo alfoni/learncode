@@ -35,7 +35,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
-      'process.env.SANDBOX_URL': JSON.stringify('http://sandbox.remosamuel.com')
+      'process.env.SANDBOX_URL': JSON.stringify('https://sandbox.kodeboksen.no')
     })
   ],
   resolve: {

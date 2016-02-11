@@ -14,8 +14,7 @@ import saveSandboxChain from './../chains/saveSandbox.js';
 import setLoadingCourse from './../actions/setLoadingCourse';
 import setLoadedCourse from './../actions/setLoadedCourse';
 import setAssignmentsPositions from './../actions/setAssignmentsPositions';
-import loadDescriptions from '../actions/loadDescriptions';
-import setDescriptions from '../actions/setDescriptions';
+import getAndSetDescriptions from 'modules/descriptions/chains/getAndSetDescriptions';
 import getTechTreeData from 'modules/techTree/chains/getTechTreeData';
 import resetAssignment from '../actions/resetAssignment';
 
@@ -66,12 +65,7 @@ export default [
       }
     ]
   },
-  [
-    loadDescriptions, {
-      success: [setDescriptions],
-      error: [showSnackbar('Innlasting av beskrivelser feilet!')]
-    }
-  ],
+  ...getAndSetDescriptions,
   ...getTechTreeData,
   set(['techTree', 'opened'], false)
 ];

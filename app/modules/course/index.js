@@ -63,7 +63,6 @@ export default () => {
       },
       showAssignmentStatus: false,
       assignmentsPositions: [],
-      descriptions: [],
       isLoadingMedia: false,
       authorId: null,
       showPreview: true,

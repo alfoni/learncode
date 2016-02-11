@@ -5,7 +5,6 @@ import {Container} from 'cerebral-view-react';
 import Router from 'cerebral-module-router';
 import Recorder from 'cerebral-module-recorder';
 import Devtools from 'cerebral-module-devtools';
-import ajax from './services/ajax';
 import localAssignments from './services/localAssignments';
 import localLastCourse from './services/localLastCourse';
 
@@ -17,6 +16,8 @@ import Courses from './modules/courses';
 import Course from './modules/course';
 import TechTree from './modules/techTree';
 import MainAssignment from './modules/mainAssignment';
+import Descriptions from './modules/descriptions';
+import Ajax from './modules/ajax';
 
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/actions/hideSnackbar.js';
@@ -31,7 +32,6 @@ controller.addSignals({
 });
 
 controller.addServices({
-  ajax,
   getIframePosition() {
     const previewIframe = document.getElementById('previewIframe');
 
@@ -45,12 +45,14 @@ controller.addServices({
 });
 
 controller.addModules({
+  ajax: Ajax(),
   home: Home(),
   sessions: Sessions(),
   courses: Courses(),
   course: Course(),
   techTree: TechTree(),
   mainAssignment: MainAssignment(),
+  descriptions: Descriptions(),
 
   recorder: Recorder({
     state: {
@@ -70,8 +72,8 @@ controller.addModules({
     '/courses/:courseId/scenes/:sceneIndex': 'course.opened',
     '/sessions': 'sessions.opened',
     '/techtree': 'techTree.opened',
-    '/mainassignment/:tierId/:userId': 'mainAssignment.opened',
-    '/mainassignment/:tierId/:userId/:preview': 'mainAssignment.previewOpened',
+    '/mainassignment/:userId': 'mainAssignment.opened',
+    '/mainassignment/:userId/:preview': 'mainAssignment.previewOpened',
     '*': 'missingRouteRouted'
   }, {
     onlyHash: true,

@@ -1,11 +1,10 @@
 import set from 'common/factories/actions/set';
 import createDescription from '../actions/createDescription';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
-import loadDescriptions from '../actions/loadDescriptions';
-import setDescriptions from '../actions/setDescriptions';
 import resetNewDescriptionFields from '../actions/resetNewDescriptionFields';
 import checkDescriptionState from '../actions/checkDescriptionState';
 import updateDescription from '../actions/updateDescription';
+import getAndSetDescriptions from 'modules/descriptions/chains/getAndSetDescriptions';
 
 export default [
   set(['courses', 'isSavingDescription'], true),
@@ -27,17 +26,8 @@ export default [
       ]
     ]
   },
-  [
-    loadDescriptions, {
-      success: [
-        setDescriptions,
-        resetNewDescriptionFields,
-        set(['courses', 'isSavingDescription'], false),
-        showSnackbar('Beskrivelsen er lagret')
-      ],
-      error: [
-        showSnackbar('Lasting av beskrivelser feilet!')
-      ]
-    }
-  ]
+  ...getAndSetDescriptions,
+  resetNewDescriptionFields,
+  set(['courses', 'isSavingDescription'], false),
+  showSnackbar('Beskrivelsen er lagret')
 ];

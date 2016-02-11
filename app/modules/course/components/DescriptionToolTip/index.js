@@ -4,7 +4,7 @@ import CodeExample from '../CodeExample';
 import styles from './styles.css';
 
 @Cerebral({
-  descriptions: ['course', 'descriptions'],
+  descriptions: ['descriptions', 'list'],
   tooltipTimeout: ['course', 'tooltip', 'timeout'],
   visibleTooltip: ['course', 'tooltip', 'visible']
 })
