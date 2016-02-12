@@ -34,7 +34,6 @@ export default [
             setAssignmentsPositions,
             setPreviewState,
             set('state:/mainAssignment.currentAssignmentIndex', 0),
-            ...saveSandboxChain,
             setLoadedCourse,
             set('state:/course.isLoading', false)
           ],
@@ -45,6 +44,7 @@ export default [
       ],
       ...getAndSetDescriptions,
       ...getTechTreeData,
+      ...saveSandboxChain,
       set('state:/techTree.opened', false)
     ]
   }
