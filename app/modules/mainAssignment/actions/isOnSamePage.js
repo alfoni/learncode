@@ -1,5 +1,5 @@
 function isOnSamePage({state, output}) {
-  const currentPage = state.get('app.currentPage');
+  const currentPage = state.get('currentPage');
 
   if (currentPage === 'mainAssignment') {
     output.true();
