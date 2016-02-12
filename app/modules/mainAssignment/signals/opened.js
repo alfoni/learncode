@@ -14,38 +14,46 @@ import setMainAssignmentAsCourse from '../actions/setMainAssignmentAsCourse';
 import mainAssignmentIsLoaded from '../actions/mainAssignmentIsLoaded';
 import setPreviewState from '../actions/setPreviewState';
 import getAndSetDescriptions from 'modules/descriptions/chains/getAndSetDescriptions';
+import isOnSamePage from '../actions/isOnSamePage';
 
 export default [
-  setPage('mainAssignment'),
-  resetAssignment,
-  mainAssignmentIsLoaded, {
-    true: [
+  isOnSamePage, {
+    true: [
       setPreviewState
     ],
     false: [
-      setDefaultCourseState,
-      setLoadingCourse,
-      set('state:/course.isLoading', true),
-      [
-        getMainAssignment, {
-          success: [
-            setMainAssignment,
-            setMainAssignmentAsCourse,
-            setAssignmentsPositions,
-            setPreviewState,
-            set('state:/mainAssignment.currentAssignmentIndex', 0),
-            setLoadedCourse,
-            set('state:/course.isLoading', false)
+      setPage('mainAssignment'),
+      resetAssignment,
+      mainAssignmentIsLoaded, {
+        true: [
+          setPreviewState
+        ],
+        false: [
+          setDefaultCourseState,
+          setLoadingCourse,
+          set('state:/course.isLoading', true),
+          [
+            getMainAssignment, {
+              success: [
+                setMainAssignment,
+                setMainAssignmentAsCourse,
+                setAssignmentsPositions,
+                setPreviewState,
+                set('state:/mainAssignment.currentAssignmentIndex', 0),
+                setLoadedCourse,
+                set('state:/course.isLoading', false)
+              ],
+              error: [
+                showSnackbar('Innlasting av sandkasse feilet!')
+              ]
+            }
           ],
-          error: [
-            showSnackbar('Innlasting av sandkasse feilet!')
-          ]
-        }
-      ],
-      ...getAndSetDescriptions,
-      ...getTechTreeData,
-      ...saveSandboxChain,
-      set('state:/techTree.opened', false)
+          ...getAndSetDescriptions,
+          ...getTechTreeData,
+          set('state:/techTree.opened', false)
+        ]
+      },
+      ...saveSandboxChain
     ]
   }
 ];
