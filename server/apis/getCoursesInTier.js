@@ -12,6 +12,14 @@ export default function getCoursesInTier(req, res) {
       id: {
         $in: coursesIds
       }
+    }, {
+      name: 1,
+      id: 1,
+      type: 1,
+      description: 1,
+      skillLevel: 1,
+      'scenes.recording.duration': 1,
+      _id: 0
     })
     .then((courses) => {
       res.type('json');
