@@ -18,7 +18,7 @@ import isOnSamePage from '../actions/isOnSamePage';
 
 export default [
   isOnSamePage, {
-    true: [
+    true: [
       setPreviewState
     ],
     false: [
@@ -40,8 +40,7 @@ export default [
                 setAssignmentsPositions,
                 setPreviewState,
                 set('state:/mainAssignment.currentAssignmentIndex', 0),
-                setLoadedCourse,
-                set('state:/course.isLoading', false)
+                setLoadedCourse
               ],
               error: [
                 showSnackbar('Innlasting av sandkasse feilet!')
@@ -53,7 +52,8 @@ export default [
           set('state:/techTree.opened', false)
         ]
       },
-      ...saveSandboxChain
+      ...saveSandboxChain,
+      set('state:/course.isLoading', false)
     ]
   }
 ];
