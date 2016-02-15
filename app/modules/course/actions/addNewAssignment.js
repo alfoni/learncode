@@ -1,15 +1,15 @@
 function addNewAssignment({state}) {
-  const currentSceneIndex = state.get(['course', 'currentSceneIndex']);
-  const assignmentsPath = ['course', 'scenes', currentSceneIndex, 'assignments'];
-  const assignmentsCount = state.get(assignmentsPath).length;
+  const currentSceneIndex = state.get('course.currentSceneIndex');
+  const sceneCursor = state.select(`course.scenes.${currentSceneIndex}`);
+  const assignmentsCount = sceneCursor.get('assignments').length;
 
-  state.push(assignmentsPath, {
+  sceneCursor.push('assignments', {
     description: '',
     code: '',
     completed: false
   });
-  state.set(['course', 'currentAssignmentIndex'], assignmentsCount - 1);
-  state.set(['course', 'scenesList', currentSceneIndex, 'assignmentsCount'], assignmentsCount + 1);
+  state.set('course.currentAssignmentIndex', assignmentsCount - 1);
+  sceneCursor.set('assignmentsCount', assignmentsCount + 1);
 }
 
 export default addNewAssignment;

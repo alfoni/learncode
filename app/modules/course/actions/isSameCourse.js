@@ -1,5 +1,5 @@
 function isSameCourse({input, state, output}) {
-  if (input.courseId === state.get(['course', 'id'])) {
+  if (input.courseId === state.get('course.id')) {
     output.true();
   } else {
     output.false();

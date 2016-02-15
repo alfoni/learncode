@@ -1,10 +1,10 @@
-function loadScene({input, state, output, services}) {
-  const courseId = state.get(['course', 'id']);
+function getScene({input, state, output, services}) {
+  const courseId = state.get('course.id');
 
   services.ajax.get(`/API/courses/${input.courseId || courseId}/scenes/${input.sceneIndex || 0}`)
-    .then((scene) => {
+    .then((response) => {
       output({
-        scene: scene
+        scene: response.result
       });
     }).catch((err) => {
       output({
@@ -13,4 +13,4 @@ function loadScene({input, state, output, services}) {
     });
 }
 
-export default loadScene;
+export default getScene;

@@ -10,9 +10,9 @@ function setAssignmentsPositions({state, services}) {
     }).map((signal) => {
       return signal.start - recording.start;
     });
-    state.set(['course', 'assignmentsPositions'], assignments);
+    state.set('course.assignmentsPositions', assignments);
   } else {
-    state.set(['course', 'assignmentsPositions'], []);
+    state.set('course.assignmentsPositions', []);
   }
 }
 

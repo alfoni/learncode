@@ -1,10 +1,10 @@
 function getMainAssignment({services, output, input, state}) {
-  const userId = input.userId || state.get(['user', 'id']);
+  const userId = input.userId || state.get('user.id');
 
   services.ajax.get(`/API/mainAssignments/${userId}`)
-    .then((mainAssignment) => {
+    .then((response) => {
       output.success({
-        mainAssignment: mainAssignment
+        mainAssignment: response.result
       });
     }).catch((e) => {
       console.log('error', e);

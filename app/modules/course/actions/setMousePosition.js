@@ -4,7 +4,7 @@ function setMousePosition({input, state, services}) {
   let mousePositionX;
   let mousePositionY = input.mousePositionY;
 
-  const sourceWidth = state.get(['recorder', 'clientSize', 'width']);
+  const sourceWidth = state.get('recorder.clientSize.width');
   const targetWidth = document.body.offsetWidth;
   const scaleFactor = (targetWidth - leftColumnWidth) / (sourceWidth - leftColumnWidth);
 
@@ -24,7 +24,7 @@ function setMousePosition({input, state, services}) {
     mousePositionX = leftColumnWidth + ((input.mousePositionX - leftColumnWidth) * scaleFactor);
   }
 
-  state.set(['course', 'mousePosition'], {
+  state.set('course.mousePosition', {
     x: mousePositionX,
     y: mousePositionY
   });

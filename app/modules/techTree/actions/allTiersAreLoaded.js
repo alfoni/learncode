@@ -1,6 +1,6 @@
 function allTiersAreLoaded({output, state}) {
-  const loadedTiers = state.get(['techTree', 'loadedTiers']);
-  const allTierIds = state.get(['techTree', 'tiers']).map((tier) => {
+  const loadedTiers = state.get('techTree.loadedTiers');
+  const allTierIds = state.get('techTree.tiers').map((tier) => {
     return tier.id;
   });
 

@@ -1,5 +1,5 @@
-import set from 'common/factories/actions/set.js';
+import set from 'cerebral-addons/set';
 
 export default [
-  set(['course', 'showAddFileInput'], false)
+  set('course.showAddFileInput', false)
 ];

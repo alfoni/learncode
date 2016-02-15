@@ -1,5 +1,5 @@
-import toggle from 'common/factories/actions/toggle.js';
+import toggle from 'cerebral-addons/toggle';
 
 export default [
-  toggle(['course', 'showEditAssignment'])
+  toggle('state:/course.showEditAssignment')
 ];

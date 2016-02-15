@@ -1,6 +1,5 @@
 import createDependencySlotTree from '../actions/createDependencySlotTree';
 import getTiers from '../actions/getTiers';
-import setTiers from '../actions/setTiers';
 import showSnackbar from 'common/factories/actions/showSnackbar';
 import updateCourses from '../actions/updateCourses';
 import setSelectedTierIndex from '../actions/setSelectedTierIndex';
@@ -8,22 +7,21 @@ import getCoursesInSelectedTier from '../actions/getCoursesInSelectedTier';
 import setTierCoursesLoaded from '../actions/setTierCoursesLoaded';
 import tierCoursesAreLoaded from '../actions/tierCoursesAreLoaded';
 import setAllTiersLoaded from '../actions/setAllTiersLoaded';
-import isAdmin from '../actions/isAdmin';
 import getAllCourses from '../actions/getAllCourses';
 import allTiersAreLoaded from '../actions/allTiersAreLoaded';
 import tiersExists from '../actions/tiersExists';
 import getMainAssignment from 'modules/mainAssignment/actions/getMainAssignment';
 import setMainAssignment from 'modules/mainAssignment/actions/setMainAssignment';
-import createMainAssignment from 'modules/mainAssignment/actions/createMainAssignment';
-import set from 'common/factories/actions/set';
+import set from 'cerebral-addons/set';
+import when from 'cerebral-addons/when';
 
 export default [
   [
     getTiers, {
       success: [
-        setTiers,
-        isAdmin, {
-          true: [
+        set('input:/tiers', 'state:/techTree.tiers'),
+        when('state:/user.isAdmin'), {
+          isTrue: [
             allTiersAreLoaded, {
               true: [
                 setSelectedTierIndex,
@@ -46,7 +44,7 @@ export default [
               ]
             }
           ],
-          false: [
+          isFalse: [
             tiersExists, {
               true: [
                 tierCoursesAreLoaded, {
@@ -80,7 +78,7 @@ export default [
           getMainAssignment, {
             success: [
               setMainAssignment,
-              set(['mainAssignment', 'existingAssignment'], true)
+              set(['mainAssignment', 'existingAssignment'], true) // Why not just something else?
             ],
             error: []
           }

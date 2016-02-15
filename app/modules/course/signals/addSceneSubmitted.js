@@ -1,18 +1,18 @@
 import saveNewScene from './../actions/saveNewScene.js';
 import addNewScene from './../actions/addNewScene.js';
-import setSceneIndex from './../actions/setSceneIndex.js';
 import setScene from './../actions/setScene.js';
-import set from 'common/factories/actions/set.js';
+import set from 'cerebral-addons/set';
+import copy from 'cerebral-addons/copy';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 
 export default [
-  set(['course', 'showConfigureScenes'], false),
-  showSnackbar('Saving scene...'),
+  set('course.showConfigureScenes', false),
+  showSnackbar('Lagrer scene...'),
   [
     saveNewScene, {
       success: [
         addNewScene,
-        setSceneIndex,
+        copy('input:/sceneIndex', 'state:/course.currentSceneIndex'),
         setScene,
         showSnackbar('Scene was saved and loaded')
       ],

@@ -1,9 +1,11 @@
 function setMainAssignment({state, input}) {
-  state.set(['mainAssignment', 'files'], input.mainAssignment.files);
-  state.set(['mainAssignment', 'currentFileIndex'], 0);
-  state.set(['mainAssignment', 'authorName'], input.mainAssignment.authorName);
-  state.set(['mainAssignment', 'userId'], input.mainAssignment.userId);
-  state.set(['mainAssignment', 'tierId'], input.tierId);
+  state.set('mainAssignment', {
+    files: input.mainAssignment.files,
+    currentFileIndex: 0,
+    authorName: input.mainAssignment.authorName,
+    userId: input.mainAssignment.userId,
+    tierId: input.tierId
+  });
 }
 
 export default setMainAssignment;

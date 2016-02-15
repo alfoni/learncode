@@ -1,7 +1,7 @@
 function addNewScene({input, state, output}) {
-  state.push(['course', 'scenes'], input.scene);
+  state.push('course.scenes', input.result);
   output({
-    sceneIndex: state.get(['course', 'scenes']).length - 1
+    sceneIndex: state.get('course.scenes').length - 1
   });
 }
 

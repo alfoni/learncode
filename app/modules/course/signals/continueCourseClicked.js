@@ -1,18 +1,20 @@
+import set from 'cerebral-addons/set';
 import nextCourseStep from '../actions/nextCourseStep';
 import playClicked from './playClicked';
-import resetAssignment from '../actions/resetAssignment';
 import techTreeToggled from '../../techTree/signals/toggled';
 import redirectToScene from '../actions/redirectToScene';
 
 export default [
   nextCourseStep, {
-    course: techTreeToggled,
+    course: [
+      ...techTreeToggled
+    ],
     scene: [
-      resetAssignment,
+      set('state:/course.currentAssignmentStatus.result', false),
       redirectToScene
     ],
     assignment: [
-      resetAssignment,
+      set('state:/course.currentAssignmentStatus.result', false),
       ...playClicked
     ]
   }

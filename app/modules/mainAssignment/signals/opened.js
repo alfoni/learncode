@@ -34,9 +34,8 @@ export default [
             setAssignmentsPositions,
             setPreviewState,
             set('state:/mainAssignment.currentAssignmentIndex', 0),
-            ...saveSandboxChain,
             setLoadedCourse,
-            set('state:/course.isLoading', false)
+            set('state:/course.isLoading', false),
           ],
           error: [
             showSnackbar('Innlasting av sandkasse feilet!')
@@ -45,6 +44,7 @@ export default [
       ],
       ...getAndSetDescriptions,
       ...getTechTreeData,
+      ...saveSandboxChain,
       set('state:/techTree.opened', false)
     ]
   }

@@ -1,5 +1,5 @@
 function setDefaultCourseState({state}) {
-  state.merge(['course'], {
+  state.merge('course', {
     name: '',
     isLoading: false,
     authorId: state.get(['user', 'id']),

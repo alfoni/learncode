@@ -1,10 +1,10 @@
 function createDependencySlotTree({state}) {
-  const courses = state.get(['techTree', 'courses']);
-  const currentTierIndex = state.get(['techTree', 'selectedTierIndex']);
+  const courses = state.get('techTree.courses');
+  const currentTierIndex = state.get('techTree.selectedTierIndex');
   let courseDependencyList = [];
 
   if (typeof currentTierIndex === 'number') {
-    courseDependencyList = state.get(['techTree', 'tiers', currentTierIndex, 'courseDependencyList']);
+    courseDependencyList = state.get(`techTree.tiers.${currentTierIndex}.courseDependencyList`);
   }
 
   function getCourse(courseId) {
@@ -377,7 +377,7 @@ function createDependencySlotTree({state}) {
   levels = drawFutureLevelDependencyLines(levels);
   levels = drawPreviousLevelDependencyLines(levels);
   levels = drawVerticalDependencyLine(levels);
-  state.set(['techTree', 'courseDependencyMap'], levels);
+  state.set('techTree.courseDependencyMap', levels);
 }
 
 export default createDependencySlotTree;
