@@ -1,6 +1,6 @@
 function isAssignmentAuthor({state, output}) {
-  const assignmentUserId = state.get(['mainAssignment', 'userId']);
-  const userId = state.get(['user', 'id']);
+  const assignmentUserId = state.get('mainAssignment.userId');
+  const userId = state.get('user.id');
 
   if (assignmentUserId === userId) {
     output.true();

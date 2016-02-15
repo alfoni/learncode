@@ -1,10 +1,10 @@
 import setSelectedCourse from '../actions/setSelectedCourse';
-import set from 'common/factories/actions/set';
+import set from 'cerebral-addons/set';
 import closeAllPopovers from 'modules/courses/actions/closeAllPopovers';
 
 export default [
   setSelectedCourse,
-  set(['techTree', 'openedCoursePopup'], null),
+  set('state:/techTree.openedCoursePopup', null),
   closeAllPopovers,
-  set(['techTree', 'showMainAssignmentPopup'], false)
+  set('state:/techTree.showMainAssignmentPopup', false)
 ];

@@ -1,5 +1,5 @@
-import set from 'common/factories/actions/set';
+import set from 'cerebral-addons/set';
 
 export default [
-  set(['techTree', 'showAddNewTierInput'], false)
+  set('state:/techTree.showAddNewTierInput', false)
 ];

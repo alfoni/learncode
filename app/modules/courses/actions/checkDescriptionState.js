@@ -1,5 +1,5 @@
 function checkDescriptionState({state, output}) {
-  if (state.get(['courses', 'selectedDescription'])) {
+  if (state.get('courses.selectedDescription')) {
     output.updated();
   } else {
     output.created();

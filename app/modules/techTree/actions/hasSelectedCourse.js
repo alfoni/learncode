@@ -1,5 +1,5 @@
 function hasSelectedCourse({state, output}) {
-  if (state.get(['techTree', 'selectedCourse'])) {
+  if (state.get('techTree.selectedCourse')) {
     output.true();
   } else {
     output.false();

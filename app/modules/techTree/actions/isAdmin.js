@@ -1,5 +1,5 @@
 function isAdmin({state, output}) {
-  if (state.get(['user', 'isAdmin'])) {
+  if (state.get('user.isAdmin')) {
     output.true();
   } else {
     output.false();

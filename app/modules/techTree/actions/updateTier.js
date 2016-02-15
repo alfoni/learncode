@@ -1,6 +1,6 @@
 function updateTier({state, services, output}) {
-  const selectedTierIndex = state.get(['techTree', 'selectedTierIndex']);
-  const selectedTier = state.get(['techTree', 'tiers', selectedTierIndex]);
+  const selectedTierIndex = state.get('techTree.selectedTierIndex');
+  const selectedTier = state.get(`techTree.tiers.${selectedTierIndex}`);
 
   services.ajax.patch('/API/tiers/' + selectedTier.id, {
     courseDependencyList: selectedTier.courseDependencyList

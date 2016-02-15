@@ -1,4 +1,4 @@
-import set from 'common/factories/actions/set.js';
+import set from 'cerebral-addons/set';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import saveRecording from '../actions/saveRecording.js';
 
@@ -8,8 +8,8 @@ export default [
     saveRecording, {
       success: [
         showSnackbar('Opptaket er nå lagret'),
-        set(['recorder', 'isUploading'], false),
-        set(['recorder', 'hasRecorded'], false)
+        set('state:/recorder.isUploading', false),
+        set('state:/recorder.hasRecorded', false)
       ],
       error: [
         showSnackbar('Det oppstod et problem med å lagre opptaket!')

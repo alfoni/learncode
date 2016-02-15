@@ -1,7 +1,7 @@
 function saveScene({state, output, services}) {
-  const courseId = state.get(['course', 'id']);
-  const sceneIndex = state.get(['course', 'currentSceneIndex']);
-  const files = state.get(['course', 'scenes', sceneIndex, 'sandboxFiles']);
+  const courseId = state.get('course.id');
+  const sceneIndex = state.get('course.currentSceneIndex');
+  const files = state.get(`course.scenes.${sceneIndex}.sandboxFiles`);
 
   services.ajax.patch(`/API/courses/${courseId}/scenes/${sceneIndex}`, {
     files: files

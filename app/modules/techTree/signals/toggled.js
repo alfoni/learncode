@@ -1,5 +1,5 @@
-import toggle from 'common/factories/actions/toggle.js';
+import toggle from 'cerebral-addons/toggle';
 
 export default [
-  toggle(['techTree', 'opened'])
+  toggle('state:/techTree.opened')
 ];

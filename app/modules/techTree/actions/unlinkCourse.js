@@ -1,31 +1,28 @@
 function unlinkCourse({input, state}) {
-  const selectedTierIndex = state.get(['techTree', 'selectedTierIndex']);
+  const selectedTierIndex = state.get('techTree.selectedTierIndex');
+  const dependencyListCursor = state.get(`techTree.tiers.${selectedTierIndex}.courseDependencyList`);
 
-  const removingCourseIndex = state.get(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList']).findIndex((course) => {
+  const removingCourseIndex = dependencyListCursor.get().findIndex((course) => {
     return input.course.id === course.courseId;
   });
 
-  state.get(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList', removingCourseIndex, 'requires']).forEach((courseId) => {
-    const requiresCourse = state.get(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList']).find((course) => {
+  dependencyListCursor.get(`${removingCourseIndex}.requires`).forEach((courseId) => {
+    const requiresCourse = dependencyListCursor.get().find((course) => {
       return course.courseId === courseId;
     });
-    const courseIndex = state.get(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList'])
+    const courseIndex = dependencyListCursor.get()
       .findIndex((dependencyCourse) => {
         return dependencyCourse.courseId === requiresCourse.courseId;
       });
-    const removingCourseRequiredByIndex = state.get(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList', courseIndex, 'requiredBy'])
+    const removingCourseRequiredByIndex = dependencyListCursor.get(`${courseIndex}.requiredBy`)
       .findIndex((requiredByCourseId) => {
         return requiredByCourseId === input.courseId;
       });
 
-    state.splice(
-      ['techTree', 'tiers', selectedTierIndex, 'courseDependencyList', courseIndex, 'requiredBy'],
-      removingCourseRequiredByIndex,
-      1
-    );
+    dependencyListCursor.splice(`${courseIndex}.requiredBy`, removingCourseRequiredByIndex, 1);
   });
 
-  state.splice(['techTree', 'tiers', selectedTierIndex, 'courseDependencyList'], removingCourseIndex, 1);
+  state.splice(`techTree.tiers.${selectedTierIndex}.courseDependencyList`, removingCourseIndex, 1);
 }
 
 export default unlinkCourse;

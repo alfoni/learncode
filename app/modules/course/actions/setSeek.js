@@ -1,16 +1,16 @@
 function setSeek({input, state, services}) {
   const fullSecond = Math.floor(input.seek / 1000) * 1000;
+  const recorderCursor = state.select('recorder');
+  recorderCursor.set('isRecording', true);
 
-  state.set(['recorder', 'isRecording'], true);
-
-  if (state.get(['recorder', 'isPlaying'])) {
+  if (recorderCursor.get('isPlaying')) {
     services.recorder.pause();
     services.recorder.seek(fullSecond);
     services.recorder.play();
   } else {
     services.recorder.seek(fullSecond);
   }
-  state.set(['recorder', 'isRecording'], false);
+  recorderCursor.set('isRecording', false);
 }
 
 export default setSeek;

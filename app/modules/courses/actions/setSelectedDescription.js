@@ -1,13 +1,15 @@
 function setSelectedDescription({state, input}) {
+  const updatedDescriptionCursor = state.get('courses.updatedDescription');
+
   if (input.description) {
-    state.set(['courses', 'selectedDescription'], input.description.tagName);
+    state.set('courses.selectedDescription', input.description.tagName);
   } else {
-    state.set(['courses', 'selectedDescription'], null);
+    state.set('courses.selectedDescription', null);
   }
-  state.set(['courses', 'updatedDescription', 'tagName'], input.description.tagName);
-  state.set(['courses', 'updatedDescription', 'description'], input.description.description);
-  state.set(['courses', 'updatedDescription', 'exampleType'], input.description.exampleType);
-  state.set(['courses', 'updatedDescription', 'example'], input.description.example);
+  updatedDescriptionCursor.set('tagName', input.description.tagName);
+  updatedDescriptionCursor.set('description', input.description.description);
+  updatedDescriptionCursor.set('exampleType', input.description.exampleType);
+  updatedDescriptionCursor.set('example', input.description.example);
 }
 
 export default setSelectedDescription;

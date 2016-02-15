@@ -1,5 +1,5 @@
 function updateName({state, input}) {
-  state.set(['techTree', 'authorName'], input.value);
+  state.set('techTree.authorName', input.value);
 }
 
 export default updateName;

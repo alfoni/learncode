@@ -1,7 +1,7 @@
 import openGoogleTab from '../actions/openGoogleTab';
-import set from 'common/factories/actions/set';
+import set from 'cerebral-addons/set';
 
 export default [
   openGoogleTab,
-  set(['mainAssignment', 'googleInput'], '')
+  set('state:/mainAssignment.googleInput', '')
 ];

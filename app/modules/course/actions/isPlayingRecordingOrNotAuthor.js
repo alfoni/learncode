@@ -1,8 +1,8 @@
 function isPlayingRecordingOrNotAuthor({state, output}) {
   if (
-    state.get(['recorder', 'isPlaying']) ||
-    state.get(['recorder', 'isRecording']) ||
-    state.get(['user', 'id']) !== state.get(['course', 'authorId'])
+    state.get('recorder.isPlaying') ||
+    state.get('recorder.isRecording') ||
+    state.get('user.id') !== state.get('course.authorId')
   ) {
     output.true();
   } else {

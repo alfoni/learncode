@@ -1,5 +1,5 @@
 function resetNewDescriptionFields({state}) {
-  state.set(['courses', 'newDescription'], {
+  state.set('courses.newDescription', {
     tagName: '',
     description: '',
     exampleType: 'HTML',

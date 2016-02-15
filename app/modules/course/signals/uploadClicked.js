@@ -1,7 +1,7 @@
-import set from 'common/factories/actions/set.js';
+import set from 'cerebral-addons/set';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 
 export default [
-  set(['course', 'recording', 'isUploading'], true),
+  set('state:/course.recording.isUploading', true),
   showSnackbar('Lagrer video og lyd...', true)
 ];
