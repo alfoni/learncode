@@ -1,18 +1,18 @@
-import hasSelectedCourse from '../actions/hasSelectedCourse';
+import when from 'cerebral-addons/when';
+import copy from 'cerebral-addons/copy';
 import setSelectedCourse from '../actions/setSelectedCourse';
 import linkCourses from '../actions/linkCourses';
 import createDependencySlotTree from '../actions/createDependencySlotTree';
 import showSnackbar from 'common/factories/actions/showSnackbar';
 import updateTier from '../actions/updateTier';
 import updateCourses from '../actions/updateCourses';
-import isAdmin from '../actions/isAdmin';
 import setOpenedCoursePopup from '../actions/setOpenedCoursePopup';
 
 export default [
-  isAdmin, {
-    true: [
-      hasSelectedCourse, {
-        true: [
+  when('state:/user.isAdmin'), {
+    isTrue: [
+      when('state:/techTree.selectedCourse'), {
+        isTrue: [
           linkCourses,
           [
             updateTier, {
@@ -24,10 +24,10 @@ export default [
             }
           ]
         ],
-        false: [setSelectedCourse]
+        isFalse: [copy('input:/course', 'state:/techTree.selectedCourse')]
       }
     ],
-    false: [
+    isFalse: [
       setOpenedCoursePopup
     ]
   }

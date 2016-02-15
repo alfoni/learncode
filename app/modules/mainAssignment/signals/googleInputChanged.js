@@ -1,5 +1,5 @@
-import updateGoogleInput from '../actions/updateGoogleInput';
+import copy from 'cerebral-addons/copy';
 
 export default [
-  updateGoogleInput
+  copy('input:/value', 'state:/mainAssignment.googleInput')
 ];

@@ -1,8 +1,8 @@
 import setPage from 'common/factories/actions/setPage.js';
 import set from 'cerebral-addons/set';
+import copy from 'cerebral-addons/copy';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import loadSessions from '../actions/loadSessions.js';
-import setSessions from '../actions/setSessions.js';
 
 export default [
   setPage('sessions'),
@@ -10,7 +10,7 @@ export default [
   [
     loadSessions, {
       success: [
-        setSessions,
+        copy('input:/sessions', 'state:/sessions.sessionsList'),
         showSnackbar('Logger er lastet')
       ],
       error: [

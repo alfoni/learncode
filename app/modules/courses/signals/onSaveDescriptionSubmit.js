@@ -1,14 +1,16 @@
 import set from 'cerebral-addons/set';
+import when from 'cerebral-addons/when';
 import createDescription from '../actions/createDescription';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import resetNewDescriptionFields from '../actions/resetNewDescriptionFields';
-import checkDescriptionState from '../actions/checkDescriptionState';
 import updateDescription from '../actions/updateDescription';
 import getAndSetDescriptions from 'modules/descriptions/chains/getAndSetDescriptions';
 
+const whenSelectedDescription = when('state:/courses.selectedDescription', {updated: when.truthy, created: when.otherwise});
+
 export default [
   set('state:/courses.isSavingDescription', true),
-  checkDescriptionState, {
+  whenSelectedDescription, {
     created: [
       [
         createDescription, {

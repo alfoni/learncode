@@ -1,5 +1,5 @@
-import updateNewTierName from '../actions/updateNewTierName';
+import copy from 'cerebral-addons/copy';
 
 export default [
-  updateNewTierName
+  copy('input:/name', 'state:/techTree.newTierName')
 ];
