@@ -12,6 +12,8 @@ function createSession(name, chain) {
     });
   }
 
+  createSessionId.async = true;
+
   function setSessionId({input, state}) {
     state.set(['session', 'sessionId'], input.sessionId);
   }
@@ -30,23 +32,21 @@ function createSession(name, chain) {
     });
   }
 
+  trackData.async = true;
+
   return [
-    [
-      createSessionId, {
-        success: [
-          setSessionId,
-          [
-            trackData, {
-              success: [],
-              error: []
-            }
-          ]
-        ].concat(chain),
-        error: [
-          showSnackbar('An error occured, please try again...')
-        ]
-      }
-    ]
+    createSessionId, {
+      success: [
+        setSessionId,
+        trackData, {
+          success: [],
+          error: []
+        }
+      ].concat(chain),
+      error: [
+        showSnackbar('An error occured, please try again...')
+      ]
+    }
   ];
 }
 
