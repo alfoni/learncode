@@ -65,6 +65,5 @@ export default (req, res, next) => {
         res.status(500);
         res.send({});
       });
-    next();
   }
 };

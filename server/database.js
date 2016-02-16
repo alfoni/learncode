@@ -30,11 +30,11 @@ export default {
       });
     });
   },
-  find(collectionName, query) {
+  find(collectionName, query, projection) {
     const collection = db.collection(collectionName);
 
     return new Promise((resolve, reject) => {
-      collection.find(query).toArray((err, result) => {
+      collection.find(query, projection).toArray((err, result) => {
         if (err) {
           reject(err);
         }

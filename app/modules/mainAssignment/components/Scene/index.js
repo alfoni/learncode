@@ -80,7 +80,6 @@ class Scene extends React.Component {
                   active={preview}
                   icon={icons.eye}
                   onClick={() => this.props.signals.mainAssignment.opened({
-                    tierId: this.props.mainAssignment.tierId,
                     userId: this.props.mainAssignment.userId,
                     preview: preview ? false : true
                   })}/>

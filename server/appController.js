@@ -33,7 +33,7 @@ import getMainAssignment from './apis/getMainAssignment.js';
 import verifyUser from './verifyUser';
 
 const isAdmin = (req, res, next) => {
-  if (req.cookies.kodeboksen === 'christianalfoni@gmail.com') {
+  if (req.cookies.kodeboksen === 'post@kodeboksen.no') {
     next();
   } else {
     res.status(401);

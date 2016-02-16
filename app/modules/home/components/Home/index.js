@@ -4,11 +4,16 @@ import {Decorator as Cerebral} from 'cerebral-view-react';
 let Video = null;
 let SuccessMessage = null;
 let icons = null;
+let elements = null;
 // let styles = null;
 import styles from './styles.css'; // TODO: Remove this;
 
 @Cerebral({
-  assignmentsSolved: ['user', 'assignmentsSolved']
+  assignmentsSolved: ['user', 'assignmentsSolved'],
+  loginErrorMessage: ['home', 'loginErrorMessage'],
+  registerErrorMessage: ['home', 'registerErrorMessage'],
+  isLoggingIn: ['home', 'isLoggingIn'],
+  isRegistering: ['home', 'isRegistering']
 })
 class Home extends React.Component {
   constructor() {
@@ -22,24 +27,101 @@ class Home extends React.Component {
       Video = require('../Video');
       SuccessMessage = require('../SuccessMessage');
       icons = require('common/icons.css');
+      elements = require('common/elements.css');
       // styles = require('./Home.css');
       this.setState({
         canRender: true
       });
     });
   }
-  renderButtons() {
-    if (Object.keys(this.props.assignmentsSolved).length) {
-      return (
-        <div>
-          <button className={styles.button} onClick={() => this.props.signals.home.continueCourseClicked()}>Fortsett</button>
-          <button className={styles.button} onClick={() => this.props.signals.home.restartCourseClicked()}>Start på nytt</button>
-        </div>
-      );
-    }
-
+  renderErrorMessage(message) {
     return (
-      <button className={styles.button} onClick={() => this.props.signals.home.formSubmitted()}>Start</button>
+      <div className={styles.errorMessage}>
+        {message}
+      </div>
+    );
+  }
+  onInputChange(form, type, value) {
+    this.props.signals.home.inputChange({form: form, type: type, value: value});
+  }
+  renderButtons() {
+    return (
+      <div className={styles.columnWrapper}>
+        <div className={styles.column}>
+          <div className={styles.columnContent}>
+            <h2 className={styles.columnTitle}>Utforsk</h2>
+            {
+              Object.keys(this.props.assignmentsSolved).length ?
+                <div>
+                  <button className={styles.submitButton} onClick={() => this.props.signals.home.continueCourseClicked()}>Fortsett</button>
+                  <button className={styles.submitButton} onClick={() => this.props.signals.home.restartCourseClicked()}>Start på nytt</button>
+                </div>
+              :
+                <div>
+                  <div className={styles.tryText}>
+                    Du må ikke registrere deg for å prøve Kodeboksen. Trykk på knappen under og alt du gjør blir lagret i én dag.
+                  </div>
+                  <button className={styles.submitButton} onClick={() => this.props.signals.home.testKodeboksenClicked()}>
+                    Prøv tjenesten
+                  </button>
+                </div>
+            }
+          </div>
+        </div>
+        <div className={styles.column}>
+          <div className={styles.columnContent}>
+            <h2 className={styles.columnTitle}>Logg inn</h2>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              this.props.signals.home.loginFormSubmitted();
+            }}>
+              <input
+                className={`${elements.input} ${styles.input}`}
+                placeholder="E-post"
+                required
+                type="email"
+                onChange={(e) => this.onInputChange('loginForm', 'email', e.target.value)}/>
+              <input
+                className={`${elements.input} ${styles.input}`}
+                placeholder="Passord"
+                required
+                type="password"
+                onChange={(e) => this.onInputChange('loginForm', 'password', e.target.value)}/>
+              <button className={styles.submitButton} type="submit" disabled={this.props.isLoggingIn}>Logg meg inn</button>
+            </form>
+            {this.props.loginErrorMessage ? this.renderErrorMessage(this.props.loginErrorMessage) : null}
+          </div>
+        </div>
+        <div className={styles.column}>
+          <div className={styles.columnContent}>
+            <h2 className={styles.columnTitle}>Registrer deg</h2>
+            <form onSubmit={(e) => {
+              e.preventDefault();
+              this.props.signals.home.registerFormSubmitted();
+            }}>
+              <input
+                className={`${elements.input} ${styles.input}`}
+                placeholder="E-post"
+                required
+                onChange={(e) => this.onInputChange('registerForm', 'email', e.target.value)}/>
+              <input
+                className={`${elements.input} ${styles.input}`}
+                placeholder="Passord"
+                required
+                type="password"
+                onChange={(e) => this.onInputChange('registerForm', 'password', e.target.value)}/>
+              <input
+                className={`${elements.input} ${styles.input}`}
+                placeholder="Gjenta passord"
+                required
+                type="password"
+                onChange={(e) => this.onInputChange('registerForm', 'repeatedPassword', e.target.value)}/>
+              <button className={styles.submitButton} type="submit" disabled={this.props.isRegistering}>Registerer meg</button>
+            </form>
+            {this.props.registerErrorMessage ? this.renderErrorMessage(this.props.registerErrorMessage) : null}
+          </div>
+        </div>
+      </div>
     );
   }
   render() {

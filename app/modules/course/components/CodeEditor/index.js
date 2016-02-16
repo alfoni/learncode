@@ -54,7 +54,7 @@ class CodeEditor extends React.Component {
       theme: 'learncode',
       matchTags: {bothTags: true},
       autoCloseTags: true,
-      gutters: ["CodeMirror-lint-markers"],
+      gutters: ['CodeMirror-lint-markers'],
       lineNumbers: true,
       lint: {
         getAnnotations: htmlHint(CodeMirror),

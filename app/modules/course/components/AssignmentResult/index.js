@@ -26,7 +26,7 @@ class AssignmentResult extends React.Component {
   }
   renderError() {
     return (
-      <div className={styles.errorWrapper}>
+      <div className={this.props.showAssignmentStatus ? styles.openedErrorWrapper : styles.errorWrapper}>
         <div
           className={this.props.showAssignmentStatus ? styles.activeErrorButton : styles.errorButton}
           onClick={() => this.props.signals.course.assignmentStatusOpened()}>!</div>

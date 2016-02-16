@@ -5,7 +5,7 @@ import styles from './styles.css';
 @Cerebral({
   courses: ['courses', 'courses']
 })
-class Courses extends React.Component {
+class CoursesList extends React.Component {
   constructor() {
     super();
   }
@@ -40,4 +40,4 @@ class Courses extends React.Component {
   }
 }
 
-export default Courses;
+export default CoursesList;

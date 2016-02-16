@@ -1,17 +1,24 @@
 .errorWrapper {
   font-family: Ubuntu, sans-serif;
   position: absolute;
-  bottom: 0;
+  bottom: 55px;
   z-index: 99;
-  width: 100%;
+  width: 40px;
   box-sizing: border-box;
   padding: 10px;
   color: #FFF;
 }
 
+.openedErrorWrapper {
+  composes: errorWrapper;
+  width: 100%;
+}
+
 .errorButton {
   cursor: pointer;
-  left: 20px;
+  top: 25px;
+  position: absolute;
+  left: 13px;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -22,6 +29,7 @@
   font-weight: bold;
   font-size: 24px;
   box-sizing: border-box;
+  background-color: #202634;
 }
 
 .activeErrorButton {
@@ -37,8 +45,8 @@
   min-height: 100px;
   background-color: #872841;
   border-radius: 5px;
-  bottom: 55px;
-  padding: 0px 20px 10px 20px;
+  bottom: 0;
+  padding: 0 20px 10px 20px;
   left: 0;
 }
 .errorPopup:after, .errorPopup:before {
@@ -62,7 +70,7 @@
 	border-color: rgba(194, 225, 245, 0);
 	border-top-color: #872841;
 	border-width: 9px;
-	margin-left: -9px;
+	margin-left: -5px;
 }
 
 .closePopup {
