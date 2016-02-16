@@ -1,5 +1,6 @@
-import setTooltip from '../actions/setTooltip';
+import copy from 'cerebral-addons/copy';
 
 export default [
-  setTooltip
+  copy('input:/tooltip', 'state:/course.tooltip.visible'),
+  copy('input:/timeout', 'state:/course.tooltip.timeout')
 ];

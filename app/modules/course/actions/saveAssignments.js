@@ -3,7 +3,7 @@ function saveAssignments({module, services, output}) {
   const sceneIndex = module.state.get('currentSceneIndex');
   const assignments = module.state.get(`scenes.${sceneIndex}.assignments`);
 
-  services.ajax.patch(`/API/courses/${courseId}/scenes/${sceneIndex}`, {
+  services.http.patch(`/API/courses/${courseId}/scenes/${sceneIndex}`, {
     assignments
   })
   .then(() => {

@@ -18,7 +18,6 @@ import Course from './modules/course';
 import TechTree from './modules/techTree';
 import MainAssignment from './modules/mainAssignment';
 import Descriptions from './modules/descriptions';
-import Ajax from './modules/ajax';
 
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/actions/hideSnackbar.js';

@@ -1,5 +1,5 @@
 function saveNewTier({state, services, output}) {
-  services.ajax.post('/API/tiers', {
+  services.http.post('/API/tiers', {
     name: state.get('techTree.newTierName')
   })
   .then((response) => {

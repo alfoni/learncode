@@ -14,12 +14,13 @@ import getMainAssignment from 'modules/mainAssignment/actions/getMainAssignment'
 import setMainAssignment from 'modules/mainAssignment/actions/setMainAssignment';
 import set from 'cerebral-addons/set';
 import when from 'cerebral-addons/when';
+import copy from 'cerebral-addons/copy';
 
 export default [
   [
     getTiers, {
       success: [
-        set('input:/tiers', 'state:/techTree.tiers'),
+        copy('input:/tiers', 'state:/techTree.tiers'),
         when('state:/user.isAdmin'), {
           isTrue: [
             allTiersAreLoaded, {

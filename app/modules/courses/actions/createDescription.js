@@ -1,5 +1,5 @@
 function createDescription({state, services, output}) {
-  services.ajax.post(`/API/descriptions`, {
+  services.http.post(`/API/descriptions`, {
     tagName: state.get('courses.newDescription.tagName'),
     description: state.get('courses.newDescription.description'),
     exampleType: state.get('courses.newDescription.exampleType'),

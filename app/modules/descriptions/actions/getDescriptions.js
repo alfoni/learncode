@@ -1,5 +1,5 @@
 function getDescriptions({services, output}) {
-  services.ajax.get('/API/descriptions')
+  services.http.get('/API/descriptions')
   .then((descriptions) => {
     output.success({descriptions: descriptions});
   })

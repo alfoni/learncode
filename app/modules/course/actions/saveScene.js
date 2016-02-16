@@ -3,7 +3,7 @@ function saveScene({state, output, services}) {
   const sceneIndex = state.get('course.currentSceneIndex');
   const files = state.get(`course.scenes.${sceneIndex}.sandboxFiles`);
 
-  services.ajax.patch(`/API/courses/${courseId}/scenes/${sceneIndex}`, {
+  services.http.patch(`/API/courses/${courseId}/scenes/${sceneIndex}`, {
     files: files
   })
   .then(() => {

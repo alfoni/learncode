@@ -1,5 +1,5 @@
 function deleteDescription({services, input, output}) {
-  services.ajax.delete('/api/descriptions/' + input.tagName)
+  services.http.delete('/api/descriptions/' + input.tagName)
   .then(() => {
     output.success();
   })

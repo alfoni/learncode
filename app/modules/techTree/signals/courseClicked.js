@@ -1,6 +1,5 @@
 import when from 'cerebral-addons/when';
 import copy from 'cerebral-addons/copy';
-import setSelectedCourse from '../actions/setSelectedCourse';
 import linkCourses from '../actions/linkCourses';
 import createDependencySlotTree from '../actions/createDependencySlotTree';
 import showSnackbar from 'common/factories/actions/showSnackbar';

@@ -1,7 +1,7 @@
 function getMainAssignment({services, output, input, state}) {
   const userId = input.userId || state.get('user.id');
 
-  services.ajax.get(`/API/mainAssignments/${userId}`)
+  services.http.get(`/API/mainAssignments/${userId}`)
     .then((response) => {
       output.success({
         mainAssignment: response.result

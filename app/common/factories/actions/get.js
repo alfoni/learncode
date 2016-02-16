@@ -1,6 +1,6 @@
 function get(url, key) {
   function action({services, output}) {
-    services.ajax.get(url)
+    services.http.get(url)
       .then((response) => {
         output.success({
           [key]: response

@@ -1,5 +1,5 @@
 function loadSessions({output, services}) {
-  services.ajax.get(`/API/sessions`)
+  services.http.get(`/API/sessions`)
     .then((sessions) => {
       output.success({
         sessions: sessions

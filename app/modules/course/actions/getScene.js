@@ -1,7 +1,7 @@
 function getScene({input, state, output, services}) {
   const courseId = state.get('course.id');
 
-  services.ajax.get(`/API/courses/${input.courseId || courseId}/scenes/${input.sceneIndex || 0}`)
+  services.http.get(`/API/courses/${input.courseId || courseId}/scenes/${input.sceneIndex || 0}`)
     .then((response) => {
       output({
         scene: response.result

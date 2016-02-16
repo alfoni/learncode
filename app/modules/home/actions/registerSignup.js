@@ -1,5 +1,6 @@
 function registerSignup({input, output, services}) {
-  services.ajax.post('/API/registerSignup', {
+  console.log(services);
+  services.http.post('/API/registerSignup', {
     email: input.email
   })
   .then((user) => {

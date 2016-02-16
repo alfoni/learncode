@@ -1,5 +1,5 @@
 function loadCourses({output, services}) {
-  services.ajax.get('/API/courses')
+  services.http.get('/API/courses')
   .then((courses) => {
     output.success({courses: courses});
   })

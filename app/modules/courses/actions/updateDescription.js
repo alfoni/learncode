@@ -5,7 +5,7 @@ function updateDescription({services, output, state}) {
   const example = updatedDescriptionCursor.get('example');
   const exampleType = updatedDescriptionCursor.get('exampleType');
 
-  services.ajax.patch('/API/descriptions/' + tagName, {
+  services.http.patch('/API/descriptions/' + tagName, {
     tagName: tagName,
     description: description,
     exampleType: exampleType,
