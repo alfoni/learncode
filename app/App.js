@@ -3,7 +3,7 @@ import {Decorator as Cerebral} from 'cerebral-view-react';
 import Course from './components/Course';
 import Home from './components/Home';
 import Courses from './components/Courses';
-import Sessions from './modules/sessions/components/Sessions';
+import Sessions from './components/Sessions';
 import MainAssignment from './components/MainAssignment/MainAssignment';
 import styles from './App.css';
 
