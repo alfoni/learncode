@@ -8,4 +8,6 @@ function getDescriptions({services, output}) {
   });
 }
 
+getDescriptions.async = true;
+
 export default getDescriptions;

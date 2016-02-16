@@ -5,21 +5,17 @@ import createMainAssignment from 'modules/mainAssignment/actions/createMainAssig
 import getMainAssignment from 'modules/mainAssignment/actions/getMainAssignment';
 
 export default [
-  [
-    createMainAssignment, {
-      success: [
-        [
-          getMainAssignment, {
-            success: [
-              setMainAssignmentAsCourse,
-              set('state:/techTree.showMainAssignmentPopup', false),
-              redirectToMainAssignment
-            ],
-            error: []
-          }
-        ]
-      ],
-      error: []
-    }
-  ]
+  createMainAssignment, {
+    success: [
+      getMainAssignment, {
+        success: [
+          setMainAssignmentAsCourse,
+          set('state:/techTree.showMainAssignmentPopup', false),
+          redirectToMainAssignment
+        ],
+        error: []
+      }
+    ],
+    error: []
+  }
 ];

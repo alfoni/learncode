@@ -24,4 +24,6 @@ function register({services, output, state}) {
   }
 }
 
+register.async = true;
+
 export default register;

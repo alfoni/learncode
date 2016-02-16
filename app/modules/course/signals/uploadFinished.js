@@ -4,16 +4,14 @@ import saveRecording from '../actions/saveRecording.js';
 
 export default [
   showSnackbar('Lagrer opptak...'),
-  [
-    saveRecording, {
-      success: [
-        showSnackbar('Opptaket er nå lagret'),
-        set('state:/recorder.isUploading', false),
-        set('state:/recorder.hasRecorded', false)
-      ],
-      error: [
-        showSnackbar('Det oppstod et problem med å lagre opptaket!')
-      ]
-    }
-  ]
+  saveRecording, {
+    success: [
+      showSnackbar('Opptaket er nå lagret'),
+      set('state:/recorder.isUploading', false),
+      set('state:/recorder.hasRecorded', false)
+    ],
+    error: [
+      showSnackbar('Det oppstod et problem med å lagre opptaket!')
+    ]
+  }
 ];

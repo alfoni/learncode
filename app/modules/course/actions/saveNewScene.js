@@ -8,4 +8,6 @@ function saveNewScene({state, output, services}) {
   .catch(output.error);
 }
 
+saveNewScene.async = true;
+
 export default saveNewScene;

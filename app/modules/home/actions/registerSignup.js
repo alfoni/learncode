@@ -12,4 +12,6 @@ function registerSignup({input, output, services}) {
   });
 }
 
+registerSignup.async = true;
+
 export default registerSignup;

@@ -13,15 +13,13 @@ export default [
       when('state:/techTree.selectedCourse'), {
         isTrue: [
           linkCourses,
-          [
-            updateTier, {
-              success: [
-                updateCourses,
-                createDependencySlotTree
-              ],
-              error: [showSnackbar('Oppdatering av tier feilet!')]
-            }
-          ]
+          updateTier, {
+            success: [
+              updateCourses,
+              createDependencySlotTree
+            ],
+            error: [showSnackbar('Oppdatering av tier feilet!')]
+          }
         ],
         isFalse: [copy('input:/course', 'state:/techTree.selectedCourse')]
       }

@@ -11,4 +11,6 @@ function getCourse({input, output, services}) {
     });
 }
 
+getCourse.async = true;
+
 export default getCourse;

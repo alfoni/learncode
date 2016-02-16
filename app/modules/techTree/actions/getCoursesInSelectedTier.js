@@ -22,4 +22,6 @@ function getCoursesInSelectedTier({services, state, output, input}) {
   });
 }
 
+getCoursesInSelectedTier.async = true;
+
 export default getCoursesInSelectedTier;

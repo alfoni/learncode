@@ -7,15 +7,13 @@ import loadSessions from '../actions/loadSessions.js';
 export default [
   setPage('sessions'),
   set('state:/sessions.isLoading', true),
-  [
-    loadSessions, {
-      success: [
-        copy('input:/sessions', 'state:/sessions.sessionsList'),
-        showSnackbar('Logger er lastet')
-      ],
-      error: [
-        showSnackbar('Kunne ikke hente sesjoner!')
-      ]
-    }
-  ]
+  loadSessions, {
+    success: [
+      copy('input:/sessions', 'state:/sessions.sessionsList'),
+      showSnackbar('Logger er lastet')
+    ],
+    error: [
+      showSnackbar('Kunne ikke hente sesjoner!')
+    ]
+  }
 ];

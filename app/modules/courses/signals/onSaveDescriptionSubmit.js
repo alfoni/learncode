@@ -12,20 +12,16 @@ export default [
   set('state:/courses.isSavingDescription', true),
   whenSelectedDescription, {
     created: [
-      [
-        createDescription, {
-          success: [],
-          error: [showSnackbar('Opprettelse av beskrivelse feilet!')]
-        }
-      ]
+      createDescription, {
+        success: [],
+        error: [showSnackbar('Opprettelse av beskrivelse feilet!')]
+      }
     ],
     updated: [
-      [
-        updateDescription, {
-          success: [],
-          error: [showSnackbar('Oppdatering av beskrivelse feilet!')]
-        }
-      ]
+      updateDescription, {
+        success: [],
+        error: [showSnackbar('Oppdatering av beskrivelse feilet!')]
+      }
     ]
   },
   ...getAndSetDescriptions,

@@ -14,4 +14,6 @@ function saveAssignments({module, services, output}) {
   });
 }
 
+saveAssignments.async = true;
+
 export default saveAssignments;

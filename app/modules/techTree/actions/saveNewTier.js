@@ -11,4 +11,6 @@ function saveNewTier({state, services, output}) {
   });
 }
 
+saveNewTier.async = true;
+
 export default saveNewTier;

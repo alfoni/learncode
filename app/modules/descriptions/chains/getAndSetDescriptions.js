@@ -9,16 +9,14 @@ export default [
     true: [],
     false: [
       set('state:/descriptions.isLoading', true),
-      [
-        getDescriptions, {
-          success: [
-            copy('input:/descriptions', 'state:/descriptions.list')
-          ],
-          error: [
-            showSnackbar('Innlasting av beskrivelser feilet!')
-          ]
-        }
-      ],
+      getDescriptions, {
+        success: [
+          copy('input:/descriptions', 'state:/descriptions.list')
+        ],
+        error: [
+          showSnackbar('Innlasting av beskrivelser feilet!')
+        ]
+      },
       set('state:/descriptions.isLoading', false)
     ]
   }

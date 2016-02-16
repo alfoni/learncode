@@ -21,4 +21,6 @@ function updateDescription({services, output, state}) {
   });
 }
 
+updateDescription.async = true;
+
 export default updateDescription;

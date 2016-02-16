@@ -14,4 +14,6 @@ function getMainAssignment({services, output, input, state}) {
     });
 }
 
+getMainAssignment.async = true;
+
 export default getMainAssignment;

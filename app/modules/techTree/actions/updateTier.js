@@ -14,4 +14,6 @@ function updateTier({state, services, output}) {
   });
 }
 
+updateTier.async = true;
+
 export default updateTier;

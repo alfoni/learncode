@@ -8,4 +8,6 @@ function deleteDescription({services, input, output}) {
   });
 }
 
+deleteDescription.async = true;
+
 export default deleteDescription;

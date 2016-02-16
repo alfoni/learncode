@@ -12,4 +12,6 @@ function loadSessions({output, services}) {
     });
 }
 
+loadSessions.async = true;
+
 export default loadSessions;

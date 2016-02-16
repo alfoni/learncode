@@ -14,4 +14,6 @@ function saveRecording({state, output, services}) {
   });
 }
 
+saveRecording.async = true;
+
 export default saveRecording;

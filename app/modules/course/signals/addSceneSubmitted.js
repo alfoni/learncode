@@ -8,17 +8,15 @@ import showSnackbar from 'common/factories/actions/showSnackbar.js';
 export default [
   set('course.showConfigureScenes', false),
   showSnackbar('Lagrer scene...'),
-  [
-    saveNewScene, {
-      success: [
-        addNewScene,
-        copy('input:/sceneIndex', 'state:/course.currentSceneIndex'),
-        setScene,
-        showSnackbar('Scene was saved and loaded')
-      ],
-      error: [
-        showSnackbar('Could not save new scene!')
-      ]
-    }
-  ]
+  saveNewScene, {
+    success: [
+      addNewScene,
+      copy('input:/sceneIndex', 'state:/course.currentSceneIndex'),
+      setScene,
+      showSnackbar('Scene was saved and loaded')
+    ],
+    error: [
+      showSnackbar('Could not save new scene!')
+    ]
+  }
 ];

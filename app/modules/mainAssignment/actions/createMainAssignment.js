@@ -14,4 +14,6 @@ function createMainAssignment({services, output, state}) {
   });
 }
 
+createMainAssignment.async = true;
+
 export default createMainAssignment;

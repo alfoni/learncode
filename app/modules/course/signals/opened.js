@@ -21,9 +21,7 @@ export default [
     true: [
       showSnackbar('Laster scene...'),
       set('state:/course.showScenesList', false),
-      [
-        getScene
-      ],
+      getScene,
       when('input:/scene'), {
         isTrue: [
           setScene,

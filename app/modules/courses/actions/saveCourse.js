@@ -10,4 +10,6 @@ function saveCourse({state, output, services}) {
   });
 }
 
+saveCourse.async = true;
+
 export default saveCourse;

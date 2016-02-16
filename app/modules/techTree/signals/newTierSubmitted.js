@@ -4,16 +4,14 @@ import addNewTier from '../actions/addNewTier';
 import set from 'cerebral-addons/set';
 
 export default [
-  [
-    saveNewTier, {
-      success: [
-        addNewTier,
-        set('state:/techTree.newTierName', ''),
-        showSnackbar('Ny tier ble opprettet')
-      ],
-      error: [
-        showSnackbar('Opprettelse av ny tier feilet!')
-      ]
-    }
-  ]
+  saveNewTier, {
+    success: [
+      addNewTier,
+      set('state:/techTree.newTierName', ''),
+      showSnackbar('Ny tier ble opprettet')
+    ],
+    error: [
+      showSnackbar('Opprettelse av ny tier feilet!')
+    ]
+  }
 ];

@@ -13,4 +13,6 @@ function login({state, services, output}) {
     });
 }
 
+login.async = true;
+
 export default login;

@@ -8,4 +8,6 @@ function loadCourses({output, services}) {
   });
 }
 
+loadCourses.async = true;
+
 export default loadCourses;

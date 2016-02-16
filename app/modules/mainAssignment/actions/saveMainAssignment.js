@@ -14,4 +14,6 @@ function saveMainAssignment({services, output, state}) {
   });
 }
 
+saveMainAssignment.async = true;
+
 export default saveMainAssignment;

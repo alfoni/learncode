@@ -15,4 +15,6 @@ function createDescription({state, services, output}) {
   });
 }
 
+createDescription.async = true;
+
 export default createDescription;

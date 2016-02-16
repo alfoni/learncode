@@ -14,4 +14,6 @@ function saveScene({state, output, services}) {
   });
 }
 
+saveScene.async = true;
+
 export default saveScene;

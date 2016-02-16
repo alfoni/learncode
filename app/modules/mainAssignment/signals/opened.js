@@ -28,21 +28,19 @@ export default [
         false: [
           setDefaultCourseState,
           set('state:/course.isLoading', true),
-          [
-            getMainAssignment, {
-              success: [
-                setMainAssignment,
-                setMainAssignmentAsCourse,
-                setAssignmentsPositions,
-                setPreviewState,
-                set('state:/mainAssignment.currentAssignmentIndex', 0),
-                set('state:/course.isLoading', false)
-              ],
-              error: [
-                showSnackbar('Innlasting av sandkasse feilet!')
-              ]
-            }
-          ],
+          getMainAssignment, {
+            success: [
+              setMainAssignment,
+              setMainAssignmentAsCourse,
+              setAssignmentsPositions,
+              setPreviewState,
+              set('state:/mainAssignment.currentAssignmentIndex', 0),
+              set('state:/course.isLoading', false)
+            ],
+            error: [
+              showSnackbar('Innlasting av sandkasse feilet!')
+            ]
+          },
           ...getAndSetDescriptions,
           ...getTechTree,
           set('state:/techTree.opened', false)

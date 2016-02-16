@@ -13,17 +13,15 @@ export default [
       createDependencySlotTree
     ],
     false: [
-      [
-        getCoursesInSelectedTier, {
-          success: [
-            updateCourses,
-            setTierCoursesLoaded,
-            setSelectedTierIndex,
-            createDependencySlotTree
-          ],
-          error: [showSnackbar('Det oppstod en feil ved henting av kurs!')]
-        }
-      ]
+      getCoursesInSelectedTier, {
+        success: [
+          updateCourses,
+          setTierCoursesLoaded,
+          setSelectedTierIndex,
+          createDependencySlotTree
+        ],
+        error: [showSnackbar('Det oppstod en feil ved henting av kurs!')]
+      }
     ]
   }
 ];

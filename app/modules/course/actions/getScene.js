@@ -13,4 +13,6 @@ function getScene({input, state, output, services}) {
     });
 }
 
+getScene.async = true;
+
 export default getScene;
