@@ -1,7 +1,6 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import styles from './styles.css';
-import icons from 'common/icons.css';
 import isAdminMode from '../../computed/isAdminMode';
 import classNames from 'classnames';
 
@@ -15,6 +14,7 @@ class Preview extends React.Component {
     this.onSandboxMessage = this.onSandboxMessage.bind(this);
   }
   componentDidMount() {
+    console.log(this.props.url);
     this.refs.preview.src = this.props.url;
     window.addEventListener('message', this.onSandboxMessage);
   }

@@ -1,11 +1,10 @@
 function registerSignup({input, output, services}) {
-  console.log(services);
   services.http.post('/API/registerSignup', {
     email: input.email
   })
-  .then((user) => {
+  .then((response) => {
     output.success({
-      user: user
+      user: response.result
     });
   })
   .catch(() => {

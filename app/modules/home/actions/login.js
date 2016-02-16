@@ -2,7 +2,7 @@ function login({state, services, output}) {
   const email = state.get('home.loginForm.email');
   const password = state.get('home.loginForm.password');
 
-  services.ajax.post(`/API/login`, {
+  services.http.post(`/API/login`, {
     email: email,
     password: password
   })

@@ -4,7 +4,7 @@ function createSession(name, chain) {
   function createSessionId({services, output}) {
     services.http.post('/API/sessions')
     .then((response) => {
-      output.success({sessionId: response.sessionId});
+      output.success({sessionId: response.result.sessionId});
     })
     .catch((e) => {
       console.log('Could not create session', e);

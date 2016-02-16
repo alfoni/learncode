@@ -1,7 +1,7 @@
 function getDescriptions({services, output}) {
   services.http.get('/API/descriptions')
-  .then((descriptions) => {
-    output.success({descriptions: descriptions});
+  .then((response) => {
+    output.success({descriptions: response.result});
   })
   .catch(() => {
     output.error();

@@ -1,8 +1,8 @@
 function loadSessions({output, services}) {
   services.http.get(`/API/sessions`)
-    .then((sessions) => {
+    .then((response) => {
       output.success({
-        sessions: sessions
+        sessions: response.result
       });
     })
     .catch(() => {

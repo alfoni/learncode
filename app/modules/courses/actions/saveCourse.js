@@ -3,7 +3,7 @@ function saveCourse({state, output, services}) {
     course: state.get('courses.newCourse')
   })
   .then((response) => {
-    output.success({id: response.id});
+    output.success({id: response.result.id});
   })
   .catch(() => {
     output.error();

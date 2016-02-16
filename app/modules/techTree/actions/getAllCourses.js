@@ -1,7 +1,7 @@
 function getAllCourses({output, services}) {
   services.http.get('/API/courses')
-  .then((courses) => {
-    output.success({courses: courses});
+  .then((response) => {
+    output.success({courses: response.result});
   })
   .catch(() => {
     output.error();

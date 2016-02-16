@@ -3,7 +3,7 @@ function saveNewTier({state, services, output}) {
     name: state.get('techTree.newTierName')
   })
   .then((response) => {
-    output.success({tier: response.tier});
+    output.success({tier: response.result.tier});
   })
   .catch((e) => {
     console.log('Could not create tier', e);

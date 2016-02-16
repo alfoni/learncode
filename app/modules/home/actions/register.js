@@ -6,7 +6,7 @@ function register({services, output, state}) {
   if (password !== repeatedPassword) {
     output.error({message: 'Passordene er ikke like.'});
   } else {
-    services.ajax.post('/API/registerSignup', {
+    services.http.post('/API/registerSignup', {
       email: email,
       password: password
     })
@@ -14,8 +14,6 @@ function register({services, output, state}) {
       output.success();
     })
     .catch((e) => {
-      console.log(e.message);
-      console.log('test');
       let errorMessage = 'Registrering feilet.';
 
       if (e.message === 'USER_EXISTS') {

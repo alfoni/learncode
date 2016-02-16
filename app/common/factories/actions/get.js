@@ -3,7 +3,7 @@ function get(url, key) {
     services.http.get(url)
       .then((response) => {
         output.success({
-          [key]: response
+          [key]: response.result
         });
       })
       .catch(() => {
