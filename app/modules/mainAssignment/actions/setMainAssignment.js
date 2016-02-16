@@ -1,5 +1,5 @@
 function setMainAssignment({state, input}) {
-  state.set('mainAssignment', {
+  state.merge('mainAssignment', {
     files: input.mainAssignment.files,
     currentFileIndex: 0,
     authorName: input.mainAssignment.authorName,
