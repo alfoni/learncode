@@ -8,7 +8,7 @@ import Preview from 'components/Preview';
 import icons from 'common/icons.css';
 import styles from 'components/Scene/styles.css';
 import isAdminMode from 'modules/course/computed/isAdminMode';
-import Descriptions from '../Descriptions';
+import DescriptionsList from '../DescriptionsList';
 import AddFile from 'components/AddFile';
 import ModuleFiles from 'components/ModuleFiles';
 import classNames from 'classnames';
@@ -49,7 +49,7 @@ class Scene extends React.Component {
           <Toolbar>
             <ToolbarButton icon={icons.chevronLeft} title="Kursoversikt" onClick={() => this.props.signals.techTree.toggled()}/>
           </Toolbar>
-          <Descriptions/>
+          <DescriptionsList/>
         </Module>
         <Module className={styles.code} show>
           <div className={styles.section}>

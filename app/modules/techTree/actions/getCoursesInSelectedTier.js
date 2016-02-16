@@ -1,5 +1,4 @@
 function getCoursesInSelectedTier({services, state, output, input}) {
-
   let selectedTierIndex = 0;
   const tierId = state.get('course.isInTier');
 
@@ -11,7 +10,7 @@ function getCoursesInSelectedTier({services, state, output, input}) {
     });
   }
 
-  const selectedTierId = state.get(`techTree.tiers${selectedTierIndex}.id`);
+  const selectedTierId = state.get(`techTree.tiers.${selectedTierIndex}.id`);
 
   services.http.get(`/API/tiers/${selectedTierId}/courses`)
   .then((response) => {

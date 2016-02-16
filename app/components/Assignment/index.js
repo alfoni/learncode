@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './styles.css';
-import DescriptionToolTip from '../DescriptionToolTip';
+import AssignmentDescription from '../AssignmentDescription';
 import {Decorator as Cerebral} from 'cerebral-view-react';
 import currentAssignment from 'modules/course/computed/currentAssignment';
 
@@ -31,9 +31,9 @@ class Assignment extends React.Component {
       <div className={styles.assignmentItem} key={index}>
         <div className={styles.assignmentNumber}>{number}</div>
         <div className={styles.assignmentText}>
-          <DescriptionToolTip id={Math.random() * 1000}>
+          <AssignmentDescription id={Math.random() * 1000}>
             {text}
-          </DescriptionToolTip>
+          </AssignmentDescription>
         </div>
       </div>
     );

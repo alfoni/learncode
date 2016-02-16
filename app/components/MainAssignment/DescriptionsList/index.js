@@ -8,7 +8,7 @@ import elements from 'common/elements.css';
   descriptions: ['descriptions', 'list'],
   googleInput: 'mainAssignment.googleInput'
 })
-class Descriptions extends React.Component {
+class DescriptionsList extends React.Component {
   constructor() {
     super();
   }
@@ -46,4 +46,4 @@ class Descriptions extends React.Component {
   }
 }
 
-export default Descriptions;
+export default DescriptionsList;

@@ -5,7 +5,6 @@ export default function getCoursesInTier(req, res) {
     id: req.params.id
   })
   .then((tier) => {
-    console.log(tier);
     const coursesIds = tier.courseDependencyList.map((courseDependency) => {
       return courseDependency.courseId;
     });
