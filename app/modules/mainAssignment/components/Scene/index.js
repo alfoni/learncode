@@ -42,8 +42,7 @@ class Scene extends React.Component {
   }
   render() {
     const preview = this.props.mainAssignment.preview;
-    console.log('preview', preview);
-    console.log('mainAssignment', this.props.mainAssignment);
+    
     return (
       <div className={styles.modules}>
         <Module className={this.props.isAdminMode ? styles.controlsAndAssignmentsAdmin : styles.controlsAndAssignments} show>
