@@ -53,11 +53,7 @@ controller.addModules({
   mainAssignment: MainAssignment(),
   descriptions: Descriptions(),
 
-  http: Http({
-    signals: {
-      '401': 'app.unauthorized'
-    }
-  }),
+  http: Http(),
   recorder: Recorder({
     state: {
       isEnded: false,

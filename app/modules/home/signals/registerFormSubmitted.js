@@ -1,11 +1,11 @@
-import set from 'common/factories/actions/set';
+import set from 'cerebral-addons/set';
 import register from '../actions/register';
 import redirect from 'common/factories/actions/redirect';
 import setRegisterErrorMessage from '../actions/registerErrorMessage';
 
 export default [
-  set(['home', 'isRegistering'], true),
-  set(['home', 'registerErrorMessage'], false),
+  set('state:/home.isRegistering', true),
+  set('state:/home.registerErrorMessage', false),
   register, {
     success: [
       redirect(
@@ -19,5 +19,5 @@ export default [
       setRegisterErrorMessage
     ]
   },
-  set(['home', 'isRegistering'], false)
+  set('state:/home.isRegistering', false)
 ];

@@ -1,17 +1,17 @@
-import set from 'common/factories/actions/set';
+import set from 'cerebral-addons/set';
 import login from '../actions/login';
 import redirectToLastCourse from '../actions/redirectToLastCourse';
 
 export default [
-  set(['home', 'isLoggingIn'], true),
-  set(['home', 'loginErrorMessage'], null),
+  set('state:/home.isLoggingIn', true),
+  set('state:/home.loginErrorMessage', null),
   login, {
     success: [
       redirectToLastCourse
     ],
     error: [
-      set(['home', 'loginErrorMessage'], 'Innlogging feilet! Har du tastet riktig e-post og passord?')
+      set('state:/home.loginErrorMessage', 'Innlogging feilet! Har du tastet riktig e-post og passord?')
     ]
   },
-  set(['home', 'isLoggingIn'], false)
+  set('state:/home.isLoggingIn', false)
 ];

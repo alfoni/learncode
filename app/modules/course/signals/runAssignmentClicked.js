@@ -7,7 +7,7 @@ export default [
   assignmentSolved, {
     true: [...saveSandboxChain],
     false: [
-      set('state://./currentAssignmentStatus.result', false),
+      set('state:/course.currentAssignmentStatus.result', false),
       setLoadingAssignment,
       ...saveSandboxChain
     ]

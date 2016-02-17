@@ -6,7 +6,7 @@ import copy from 'cerebral-addons/copy';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 
 export default [
-  set('course.showConfigureScenes', false),
+  set('state:/course.showConfigureScenes', false),
   showSnackbar('Lagrer scene...'),
   saveNewScene, {
     success: [

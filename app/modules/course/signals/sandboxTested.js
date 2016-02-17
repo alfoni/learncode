@@ -10,7 +10,7 @@ export default [
       setCompletedAssignment
     ],
     false: [
-      set('state://./showAssignmentStatus', true)
+      set('state:/course.showAssignmentStatus', true)
     ]
   }
 ];
