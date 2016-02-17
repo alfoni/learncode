@@ -19,6 +19,7 @@ export default function getCoursesInTier(req, res) {
       description: 1,
       skillLevel: 1,
       'scenes.recording.duration': 1,
+      'scenes.assignments.description': 1,
       _id: 0
     })
     .then((courses) => {
