@@ -4,7 +4,7 @@ function createDependencySlotTree({state}) {
   let courseDependencyList = [];
 
   if (typeof currentTierIndex === 'number') {
-    courseDependencyList = state.get(`techTree.tiers.${currentTierIndex}.courseDependencyList`);
+    courseDependencyList = state.get(`techTree.tiers.${currentTierIndex}.courseDependencyList`) || [];
   }
 
   function getCourse(courseId) {
