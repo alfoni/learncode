@@ -1,5 +1,5 @@
-import updateName from '../actions/updateName';
+import copy from 'cerebral-addons/copy';
 
 export default [
-  updateName
+  copy('input:/value', 'state:/techTree.authorName')
 ];

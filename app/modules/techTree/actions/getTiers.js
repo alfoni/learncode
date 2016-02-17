@@ -1,7 +1,7 @@
 function getTiers({services, output}) {
-  services.ajax.get('/API/tiers')
-  .then((tiers) => {
-    output.success({tiers: tiers});
+  services.http.get('/API/tiers')
+  .then((response) => {
+    output.success({tiers: response.result});
   })
   .catch((e) => {
     console.log('Could not get tiers', e);

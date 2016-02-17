@@ -1,5 +1,5 @@
 function mainAssignmentIsLoaded({state, output}) {
-  if (state.get(['mainAssignment', 'files']).length) {
+  if (state.get('mainAssignment.files').length) {
     output.true();
   } else {
     output.false();

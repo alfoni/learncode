@@ -1,6 +1,6 @@
 function setSelectedTierIndex({state, input}) {
-  const tierId = state.get(['course', 'isInTier']);
-  let selectedTierIndex = state.get(['techTree', 'tiers']).findIndex((tier) => {
+  const tierId = state.get('course.isInTier');
+  let selectedTierIndex = state.get('techTree.tiers').findIndex((tier) => {
     return tier.id === tierId;
   });
 
@@ -8,7 +8,7 @@ function setSelectedTierIndex({state, input}) {
     selectedTierIndex = input.tierIndex;
   }
 
-  state.set(['techTree', 'selectedTierIndex'], selectedTierIndex === -1 ? 0 : selectedTierIndex);
+  state.set('techTree.selectedTierIndex', selectedTierIndex === -1 ? 0 : selectedTierIndex);
 }
 
 export default setSelectedTierIndex;

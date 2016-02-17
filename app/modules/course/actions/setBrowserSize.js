@@ -1,5 +1,5 @@
 function setBrowserSize({state}) {
-  state.set(['recorder', 'clientSize'], {
+  state.set('recorder.clientSize', {
     width: document.body.offsetWidth,
     height: document.body.offsetHeight
   });

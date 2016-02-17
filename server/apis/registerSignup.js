@@ -65,7 +65,7 @@ export default function registerSignup(req, res) {
       });
       res.send({
         id: id,
-        isAdmin: req.body.email === 'christianalfoni@gmail.com'
+        isAdmin: req.body.email === 'post@kodeboksen.no'
       });
     })
     .catch((e) => {

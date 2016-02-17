@@ -1,5 +1,5 @@
 function setOpenedCoursePopup({state, input}) {
-  state.set(['techTree', 'openedCoursePopup'], {
+  state.set('techTree.openedCoursePopup', {
     ...input
   });
 }

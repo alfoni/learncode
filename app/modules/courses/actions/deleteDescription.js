@@ -1,6 +1,5 @@
 function deleteDescription({services, input, output}) {
-  console.log(input.tagName);
-  services.ajax.delete('/api/descriptions/' + input.tagName)
+  services.http.delete('/api/descriptions/' + input.tagName)
   .then(() => {
     output.success();
   })
@@ -8,5 +7,7 @@ function deleteDescription({services, input, output}) {
     output.error();
   });
 }
+
+deleteDescription.async = true;
 
 export default deleteDescription;

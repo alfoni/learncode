@@ -6,16 +6,13 @@ import updateCourses from '../actions/updateCourses';
 
 export default [
   addCourseDependency,
-  [
-    updateTier, {
-      success: [
-        updateCourses,
-        createDependencySlotTree
-      ],
-      error: [
-        showSnackbar('Oppdatering av tier feilet!')
-      ]
-    }
-  ]
-
+  updateTier, {
+    success: [
+      updateCourses,
+      createDependencySlotTree
+    ],
+    error: [
+      showSnackbar('Oppdatering av tier feilet!')
+    ]
+  }
 ];

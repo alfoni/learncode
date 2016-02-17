@@ -15,7 +15,7 @@ export default function createCourse(req, res) {
   const course = {
     id: uuid.v4(),
     created: Date.now(),
-    name: req.body.course.courseName,
+    name: req.body.course.name,
     authorId: req.cookies.kodeboksen,
     type: req.body.course.type,
     description: req.body.course.description,

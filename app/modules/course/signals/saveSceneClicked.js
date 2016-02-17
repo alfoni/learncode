@@ -13,29 +13,25 @@ export default [
     false: [
       hasRecordedScene, {
         true: [
-          [
-            saveAssignments, {
-              success: [
-                showSnackbar('Oppgavene er lagret')
-              ],
-              error: [
-                showSnackbar('Det skjedde en feil med lagring av oppgavene!')
-              ]
-            }
-          ]
+          saveAssignments, {
+            success: [
+              showSnackbar('Oppgavene er lagret')
+            ],
+            error: [
+              showSnackbar('Det skjedde en feil med lagring av oppgavene!')
+            ]
+          }
         ],
         false: [
           ...saveSandboxChain,
-          [
-            saveScene, {
-              success: [
-                showSnackbar('Scenen er lagret')
-              ],
-              error: [
-                showSnackbar('Det skjedde en feil med lagring av scenen!')
-              ]
-            }
-          ]
+          saveScene, {
+            success: [
+              showSnackbar('Scenen er lagret')
+            ],
+            error: [
+              showSnackbar('Det skjedde en feil med lagring av scenen!')
+            ]
+          }
         ]
       }
     ]

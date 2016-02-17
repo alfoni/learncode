@@ -6,14 +6,12 @@ import updateCourses from '../actions/updateCourses';
 
 export default [
   unlinkCourse,
-  [
-    updateTier, {
-      success: [
-        updateCourses,
-        createDependencySlotTree,
-        showSnackbar('Course was successfully removed from tier')
-      ],
-      error: [showSnackbar('Removing of course from tier failed!')]
-    }
-  ]
+  updateTier, {
+    success: [
+      updateCourses,
+      createDependencySlotTree,
+      showSnackbar('Course was successfully removed from tier')
+    ],
+    error: [showSnackbar('Removing of course from tier failed!')]
+  }
 ];

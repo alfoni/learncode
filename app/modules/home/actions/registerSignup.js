@@ -1,15 +1,17 @@
 function registerSignup({input, output, services}) {
-  services.ajax.post('/API/registerSignup', {
+  services.http.post('/API/registerSignup', {
     email: input.email
   })
-  .then((user) => {
+  .then((response) => {
     output.success({
-      user: user
+      user: response.result
     });
   })
   .catch(() => {
     output.error();
   });
 }
+
+registerSignup.async = true;
 
 export default registerSignup;

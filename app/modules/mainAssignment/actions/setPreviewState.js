@@ -1,8 +1,8 @@
 function setPreviewState({state, input}) {
   if (input.preview) {
-    state.set(['mainAssignment', 'preview'], true);
+    state.set('mainAssignment.preview', true);
   } else {
-    state.set(['mainAssignment', 'preview'], false);
+    state.set('mainAssignment.preview', false);
   }
 }
 

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import controller from './controller.js';
 import {Container} from 'cerebral-view-react';
 import Router from 'cerebral-module-router';
+import Http from 'cerebral-module-http';
 import Recorder from 'cerebral-module-recorder';
 import Devtools from 'cerebral-module-devtools';
 import localAssignments from './services/localAssignments';
@@ -17,7 +18,6 @@ import Course from './modules/course';
 import TechTree from './modules/techTree';
 import MainAssignment from './modules/mainAssignment';
 import Descriptions from './modules/descriptions';
-import Ajax from './modules/ajax';
 
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import hideSnackbar from 'common/factories/actions/hideSnackbar.js';
@@ -45,7 +45,6 @@ controller.addServices({
 });
 
 controller.addModules({
-  ajax: Ajax(),
   home: Home(),
   sessions: Sessions(),
   courses: Courses(),
@@ -54,6 +53,11 @@ controller.addModules({
   mainAssignment: MainAssignment(),
   descriptions: Descriptions(),
 
+  http: Http({
+    signals: {
+      '401': 'app.unauthorized'
+    }
+  }),
   recorder: Recorder({
     state: {
       isEnded: false,

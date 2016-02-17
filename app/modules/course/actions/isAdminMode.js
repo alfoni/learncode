@@ -1,5 +1,5 @@
 function isAdminMode({state, output}) {
-  const user = state.get(['user']);
+  const user = state.get('user');
 
   if (user.isAdmin && !user.forceUser) {
     output.true();

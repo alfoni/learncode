@@ -1,10 +1,10 @@
 import redirectToMainAssignment from '../actions/redirectToMainAssignment';
-import set from 'common/factories/actions/set';
+import set from 'cerebral-addons/set';
 import setMainAssignmentAsCourse from 'modules/mainAssignment/actions/setMainAssignmentAsCourse';
 
 export default [
   setMainAssignmentAsCourse,
-  set(['techTree', 'opened'], false),
-  set(['techTree', 'showMainAssignmentPopup'], false),
+  set('state:/techTree.opened', false),
+  set('state:/techTree.showMainAssignmentPopup', false),
   redirectToMainAssignment
 ];

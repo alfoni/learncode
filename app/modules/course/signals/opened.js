@@ -1,63 +1,57 @@
-import setPage from 'common/factories/actions/setPage.js';
-import addonsSet from 'cerebral-addons/set';
-import set from 'common/factories/actions/set.js';
-import loadCourse from './../actions/loadCourse.js';
-import loadScene from './../actions/loadScene.js';
+import set from 'cerebral-addons/set';
+import when from 'cerebral-addons/when';
+import getCourse from './../actions/getCourse.js';
+import getScene from './../actions/getScene.js';
 import setCourse from './../actions/setCourse.js';
 import setDefaultCourseState from './../actions/setDefaultCourseState.js';
 import isSameCourse from './../actions/isSameCourse.js';
-import sceneDidLoad from './../actions/sceneDidLoad.js';
 import courseAndSceneDidLoad from './../actions/courseAndSceneDidLoad.js';
 import setScene from './../actions/setScene.js';
 import showSnackbar from 'common/factories/actions/showSnackbar.js';
 import saveSandboxChain from './../chains/saveSandbox.js';
-import setLoadingCourse from './../actions/setLoadingCourse';
-import setLoadedCourse from './../actions/setLoadedCourse';
+import setLoadedCourseSnackbar from './../actions/setLoadedCourseSnackbar';
 import setAssignmentsPositions from './../actions/setAssignmentsPositions';
 import getAndSetDescriptions from 'modules/descriptions/chains/getAndSetDescriptions';
-import getTechTreeData from 'modules/techTree/chains/getTechTreeData';
-import resetAssignment from '../actions/resetAssignment';
+import getTechTree from 'modules/techTree/chains/getTechTree';
 
 export default [
-  setPage('course'),
-  resetAssignment,
+  set('state:/currentPage', 'course'),
+  set('state:/course.currentAssignmentStatus.result', false),
   isSameCourse, {
     true: [
       showSnackbar('Laster scene...'),
-      set(['course', 'showScenesList'], false),
-      [
-        loadScene
-      ],
-      sceneDidLoad, {
-        true: [
+      set('state:/course.showScenesList', false),
+      getScene,
+      when('input:/scene'), {
+        isTrue: [
           setScene,
           setAssignmentsPositions,
-          addonsSet('state://./currentAssignmentIndex', -1),
+          set('state:/course.currentAssignmentIndex', -1),
           ...saveSandboxChain,
           showSnackbar('Scenen er lastet')
         ],
-        false: [
+        isFalse: [
           showSnackbar('Innlasting av scenen feilet!')
         ]
       }
     ],
     false: [
       setDefaultCourseState,
-      setLoadingCourse,
-      set(['course', 'isLoading'], true),
+      showSnackbar('Laster kurs...'),
+      set('state:/course.isLoading', true),
       [
-        loadCourse,
-        loadScene
+        getCourse,
+        getScene
       ],
       courseAndSceneDidLoad, {
         true: [
           setCourse,
           setScene,
           setAssignmentsPositions,
-          addonsSet('state://./currentAssignmentIndex', -1),
+          set('state:/course.currentAssignmentIndex', -1),
           ...saveSandboxChain,
-          setLoadedCourse,
-          set(['course', 'isLoading'], false)
+          setLoadedCourseSnackbar,
+          set('state:/course.isLoading', false)
         ],
         false: [
           showSnackbar('Innlasting av kurset feilet!')
@@ -66,6 +60,6 @@ export default [
     ]
   },
   ...getAndSetDescriptions,
-  ...getTechTreeData,
-  set(['techTree', 'opened'], false)
+  ...getTechTree,
+  set('state:/techTree.opened', false)
 ];

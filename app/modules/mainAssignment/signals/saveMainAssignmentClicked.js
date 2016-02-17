@@ -7,16 +7,14 @@ export default [
   ...saveSandboxChain,
   isAssignmentAuthor, {
     true: [
-      [
-        saveMainAssignment, {
-          success: [
-            showSnackbar('Oppgaven er lagret')
-          ],
-          error: [
-            showSnackbar('Det skjedde en feil med lagring av oppgaven!')
-          ]
-        }
-      ]
+      saveMainAssignment, {
+        success: [
+          showSnackbar('Oppgaven er lagret')
+        ],
+        error: [
+          showSnackbar('Det skjedde en feil med lagring av oppgaven!')
+        ]
+      }
     ],
     false: []
   }

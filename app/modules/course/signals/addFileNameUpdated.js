@@ -1,5 +1,5 @@
-import updateNewFileName from '../actions/updateNewFileName.js';
+import copy from 'cerebral-addons/copy';
 
 export default [
-  updateNewFileName
+  copy('input:/fileName', 'state:/course.newFileName')
 ];

@@ -1,5 +1,5 @@
-import updateNewSceneName from '../actions/updateNewSceneName.js';
+import copy from 'cerebral-addons/copy';
 
 export default [
-  updateNewSceneName
+  copy('input:/value', 'state:/course.newSceneName')
 ];

@@ -1,8 +1,8 @@
 function createMainAssignment({services, output, state}) {
-  const userId = state.get(['user', 'id']);
+  const userId = state.get('user.id');
 
-  services.ajax.patch(`/API/mainAssignments/${userId}`, {
-    authorName: state.get(['techTree', 'authorName'])
+  services.http.patch(`/API/mainAssignments/${userId}`, {
+    authorName: state.get('techTree.authorName')
   })
   .then(() => {
     output.success({
@@ -13,5 +13,7 @@ function createMainAssignment({services, output, state}) {
     output.error();
   });
 }
+
+createMainAssignment.async = true;
 
 export default createMainAssignment;

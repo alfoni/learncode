@@ -9,28 +9,30 @@ function isPlaying({state, output}) {
 isPlaying.outputs = ['true', 'false'];
 
 function track(name, chain) {
+  function trackData({input, state, output, services}) {
+    const sessionId = state.get(['session', 'sessionId']);
+    services.http.post(`/API/sessions/${sessionId}`, {
+      name: name,
+      input: input
+    })
+    .then(() => {
+      output.success();
+    })
+    .catch((e) => {
+      output.error(e);
+    });
+  }
+
+  trackData.async = true;
+
   return chain.concat([
     isPlaying, {
       true: [],
       false: [
-        [
-          function trackData({input, state, output, services}) {
-            const sessionId = state.get(['session', 'sessionId']);
-            services.ajax.post(`/API/sessions/${sessionId}`, {
-              name: name,
-              input: input
-            })
-            .then(() => {
-              output.success();
-            })
-            .catch((e) => {
-              output.error(e);
-            });
-          }, {
-            success: [],
-            error: []
-          }
-        ]
+        trackData, {
+          success: [],
+          error: []
+        }
       ]
     }
   ]);

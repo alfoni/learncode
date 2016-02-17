@@ -1,8 +1,8 @@
 function loadSessions({output, services}) {
-  services.ajax.get(`/API/sessions`)
-    .then((sessions) => {
+  services.http.get(`/API/sessions`)
+    .then((response) => {
       output.success({
-        sessions: sessions
+        sessions: response.result
       });
     })
     .catch(() => {
@@ -11,5 +11,7 @@ function loadSessions({output, services}) {
       });
     });
 }
+
+loadSessions.async = true;
 
 export default loadSessions;

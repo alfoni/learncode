@@ -1,5 +1,5 @@
-import setSelectedSession from '../actions/setSelectedSession';
+import copy from 'cerebral-addons/copy';
 
 export default [
-  setSelectedSession
+  copy('input:/session', 'state:/sessions.selectedSession')
 ];

@@ -1,7 +1,7 @@
-import set from 'common/factories/actions/set.js';
+import set from 'cerebral-addons/set';
 import closeAllPopovers from '../actions/closeAllPopovers';
 
 export default [
   closeAllPopovers,
-  set(['courses', 'showNewCourse'], true)
+  set('state:/courses.showNewCourse', true)
 ];

@@ -1,10 +1,10 @@
 import React from 'react';
 import {Decorator as Cerebral} from 'cerebral-view-react';
-import Course from './modules/course/components/Course';
-import Home from './modules/home/components/Home';
-import Courses from './modules/courses/components/Courses';
-import Sessions from './modules/sessions/components/Sessions';
-import MainAssignment from './modules/mainAssignment/components/MainAssignment';
+import Course from './components/Course';
+import Home from './components/Home';
+import Courses from './components/Courses';
+import Sessions from './components/Sessions';
+import MainAssignment from './components/MainAssignment/MainAssignment';
 import styles from './App.css';
 
 const pages = {

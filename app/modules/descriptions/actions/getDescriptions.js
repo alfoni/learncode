@@ -1,11 +1,13 @@
 function getDescriptions({services, output}) {
-  services.ajax.get('/API/descriptions')
-  .then((descriptions) => {
-    output.success({descriptions: descriptions});
+  services.http.get('/API/descriptions')
+  .then((response) => {
+    output.success({descriptions: response.result});
   })
   .catch(() => {
     output.error();
   });
 }
+
+getDescriptions.async = true;
 
 export default getDescriptions;

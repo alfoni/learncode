@@ -1,5 +1,5 @@
-import setOpenedSignal from '../actions/setOpenedSignal';
+import copy from 'cerebral-addons/copy';
 
 export default [
-  setOpenedSignal
+  copy('input:/index', 'state:/sessions.openedSignal')
 ];

@@ -1,9 +1,9 @@
 function saveRecording({state, output, services}) {
-  const courseId = state.get(['course', 'id']);
-  const sceneIndex = state.get(['course', 'currentSceneIndex']);
+  const courseId = state.get('course.id');
+  const sceneIndex = state.get('course.currentSceneIndex');
   const recording = services.recorder.getRecording();
 
-  services.ajax.patch(`/API/courses/${courseId}/scenes/${sceneIndex}`, {
+  services.http.patch(`/API/courses/${courseId}/scenes/${sceneIndex}`, {
     recording: recording
   })
   .then(() => {
@@ -13,5 +13,7 @@ function saveRecording({state, output, services}) {
     output.error();
   });
 }
+
+saveRecording.async = true;
 
 export default saveRecording;
