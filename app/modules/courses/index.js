@@ -33,7 +33,7 @@ export default () => {
         example: ''
       },
       newCourse: {
-        courseName: '',
+        name: '',
         sceneName: '',
         type: 'course',
         skillLevel: '',

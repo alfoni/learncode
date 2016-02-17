@@ -19,7 +19,7 @@ class AddNewCourse extends React.Component {
         <form onSubmit={(e) => this.onNewCourseSubmit(e)}>
           <input
             className={elements.input}
-            onChange={(e) => this.props.signals.courses.newCourseUpdated.sync({field: 'courseName', value: e.target.value})}
+            onChange={(e) => this.props.signals.courses.newCourseUpdated.sync({field: 'name', value: e.target.value})}
             placeholder="Navn på kurs"
             disabled={this.props.isSavingNewCourse}
             autoFocus
